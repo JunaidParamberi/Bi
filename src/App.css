@@ -1,0 +1,153 @@
+
+/* Head Font Regular */
+@font-face {
+  font-family: 'BoehringerForwardHead';
+  src: url('./fonts/BoehringerForwardHead.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Head Font Bold */
+@font-face {
+  font-family: 'BoehringerForwardHead';
+  src: url('./fonts/BoehringerForwardHead-Bd.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Head Font Italic */
+@font-face {
+  font-family: 'BoehringerForwardHead';
+  src: url('./fonts/BoehringerForwardHead-It.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Head Font Bold Italic */
+@font-face {
+  font-family: 'BoehringerForwardHead';
+  src: url('./fonts/BoehringerForwardHead-BdIt.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Text Font Regular */
+@font-face {
+  font-family: 'BoehringerForwardText';
+  src: url('./fonts/BoehringerForwardText.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Text Font Bold */
+@font-face {
+  font-family: 'BoehringerForwardText';
+  src: url('./fonts/BoehringerForwardText-Bd.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Text Font Italic */
+@font-face {
+  font-family: 'BoehringerForwardText';
+  src: url('./fonts/BoehringerForwardText-It.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Text Font Bold Italic */
+@font-face {
+  font-family: 'BoehringerForwardText';
+  src: url('./fonts/BoehringerForwardText-BdIt.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+:root{
+  --Accent-Green : #00e47c;
+  --Dark-Green : #08312a;
+  --Warm-Gray : #e5e3de;
+  --Light_Gray : #f6f5f3;
+
+
+
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: "BoehringerForwardHead", sans-serif;
+  background-image: url('src/assets/images/Main BG.svg');
+  background-repeat: no-repeat; 
+  background-size: cover;
+  color: var(--Accent-Green) ;
+  user-select: none;
+}
+
+.app{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.gradient-border {
+  position: relative;
+  display: inline-block;
+  border-radius: 1000px; /* Ensures the rounded effect */
+  padding: 10px; /* Adjust this to control spacing between content and border */
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px); /* Expands height to match the outer shadow */
+  width: calc(100% + 4px);  /* Expands width to match the outer shadow */
+  border-radius: 1000px;
+  background: linear-gradient(to left, var(--Dark-Green), #00e47c); /* Green to dark gradient */
+  z-index: -2; /* Places it behind the content */
+}
+
+.icon-gradient-border {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1000px;
+  padding: 9px;
+
+}
+
+.icon-gradient-border::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  border-radius: 1000px;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.5), #00e47c);
+  z-index: 0; /* Adjust to 0 to avoid overlap */
+}
+.icon-gradient-border::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 1000px;
+  background: black;
+  z-index: 1; /* Adjust to 0 to avoid overlap */
+}
+
+.icon-gradient-border img {
+  position: relative;
+  z-index: 1; /* Ensures the image stays above the gradient border */
+  
+  
+}
+
