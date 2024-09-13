@@ -1,9 +1,11 @@
-import React from 'react'
+
 
 function Button() {
   return (
     <div>
-      <span>Your Text</span>
+        <button className="gradient-border px-10">
+            More Stories
+        </button>
     </div>
   )
 }

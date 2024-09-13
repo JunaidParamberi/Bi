@@ -80,8 +80,8 @@ body{
   height: 100vh;
   box-sizing: border-box;
   font-family: "BoehringerForwardHead", sans-serif;
-  background-image: url('src/assets/images/Main BG.svg');
-  background-repeat: no-repeat; 
+  /* background-image: url('src/assets/images/Main BG.svg'); */
+  /* background: radial-gradient(circle at center, #00cc66 10%, #003333 70%) fixed; */
   background-size: cover;
   color: var(--Accent-Green) ;
   user-select: none;
@@ -99,6 +99,7 @@ body{
   display: inline-block;
   border-radius: 1000px; /* Ensures the rounded effect */
   padding: 10px; /* Adjust this to control spacing between content and border */
+  background-color: black;
 }
 
 .gradient-border::after {
@@ -113,13 +114,15 @@ body{
   z-index: -2; /* Places it behind the content */
 }
 
+
+
 .icon-gradient-border {
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
-  padding: 9px;
+
 
 }
 
