@@ -63,15 +63,16 @@
   font-style: italic;
 }
 
+
+
 :root{
   --Accent-Green : #00e47c;
   --Dark-Green : #08312a;
   --Warm-Gray : #e5e3de;
   --Light_Gray : #f6f5f3;
 
-
-
 }
+
 
 body{
   margin: 0;
@@ -85,12 +86,15 @@ body{
   background-size: cover;
   color: var(--Accent-Green) ;
   user-select: none;
+  overflow: hidden;
+  position: relative;
 }
 
 .app{
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
 
@@ -154,3 +158,39 @@ body{
   
 }
 
+
+/* styles.css */
+.inside-glow-imeta {
+  border: 2px solid #00cc66;
+  backdrop-filter: blur(10px); /* Adjust the blur value as needed */
+
+}
+.inside-glow {
+  border: 2px solid #00cc66;
+  box-shadow: inset 0 0 15px #00cc66;
+  backdrop-filter: blur(10px); /* Adjust the blur value as needed */
+
+}
+
+
+#tsparticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -50; /* Ensure it is in front of the background but behind the content */
+}
+
+
+.content {
+  position: relative;
+  z-index: 1; /* Content above the particles */
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+}
+
+
+.worldmap__figure-container {
+  width: 100%;
+  height: 100%;
+}
