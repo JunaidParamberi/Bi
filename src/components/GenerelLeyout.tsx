@@ -24,9 +24,13 @@ function GeneralLayout() {
 
         <div className=' flex flex-col gap-3 w-[60%] justify-end'>
           <Link to="more">
-          <Button text={"More Stories"} onClick={console.log("clikced")}/>
+          <Button text={"More Stories"} onClick={function (): void {
+                      throw new Error('Function not implemented.');
+                    } }/>
           </Link>
-          <Button text={"SD4G Team"} onClick={console.log("clikced")}/>
+          <Button text={"SD4G Team"} onClick={function (): void {
+                    throw new Error('Function not implemented.');
+                  } } />
         </div>
         }
         </div>

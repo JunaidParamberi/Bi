@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
+
+import { useNavigate, NavLink } from "react-router-dom";
 import ArrowLeft from "../assets/icons/arrow_left.svg";
 import ArrowRight from "../assets/icons/arrow_right.svg";
 import Home from "../assets/icons/home.svg";
