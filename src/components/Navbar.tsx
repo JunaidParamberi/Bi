@@ -36,11 +36,14 @@ function Navbar() {
           <img src={More} alt="more" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
 
-        <NavLink to="globe" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2  xl:p-6 active:opacity-70`}>
+        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2  xl:p-6 active:opacity-70`}>
           <img src={Globe} alt="globe" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
 
-        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 xl:p-5 active:opacity-70`}>
+        <NavLink 
+        to="world"
+      
+        className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 xl:p-5 active:opacity-70`}>
           <img src={Home} alt="home" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
       </div>

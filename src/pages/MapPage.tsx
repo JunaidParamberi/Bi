@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import mapImg from '../assets/images/Map.svg'
 import MapComponent from '../components/Map.tsx';
 
@@ -29,10 +30,10 @@ function MapPage() {
             
             {/* Replace the img with MapComponent */}
 
-            <div className=' w-full h-full'>
+            <Link  relative='path' to='kenya' className=' w-full h-full'>
             <MapComponent />
 
-            </div>
+            </Link>
   
           </div>
         </div>

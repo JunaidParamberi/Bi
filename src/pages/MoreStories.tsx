@@ -7,10 +7,10 @@ import StoryCard from "../components/StoryCard"
 function MoreStories() {
   console.log(useLocation())
   return (
-    <div className=" h-full w-full">
-        <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center">
+    <div className=" h-full w-full py-6">
+        <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center py-7">
 
-          <div className="w-[90%] flex flex-col gap-10">
+          <div className="w-[90%] flex flex-col ">
 
           <h1 className='text-[40px] font-bold w-full text-left xl:text-[100px] text-white'>More Stories</h1>
 

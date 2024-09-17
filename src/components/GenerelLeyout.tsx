@@ -1,5 +1,5 @@
 
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import logo from '../assets/icons/Logo_Accent Green.svg';
 import { useLocation } from 'react-router-dom';
@@ -12,19 +12,21 @@ function GeneralLayout() {
 
   return (
     <div className=' w-full h-screen flex flex-col justify-center items-center'>
-        <div className='  w-[90%] h-full flex flex-col justify-between items-center py-8 '>
-            <div className='w-full flex justify-center items-center flex-col h-full '>
+        <div className='  w-[90%] h-full flex flex-col justify-between items-center'>
+            <div className='w-full flex justify-center items-center flex-col h-[85vh]  '>
                 <Outlet /> 
             </div>
 
-        <div className='flex justify-between items-end h-[15vh] w-full '>
+        <div className='flex justify-between items-end h-[15vh] py-6 w-full '>
         <div className=' w-[33.3%]'>
       {  
-      location.pathname === "/" &&
+      location.pathname === "/world" &&
 
         <div className=' flex flex-col gap-3 w-[60%] justify-end'>
+          <Link to="more">
           <Button text={"More Stories"} onClick={console.log("clikced")}/>
-          <Button text={"Core Governance Team"} onClick={console.log("clikced")}/>
+          </Link>
+          <Button text={"SD4G Team"} onClick={console.log("clikced")}/>
         </div>
         }
         </div>
@@ -33,7 +35,7 @@ function GeneralLayout() {
           <Navbar />
         </div>
 
-        {location.pathname != "/globe" ?  
+        {location.pathname != "/" ?  
        <div className=' w-[33.3%] flex justify-end'> 
 
            <img src={logo} alt="Logo" className='w-[36%]' />
