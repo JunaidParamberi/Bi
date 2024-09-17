@@ -88,13 +88,13 @@ const CountryPage = () => {
             </div>
 
             {/* Image slider */}
-            <div className="flex  overflow-x-auto justify-between gap-2  custom-scrollbar-y">
+            <div className="flex  overflow-x-auto  gap-4  custom-scrollbar-y">
               {data?.images.map((img, index) => (
                 <img
                   src={img}
                   alt=""
                   key={index}
-                  className="h-auto w-full object-cover"
+                  className="h-auto w-[210px] object-cover"
                 />
               ))}
             </div>
