@@ -16,7 +16,8 @@ function App() {
       <Routes>
         <Route path='/' element={<GenerelLeyout />}>
           <Route index element={<MapPage />} /> 
-          <Route path='more' element={<MoreStories/>} /> 
+          <Route path='more' element={<MoreStories/>} />
+          <Route path='more/Ingelheim' element={<h1>This Is ingalhem </h1>} />  
           <Route path='globe' element={<h1>This Is globe </h1>} /> 
           <Route path='home' element={<h1>This Is home </h1>} /> 
         </Route>

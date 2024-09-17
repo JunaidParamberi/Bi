@@ -20,28 +20,28 @@ function Navbar() {
 
 
   return (
-    <div className="gradient-border bg-[#000000] flex px-[20px] py-2 w-[80%] justify-between rounded-full items-center duration-200 transition-all">
+    <div className="gradient-border bg-[#000000] flex px-[20px] py-2 xl:px-10 xl:py-4 w-[80%] justify-between rounded-full items-center duration-200 transition-all">
     <div className=" active:opacity-70">
 
       <img
         src={ArrowLeft}
         alt="arrow-left"
-        className="w-[20px] h-[20px] cursor-pointer"
+        className="w-[20px] h-[20px] cursor-pointer  xl:w-[50px] xl:h-[50px]"
         onClick={goBackward} // Call goBackward on click
       />
     </div>
 
       <div className="flex items-center justify-between w-[60%]">
-        <NavLink to="more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 active:opacity-70`}>
-          <img src={More} alt="more" className={ `w-[20px] h-[20px]`} />
+        <NavLink to="more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 xl:p-6 active:opacity-70`}>
+          <img src={More} alt="more" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
 
-        <NavLink to="globe" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 active:opacity-70`}>
-          <img src={Globe} alt="globe" className={ `w-[20px] h-[20px]`} />
+        <NavLink to="globe" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2  xl:p-6 active:opacity-70`}>
+          <img src={Globe} alt="globe" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
 
-        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 active:opacity-70`}>
-          <img src={Home} alt="home" className={ `w-[20px] h-[20px]`} />
+        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 xl:p-5 active:opacity-70`}>
+          <img src={Home} alt="home" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
       </div>
 
@@ -50,7 +50,7 @@ function Navbar() {
       <img
         src={ArrowRight}
         alt="arrow-right"
-        className="w-[20px] h-[20px] cursor-pointer"
+        className="w-[20px] h-[20px] cursor-pointer xl:w-[50px] xl:h-[50px]"
         onClick={goForward} // Call goForward on click
         />
     </div>

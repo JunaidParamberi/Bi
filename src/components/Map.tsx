@@ -2,9 +2,8 @@ import mapImg from '../assets/images/world.svg'
 
 function Map() {
   return (
-    <div >
-      <img src={mapImg} alt="mapimg" className=' w-full' />
-    </div>
+
+      <img src={mapImg} alt="mapimg" className='w-full' />
   )
 }
 

@@ -106,6 +106,8 @@ body{
   background-color: black;
 }
 
+
+
 .gradient-border::after {
   content: '';
   position: absolute;
