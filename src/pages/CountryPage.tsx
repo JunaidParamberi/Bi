@@ -55,65 +55,54 @@ const CountryPage = () => {
 
   return (
     <div className="w-full h-full flex flex-col py-6">
-      <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center py-7">
-        <div className="w-[90%]  justify-end flex h-[90%]">
+    <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center py-7">
+      <div className="w-[90%] justify-end flex h-[90%]">
+        <div className="flex justify-between gap-5 items-end w-full">
+          <img src={cardImg} alt="" className="h-full w-[40%] object-cover" />
 
-            <div className=' flex justify-between gap-5  items-end'>
+          <div className="h-full w-full flex flex-col justify-between">
+            <h1 className="text-[40px] font-bold w-full text-left xl:text-[100px] text-white">Kenya</h1>
 
-      
-            <img src={cardImg} alt="" className=' h-full w-[40%] object-cover' />
-         
-
-          <div className='h-full w-full flex flex-col  justify-between '>
-            <h1 className='text-[40px] font-bold w-full text-left xl:text-[100px] text-white'>Kenya</h1>
-
-            <div className=' w-full'>
-
-            <div className=' flex w-full items-baseline'>
-              {
-                  arr.map((item, index) => (
-                      <button
-                      key={index}
-                      onClick={() => handleClick(item)}
-                      className={`  ${data?.title === item.title ? 
-                        "bg-accent-green text-dark-green px-5 py-2 font-semibold xl:text-[35px] text-[14px]" 
-                      : "bg-black xl:text-[32px] text-white text-[13px] px-5 py-[6px] font-semibold bg-opacity-20 s" }`}>
+            <div className="w-full">
+              <div className="flex w-full items-baseline">
+                {arr.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleClick(item)}
+                    className={`${
+                      data?.title === item.title
+                        ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold xl:text-[35px] text-[14px]'
+                        : 'bg-black xl:text-[32px] text-white text-[13px] px-5 py-[6px] font-semibold bg-opacity-20'
+                    }`}
+                  >
                     {item.title}
                   </button>
-                ))
-            }
-            </div>
-            </div>
-
-            <div className='border-accent-green border-[0.5px] min-h-[52%] max-h-[52%] flex justify-center items-center mb-3'>
-                <div className='overflow-y-auto custom-scrollbar h-[80%] w-[95%]'>
-                <p className=' text-white p-3'>
-                    {data?.text}
-                </p>
-                </div>
+                ))}
+              </div>
             </div>
 
-            {/* <div className='h-full overflow-y-auto custom-scrollbar border-accent-green border-[0.5px] p-8'>
-                <p className='h-full text-white'>
-                {data?.text}
-                </p>
-                </div> */}
-
-            <div className=' flex  gap-3 overflow-auto custom-scrollbar-y  '>
-                {
-                    data?.images.map((img: string | undefined, index: Key | null | undefined) => (
-                        <img src={img} alt="" key={index} className=' h-full w-full' />
-                    ))
-                }
+            <div className="border-accent-green border-[0.5px] min-h-[52%] max-h-[52%] flex justify-center items-center mb-3">
+              <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%]">
+                <p className="text-white p-3">{data?.text}</p>
+              </div>
             </div>
 
-
-         
+            {/* Image slider */}
+            <div className="flex  overflow-x-auto justify-between gap-2  custom-scrollbar-y">
+              {data?.images.map((img, index) => (
+                <img
+                  src={img}
+                  alt=""
+                  key={index}
+                  className="h-auto w-full object-cover"
+                />
+              ))}
+            </div>
           </div>
         </div>
-    </div>
       </div>
     </div>
+  </div>
   );
 }
 
