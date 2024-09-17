@@ -99,10 +99,10 @@ const CountryPage = () => {
                 </p>
                 </div> */}
 
-            <div className=' flex w-full h-full gap-3 overflow-auto custom-scrollbar-y  '>
+            <div className=' flex  gap-3 overflow-auto custom-scrollbar-y  '>
                 {
                     data?.images.map((img: string | undefined, index: Key | null | undefined) => (
-                        <img src={img} alt="" key={index} className='object-cover mb-1' />
+                        <img src={img} alt="" key={index} className=' h-full w-full' />
                     ))
                 }
             </div>
