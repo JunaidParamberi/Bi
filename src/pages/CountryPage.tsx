@@ -62,14 +62,14 @@ const CountryPage = () => {
 
           <div className="h-full w-full flex flex-col justify-between">
             <h1 className="text-[40px] font-bold w-full text-left xl:text-[100px] text-white">Kenya</h1>
-            
-           
-              <div className="flex w-full items-end min-h-fit max-h-full">
+
+            <div className="w-full">
+              <div className="flex w-full items-baseline">
                 {arr.map((item, index) => (
                   <button
                     key={index}
                     onClick={() => handleClick(item)}
-                    className={` duration-200 ease-in-out ${
+                    className={`${
                       data?.title === item.title
                         ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold xl:text-[35px] text-[14px]'
                         : 'bg-black xl:text-[32px] text-white text-[13px] px-5 py-[6px] font-semibold bg-opacity-20'
@@ -79,7 +79,7 @@ const CountryPage = () => {
                   </button>
                 ))}
               </div>
-        
+            </div>
 
             <div className="border-accent-green border-[0.5px] min-h-[52%] max-h-[52%] flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%]">
@@ -88,13 +88,13 @@ const CountryPage = () => {
             </div>
 
             {/* Image slider */}
-            <div className="flex h-full overflow-y-hidden  overflow-x-auto  gap-4  custom-scrollbar-y">
+            <div className="flex  overflow-x-auto  gap-4  custom-scrollbar-y">
               {data?.images.map((img: string | undefined, index: Key | null | undefined) => (
                 <img
                   src={img}
                   alt=""
                   key={index}
-                  className="h-auto w-[210px] object-cover "
+                  className="h-auto w-[210px] object-cover"
                 />
               ))}
             </div>

@@ -13,13 +13,13 @@
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
+    "brew": "^0.0.8",
     "dom": "^0.0.3",
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.26.2",
-    "react-simple-maps": "^1.0.0",
     "react-svg-worldmap": "^2.0.0-alpha.16",
     "react-tsparticles": "^2.12.2",
     "router": "^2.0.0",
@@ -49,7 +49,7 @@
   "main": "dist-electron/main.js",
   "build": {
     "appId": "com.example.bi",
-    "productName": "bi",
+    "productName": "Boehringer Ingelheim",
     "files": [
       "dist/",
       "dist-electron/",
