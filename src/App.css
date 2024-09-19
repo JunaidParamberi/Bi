@@ -252,5 +252,32 @@ scroll-behavior: smooth;
 }
 
 
+.jvectormap-container svg{
+  width: 100%;
+  fill: radial-gradient(circle, 
+  var(--Accent-Green) 0%,      /* Center color */
+  var(--Dark-Green) 100%       /* Outer color */
+  
+);
+
+stroke: none;
+ 
+}
+
+.jvectormap-container svg>path {
+  stroke: none;
+}
+
+
+
+
+
+.gradient-background {
+  background: radial-gradient(circle, 
+    var(--Accent-Green) 0%,      /* Center color */
+    var(--Dark-Green) 100%       /* Outer color */
+  );
+}
+
 
 

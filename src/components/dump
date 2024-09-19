@@ -1,0 +1,40 @@
+// <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    //   {/* SVG Definition for Gradient */}
+    //   <svg width="0" height="0">
+    //     <defs>
+    //       <linearGradient id="gradientFill" x1="0%" y1="0%" x2="100%" y2="100%">
+    //         <stop offset="0%" style={{ stopColor: '#00e47c', stopOpacity: 1 }} />
+    //         <stop offset="100%" style={{ stopColor: '#08312a', stopOpacity: 1 }} />
+    //       </linearGradient>
+    //     </defs>
+    //   </svg>
+
+    //   <VectorMap
+    //     map={worldMill}
+    //     backgroundColor="transparent"  // Set the background to transparent
+    //     zoomOnScroll={false}           // Disable zoom on scroll
+    //     panOnDrag={false}              // Disable panning
+    //     zoomButtons={false}            // Hide zoom buttons
+    //     showTooltip={false}            // Disable tooltips
+    //     onRegionClick={handleRegionClick} // Event for clicking on a country
+    //     onRegionTipShow={(event) => event.preventDefault()} // Disable tooltip completely
+    //     regionStyle={{
+    //       initial: {
+    //         fill: 'url(#gradientFill)',  // Apply the gradient fill globally across all regions
+    //         stroke: 'red',       // Remove borders between countries
+    //         strokeWidth: 1,              // Set stroke width to 0
+    //         strokeOpacity: 1
+    //         ,            // Ensure stroke opacity is 0
+    //         transformOrigin: 'center',   // Ensure scaling is uniform from the center
+    //       },
+    //       selected: {
+    //         fill: '#F53',                // Color for selected countries
+    //       },
+    //     }}
+    //     containerStyle={{
+    //       width: '100%',
+    //       height: '100%',
+    //     }}
+    //     containerClassName="map"
+    //   />
+    // </div>
