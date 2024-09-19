@@ -7,6 +7,7 @@ import MoreStories from './pages/MoreStories';
 import ParticlesBackground from './components/ParticlesBackground';
 import StoryPage from './pages/StoryPage';
 import CountryPage from './pages/CountryPage';
+import GlobePage from './pages/GlobePage';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<GenerelLeyout />}>
-          <Route path='/' element={<h1>This Is globe </h1>} /> 
+          <Route path='/' element={<GlobePage/>} /> 
           <Route path='more' element={<MoreStories/>} />
           <Route path='more/Ingelheim' element={<StoryPage/>} />  
           <Route path='world' element={<MapPage/>} /> 
