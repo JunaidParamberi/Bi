@@ -164,7 +164,7 @@ body{
 /* styles.css */
 .inside-glow-imeta {
   border: 2px solid #00cc66;
-  backdrop-filter: blur(10px); /* Adjust the blur value as needed */
+  background-color: var(--Dark-Green);
 
 }
 .inside-glow {

@@ -17,23 +17,23 @@ export function Imeta() {
 
 function MapPage() {
     return (
-      <div className="w-full relative h-[90%] flex flex-col"> {/* Ensure full width and height */}
+      <div className="w-full relative h-full flex flex-col py-4"> {/* Ensure full width and height */}
         <div className=" flex flex-col w-full h-full justify-between"> {/* Full width and height for content */}
           <div>
             <h1 className="text-[40px] font-bold xl:text-[100px]">India, Meddle East, Turkey and Africa (IMETA)</h1>
           </div>
   
           <div className="flex items-center w-full h-full"> {/* Ensure this div takes full height */}
-            <div className="absolute bottom-[0%] left-0">
+            <div className="absolute z-50 bottom-[10%] left-0">
               <Imeta />
             </div>
             
             {/* Replace the img with MapComponent */}
-{/* 
-            <Link  relative='path' to='kenya' className=' w-full h-full'> */}
+
+            <div className=' flex justify-center items-center w-full h-full'>
             <MapComponent />
 
-            {/* </Link> */}
+            </div>
   
           </div>
         </div>

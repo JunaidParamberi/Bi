@@ -11,13 +11,13 @@ function GeneralLayout() {
 
 
   return (
-    <div className=' w-full h-screen flex flex-col justify-center items-center'>
+    <div className=' relative w-full h-screen flex flex-col justify-center items-center'>
         <div className='  w-[90%] h-full flex flex-col justify-between items-center'>
             <div className='w-full flex justify-center items-center flex-col h-[85vh]  '>
                 <Outlet /> 
             </div>
 
-        <div className='flex justify-between items-end h-[15vh] py-6 w-full '>
+        <div className='flex justify-between items-end h-[15vh] py-6 w-[90%] absolute bottom-0 '>
         <div className=' w-[33.3%]'>
       {  
       location.pathname === "/world" &&
@@ -28,9 +28,13 @@ function GeneralLayout() {
                       throw new Error('Function not implemented.');
                     } }/>
           </Link>
-          <Button text={"SD4G Team"} onClick={function (): void {
+
+          <Link to='team'>
+          
+          <Button text={"SD4G  IMETA Team"} onClick={function (): void {
                     throw new Error('Function not implemented.');
                   } } />
+          </Link>
         </div>
         }
         </div>

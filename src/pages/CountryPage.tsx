@@ -4,54 +4,36 @@ import smImg from '../assets/images/Asset 28.png';
 import smImg2 from '../assets/images/Asset 29.png';
 import smImg3 from '../assets/images/Asset 30.png';
 import smImg4 from '../assets/images/Asset 31.png';
-
+import {imetaData} from "../data/IMETA.js"
+import { useLocation } from 'react-router-dom';
 // Define the type for the items in the array
-type DataType = {
-  title: string;
-  text: string;
-  images : Array<string>;
-};
+
+
+
 
 const CountryPage = () => {
   // Initialize state with the correct type
   
   // Define the array with typed items
-  const arr: DataType[] = [
-      {
-          title: "Access to Health",
-         
-          text: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+  const location = useLocation()
 
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+  const currentData = location.state
 
-                Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-
-                Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                `,
-          images : [smImg, smImg2, smImg3, smImg4, smImg4, smImg4]
-        },
-        {
-            title: "Stop Rabies",
-            text: "Access to Healthcare is an end-to-end patient support program by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments through subsidized pricing models, and ensure patient adherence to medication for non-communicable diseases such as hypertension, Chronic Obstructive Pulmonary Disease (COPD) and type 2 diabetes. The program is set to expand across the region in the coming years",
-            images : [
-                    smImg4, smImg3, smImg2, smImg
-]
-        }
-    ];
-    
-    const [data, setData] = useState<DataType | null>(arr[0]);
+  const [data, setData] = useState(currentData.articles[0]);
 
   // Correctly type the item parameter
   const handleClick = (item: DataType) => {
     setData(item);
   };
 
+  const img = [
 
-  console.log(`Data : ${data}`)
+    smImg, smImg2, smImg3, smImg4
+  ]
+  
+
+ 
+console.log(data)
 
   return (
     <div className="w-full h-full flex flex-col py-6">
@@ -61,21 +43,21 @@ const CountryPage = () => {
           <img src={cardImg} alt="" className="h-full w-[40%] object-cover" />
 
           <div className="h-full w-full flex flex-col justify-between">
-            <h1 className="text-[40px] font-bold w-full text-left xl:text-[100px] text-white">Kenya</h1>
+            <h1 className="text-[40px] font-bold w-full text-left xl:text-[100px] text-white">{currentData.country}</h1>
 
             <div className="w-full">
               <div className="flex w-full items-baseline">
-                {arr.map((item, index) => (
+                {currentData.articles.map((item, index) => (
                   <button
                     key={index}
                     onClick={() => handleClick(item)}
                     className={`${
-                      data?.title === item.title
+                      data?.heading === item.heading
                         ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold xl:text-[35px] text-[14px]'
                         : 'bg-black xl:text-[32px] text-white text-[13px] px-5 py-[6px] font-semibold bg-opacity-20'
                     }`}
                   >
-                    {item.title}
+                    {item.heading}
                   </button>
                 ))}
               </div>
@@ -83,13 +65,13 @@ const CountryPage = () => {
 
             <div className="border-accent-green border-[0.5px] min-h-[52%] max-h-[52%] flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%]">
-                <p className="text-white p-3">{data?.text}</p>
+                <p className="text-white p-3">{data?.article}</p>
               </div>
             </div>
 
             {/* Image slider */}
             <div className="flex  overflow-x-auto  gap-4  custom-scrollbar-y">
-              {data?.images.map((img: string | undefined, index: Key | null | undefined) => (
+              {img?.map((img: string | undefined, index: Key | null | undefined) => (
                 <img
                   src={img}
                   alt=""
