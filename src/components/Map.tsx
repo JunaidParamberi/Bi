@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import mapImg from "../assets/images/Map.svg";
 import pinImg from "../assets/images/Pin.svg";
-import {imetaData} from "../data/IMETA.js"
-import { Link, useLocation } from 'react-router-dom';
+import { imetaData } from "../data/IMETA"; // Change to .js if necessary
+import { Link } from 'react-router-dom';
 
 // Marker type definition
-interface markers {
+interface Marker {
   id: number;
   country: string;
   top: string;
@@ -14,19 +14,13 @@ interface markers {
 
 interface MyComponentProps {
   style?: React.CSSProperties; // Optional style prop with CSSProperties type
-  title: string; // Some other props
+  title: string; // Title prop
 }
 
 // CountryCard component with props typed
 const CountryCard: React.FC<MyComponentProps> = ({ style, title }) => {
+  const currentData = imetaData.find((data) => data.country === title);
 
-    const currentData = imetaData.find((data: { country: unknown; }) => data.country === title)
-
-  console.log(imetaData)
-  console.log(title)
-  const location = useLocation()
-  console.log(location)
-  
   return (
     <div
       style={style}
@@ -35,24 +29,33 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title }) => {
       <h1 className="text-2xl">{currentData?.country}</h1>
       <h1 className="text-[14px] xl:text-[40px]">{currentData?.title}</h1>
       <div>
-      <Link to={currentData.country} state={currentData} className=' text-accent-green text-[14px]'>Read More </Link>
+        {currentData?.country ? (
+          <Link 
+            to={currentData.country} 
+            state={currentData} 
+            className='text-accent-green text-[14px]'
+          >
+            Read More
+          </Link>
+        ) : (
+          <span className='text-accent-green text-[14px]'>Read More</span>
+        )}
       </div>
     </div>
   );
 };
-
 // Marker data
 const markers: Marker[] = [
   { id: 1, country: 'India', top: '50%', left: '70%' },
   { id: 2, country: 'UAE', top: '46%', left: '63%' },
   { id: 3, country: 'Turkey', top: '38%', left: '56%' },
-  { id: 4 , country: 'Kenya', top: '57%', left: '59%' },
+  { id: 4, country: 'Kenya', top: '57%', left: '59%' },
   { id: 5, country: 'Rwanda', top: '58%', left: '56%' },
   { id: 6, country: 'South Africa', top: '72%', left: '54%' },
 ];
 
 // Main component
-const MapComponent = () => {
+const MapComponent: React.FC = () => {
   // State for active country and its position
   const [activeCountry, setActiveCountry] = useState<string>("");
   const [position, setPosition] = useState<Marker | undefined>(undefined);
@@ -71,7 +74,7 @@ const MapComponent = () => {
     <div className="relative w-full h-full" style={{ position: 'relative' }}>
       {/* Show CountryCard only if activeCountry is selected */}
       {activeCountry && position && (
-        <CountryCard title={activeCountry} style={{ top: position.top, left: position.left, margin : "20px" }} />
+        <CountryCard title={activeCountry} style={{ top: position.top, left: position.left, margin: "20px" }} />
       )}
       {/* Container for responsive scaling */}
       <div

@@ -4,19 +4,29 @@ import smImg from '../assets/images/Asset 28.png';
 import smImg2 from '../assets/images/Asset 29.png';
 import smImg3 from '../assets/images/Asset 30.png';
 import smImg4 from '../assets/images/Asset 31.png';
-
 import { useLocation } from 'react-router-dom';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-const CountryPage = () => {
-  const [currentImage, setCurrentImage] = useState("");
+// Define the types for Article and CurrentData
+interface Article {
+  heading: string;
+  article: string;
+}
+
+interface CurrentData {
+  country: string;
+  articles: Article[];
+}
+
+const CountryPage: React.FC = () => {
+  const [currentImage, setCurrentImage] = useState<string>(""); // Type for currentImage
   const location = useLocation();
-  const currentData = location.state;
-  const [data, setData] = useState(currentData.articles[0]);
+  const currentData = location.state as CurrentData; // Use type assertion
+  const [data, setData] = useState<Article>(currentData.articles[0]); // Specify type for data
 
   const img = [smImg, smImg2, smImg3, smImg4];
 
-  const handleClick = (item) => {
+  const handleClick = (item: Article) => {
     setData(item);
   };
 
@@ -24,11 +34,10 @@ const CountryPage = () => {
     <div className="relative w-full h-full flex flex-col py-6">
       {currentImage && (
         <div className='fixed full-image inset-0 flex justify-center items-center bg-dark-green bg-opacity-30 z-50'>
-          <div className=' absolute right-16 top-16 cursor-pointer' onClick={()=>setCurrentImage("")}>
-          <CancelOutlinedIcon  sx={{width : "40px", height  : "40%"} } />
-
+          <div className='absolute right-16 top-16 cursor-pointer' onClick={() => setCurrentImage("")}>
+            <CancelOutlinedIcon sx={{ width: "40px", height: "40%" }} />
           </div>
-          <img src={currentImage} alt="image" className='w-[80%] h-auto ' />
+          <img src={currentImage} alt="image" className='w-[80%] h-auto' />
         </div>
       )}
       <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center py-7">
@@ -39,7 +48,7 @@ const CountryPage = () => {
               <h1 className="text-[40px] font-bold w-full text-left xl:text-[100px] text-white">{currentData.country}</h1>
               <div className="w-full">
                 <div className="flex w-full items-baseline">
-                  {currentData.articles.map((item, index) => (
+                  {currentData.articles.map((item: Article, index: Key) => (
                     <button
                       key={index}
                       onClick={() => handleClick(item)}
@@ -63,10 +72,10 @@ const CountryPage = () => {
 
               {/* Image slider */}
               <div className="flex overflow-x-auto gap-4 custom-scrollbar-y">
-                {img?.map((img: string | undefined, index: Key | null | undefined) => (
+                {img.map((imageSrc: string, index: Key) => (
                   <img
-                    onClick={() => setCurrentImage(img)}
-                    src={img}
+                    onClick={() => setCurrentImage(imageSrc)}
+                    src={imageSrc}
                     alt=""
                     key={index}
                     className="h-auto w-[210px] object-cover cursor-zoom-in"

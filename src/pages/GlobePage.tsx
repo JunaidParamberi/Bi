@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
-import Globe from 'react-globe.gl';
+import { useRef, useEffect } from 'react';
+import Globe, { GlobeMethods } from 'react-globe.gl';
 import gloImg from '../assets/images/globe-bg.png';
 import RadarWave from '../components/RadarWave';
 
 function RealisticGlobePage() {
-  const globeEl = useRef(null);
+  const globeEl = useRef<GlobeMethods | undefined>(undefined); // Change here
 
   useEffect(() => {
     if (globeEl.current) {

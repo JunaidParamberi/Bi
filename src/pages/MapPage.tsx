@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-// import mapImg from '../assets/images/Map.svg'
+
 import MapComponent from '../components/Map.tsx';
 
 
