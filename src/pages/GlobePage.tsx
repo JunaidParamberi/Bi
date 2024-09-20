@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
 import gloImg from '../assets/images/globe-bg.png';
 import RadarWave from '../components/RadarWave';
-
+import {Link} from "react-router-dom"
 function RealisticGlobePage() {
   const globeEl = useRef<GlobeMethods | undefined>(undefined); // Change here
 
@@ -17,7 +17,7 @@ function RealisticGlobePage() {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center relative">
+    <Link to='world' className="w-screen h-screen flex justify-center items-center relative">
       <RadarWave />
       <Globe
         ref={globeEl}
@@ -31,7 +31,7 @@ function RealisticGlobePage() {
         enablePointerInteraction={false} // Disable pointer interaction
       />
       <div className="inner-glow" /> {/* Inner glow effect */}
-    </div>
+    </Link>
   );
 }
 

@@ -13,7 +13,7 @@ interface TeamCardProps {
 
 export const TeamCard: React.FC<TeamCardProps> = ({ data }) => {
   return (
-    <div className={`w-[232px] h-[90px] relative flex items-end m-1 ${data.name === "" && "opacity-0"}`}>
+    <div className={`w-[220px] h-[75px] relative flex items-end m-1 ${data.name === "" && "opacity-0"}`}>
       <div className='w-[32%] h-[90%] ml-3 absolute border-accent-green border-[0.5px] mb-3'>
         <Avatar
           src={data.image}
