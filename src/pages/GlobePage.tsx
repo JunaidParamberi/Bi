@@ -1,30 +1,36 @@
 import React, { useRef, useEffect } from 'react';
 import Globe from 'react-globe.gl';
-import gloImg from '../assets/images/globe-bg.png'
+import gloImg from '../assets/images/globe-bg.png';
+import RadarWave from '../components/RadarWave';
 
 function RealisticGlobePage() {
   const globeEl = useRef(null);
 
   useEffect(() => {
     if (globeEl.current) {
-      // Optional: Rotate the globe for a dynamic effect
       globeEl.current.controls().autoRotate = true;
-      globeEl.current.controls().autoRotateSpeed = 0.7;
+      globeEl.current.controls().autoRotateSpeed = 5;
+      globeEl.current.controls().enableZoom = false; // Disable zoom
+      globeEl.current.controls().enablePan = false; // Disable panning
+      globeEl.current.controls().enableRotate = false; // Disable rotation
     }
   }, []);
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen flex justify-center items-center relative">
+      <RadarWave />
       <Globe
         ref={globeEl}
         width={window.innerWidth}
         height={window.innerHeight}
         globeImageUrl={gloImg} // Realistic day-time texture
-       // Realistic night-time lights texture
-        cloudsData={[{}]}  // Dummy data for enabling clouds layer
-        cloudsOpacity={0.3}  // Cloud opacity for realism
-        backgroundColor="rgba(0, 0, 0, 0)"  // Transparent background
+        showAtmosphere={true}
+        atmosphereColor="#00e47c"
+        atmosphereAltitude={0.2} // Increased altitude for a more pronounced glow
+        backgroundColor="rgba(0, 0, 0, 0)" // Transparent background
+        enablePointerInteraction={false} // Disable pointer interaction
       />
+      <div className="inner-glow" /> {/* Inner glow effect */}
     </div>
   );
 }

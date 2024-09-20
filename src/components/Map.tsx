@@ -3,9 +3,9 @@ import mapImg from "../assets/images/Map.svg";
 import pinImg from "../assets/images/Pin.svg";
 import {imetaData} from "../data/IMETA.js"
 import { Link, useLocation } from 'react-router-dom';
-+
+
 // Marker type definition
-interface Marker {
+interface markers {
   id: number;
   country: string;
   top: string;
@@ -68,7 +68,7 @@ const MapComponent = () => {
   }, [activeCountry]);
 
   return (
-    <div className="relative w-[90%] h-full" style={{ position: 'relative' }}>
+    <div className="relative w-full h-full" style={{ position: 'relative' }}>
       {/* Show CountryCard only if activeCountry is selected */}
       {activeCountry && position && (
         <CountryCard title={activeCountry} style={{ top: position.top, left: position.left, margin : "20px" }} />

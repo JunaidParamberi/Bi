@@ -8,6 +8,7 @@ import ParticlesBackground from './components/ParticlesBackground';
 import StoryPage from './pages/StoryPage';
 import CountryPage from './pages/CountryPage';
 import GlobePage from './pages/GlobePage';
+import TeamPage from './pages/TeamPage';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path='more/Ingelheim' element={<StoryPage />} />  
           <Route path='world' element={<MapPage />} /> 
           <Route path='world/:country' element={<CountryPage />} /> 
-          <Route path='team' element={<h1>This Is team</h1>} /> 
+          <Route path='team' element={<TeamPage/>} /> 
         </Route>
       </Routes>
     </div>
