@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'BoehringerForwardHead';
   src: url('./fonts/BoehringerForwardHead.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400; /* Regular weight */
   font-style: normal;
 }
 
@@ -11,7 +11,7 @@
 @font-face {
   font-family: 'BoehringerForwardHead';
   src: url('./fonts/BoehringerForwardHead-Bd.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 700; /* Bold weight */
   font-style: normal;
 }
 
@@ -19,7 +19,7 @@
 @font-face {
   font-family: 'BoehringerForwardHead';
   src: url('./fonts/BoehringerForwardHead-It.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400; /* Regular weight for italic */
   font-style: italic;
 }
 
@@ -27,7 +27,7 @@
 @font-face {
   font-family: 'BoehringerForwardHead';
   src: url('./fonts/BoehringerForwardHead-BdIt.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 700; /* Bold weight for italic */
   font-style: italic;
 }
 
@@ -35,7 +35,15 @@
 @font-face {
   font-family: 'BoehringerForwardText';
   src: url('./fonts/BoehringerForwardText.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400; /* Regular weight */
+  font-style: normal;
+}
+
+/* Text Font Extralight */
+@font-face {
+  font-family: 'BoehringerForwardText';
+  src: url('./fonts/BoehringerForwardText-Extralight.ttf') format('truetype');
+  font-weight: 200; /* Extralight weight */
   font-style: normal;
 }
 
@@ -43,7 +51,7 @@
 @font-face {
   font-family: 'BoehringerForwardText';
   src: url('./fonts/BoehringerForwardText-Bd.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 700; /* Bold weight */
   font-style: normal;
 }
 
@@ -51,7 +59,7 @@
 @font-face {
   font-family: 'BoehringerForwardText';
   src: url('./fonts/BoehringerForwardText-It.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400; /* Regular weight for italic */
   font-style: italic;
 }
 
@@ -59,7 +67,7 @@
 @font-face {
   font-family: 'BoehringerForwardText';
   src: url('./fonts/BoehringerForwardText-BdIt.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 700; /* Bold weight for italic */
   font-style: italic;
 }
 
@@ -81,6 +89,8 @@ body{
   height: 100vh;
   box-sizing: border-box;
   font-family: "BoehringerForwardHead", sans-serif;
+  background-color: #08312a;
+
   /* background-image: url('src/assets/images/Main BG.svg'); */
   /* background: radial-gradient(circle at center, #00cc66 10%, #003333 70%) fixed; */
   background-size: cover;
@@ -98,13 +108,48 @@ body{
 }
 
 
+.app > p {
+  font-weight: 200;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* bg-gradient-to-r from-[#00e47c] to-[#08312a]  */
+
+@layer utilities {
+  .card-wrapper {
+    @apply relative bg-[#00e47c] flex p-[2px] w-[80%] justify-between rounded-full items-center duration-200 transition-all overflow-hidden;
+  }
+  
+  .card-wrapper::before {
+    content: ''; /* Ensure content is defined */
+    background: conic-gradient(
+      var(--Accent-Green) 0deg,
+      var(--Dark-Green) 80deg,
+      transparent 90deg
+    );
+
+    @apply h-[600%] w-[150%] absolute rounded-full animate-border-spin left-[-25%] z-0; /* Set z-index to 0 */
+  }
+  
+  .card-content {
+    @apply flex h-full bg-black justify-between w-full items-center rounded-full px-[20px] py-2 xl:px-10 xl:py-4 z-10; /* Set z-index to 10 */
+  }
+}
+
+
+
 .gradient-border {
   position: relative;
   display: inline-block;
-  border-radius: 1000px; /* Ensures the rounded effect */
-  padding: 10px; /* Adjust this to control spacing between content and border */
+  border-radius: 1000px; 
+  padding: 10px; 
   background-color: black;
 }
+
 
 
 
@@ -113,12 +158,21 @@ body{
   position: absolute;
   top: -2px;
   left: -2px;
-  height: calc(100% + 4px); /* Expands height to match the outer shadow */
-  width: calc(100% + 4px);  /* Expands width to match the outer shadow */
+  height: calc(100% + 4px); 
+  width: calc(100% + 4px);  
   border-radius: 1000px;
-  background: linear-gradient(to left, var(--Dark-Green), #00e47c); /* Green to dark gradient */
-  z-index: -2; /* Places it behind the content */
+  background: linear-gradient(to left, var(--Dark-Green), #00e47c); 
+  z-index: -2; 
 }
+
+
+.gradient-border:hover{
+  box-shadow: 40px 0 100px #08312a, -40px 0 100px #00cc66, ;
+}
+
+
+
+
 
 
 
@@ -141,8 +195,10 @@ body{
   width: calc(100% + 4px);
   border-radius: 1000px;
   background: linear-gradient(to left, rgba(0, 0, 0, 0.5), #00e47c);
-  z-index: 0; /* Adjust to 0 to avoid overlap */
+  z-index: 0;
 }
+
+
 .icon-gradient-border::before {
   content: '';
   position: absolute;
@@ -150,20 +206,20 @@ body{
   width: 100%;
   border-radius: 1000px;
   background: black;
-  z-index: 1; /* Adjust to 0 to avoid overlap */
+  z-index: 1; 
 }
 
 .icon-gradient-border img {
   position: relative;
-  z-index: 1; /* Ensures the image stays above the gradient border */
+  z-index: 1; 
   
   
 }
 
 
-/* styles.css */
+
 .inside-glow-imeta {
-  border: 2px solid #00cc66;
+  border: 1px solid #00cc66;
   background-color: var(--Dark-Green);
 
 }
@@ -176,6 +232,9 @@ body{
 
 .full-image{
   backdrop-filter: blur(10px); /* Adjust the blur value as needed */
+}
+.bg-blur{
+  backdrop-filter: blur(5px); /* Adjust the blur value as needed */
 }
 
 #tsparticles {
@@ -296,4 +355,135 @@ stroke: none;
  
 }
 
+/* Animation for opening (from the top-left corner) */
+@keyframes growFromTopLeft {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top left;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: top left;
+  }
+}
 
+/* Animation for closing (reverse of opening) */
+@keyframes shrinkToTopLeft {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: top left;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top left;
+  }
+}
+
+/* Apply animations */
+.futuristic-enter {
+  animation: growFromTopLeft 0.2s ease-in-out forwards;
+}
+
+.futuristic-exit {
+  animation: shrinkToTopLeft 0.2s ease-in-out  forwards;
+}
+
+
+
+@keyframes growFromCenter {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+/* Animation for closing (reverse of opening) */
+@keyframes shrinkToCenter {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center;
+  }
+}
+
+/* Apply animations */
+.imeta-futuristic-enter {
+  animation: growFromCenter 0.2s ease-in-out forwards;
+}
+
+.imeta-futuristic-exit {
+  animation: shrinkToCenter 0.2s ease-in-out  forwards;
+}
+
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #00e47c;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.pulse {
+  position: relative;
+  width: 620px; 
+  height: 620px; 
+  box-shadow: inset 0 0 40px var(--Accent-Green),
+  0 0 50px var(--Accent-Green)
+  ;
+  border-radius: 50%; 
+  border: var(--Accent-Green) 5px solid;
+
+}
+
+.pulse span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: var(--Accent-Green) 1px solid;
+  animation: animate 6s linear infinite;
+  border-radius: 50%;
+ animation-delay: calc(var(--i) * -1s) ;
+
+}
+
+@keyframes animate {
+
+  0% {
+    width: 200px; 
+    height: 200px; 
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    width: 1200px; 
+    height: 1200px; 
+    opacity: 0;
+  }
+}

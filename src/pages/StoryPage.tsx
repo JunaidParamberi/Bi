@@ -1,36 +1,45 @@
-import cardImg from '../assets/images/Asset 23.png'
+import { useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
 
 export default function StoryPage () {
 
-    return (
-        <div className="w-full h-full flex flex-col py-6">
-            <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center py-7">
-                <div className="w-[90%] gap-7 flex h-[80%] items-end justify-end ">
+    const location = useLocation()
 
-                    <div className='w-[40%] h-full'>
-                        <img src={cardImg} alt="" className='w-full h-full object-cover' />
+    const state  = location.state
+
+    return (
+        <motion.div
+        initial={{ opacity: 0, y: 20 }}  // Start below
+          animate={{ opacity: 1, y: 0 }}   // Slide in from below
+          exit={{ opacity: 0, y: 20 }}     // Slide out below
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        
+        className="w-full h-full flex flex-col py-6 justify-between">
+            <div className="bg-dark-green border-accent-green border-[0.5px] h-full w-full flex justify-center items-center py-7">
+                <div className="w-[90%] gap-7 flex h-[80%] justify-center items-start  ">
+
+                    <div className='w-[60%] h-full'>
+                        <img src={state.coverImage} alt="" className='w-full h-full object-cover' />
                     </div>
 
-                    <div className='  h-full w-[60%] flex flex-col'>
-                        <h1 className='text-[40px] font-bold w-full text-left xl:text-[100px] text-white'>Story</h1>
+                    <motion.div
+                       initial={{ opacity: 0, y: 20 }}  // Start below
+                       animate={{ opacity: 1, y: 0 }}   // Slide in from below
+                       exit={{ opacity: 0, y: 20 }}     // Slide out below
+                       transition={{ duration: 0.9, ease: "easeOut" }}
+                    
+                    className='   w-[60%] flex flex-col h-fit gap-6'>
+                        <h1 className='text-[40px] font-bold w-full text-left xl:text-[100px] text-white'>{state.title}</h1>
 
                         <div className='h-full overflow-y-auto custom-scrollbar'>
                             <p className='h-full text-white pr-4'>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                <br/><br/>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                                {state.text}
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

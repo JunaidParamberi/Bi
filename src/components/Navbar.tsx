@@ -20,7 +20,9 @@ function Navbar() {
 
 
   return (
-    <div className="gradient-border bg-[#000000] flex px-[20px] py-2 xl:px-10 xl:py-4 w-[80%] justify-between rounded-full items-center duration-200 transition-all">
+    <div className=" card-wrapper ">
+      <div className=" card-content">
+
     <div className=" active:opacity-70">
 
       <img
@@ -28,7 +30,7 @@ function Navbar() {
         alt="arrow-left"
         className="w-[20px] h-[20px] cursor-pointer  xl:w-[50px] xl:h-[50px]"
         onClick={goBackward} // Call goBackward on click
-      />
+        />
     </div>
 
       <div className="flex items-center justify-between w-[60%]">
@@ -42,7 +44,7 @@ function Navbar() {
 
         <NavLink 
         to="world"
-      
+        
         className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 xl:p-5 active:opacity-70`}>
           <img src={Home} alt="home" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
@@ -57,6 +59,7 @@ function Navbar() {
         onClick={goForward} // Call goForward on click
         />
     </div>
+        </div>
     </div>
   );
 }

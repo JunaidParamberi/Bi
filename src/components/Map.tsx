@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import mapImg from "../assets/images/Map.svg";
 import pinImg from "../assets/images/Pin.svg";
 import { imetaData } from "../data/IMETA"; // Change to .js if necessary
@@ -15,16 +15,31 @@ interface Marker {
 interface MyComponentProps {
   style?: React.CSSProperties; // Optional style prop with CSSProperties type
   title: string; // Title prop
+  isVisible: boolean; // Added to the interface
 }
 
 // CountryCard component with props typed
-const CountryCard: React.FC<MyComponentProps> = ({ style, title }) => {
+const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) => {
   const currentData = imetaData.find((data) => data.country === title);
+
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+
+  useEffect(() => {
+    if (!isVisible) {
+      // Trigger exit animation before removing the card
+      setIsAnimatingOut(true);
+      const timer = setTimeout(() => {
+        setIsAnimatingOut(false); // Ensure it's cleaned up properly
+      }, 600); // Duration of the exit animation
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible]);
 
   return (
     <div
       style={style}
-      className="absolute w-[15%] flex flex-col gap-5 py-8 px-4 rounded-none text-white inside-glow-imeta bg-dark-green z-50"
+      className={`absolute w-[15%] flex flex-col gap-5 py-8 px-4 text-white inside-glow-imeta bg-dark-green z-50
+        ${isVisible && !isAnimatingOut ? 'futuristic-enter' : 'futuristic-exit'}`}
     >
       <h1 className="text-2xl">{currentData?.country}</h1>
       <h1 className="text-[14px] xl:text-[40px]">{currentData?.title}</h1>
@@ -59,6 +74,7 @@ const MapComponent: React.FC = () => {
   // State for active country and its position
   const [activeCountry, setActiveCountry] = useState<string>("");
   const [position, setPosition] = useState<Marker | undefined>(undefined);
+  const cardRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (country: string) => {
     setActiveCountry(country);
@@ -70,11 +86,35 @@ const MapComponent: React.FC = () => {
     setPosition(positionNow); // This can be undefined if not found
   }, [activeCountry]);
 
+
+    // Event handler to detect clicks outside the CountryCard
+    useEffect(() => {
+      const handleOutsideClick = (event: MouseEvent) => {
+        if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+          setActiveCountry(""); // Close the CountryCard if clicked outside
+        }
+      };
+  
+      // Add event listener
+      document.addEventListener("mousedown", handleOutsideClick);
+  
+      // Remove event listener on cleanup
+      return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
+    }, []);
+
   return (
-    <div className="relative w-full h-full" style={{ position: 'relative' }}>
+    <div className="relative w-full h-full flex justify-center items-center" style={{ position: 'relative' }}>
       {/* Show CountryCard only if activeCountry is selected */}
       {activeCountry && position && (
-        <CountryCard title={activeCountry} style={{ top: position.top, left: position.left, margin: "20px" }} />
+        <div ref={cardRef}>
+          <CountryCard
+            title={activeCountry}
+            style={{ top: position.top, left: position.left, margin: "20px" }}
+            isVisible={!!activeCountry} // Control visibility
+          />
+        </div>
       )}
       {/* Container for responsive scaling */}
       <div
@@ -84,7 +124,7 @@ const MapComponent: React.FC = () => {
         {/* Map Image */}
         <img
           src={mapImg}
-          className="absolute top-0 left-0 w-full object-contain"
+          className="absolute top-0 left-0 object-contain"
           alt="Map"
         />
 

@@ -1,4 +1,5 @@
 import Avatar from '@mui/material/Avatar';
+import { motion } from 'framer-motion';
 import { team1, team2 } from '../data/teamData.ts';
 
 interface TeamMember {
@@ -13,7 +14,12 @@ interface TeamCardProps {
 
 export const TeamCard: React.FC<TeamCardProps> = ({ data }) => {
   return (
-    <div className={`w-[220px] h-[75px] relative flex items-end m-1 ${data.name === "" && "opacity-0"}`}>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`w-[220px] h-[75px] relative flex items-end m-1 ${data.name === "" && "opacity-0"}`}
+    >
       <div className='w-[32%] h-[90%] ml-3 absolute border-accent-green border-[0.5px] mb-3'>
         <Avatar
           src={data.image}
@@ -21,33 +27,36 @@ export const TeamCard: React.FC<TeamCardProps> = ({ data }) => {
           variant='square'
         />
       </div>
-      <div className='p-3 text-left w-full flex h-[80%] bg-black bg-opacity-65 justify-center items-center border-[#00e47d7f] border-[0.1px]'>
+      <div className='p-3 text-left w-full flex h-[90%] bg-black bg-opacity-50 justify-center items-center border-[#00e47d7f] border-[0.1px]'>
         <div className='w-[38%]' />
         <div className='w-[60%]'>
           <h1 className='text-white text-[80%] font-semibold'>{data.name}</h1>
           <h2 className='text-[60%] font-light leading-tight'>{data.occupation}</h2>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
-
-
 
 const TeamPage: React.FC = () => {
   return (
     <div className='w-full h-full flex justify-center items-center py-6'>
-      <div className='bg-dark-green border-accent-green border-[0.5px] h-screen w-full max-h-full justify-center items-center p-10 overflow-hidden'>
-        <div className='team-1 w-full flex flex-col justify-center items-center'>
-          <div className='w-full'>
-            <TeamCard data={team1[0]} />
+      <div className='bg-dark-green border-accent-green border-[0.5px] w-full h-full flex overflow-hidden justify-center items-center'>
+        <div className='  w-[95%] h-[90%] flex justify-center items-center ' >
+
+        <div className='team-1 before:flex flex-col'>
+          <div className='flex flex-col w-full'> 
+            <div className='w-full'>
+              <TeamCard data={team1[0]} />
+            </div>
+            <div className='flex flex-wrap w-full'>
+              {team1.slice(1).map((tm, index) => (
+                <TeamCard key={index} data={tm} />
+              ))}
+            </div>
           </div>
-          <div className='flex flex-wrap w-full'>
-            {team1.slice(1).map((tm, index) => (
-              <TeamCard key={index} data={tm} />
-            ))}
-          </div>
-          <div className='w-full h-full justify-between items-end flex mt-6'>
+          
+          <div className='w-full items-end flex mt-6'>
             <div className='w-[70%] flex flex-wrap flex-col'>
               <h1 className='text-2xl font-bold m-2'>{team2[0].teamName}</h1>
               <div className='flex flex-wrap'>
@@ -67,6 +76,7 @@ const TeamPage: React.FC = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

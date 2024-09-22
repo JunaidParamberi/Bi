@@ -1,9 +1,8 @@
 
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import logo from '../assets/icons/Logo_Accent Green.svg';
 import { useLocation } from 'react-router-dom';
-import Button from './Button';
 
 function GeneralLayout() {
 
@@ -19,24 +18,7 @@ function GeneralLayout() {
 
         <div className='flex justify-between items-end h-[15vh] py-6 w-[90%] absolute bottom-0 '>
         <div className=' w-[33.3%]'>
-      {  
-      location.pathname === "/world" &&
 
-        <div className=' flex flex-col gap-3 w-[60%] justify-end'>
-          <Link to="more">
-          <Button text={"More Stories"} onClick={function (): void {
-                      throw new Error('Function not implemented.');
-                    } }/>
-          </Link>
-
-          <Link to='team'>
-          
-          <Button text={"SD4G  IMETA Team"} onClick={function (): void {
-                    throw new Error('Function not implemented.');
-                  } } />
-          </Link>
-        </div>
-        }
         </div>
 
         <div className='flex-1 flex justify-center w-[33.3%]'>

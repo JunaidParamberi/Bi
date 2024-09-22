@@ -1,6 +1,6 @@
 import './App.css';
 import mainBg from './assets/images/Main BG.svg';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import GenerelLeyout from './components/GenerelLeyout';
 import MapPage from './pages/MapPage';
 import MoreStories from './pages/MoreStories';
@@ -10,7 +10,10 @@ import CountryPage from './pages/CountryPage';
 import GlobePage from './pages/GlobePage';
 import TeamPage from './pages/TeamPage';
 
+
 function App() {
+
+  const location = useLocation();  // To track route changes for animations
   return (
     <div className='app'>
       <img
@@ -19,11 +22,11 @@ function App() {
         className='min-w-full min-h-[100vh] object-cover bg-no-repeat absolute z-[-100]'
       />
       <ParticlesBackground />
-      <Routes>
+      <Routes location={location} key={location.pathname}>
         <Route path='/' element={<GenerelLeyout />}>
           <Route index element={<GlobePage />} /> 
           <Route path='more' element={<MoreStories />} />
-          <Route path='more/Ingelheim' element={<StoryPage />} />  
+          <Route path='more/:title' element={<StoryPage />} />  
           <Route path='world' element={<MapPage />} /> 
           <Route path='world/:country' element={<CountryPage />} /> 
           <Route path='team' element={<TeamPage/>} /> 
