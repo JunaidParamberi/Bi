@@ -4,11 +4,22 @@ import gloImg from '../assets/images/globe-bg.png';
 import RadarWave from '../components/RadarWave';
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
-import {PuffLoader} from 'react-spinners'
+import { PuffLoader } from 'react-spinners';
 
 function RealisticGlobePage() {
   const globeEl = useRef<GlobeMethods | undefined>(undefined);
   const [isGlobeLoaded, setIsGlobeLoaded] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({ width: window.innerWidth, height: window.innerHeight });
+      setIsGlobeLoaded(false); // Set globe to not loaded to show loader
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (globeEl.current) {
@@ -28,7 +39,7 @@ function RealisticGlobePage() {
     return () => {
       clearTimeout(loadTimeout);
     };
-  }, []);
+  }, [dimensions]); // Re-run effect when dimensions change
 
   return (
     <motion.div
@@ -40,10 +51,10 @@ function RealisticGlobePage() {
     >
       <Link to="world" className="w-full h-full flex justify-center items-center relative">
 
-      <div className=' absolute w-full h-full flex justify-center items-center'>
-        
-        <RadarWave />
-      </div>
+        {/* Radar wave animation */}
+        <div className="absolute w-full h-full flex justify-center items-center">
+          <RadarWave />
+        </div>
 
         {!isGlobeLoaded && (
           <div className="absolute w-full h-full flex justify-center items-center">
@@ -51,21 +62,20 @@ function RealisticGlobePage() {
           </div>
         )}
 
-        {/* Globe component */}
-        {/* Uncomment when you are ready to use it */}
-        
-        <Globe
-          ref={globeEl}
-          width={window.innerWidth }  // Responsive width (80% of the screen)
-          height={window.innerHeight}  // Responsive height (80% of the screen)
-          globeImageUrl={gloImg}
-          showAtmosphere={true}
-          atmosphereColor="#00e47c"
-          atmosphereAltitude={0.2}
-          backgroundColor="rgba(0, 0, 0, 0)"
-          enablePointerInteraction={false}
-        /> 
-        
+        {/* Globe Container */}
+        <div className="globe-container">
+          <Globe
+            ref={globeEl}
+            globeImageUrl={gloImg}
+            showAtmosphere={true}
+            atmosphereColor="#00e47c"
+            atmosphereAltitude={0.2}
+            backgroundColor="rgba(0, 0, 0, 0)"
+            enablePointerInteraction={false}
+            width={dimensions.width * 0.55}  // Adjusting width based on current dimensions
+            height={dimensions.width * 0.55} // Adjusting height based on current dimensions
+          />
+        </div>
 
         <div className="inner-glow" />
       </Link>

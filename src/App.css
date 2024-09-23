@@ -448,8 +448,8 @@ stroke: none;
 
 .pulse {
   position: relative;
-  width: 620px;
-  height: 620px;
+  width: 37vw;
+  height: 37vw;
   box-shadow: inset 0 0 40px var(--Accent-Green),
   0 0 50px var(--Accent-Green);
   border-radius: 50%;
@@ -470,47 +470,17 @@ stroke: none;
 
 @keyframes animate {
   0% {
-    width: 200px;
-    height: 200px;
+    width:  37vw;
+    height:  37vw;
     opacity: 1;
   }
   50% {
     opacity: 1;
   }
   100% {
-    width: 1200px;
-    height: 1200px;
+    width: 100vw;
+    height: 100vw;
     opacity: 0;
   }
 }
 
-/* Media Query for 4K screens (min-width: 3840px) */
-@media (min-width: 3840px) {
-  .pulse {
-    width: 1480px;
-    height: 1480px;
-  }
-
-  .pulse span {
-    animation: animate4k 6s linear infinite;
-    animation-delay: calc(var(--i) * -1s);
-    border: var(--Accent-Green) 3px solid;
-  }
-
-  /* Keyframes for 4K screens */
-  @keyframes animate4k {
-    0% {
-      width: 500px;   /* Larger initial size */
-      height: 500px;
-      opacity: 1;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      width: 3000px;  /* Larger final size */
-      height: 3000px;
-      opacity: 0;
-    }
-  }
-}

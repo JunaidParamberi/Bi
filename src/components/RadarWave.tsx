@@ -10,7 +10,7 @@ const RadarWave = () => {
             style={{ ['--i' as string]: index + 1 }} // bracket notation to access custom property
           ></span>
         ))}
-        <img src={buttonImg} alt="" className='w-[50%] absolute bottom-[0.2%] right-[-33%]' />
+        <img src={buttonImg} alt="" className='w-[60%] absolute bottom-[0.2%] right-[-46%]' />
       </div>
       {/* <GlobeButton/> */}
     </>

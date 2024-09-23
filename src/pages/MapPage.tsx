@@ -14,7 +14,7 @@ interface ButtonProps {
 export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
   return (
     <div 
-      className='bg-dark-green border-accent-green border-[0.5px] w-full px-[30px] xl:px-16 xl:py-20  py-8 flex flex-col gap-5 rounded-none text-white'>
+      className='bg-dark-green border-accent-green border-[0.5px] w-full px-[10%]  xl:py-20  py-[15%] flex flex-col gap-5 rounded-none text-white'>
       <h1 className='text-[35px] xl:text-[80px]'>IMETA</h1>
       <h2 className='text-[14px] xl:text-[35px]'>
         The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities.
@@ -81,10 +81,13 @@ function MapPage() {
           animate={{ opacity: 1, y: 0 }}   // Slide in from below
           exit={{ opacity: 0, y: 20 }}     // Slide out below
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className='flex justify-center items-center h-full w-full xl:gap-10 xl:mt-48 flex-col'
+          className='flex justify-between items-center h-full w-full xl:gap-10 xl:mt-30 flex-col'
         >
               <h1 className="text-[40px] w-full font-bold xl:pt-16 xl:text-[100px]">India, Middle East, Turkey, and Africa (IMETA)</h1>
-          <MapComponent />
+              <div className=' w-[80%] xl:w-full h-full'>
+
+           <MapComponent />
+              </div>
         </motion.div>
       </motion.div>
 
@@ -114,7 +117,7 @@ function MapPage() {
             </div>
             <div className='flex flex-col gap-3 xl:gap-16 text-white'>
               <h2 className='text-3xl xl:text-[100px]'>IMETA</h2>
-              <p className='text-sm font-extralight xl:text-[30px] leading-[40px]'>
+              <p className='text-sm font-extralight xl:text-[30px] xl:leading-[40px]'>
                 The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities. <br /><br />
                 The Boehringer Ingelheim team in IMETA is comprised of 2,000 exceptional team members from 26 nationalities who proudly serve over 70 countries, or 45 percent of the world’s population. Furthermore, 50 percent of Boehringer Ingelheim’s global sustainability efforts are being implemented in the region, reflecting the needs of underserved communities.
               </p>

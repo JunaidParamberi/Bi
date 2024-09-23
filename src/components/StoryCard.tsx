@@ -17,14 +17,14 @@ function StoryCard({ item }: StoryCardProps) {
       <img
         src={item.coverImage}
         alt={item.title}
-        className="h-[35vh] w-full object-cover"
+        className="h-[35vh] min-w-full object-cover"
       />
 
       <div className="flex flex-col gap-5 xl:gap-16">
         <h2 className="text-2xl xl:text-[60px]">{item.title}</h2>
 
         {/* Use the line-clamp utility to limit text to 3 lines */}
-        <p className="text-sm xl:text-[35px]  text-white leading-[1.2] line-clamp-3 ">
+        <p className="text-sm xl:text-[35px]  text-white xl:leading-[1.2] line-clamp-3 ">
           {item.text}
         </p>
 
