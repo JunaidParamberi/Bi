@@ -39,12 +39,12 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
   return (
     <div
       style={style}
-      className={`absolute w-fit flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-10 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green z-50
+      className={`absolute w-fit flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-16 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green z-50
         ${isVisible && !isAnimatingOut ? 'futuristic-enter' : 'futuristic-exit'}`}
     >
       <div className=' flex h-full w-full flex-col gap-6'>
       <h1 className="text-2xl xl:text-[40px]">{currentData?.country}</h1>
-      <h1 className="text-[14px] xl:text-[30px]">{currentData?.title}</h1>
+      <h1 className="text-[14px] xl:text-[30px] ">{currentData?.title}</h1>
       <div>
         {currentData?.country ? (
           <Link 

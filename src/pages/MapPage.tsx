@@ -81,7 +81,7 @@ function MapPage() {
           animate={{ opacity: 1, y: 0 }}   // Slide in from below
           exit={{ opacity: 0, y: 20 }}     // Slide out below
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className='flex justify-center items-center h-full w-full xl:mt-48 flex-col'
+          className='flex justify-center items-center h-full w-full xl:gap-10 xl:mt-48 flex-col'
         >
               <h1 className="text-[40px] w-full font-bold xl:pt-16 xl:text-[100px]">India, Middle East, Turkey, and Africa (IMETA)</h1>
           <MapComponent />
