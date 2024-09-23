@@ -60,7 +60,7 @@
   "main": "dist-electron/main.js",
   "build": {
     "appId": "boehringer.id",
-    "productName": "BI",
+    "productName": "Boehringer Ingelheim",
     "files": [
       "dist/",
       "dist-electron/",

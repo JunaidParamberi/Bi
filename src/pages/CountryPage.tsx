@@ -5,7 +5,7 @@ import smImg2 from '../assets/images/Asset 29.png';
 import smImg3 from '../assets/images/Asset 30.png';
 import smImg4 from '../assets/images/Asset 31.png';
 import { useLocation } from 'react-router-dom';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import {motion} from 'framer-motion'
 
 // Define the types for Article and CurrentData
@@ -31,6 +31,16 @@ const CountryPage: React.FC = () => {
     setData(item);
   };
 
+
+  const styles = {
+    icon: {
+      '@media (min-width: 3840px)': {
+        width: '5rem', // Width for xl screens (min-width: 3840px)
+        height: '5rem', // Height for xl screens
+      }
+    }
+  };
+
   return (
     
     <motion.div 
@@ -45,8 +55,8 @@ const CountryPage: React.FC = () => {
         <div className= {`fixed full-image inset-0 flex justify-center items-center bg-dark-green bg-opacity-30 z-50 
         ${currentImage ? 'imeta-futuristic-enter' : 'imeta-futuristic-exit '}
         `}>
-          <div className='absolute right-16 top-16 cursor-pointer' onClick={() => setCurrentImage("")}>
-            <CancelOutlinedIcon sx={{ width: "40px", height: "40%" }} />
+          <div className='absolute xl:right-28 xl:top-28 right-16 top-16 cursor-pointer' onClick={() => setCurrentImage("")}>
+          <CloseIcon sx={styles.icon} fontSize='large' className=' xl:w-11 xl:h-11' color='inherit' />
           </div>
           <img src={currentImage} alt="image" className='w-[80%] h-auto' />
         </div>
@@ -87,7 +97,7 @@ const CountryPage: React.FC = () => {
                 </div>
 
                 <div className="border-accent-green border-[0.5px] min-h-[60%] max-h-[52%] flex justify-center items-center mb-3">
-                <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%]">
+                <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
                   <p className="text-white p-3">{data?.article}</p>
                 </div>
                 </div>
@@ -98,7 +108,7 @@ const CountryPage: React.FC = () => {
                     src={imageSrc}
                     alt=""
                     key={index}
-                    className="w-[300px] h-full  object-cover cursor-zoom-in"
+                    className="w-[300px] xl:w-[513px] h-full  object-cover cursor-zoom-in"
                   />
                 ))}
               </div>

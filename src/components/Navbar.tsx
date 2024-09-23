@@ -28,12 +28,12 @@ function Navbar() {
       <img
         src={ArrowLeft}
         alt="arrow-left"
-        className="w-[20px] h-[20px] cursor-pointer  xl:w-[50px] xl:h-[50px]"
+        className="w-[20px] h-[20px] cursor-pointer  xl:w-[50px] xl:h-[50px] mr-14 xl:mr-24"
         onClick={goBackward} // Call goBackward on click
         />
     </div>
 
-      <div className="flex items-center justify-between w-[60%]">
+      <div className="flex items-center gap-6 xl:gap-11">
         <NavLink to="more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} p-2 xl:p-6 active:opacity-70`}>
           <img src={More} alt="more" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px]`} />
         </NavLink>
@@ -55,7 +55,7 @@ function Navbar() {
       <img
         src={ArrowRight}
         alt="arrow-right"
-        className="w-[20px] h-[20px] cursor-pointer xl:w-[50px] xl:h-[50px]"
+        className="w-[20px] h-[20px] cursor-pointer xl:w-[50px] xl:h-[50px] ml-14  xl:ml-24"
         onClick={goForward} // Call goForward on click
         />
     </div>

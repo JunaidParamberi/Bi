@@ -3,6 +3,7 @@ import mapImg from "../assets/images/Map.svg";
 import pinImg from "../assets/images/Pin.svg";
 import { imetaData } from "../data/IMETA"; // Change to .js if necessary
 import { Link } from 'react-router-dom';
+import {motion } from "framer-motion"
 
 // Marker type definition
 interface Marker {
@@ -38,17 +39,18 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
   return (
     <div
       style={style}
-      className={`absolute w-[15%] flex flex-col gap-5 py-8 px-4 text-white inside-glow-imeta bg-dark-green z-50
+      className={`absolute w-fit flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-10 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green z-50
         ${isVisible && !isAnimatingOut ? 'futuristic-enter' : 'futuristic-exit'}`}
     >
-      <h1 className="text-2xl">{currentData?.country}</h1>
-      <h1 className="text-[14px] xl:text-[40px]">{currentData?.title}</h1>
+      <div className=' flex h-full w-full flex-col gap-6'>
+      <h1 className="text-2xl xl:text-[40px]">{currentData?.country}</h1>
+      <h1 className="text-[14px] xl:text-[30px]">{currentData?.title}</h1>
       <div>
         {currentData?.country ? (
           <Link 
-            to={currentData.country} 
-            state={currentData} 
-            className='text-accent-green text-[14px]'
+          to={currentData.country} 
+          state={currentData} 
+          className='text-accent-green text-[14px] xl:text-[25px]'
           >
             Read More
           </Link>
@@ -56,6 +58,7 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
           <span className='text-accent-green text-[14px]'>Read More</span>
         )}
       </div>
+        </div>
     </div>
   );
 };
@@ -111,7 +114,7 @@ const MapComponent: React.FC = () => {
         <div ref={cardRef}>
           <CountryCard
             title={activeCountry}
-            style={{ top: position.top, left: position.left, margin: "20px" }}
+            style={{ top: position.top, left: position.left, margin: "15px" }}
             isVisible={!!activeCountry} // Control visibility
           />
         </div>
@@ -131,6 +134,8 @@ const MapComponent: React.FC = () => {
         {/* Markers */}
         {markers.map((marker) => (
           <div
+          
+         
             key={marker.id}
             onClick={() => handleClick(marker.country)}
             className="absolute w-[2%] cursor-pointer"
@@ -141,7 +146,13 @@ const MapComponent: React.FC = () => {
             }}
             title={marker.country}
           >
-            <img src={pinImg} alt="Pin" />
+            <motion.img
+             initial={{ opacity: 0, y: -50, scale : 1.5 }}  // Start off above
+             animate={{ opacity: 1, y: 0, scale : 1 }}    // Slide in smoothly
+             exit={{ opacity: 0, y: 50, scale : 1 }}      // Slide out below
+             transition={{ duration: 0.8, ease: "easeOut" }}  // Smooth and quick transition
+            
+            src={pinImg} alt="Pin" />
           </div>
         ))}
       </div>

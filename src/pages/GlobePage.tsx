@@ -33,10 +33,10 @@ function RealisticGlobePage() {
   return (
     <motion.div
       className="w-screen h-screen flex justify-center items-center relative"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 3, ease: "easeInOut" }}
+      exit={{ opacity: 0, y: 10 }}
+      transition={{ duration: 2, ease: "easeInOut" }}
     >
       <Link to="world" className="w-full h-full flex justify-center items-center relative">
 

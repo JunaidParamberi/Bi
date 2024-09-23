@@ -14,13 +14,13 @@ interface ButtonProps {
 export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
   return (
     <div 
-      className='bg-dark-green border-accent-green border-[0.5px] w-full p-[40px] flex flex-col gap-5 rounded-none text-white'>
+      className='bg-dark-green border-accent-green border-[0.5px] w-full px-[30px] xl:px-16 xl:py-20  py-8 flex flex-col gap-5 rounded-none text-white'>
       <h1 className='text-[35px] xl:text-[80px]'>IMETA</h1>
-      <h2 className='text-[14px] xl:text-[40px]'>
+      <h2 className='text-[14px] xl:text-[35px]'>
         The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities.
       </h2>
       <div
-        className='text-accent-green text-[14px] cursor-pointer'
+        className='text-accent-green text-[14px] cursor-pointer xl:text-[25px]'
         onClick={activate} // Trigger the activate function when clicking "Read More"
       >
         Read More
@@ -37,6 +37,18 @@ function MapPage() {
     setIsActive(true); // Set the state to true when clicked
   };
 
+
+
+  const styles = {
+    icon: {
+      '@media (min-width: 3840px)': {
+        width: '4rem', // Width for xl screens (min-width: 3840px)
+        height: '4rem', // Height for xl screens
+      }
+    }
+  };
+
+
   return (
     <>
       <motion.div 
@@ -47,9 +59,9 @@ function MapPage() {
         className="w-full relative h-full flex flex-col py-7 justify-center items-center"
       >
         {/* The Imeta component */}
-        <div className="absolute w-[23%] z-50 bottom-[-4%] gap-5 left-0 flex flex-col">
+        <div className="absolute w-[22%] xl:w-[20%] z-50 bottom-[-4%] gap-5 xl:gap-8 left-0 flex flex-col">
           <Imeta activate={handleClick} /> {/* Passing handleClick to the Imeta component */}
-          <div className='flex flex-col gap-3 justify-end w-[90%]'>
+          <div className='flex flex-col gap-3 justify-start w-[80%]'>
             <Link to="/more">
               <Button text={"More Stories"} onClick={function (): void {
                 throw new Error('Function not implemented.');
@@ -63,15 +75,15 @@ function MapPage() {
           </div>
         </div>
 
-        <h1 className="text-[40px] w-full font-bold mt-4 xl:text-[100px]">India, Middle East, Turkey, and Africa (IMETA)</h1>
         
         <motion.div 
           initial={{ opacity: 0, y: 20 }}  // Start below
           animate={{ opacity: 1, y: 0 }}   // Slide in from below
           exit={{ opacity: 0, y: 20 }}     // Slide out below
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className='flex justify-center items-center w-[90%]  flex-col'
+          className='flex justify-center items-center h-full w-full xl:mt-48 flex-col'
         >
+              <h1 className="text-[40px] w-full font-bold xl:pt-16 xl:text-[100px]">India, Middle East, Turkey, and Africa (IMETA)</h1>
           <MapComponent />
         </motion.div>
       </motion.div>
@@ -82,25 +94,27 @@ function MapPage() {
         animate={{ opacity: 1, scale: 1, rotateX: 0 }}     // Animates to normal scale and rotation
         exit={{ opacity: 0, scale: 0.8, rotateX: -30 }}    // Exit with reverse effects
         transition={{ duration: 0.7, ease: "easeOut" }}    // Smooth transition
-        className={`bg-dark-green w-screen absolute z-[100] h-[110vh] bg-opacity-75 flex justify-center items-center
+        className={`bg-dark-green w-screen absolute z-[100] h-[110vh] bg-opacity-85 flex justify-center items-center
         ${isActive ? 'imeta-futuristic-enter' : 'imeta-futuristic-exit hidden'}
       `}
       >
-        <div className='relative w-[60%] bg-dark-green border-accent-green border-[0.5px] p-20 flex justify-center items-center'>
+        <div className='relative w-[60%] bg-dark-green border-accent-green border-[0.5px] p-20 xl:p-40 flex justify-center items-center'>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}  // Modal content scales in
             animate={{ opacity: 1, scale: 1 }}    // Scales up with a bounce effect
             exit={{ opacity: 0, scale: 0.9 }}     // Scales down when exiting
             transition={{ duration: 0.5, ease: "easeInOut", bounce: 0.3 }}  // Bounce effect for smoothness
+
+            className=' flex'
           >
-            <div className='absolute top-[10%] right-[5%] cursor-pointer'
+            <div className='absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer'
               onClick={() => setIsActive(false)}
             >
-              <CloseIcon fontSize='large' color='inherit' />
+              <CloseIcon sx={styles.icon} fontSize='large' className=' xl:w-11 xl:h-11' color='inherit' />
             </div>
-            <div className='flex flex-col gap-3 text-white'>
-              <h2 className='text-3xl'>IMETA</h2>
-              <p className='text-sm font-extralight'>
+            <div className='flex flex-col gap-3 xl:gap-16 text-white'>
+              <h2 className='text-3xl xl:text-[100px]'>IMETA</h2>
+              <p className='text-sm font-extralight xl:text-[30px] leading-[40px]'>
                 The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities. <br /><br />
                 The Boehringer Ingelheim team in IMETA is comprised of 2,000 exceptional team members from 26 nationalities who proudly serve over 70 countries, or 45 percent of the world’s population. Furthermore, 50 percent of Boehringer Ingelheim’s global sustainability efforts are being implemented in the region, reflecting the needs of underserved communities.
               </p>
