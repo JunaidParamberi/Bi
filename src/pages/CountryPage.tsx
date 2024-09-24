@@ -1,20 +1,17 @@
-import { Key, useState } from 'react';
+import { Key, useState, useEffect } from 'react';
 import cardImg from '../assets/images/Asset 24.png';
-import smImg from '../assets/images/Asset 28.png';
-import smImg2 from '../assets/images/Asset 29.png';
-import smImg3 from '../assets/images/Asset 30.png';
-import smImg4 from '../assets/images/Asset 31.png';
 import { useLocation } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { motion } from 'framer-motion';
-import { imetaData } from "../data/IMETA"; // Change to .js if necessary
+import { imetaData } from "../data/IMETA";
+import { PuffLoader } from 'react-spinners';
 
 // Define the types for Article and CurrentData
 type Article = {
   heading: string;
-  images?: string[]; // Optional property
+  images?: string[];
   article: string;
 };
 
@@ -24,118 +21,119 @@ interface CurrentData {
 }
 
 const CountryPage: React.FC = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null); // Track image index instead of image itself
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  const [loading, setLoading] = useState(false); // Loading state
   const location = useLocation();
-  const currentData = location.state as CurrentData; // Use type assertion
-  const [data, setData] = useState<Article>(currentData.articles[0]); // Specify type for data
+  const currentData = location.state as CurrentData;
+  const [data, setData] = useState<Article>(currentData.articles[0]);
 
-  const img = [smImg, smImg2, smImg3, smImg4];
+  // Effect to reset loading when data changes
+  useEffect(() => {
+    setLoading(false); // Reset loading when article data changes
+  }, [data]);
 
   const handleClick = (item: Article) => {
     setData(item);
+    setCurrentImageIndex(null); // Reset the image index when changing articles
+    setLoading(true); // Start loading when changing articles
   };
-
-  const handleNextImage = () => {
-    if (currentImageIndex !== null && currentImageIndex < img.length - 1) {
-      setCurrentImageIndex((prevIndex) => (prevIndex ?? 0) + 1);
-    }
-  };
-
-  const handlePreviousImage = () => {
-    if (currentImageIndex !== null && currentImageIndex > 0) {
-      setCurrentImageIndex((prevIndex) => (prevIndex ?? 1) - 1);
-    }
-  };
-
-  const handleCloseImage = () => {
-    setCurrentImageIndex(null);
-  };
-
-
-
 
   const filteredData = imetaData.filter(item => item.country === currentData.country);
+  const newData = filteredData[0];
 
-  const newData = filteredData[0]
-  console.log(newData)
-
-
-  const styles = {
-    icon: {
-      '@media (min-width: 3840px)': {
-        width: '5rem', // Width for xl screens (min-width: 3840px)
-        height: '5rem', // Height for xl screens
-      }
+  const handlePrevClick = () => {
+    if (currentImageIndex !== null && currentImageIndex > 0) {
+      setSwipeDirection('right');
+      setLoading(true); // Set loading to true when changing image
+      setCurrentImageIndex(currentImageIndex - 1);
     }
+  };
+
+  const handleNextClick = () => {
+    if (currentImageIndex !== null && currentImageIndex < (data.images?.length || 0) - 1) {
+      setSwipeDirection('left');
+      setLoading(true); // Set loading to true when changing image
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
+  // Simulate loading time (you might replace this with your actual loading logic)
+  const handleImageLoad = () => {
+    setLoading(false); // Set loading to false after the image has loaded
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} // Start below
-      animate={{ opacity: 1, y: 0 }} // Slide in from below
-      exit={{ opacity: 0, y: 20 }} // Slide out below
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="relative w-full h-full flex justify-center items-center"
     >
       {currentImageIndex !== null && (
-        <div
-          className={`fixed full-image inset-0 flex justify-center items-center bg-dark-green bg-opacity-30 z-50 text-accent-green
-          ${currentImageIndex !== null ? 'imeta-futuristic-enter' : 'imeta-futuristic-exit'}
-        `}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className={`fixed full-image inset-0 flex justify-center items-center bg-dark-green bg-opacity-30 z-50 text-accent-green`}
         >
           <div
             className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
-            onClick={handleCloseImage}
+            onClick={() => setCurrentImageIndex(null)} // Close modal
           >
-            <CloseIcon
-              sx={styles.icon}
-              fontSize="large"
-             
-              color="inherit"
-            />
+            <CloseIcon fontSize="large" color="inherit" />
           </div>
 
-          {/* Previous Arrow */}
           <button
-            onClick={handlePreviousImage}
-            disabled={currentImageIndex === 0} // Disable if at the first image
-            className={`absolute left-8 xl:left-16 cursor-pointer z-50 text-accent-green ${
+            onClick={handlePrevClick}
+            disabled={currentImageIndex === 0}
+            className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
               currentImageIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            <ArrowBackIosNewIcon  color="inherit" sx={styles.icon} />
+            <ArrowBackIosNewIcon color="inherit" />
           </button>
 
-          {/* Image */}
-          <img
-            src={currentImageIndex !== null ? data.images[currentImageIndex] : ''} // Display current image
-            alt="image"
-            className="h-[90%] w-auto"
+          {/* Image with animation */}
+          <motion.div
+            key={currentImageIndex} // Key prop to trigger remount on index change
+            initial={{ opacity: 0, x: swipeDirection === 'left' ? 100 : -100 }} // Start off-screen
+            animate={{ opacity: 1, x: 0 }} // Animate to full opacity and center
+            exit={{ opacity: 0, x: swipeDirection === 'left' ? -100 : 100 }} // Exit off-screen
+            transition={{ duration: 0.5 }} // Transition duration
+            className="h-[90%] w-auto flex justify-center items-center"
+          >
+            <img
+              src={data.images?.[currentImageIndex!] ?? ''}
+              alt="image"
+              className="h-full w-auto object-cover max-w-[80%]"
+              onLoad={handleImageLoad} // Call when the image loads
             />
+          </motion.div>
 
-
-          {/* Next Arrow */}
           <button
-            onClick={handleNextImage}
-            disabled={currentImageIndex === img.length - 1} // Disable if at the last image
-            className={`absolute right-8 xl:right-16 cursor-pointer z-50 text-accent-green ${
-              currentImageIndex === img.length - 1 ? 'opacity-50 cursor-not-allowed' : ''
+            onClick={handleNextClick}
+            disabled={currentImageIndex === (data.images?.length || 0) - 1}
+            className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
+              currentImageIndex === (data.images?.length || 0) - 1 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            <ArrowForwardIosIcon  color="inherit" sx={styles.icon} />
+            <ArrowForwardIosIcon color="inherit" />
           </button>
-        </div>
+        </motion.div>
       )}
 
       <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
-        <div className="w-[90%] h-[90%] flex justify-between ">
+        <div className="w-[90%] h-[90%] flex justify-between">
           <img src={cardImg} alt="" className="h-full w-[35%] object-cover" />
 
           <div className="h-full w-[63%] text-[#ffffff81] flex flex-col justify-between">
             <motion.div
-              initial={{ opacity: 0, y: 20 }} // Start below
-              animate={{ opacity: 1, y: 0 }} // Slide in from below
-              exit={{ opacity: 0, y: 20 }} // Slide out below
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="w-full h-full flex flex-col justify-items-end items-baseline"
             >
@@ -166,16 +164,33 @@ const CountryPage: React.FC = () => {
               </div>
 
               {/* Image Slider */}
-             <div className="flex w-full h-[30%] overflow-x-auto gap-4 custom-scrollbar-y">
-                {data.images?.map((imageSrc: string, index: number) => ( // Use `data.images` instead of `newData.articles?.images`
-                  <img
-                    onClick={() => setCurrentImageIndex(index)} // Set index when an image is clicked
-                    src={imageSrc}
-                    loading='lazy'
-                    alt=""
-                    key={index}
-                    className=" min-w-[12vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
-                  />
+              <div className="flex w-full h-[30%] overflow-x-auto gap-4 custom-scrollbar-y">
+                {data.images?.map((imageSrc: string, index: number) => (
+                  <div key={index} className="relative">
+                    {loading && currentImageIndex === index ? ( // Show loader only for the currently loading image
+                      <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
+                        <PuffLoader color="#36d7b7" />
+                      </div>
+                    )
+                  
+                  :
+                  
+                    <img
+                    onClick={() => {
+                      setCurrentImageIndex(index); // Set index when an image is clicked
+                      setLoading(true); // Set loading to true when the image is clicked
+                    }}
+                    srcSet={`${imageSrc}?w=200 200w,
+                      ${imageSrc}?w=400 400w,
+                      ${imageSrc}?w=800 800w`}
+                      loading="lazy"
+                      alt=""
+                      className="min-w-[12vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
+                      onLoad={handleImageLoad} // Call when the image loads
+                      onError={() => setLoading(false)} // Handle error case
+                      />
+                    }
+                  </div>
                 ))}
               </div>
             </motion.div>
