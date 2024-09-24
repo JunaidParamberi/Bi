@@ -25,6 +25,7 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
 
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
+  console.log(imetaData)
   useEffect(() => {
     if (!isVisible) {
       // Trigger exit animation before removing the card
@@ -43,14 +44,14 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
         ${isVisible && !isAnimatingOut ? 'futuristic-enter' : 'futuristic-exit'}`}
     >
       <div className=' flex h-full w-full flex-col gap-6'>
-      <h1 className="text-2xl xl:text-[40px]">{currentData?.country}</h1>
-      <h1 className="text-[14px] xl:text-[30px] ">{currentData?.title}</h1>
+      <h1 className="text-[1.1vw]">{currentData?.country}</h1>
+      <h1 className="text-[0.7vw]  ">{currentData?.title}</h1>
       <div>
         {currentData?.country ? (
           <Link 
           to={currentData.country} 
           state={currentData} 
-          className='text-accent-green text-[14px] xl:text-[25px]'
+          className='text-accent-green text-[0.6vw] '
           >
             Read More
           </Link>

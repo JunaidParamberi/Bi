@@ -12,7 +12,7 @@ function GeneralLayout() {
   return (
     <div className=' relative w-full h-screen flex flex-col justify-center items-center'>
         <div className='  w-[90%] h-full flex flex-col justify-between items-center'>
-            <div className='w-full flex justify-center items-center flex-col   h-[90vh]  '>
+            <div className='w-full flex justify-center items-center flex-col h-[90vh]  '>
                 <Outlet /> 
             </div>
 

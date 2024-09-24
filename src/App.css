@@ -423,11 +423,11 @@ stroke: none;
 
 /* Apply animations */
 .imeta-futuristic-enter {
-  animation: growFromCenter 0.2s ease-in-out forwards;
+  animation: growFromCenter 0.4s ease-in-out forwards;
 }
 
 .imeta-futuristic-exit {
-  animation: shrinkToCenter 0.2s ease-in-out  forwards;
+  animation: shrinkToCenter 0.4s ease-in-out  forwards;
 }
 
 

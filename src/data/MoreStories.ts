@@ -1,5 +1,5 @@
-import img1 from "../assets/images/Asset 23.png"
-import img2 from "../assets/images/Asset 42.png"
+import img1 from "../assets/images/Stories/volunteering/kws.jpg"
+import img2 from "../assets/images/Stories/Making More Health/PHOTO-2022-09-18-19-42-25.jpg"
 
 
 export const  storyData = [
