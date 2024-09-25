@@ -17,8 +17,12 @@ function createWindow() {
       preload: path.join(__dirname, "preload.mjs"),
       nodeIntegration: false,
       // Disable nodeIntegration for security
-      contextIsolation: true
+      contextIsolation: true,
       // Use context isolation for additional protection
+      enableRemoteModule: false,
+      // Disable remote module for security
+      // Enable touch events explicitly
+      additionalArguments: ["--touch-events=enabled"]
     }
   });
   win.maximize();

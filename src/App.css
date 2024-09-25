@@ -90,6 +90,7 @@ body{
   box-sizing: border-box;
   font-family: "BoehringerForwardHead", sans-serif;
   background-color: #08312a;
+  touch-action: manipulation; /* Allow touch interactions like scrolling */
 
   /* background-image: url('src/assets/images/Main BG.svg'); */
   /* background: radial-gradient(circle at center, #00cc66 10%, #003333 70%) fixed; */

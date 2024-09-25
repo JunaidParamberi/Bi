@@ -1,9 +1,7 @@
+// main.ts (Main process)
 import { app, BrowserWindow, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-
-
-
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -17,6 +15,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 
 let win: BrowserWindow | null
 
+// Create the main window with touch support enabled
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
@@ -25,12 +24,16 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.mjs'),
       nodeIntegration: false,  // Disable nodeIntegration for security
       contextIsolation: true,  // Use context isolation for additional protection
+      enableRemoteModule: false,  // Disable remote module for security
+      // Enable touch events explicitly
+      additionalArguments: ['--touch-events=enabled'],
     },
   })
 
   // Maximize window if fullscreen is not enabled
   win.maximize()
 
+  // Load URL based on environment
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)
 
@@ -90,3 +93,4 @@ app.whenReady().then(() => {
   createWindow()
   removeDefaultMenu()  // Remove the default menu if in production
 })
+
