@@ -140,7 +140,7 @@ const CountryPage: React.FC = () => {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="w-full h-full flex flex-col justify-items-end items-baseline"
             >
-              <h1 className="text-[2.5vw]  font-bold w-full text-left  text-white my-4">
+              <h1 className="text-[2.8vw]  font-bold w-full text-left  text-white my-4">
                 {newData.country}
               </h1>
 
@@ -151,8 +151,8 @@ const CountryPage: React.FC = () => {
                     onClick={() => handleClick(item)}
                     className={`${
                       data?.heading === item.heading
-                        ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold  text-[1vw]'
-                        : 'bg-black xl:text-[32px] text-white text-[0.9vw] px-5 py-[7px] font-semibold bg-opacity-20 '
+                        ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold text-[1vw]'
+                        : 'bg-black  text-white text-[0.9vw] px-5 py-[7px] font-semibold bg-opacity-20 '
                     }`}
                   >
                     {item.heading}
@@ -162,7 +162,7 @@ const CountryPage: React.FC = () => {
 
               <div className="border-accent-green border-[0.5px] h-[80%] max-w-full flex justify-center items-center mb-3">
                 <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
-                  <p className="text-white text-[1vw]   p-3">{data?.article}</p>
+                  <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">{data?.article}</p>
                 </div>
               </div>
 

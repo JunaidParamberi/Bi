@@ -101,7 +101,7 @@ function MapPage() {
         ${isActive ? 'imeta-futuristic-enter' : 'imeta-futuristic-exit hidden'}
       `}
       >
-        <div className='relative w-[60%] bg-dark-green border-accent-green border-[0.5px] p-20 xl:p-40 flex justify-center items-center'>
+        <div className='relative w-[55%] bg-dark-green border-accent-green border-[0.5px] p-[5%]  flex justify-center items-center'>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}  // Modal content scales in
             animate={{ opacity: 1, scale: 1 }}    // Scales up with a bounce effect
@@ -117,7 +117,7 @@ function MapPage() {
             </div>
             <div className='flex flex-col gap-3 xl:gap-16 text-white'>
               <h2 className='text-3xl xl:text-[100px]'>IMETA</h2>
-              <p className='text-sm font-extralight xl:text-[30px] xl:leading-[40px]'>
+              <p className='text-[1vw] xl:text-[0.9vw] font-extralight '>
                 The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities. <br /><br />
                 The Boehringer Ingelheim team in IMETA is comprised of 2,000 exceptional team members from 26 nationalities who proudly serve over 70 countries, or 45 percent of the world’s population. Furthermore, 50 percent of Boehringer Ingelheim’s global sustainability efforts are being implemented in the region, reflecting the needs of underserved communities.
               </p>

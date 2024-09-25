@@ -30,10 +30,10 @@ export default function StoryPage () {
                        transition={{ duration: 0.9, ease: "easeOut" }}
                     
                     className='   w-[60%] flex flex-col h-fit gap-6'>
-                        <h1 className='text-[40px] font-bold w-full text-left xl:text-[100px] text-white'>{state.title}</h1>
+                        <h1 className='text-[2.8vw] font-bold w-full text-left xl:text-[100px] text-white'>{state.title}</h1>
 
                         <div className='h-full overflow-y-auto custom-scrollbar'>
-                            <p className='h-full text-white pr-4 xl:text-[40px] '>
+                            <p className='h-full text-white pr-4 text-[1vw] xl:text-[0.9vw] '>
                                 {state.text}
                             </p>
                         </div>
