@@ -1,7 +1,7 @@
 // kenya
 import kenyaImageAc2 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3730.jpg"
 import kenyaImageAc3 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3803.jpg"
-import kenyaImageAc1 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3727.jpg"
+
 import kenyaImageAc4 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3821.jpg"
 import kenyaImageAc5 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3849.jpg"
 import kenyaImageAc6 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3923.jpg"
@@ -82,7 +82,7 @@ import TRimg3 from "../assets/images/Stories/Turkey/3.jpeg";
 import TRimg4 from "../assets/images/Stories/Turkey/4.jpeg";
 import TRimg5 from "../assets/images/Stories/Turkey/5.jpeg";
 import TRimg6 from "../assets/images/Stories/Turkey/6.jpeg";
-import TRimg7 from "../assets/images/Stories/Turkey/7.jpeg";
+
 import TRimg8 from "../assets/images/Stories/Turkey/8.jpeg";
 import TRimg9 from "../assets/images/Stories/Turkey/9.jpeg";
 import TRimg10 from "../assets/images/Stories/Turkey/10.jpeg";
@@ -112,7 +112,7 @@ export const  imetaData = [
                 heading : "Stop Rabies",
                 coverImage : "",
                 images : [
-                    kenyaImageAc1, kenyaImageAc1
+                    
                 ],
                 article : "Boehringer Ingelheim joined forces with Pet Practitioners Association of Mumbai (PPAM), a non-profit charitable organization to combat rabies in the Greater Mumbai area, to run free vaccination camps. The initiative aligns with the Indian national goal to eliminate dog-mediated rabies by 2030 through a two-pronged approach consisting of dog vaccinations and children education. As part of the partnership in 2023, Boehringer Ingelheim donated 30,000 doses of anti-rabies vaccinations and conducted a month-long awareness drive, with the support of Brihanmumbai Municipal Corporation (BMC), to educate 1,000 school students about rabies prevention and the human-animal bond. These efforts are being replicated in 2024. "
             }
@@ -154,9 +154,9 @@ export const  imetaData = [
                     TRimg2, 
                     TRimg3, 
                     TRimg4, 
-                    TRimg5, 
+                  
                     TRimg6, 
-                    TRimg7, 
+              
                     TRimg8, 
                     TRimg9, 
                     TRimg10, 
@@ -165,7 +165,7 @@ export const  imetaData = [
                     TRimg13, 
                     TRimg14, 
                     TRimg15, 
-                    TRimg16, 
+               
                     TRimg17, 
                     TRimg18, 
                     TRimg19
@@ -185,7 +185,7 @@ export const  imetaData = [
                 heading : "Access to Healthcare",
                 coverImage :kenyaImageAc2,
                 images : [
-                    kenyaImageAc1, 
+                   
                     kenyaImageAc2, 
                     kenyaImageAc3, 
                     kenyaImageAc4, 
@@ -227,7 +227,7 @@ export const  imetaData = [
                 heading : "Coming Soon",
                 coverImage : "",
                 images : [
-                    kenyaImageAc1, kenyaImageAc1, 
+                    
                 ],
                 article : 'Boehringer Ingelheim is set to bridge the health equity gap in Rwanda with a new initiative in the pipeline. '
             }

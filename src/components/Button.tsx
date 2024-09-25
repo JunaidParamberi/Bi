@@ -10,7 +10,7 @@ const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
   return (
     <div>
       <button
-        className="gradient-border  px-[10%] py-[3%] xl:text-[34px]  text-[16px] w-full text-center active:opacity-70 text-ellipsis"
+        className="gradient-border  px-[10%] py-[3%] text-[1.05vw] w-full text-center active:opacity-70 text-ellipsis"
         onClick={onClick}
       >
         {text || 'More Stories'}
