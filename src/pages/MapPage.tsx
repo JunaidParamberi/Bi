@@ -116,10 +116,10 @@ function MapPage() {
               <CloseIcon sx={styles.icon} fontSize='large' className=' xl:w-11 xl:h-11' color='inherit' />
             </div>
             <div className='flex flex-col gap-3 xl:gap-16 text-white'>
-              <h2 className='text-3xl xl:text-[100px]'>IMETA</h2>
-              <p className='text-[1vw] xl:text-[0.9vw] font-extralight '>
+              <h2 className='text-[2.5vw]'>IMETA</h2>
+              <p className='text-[1vw] xl:text-[0.9vw] font-extralight flex flex-col gap-3 '>
                 The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities. <br /><br />
-                The Boehringer Ingelheim team in IMETA is comprised of 2,000 exceptional team members from 26 nationalities who proudly serve over 70 countries, or 45 percent of the world’s population. Furthermore, 50 percent of Boehringer Ingelheim’s global sustainability efforts are being implemented in the region, reflecting the needs of underserved communities.
+                The Boehringer Ingelheim team in IMETA is comprised of 1,800 exceptional team members from 26 nationalities who proudly serve over 70 countries, or 45 percent of the world’s population. <span className=' text-[1.107vw] '> Furthermore, 50 percent of Boehringer Ingelheim’s global sustainability efforts are being implemented in the region, reflecting the needs of underserved communities.</span>  
               </p>
             </div>
           </motion.div>
