@@ -14,13 +14,12 @@ function createWindow() {
     fullscreen: true,
     // Opens in full screen
     webPreferences: {
-      preload: path.join(__dirname, "preload.mjs"),
+      preload: path.join(__dirname, "preload.js"),
+      // Preload script
       nodeIntegration: false,
       // Disable nodeIntegration for security
       contextIsolation: true,
       // Use context isolation for additional protection
-      enableRemoteModule: false,
-      // Disable remote module for security
       // Enable touch events explicitly
       additionalArguments: ["--touch-events=enabled"]
     }
