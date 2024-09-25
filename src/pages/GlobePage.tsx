@@ -52,7 +52,7 @@ function RealisticGlobePage() {
       <Link to="world" className="w-full h-full flex justify-center items-center relative">
 
         {/* Radar wave animation */}
-        <div className="absolute w-full h-full flex justify-center items-center">
+        <div className="absolute w-full h-[full] flex justify-center items-center">
           <RadarWave />
         </div>
 

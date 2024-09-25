@@ -10,6 +10,7 @@ import { PuffLoader } from 'react-spinners';
 
 // Define the types for Article and CurrentData
 type Article = {
+  coverImage?: string;
   heading: string;
   images?: string[];
   article: string;
@@ -62,6 +63,8 @@ const CountryPage: React.FC = () => {
   const handleImageLoad = () => {
     setLoading(false); // Set loading to false after the image has loaded
   };
+
+  console.log(data)
 
   return (
     <motion.div
@@ -127,7 +130,7 @@ const CountryPage: React.FC = () => {
 
       <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
         <div className="w-[90%] h-[90%] flex justify-between">
-          <img src={cardImg} alt="" className="h-full w-[35%] object-cover" />
+          <img src={data.coverImage ? data?.coverImage : cardImg } alt="" className="h-full w-[35%] object-cover" />
 
           <div className="h-full w-[63%] text-[#ffffff81] flex flex-col justify-between">
             <motion.div
@@ -137,7 +140,7 @@ const CountryPage: React.FC = () => {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="w-full h-full flex flex-col justify-items-end items-baseline"
             >
-              <h1 className="text-[40px] font-bold w-full text-left xl:text-[100px] text-white my-4">
+              <h1 className="text-[2.5vw]  font-bold w-full text-left  text-white my-4">
                 {newData.country}
               </h1>
 
@@ -148,8 +151,8 @@ const CountryPage: React.FC = () => {
                     onClick={() => handleClick(item)}
                     className={`${
                       data?.heading === item.heading
-                        ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold xl:text-[35px] text-[14px]'
-                        : 'bg-black xl:text-[32px] text-white text-[13px] px-5 py-[7px] font-semibold bg-opacity-20'
+                        ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold  text-[1vw]'
+                        : 'bg-black xl:text-[32px] text-white text-[0.9vw] px-5 py-[7px] font-semibold bg-opacity-20 '
                     }`}
                   >
                     {item.heading}
@@ -159,7 +162,7 @@ const CountryPage: React.FC = () => {
 
               <div className="border-accent-green border-[0.5px] h-[80%] max-w-full flex justify-center items-center mb-3">
                 <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
-                  <p className="text-white p-3">{data?.article}</p>
+                  <p className="text-white text-[1vw]   p-3">{data?.article}</p>
                 </div>
               </div>
 
@@ -185,7 +188,7 @@ const CountryPage: React.FC = () => {
                       ${imageSrc}?w=800 800w`}
                       loading="lazy"
                       alt=""
-                      className="min-w-[12vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
+                      className="min-w-[15vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
                       onLoad={handleImageLoad} // Call when the image loads
                       onError={() => setLoading(false)} // Handle error case
                       />

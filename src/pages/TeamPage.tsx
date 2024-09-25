@@ -74,7 +74,7 @@ const TeamPage: React.FC = () => {
                 ))}
               </div>
             </div>
-            <div className='w-[35%] flex flex-col flex-wrap'>
+            <div className='w-[40%] flex flex-col flex-wrap'>
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

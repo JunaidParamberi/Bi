@@ -105,12 +105,12 @@ import TRimg19 from "../assets/images/Stories/Turkey/19.jpeg";
 
 export const  imetaData = [
     {   id: 1,
-        
         country: 'India',
         title : "Stop Rabies",
         articles : [
             {
                 heading : "Stop Rabies",
+                coverImage : "",
                 images : [
                     kenyaImageAc1, kenyaImageAc1
                 ],
@@ -122,10 +122,12 @@ export const  imetaData = [
     },
     {   id: 2,
         country: 'UAE',
+
         title : "More Green",
         articles : [
             {
                 heading : "More Green",
+                coverImage : UAEimg4,
                 images : [
                     UAEimg1,
                     UAEimg2,
@@ -141,10 +143,12 @@ export const  imetaData = [
     },
     {   id: 3,
         country: "Turkey",
+     
         title : "Kalben Children Village",
         articles : [
             {
                 heading : "Kalben Children Village",
+                coverImage :TRimg9 ,
                 images : [
                     TRimg1, 
                     TRimg2, 
@@ -174,10 +178,12 @@ export const  imetaData = [
     },
     {   id: 4,
         country: 'Kenya',
+  
         title : "Stop Rabies",
         articles : [
             {
                 heading : "Access to Healthcare",
+                coverImage :kenyaImageAc2,
                 images : [
                     kenyaImageAc1, 
                     kenyaImageAc2, 
@@ -190,6 +196,7 @@ export const  imetaData = [
             },
             {
                 heading : "Stop Rabies",
+                coverImage :kenyaImageStopRab2,
                 images : [
                     kenyaImageStopRab1, 
                     kenyaImageStopRab2, 
@@ -214,9 +221,11 @@ export const  imetaData = [
     {   id: 5,
         country: 'Rwanda',
         title : "Coming Soon",
+
         articles : [
             {
                 heading : "Coming Soon",
+                coverImage : "",
                 images : [
                     kenyaImageAc1, kenyaImageAc1, 
                 ],
@@ -230,10 +239,12 @@ export const  imetaData = [
     },
     {   id: 6,
         country: 'South Africa',
+    
         title : "Stop Rabies",
         articles : [
             {
                 heading : "Stop Rabies",
+                coverImage :  SAimg15 ,
                 images : [
                     SAimg1,
                     SAimg2,

@@ -16,11 +16,11 @@ export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
     <div 
       className='bg-dark-green border-accent-green border-[0.5px] w-full px-[10%]  xl:py-20  py-[15%] flex flex-col gap-5 rounded-none text-white'>
       <h1 className='text-[2vw] xl:text-[2vw] '>IMETA</h1>
-      <h2 className='text-[0.8.5vw] xl:text-[0.9vw] '>
+      <h2 className='text-[1vw] xl:text-[0.9vw] '>
         The IMETA region is unique in its rich cultural and demographic diversity; however, it also encompasses some of the world’s most underserved communities.
       </h2>
       <div
-        className='text-accent-green text-[0.7vw] cursor-pointer '
+        className='text-accent-green text-[0.8vw] cursor-pointer '
         onClick={activate} // Trigger the activate function when clicking "Read More"
       >
         Read More
@@ -83,8 +83,8 @@ function MapPage() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className='flex justify-between items-center h-full w-full xl:gap-10 xl:mt-30 flex-col'
         >
-              <h1 className="text-[40px] w-full font-bold xl:pt-16 xl:text-[100px]">India, Middle East, Turkey, and Africa (IMETA)</h1>
-              <div className=' w-[80%] xl:w-full h-full'>
+              <h1 className=" text-[2.6vw] w-full font-bold  ">India, Middle East, Turkey, and Africa (IMETA)</h1>
+              <div className=' w-[95vw]  h-[80vw] object-contain'>
 
            <MapComponent />
               </div>

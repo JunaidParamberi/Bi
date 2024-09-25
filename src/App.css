@@ -288,7 +288,9 @@ scroll-behavior: smooth;
 }
 .custom-scrollbar-y::-webkit-scrollbar {
   width: 1px; /* Set the width of the scrollbar */
-  height: 4px;
+  height: 6px;
+  border-radius: 10px;
+  scroll-behavior: smooth ease-in-out;
   
 
 
@@ -299,6 +301,8 @@ scroll-behavior: smooth;
   border-radius: 10px; /* Round corners */
   
 }
+
+
 
 .custom-scrollbar-y::-webkit-scrollbar-track {
   background: #00000000; /* Background of the scrollbar track */
@@ -481,6 +485,28 @@ stroke: none;
     width: 100vw;
     height: 100vw;
     opacity: 0;
+
+   
+  }
+}
+
+@media screen and (min-width : 2560px;) {
+  @keyframes animate {
+    0% {
+      width:  37vw;
+      height:  37vw;
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      width: 75vw;
+      height: 75vw;
+      opacity: 0;
+  
+     
+    }
   }
 }
 

@@ -13,6 +13,10 @@ import michele from '../assets/High resolution picture/MicrosoftTeams-image (9).
 import nadine from '../assets/High resolution picture/nnnnnnn.png'
 import Redouane from '../assets/High resolution picture/Redouane.jpg'
 import amin from '../assets/High resolution picture/BI Certif6519.jpg'
+import Ayse from '../assets/High resolution picture/Ayse Tombaz.png'
+import amy from '../assets/High resolution picture/Amy Emile.png'
+import nassim from '../assets/High resolution picture/Nassim Ouagueni.png'
+import sara from '../assets/High resolution picture/Sara Badrig .png'
 
 const team1 = [
     {
@@ -74,7 +78,7 @@ const team2 = [
         {
             name : "Nassim Ouagueni",
             occupation : 'AH initiatives lead ',
-            image : ""
+            image : nassim
         },
         {
             name : "Mirna Hammoud",
@@ -97,7 +101,7 @@ const team2 = [
         {
             name : "Ayse Tombaz",
             occupation : 'Turkey ',
-            image : ""
+            image : Ayse
         },
         {
             name : "Ilda Naccour ",
@@ -107,7 +111,7 @@ const team2 = [
         {
             name : "Amy Emile",
             occupation : 'New Africa (NEWA)',
-            image : ""
+            image : amy
         },
         {
             name : "Mohamed Amine Ouachem",
@@ -127,7 +131,7 @@ const team2 = [
         {
             name : "Sara Badrig",
             occupation : 'Saudi Arabia, Gulf East Africa (SAGEA)',
-            image : ""
+            image : sara
         }
         ]
 
