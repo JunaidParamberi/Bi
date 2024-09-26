@@ -190,7 +190,7 @@ const CountryPage: React.FC = () => {
                                     <PuffLoader color="#36d7b7" />
                                   </div>
                                 ) : isVideo(mediaSrc) ? (
-                                  <div className="relative">
+                                  <div className="relative h-full">
                                     {/* Render video thumbnail with play button */}
                                     <img
                                       onClick={() => {
@@ -198,7 +198,7 @@ const CountryPage: React.FC = () => {
                                         setLoading(true);
                                       }}
                                       src={data.videoThump ?? mediaSrc}
-                                      className="min-w-[15vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
+                                      className="min-w-[15vw] xl:w-[513px] h-full object-cover cursor-zoom-in "
                                       onLoad={handleImageLoad}
                                       onError={() => setLoading(false)} // Handle error case
                                       alt="Video Thumbnail"
@@ -206,8 +206,12 @@ const CountryPage: React.FC = () => {
                                     {/* Play button overlay */}
                                     <img
                                       src={playBtn}
+                                      onClick={() => {
+                                        setCurrentImageIndex(index);
+                                        setLoading(true);
+                                      }}
                                       alt="Play Button"
-                                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px]"
+                                      className=" cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
                                     />
                                   </div>
                                 ) : (

@@ -70,7 +70,7 @@ export default function StoryPage() {
 
             <div className="border-accent-green border-[0.5px] h-[60%] max-w-full flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
-                <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">{state.text} <br /> <br /> Continue the journey 2024.</p>
+                <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">{state.text} <br /> <br />{state.title=== "Making More Health" ? "Continue the journey 2024." : ""} </p>
               </div>
             </div>
 
