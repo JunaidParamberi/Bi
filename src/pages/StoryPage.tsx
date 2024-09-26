@@ -106,10 +106,10 @@ export default function StoryPage() {
       {/* Modal for Image Viewer */}
       {currentImageIndex !== null && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+        initial={{ opacity: 0, scale : 0 }}
+        animate={{ opacity: 1, scale : 1 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green"
         >
           <div
