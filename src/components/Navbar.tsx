@@ -28,25 +28,25 @@ function Navbar() {
       <img
         src={ArrowLeft}
         alt="arrow-left"
-        className="w-[20px] h-[20px] cursor-pointer  xl:w-[50px] xl:h-[50px] mr-14 xl:mr-24"
+        className="w-[1.4vw] h-[1.4vw]  cursor-pointer  mr-[3.1vw] "
         onClick={goBackward} // Call goBackward on click
         />
     </div>
 
-      <div className="flex items-center gap-6 xl:gap-11">
+      <div className="flex items-center gap-[1.5vw] ">
         <NavLink to="more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"}  hover:scale-110 active:scale-95 active:rotate-[10deg] transition-transform duration-300 p-2 xl:p-6`}>
-          <img src={More} alt="more" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
+          <img src={More} alt="more" className={ `w-[1.4vw] h-[1.4vw]  xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
         </NavLink>
 
         <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-[10deg] transition-transform duration-300 p-2 xl:p-6`}>
-          <img src={Globe} alt="globe" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
+          <img src={Globe} alt="globe" className={ `w-[1.4vw] h-[1.4vw]   xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
         </NavLink>
 
         <NavLink 
         to="world"
         
         className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-[10deg] transition-transform duration-300 p-2 xl:p-6`}>
-          <img src={Home} alt="home" className={ `w-[20px] h-[20px]  xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
+          <img src={Home} alt="home" className={ `w-[1.4vw] h-[1.4vw]   xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
         </NavLink>
       </div>
 
@@ -55,7 +55,7 @@ function Navbar() {
       <img
         src={ArrowRight}
         alt="arrow-right"
-        className="w-[20px] h-[20px] cursor-pointer xl:w-[50px] xl:h-[50px] ml-14  xl:ml-24"
+        className="w-[1.4vw] h-[1.4vw] cursor-pointer ml-[3.1vw]"
         onClick={goForward} // Call goForward on click
         />
     </div>

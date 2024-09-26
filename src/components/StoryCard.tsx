@@ -33,7 +33,7 @@ function StoryCard({ item }: StoryCardProps) {
             relative="path"
             to={item.title}
             state={item}
-            className="px-6 xl:px-10 xl:py-4 py-2 text-[14px] xl:text-[35px] border-accent-green border-[1px] hover:bg-accent-green hover:text-dark-green active:opacity-70 duration-200 transition-all"
+            className="px-[2vw]  py-[0.7vw] text-[0.9vw] border-accent-green border-[1px] hover:bg-accent-green hover:text-dark-green active:opacity-70 duration-200 transition-all"
           >
             Read More
           </Link>
