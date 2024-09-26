@@ -461,14 +461,16 @@ stroke: none;
 
 .pulse span {
   position: absolute;
+  will-change: transform, opacity;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: transparent;
   border: var(--Accent-Green) 1px solid;
   animation: animate 6s linear infinite;
-  border-radius: 50%;
+
   animation-delay: calc(var(--i) * -1s);
+  border-radius: 50%;
 }
 
 @keyframes animate {
@@ -488,6 +490,30 @@ stroke: none;
    
   }
 }
+
+
+/* Retina Display Optimization: Target only Retina screens (e.g., MacBook) */
+@media only screen and (min-device-pixel-ratio: 2), 
+       only screen and (min-resolution: 192dpi) {
+        @keyframes animate {
+          0% {
+            width:  37vw;
+            height:  37vw;
+            opacity: 1;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            width: 72vw;
+            height: 72vw;
+            opacity: 0;
+        
+           
+          }
+        }
+}
+
 
 
 

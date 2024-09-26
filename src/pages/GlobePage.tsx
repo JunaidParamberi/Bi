@@ -52,7 +52,7 @@ function RealisticGlobePage() {
       <Link to="world" className="w-full h-full flex justify-center items-center relative">
 
         {/* Radar wave animation */}
-        <div className="absolute w-full h-[full] flex justify-center items-center">
+        <div className="absolute w-full h-full flex justify-center items-center">
           <RadarWave />
         </div>
 
@@ -63,12 +63,11 @@ function RealisticGlobePage() {
         )}
 
         {/* Globe Container */}
-
         <div className="globe-container relative w-full h-full justify-center flex items-center">
-        <div
-        className='  absolute globe-glow z-50  '
-        style={{width : dimensions.width * 0.35, height : dimensions.width * 0.35 }}>
-          </div>
+          <div
+            className="absolute globe-glow z-50"
+            style={{ width: dimensions.width * 0.35, height: dimensions.width * 0.35 }}
+          ></div>
           <Globe
             ref={globeEl}
             globeImageUrl={gloImg}
@@ -77,10 +76,10 @@ function RealisticGlobePage() {
             atmosphereAltitude={0.2}
             backgroundColor="rgba(0, 0, 0, 0)"
             enablePointerInteraction={false}
-            width={dimensions.width * 0.55}  // Adjusting width based on current dimensions
+            width={dimensions.width * 0.55} // Adjusting width based on current dimensions
             height={dimensions.width * 0.55} // Adjusting height based on current dimensions
-            />
-            </div>
+          />
+        </div>
 
         <div className="inner-glow" />
       </Link>
