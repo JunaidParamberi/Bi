@@ -1,44 +1,32 @@
-import { app, BrowserWindow, Menu } from "electron";
-import { fileURLToPath } from "url";
-import path from "path";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-let win;
-function createWindow() {
-  win = new BrowserWindow({
-    icon: path.join(__dirname, "src/assets/icons/Icon_Accent Green.icns"),
-    fullscreen: true,
+import { app as t, BrowserWindow as a, Menu as c } from "electron";
+import { fileURLToPath as l } from "url";
+import n from "path";
+const i = n.dirname(l(import.meta.url));
+let e;
+function f() {
+  e = new a({
+    icon: n.join(i, "src/assets/icons/Icon_Accent Green.icns"),
+    fullscreen: !0,
     // Opens in full screen
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-      nodeIntegration: false,
+      preload: n.join(i, "preload.js"),
+      nodeIntegration: !1,
       // Disable nodeIntegration for security
-      contextIsolation: true
+      contextIsolation: !0
       // Use context isolation for security
     }
   });
-  const startURL = process.env.VITE_DEV_SERVER_URL || `file://${path.join(__dirname, "../dist/index.html")}`;
-  win.loadURL(startURL);
-  win.maximize();
-  if (process.env.VITE_DEV_SERVER_URL) {
-    win.webContents.openDevTools({ mode: "detach" });
-  }
-  win.webContents.on("before-input-event", (event, input) => {
-    if (input.key === "F12" || input.control && input.shift && input.key.toLowerCase() === "i") {
-      event.preventDefault();
-    }
+  const r = process.env.VITE_DEV_SERVER_URL || `file://${n.join(i, "../dist/index.html")}`;
+  e.loadURL(r), e.maximize(), process.env.VITE_DEV_SERVER_URL && e.webContents.openDevTools({ mode: "detach" }), e.webContents.on("before-input-event", (s, o) => {
+    (o.key === "F12" || o.control && o.shift && o.key.toLowerCase() === "i") && s.preventDefault();
   });
 }
-function removeDefaultMenu() {
-  if (app.isPackaged) {
-    Menu.setApplicationMenu(null);
-  }
+function d() {
+  t.isPackaged && c.setApplicationMenu(null);
 }
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+t.on("window-all-closed", () => {
+  process.platform !== "darwin" && t.quit();
 });
-app.whenReady().then(() => {
-  createWindow();
-  removeDefaultMenu();
+t.whenReady().then(() => {
+  f(), d();
 });
