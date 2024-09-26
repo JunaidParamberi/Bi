@@ -1,61 +1,38 @@
+// src/main.ts
 import { app, BrowserWindow, Menu } from 'electron'
-import { fileURLToPath } from 'node:url'
-import path from 'node:path'
+import { fileURLToPath } from 'url'
+import path from 'path'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-process.env.APP_ROOT = path.join(__dirname, '..')
-
-export const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
-export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron')
-export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
-
-process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 'public') : RENDERER_DIST
 
 let win: BrowserWindow | null
 
 // Create the main window
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(__dirname, 'src/assets/icons/Icon_Accent Green.icns'),
     fullscreen: true,  // Opens in full screen
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),  // Preload script
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,  // Disable nodeIntegration for security
-      contextIsolation: true,  // Use context isolation for additional protection
-      // Enable touch events explicitly
-      additionalArguments: ['--touch-events=enabled'],
+      contextIsolation: true,  // Use context isolation for security
     },
   })
 
-  // Maximize window if fullscreen is not enabled
+  // Load the React app
+  const startURL = process.env.VITE_DEV_SERVER_URL || `file://${path.join(__dirname, '../dist/index.html')}`
+  win.loadURL(startURL)
+
+  // Maximize window if not fullscreen
   win.maximize()
 
-  // Load URL based on environment
-  if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL)
-
-    // Only open DevTools if in development mode
-    if (!app.isPackaged) {
-      win.webContents.openDevTools({ mode: 'detach' })
-    }
-  } else {
-    win.loadFile(path.join(RENDERER_DIST, 'index.html'))
-
-    // Ensure DevTools are closed in production
-    if (app.isPackaged) {
-      win.webContents.on('devtools-opened', () => {
-        win?.webContents.closeDevTools()
-      })
-    }
+  if (process.env.VITE_DEV_SERVER_URL) {
+    win.webContents.openDevTools({ mode: 'detach' })
   }
 
-  // Prevent DevTools from opening via shortcut (F12, Ctrl+Shift+I, etc.)
+  // Disable DevTools in production
   win.webContents.on('before-input-event', (event, input) => {
-    if (
-      input.key === 'F12' ||
-      (input.control && input.shift && input.key.toLowerCase() === 'i')
-    ) {
+    if (input.key === 'F12' || (input.control && input.shift && input.key.toLowerCase() === 'i')) {
       event.preventDefault()
     }
   })
@@ -64,31 +41,19 @@ function createWindow() {
 // Remove the default menu in production
 function removeDefaultMenu() {
   if (app.isPackaged) {
-    Menu.setApplicationMenu(null) // This removes the default menu entirely
+    Menu.setApplicationMenu(null)
   }
 }
 
-// Quit when all windows are closed, except on macOS.
+// Quit the app when all windows are closed (except on macOS)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
-    win = null
   }
 })
 
-app.on('activate', () => {
-  // Re-create a window if no other windows are open (macOS specific behavior).
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
-
-// Enforce production mode
+// Create the window when the app is ready
 app.whenReady().then(() => {
-  if (process.env.NODE_ENV !== 'development') {
-    process.env.NODE_ENV = 'production'
-  }
   createWindow()
-  removeDefaultMenu()  // Remove the default menu if in production
+  removeDefaultMenu()
 })
-

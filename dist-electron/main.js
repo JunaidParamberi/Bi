@@ -1,46 +1,32 @@
-import { app as n, BrowserWindow as i, Menu as d } from "electron";
-import { fileURLToPath as p } from "node:url";
-import o from "node:path";
-const r = o.dirname(p(import.meta.url));
-process.env.APP_ROOT = o.join(r, "..");
-const s = process.env.VITE_DEV_SERVER_URL, E = o.join(process.env.APP_ROOT, "dist-electron"), l = o.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = s ? o.join(process.env.APP_ROOT, "public") : l;
+import { app as t, BrowserWindow as a, Menu as c } from "electron";
+import { fileURLToPath as l } from "url";
+import n from "path";
+const i = n.dirname(l(import.meta.url));
 let e;
-function a() {
-  e = new i({
-    icon: o.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+function f() {
+  e = new a({
+    icon: n.join(i, "src/assets/icons/Icon_Accent Green.icns"),
     fullscreen: !0,
     // Opens in full screen
     webPreferences: {
-      preload: o.join(r, "preload.js"),
-      // Preload script
+      preload: n.join(i, "preload.js"),
       nodeIntegration: !1,
       // Disable nodeIntegration for security
-      contextIsolation: !0,
-      // Use context isolation for additional protection
-      // Enable touch events explicitly
-      additionalArguments: ["--touch-events=enabled"]
+      contextIsolation: !0
+      // Use context isolation for security
     }
-  }), e.maximize(), s ? (e.loadURL(s), n.isPackaged || e.webContents.openDevTools({ mode: "detach" })) : (e.loadFile(o.join(l, "index.html")), n.isPackaged && e.webContents.on("devtools-opened", () => {
-    e == null || e.webContents.closeDevTools();
-  })), e.webContents.on("before-input-event", (c, t) => {
-    (t.key === "F12" || t.control && t.shift && t.key.toLowerCase() === "i") && c.preventDefault();
+  });
+  const r = process.env.VITE_DEV_SERVER_URL || `file://${n.join(i, "../dist/index.html")}`;
+  e.loadURL(r), e.maximize(), process.env.VITE_DEV_SERVER_URL && e.webContents.openDevTools({ mode: "detach" }), e.webContents.on("before-input-event", (s, o) => {
+    (o.key === "F12" || o.control && o.shift && o.key.toLowerCase() === "i") && s.preventDefault();
   });
 }
-function f() {
-  n.isPackaged && d.setApplicationMenu(null);
+function d() {
+  t.isPackaged && c.setApplicationMenu(null);
 }
-n.on("window-all-closed", () => {
-  process.platform !== "darwin" && (n.quit(), e = null);
+t.on("window-all-closed", () => {
+  process.platform !== "darwin" && t.quit();
 });
-n.on("activate", () => {
-  i.getAllWindows().length === 0 && a();
+t.whenReady().then(() => {
+  f(), d();
 });
-n.whenReady().then(() => {
-  process.env.NODE_ENV !== "development" && (process.env.NODE_ENV = "production"), a(), f();
-});
-export {
-  E as MAIN_DIST,
-  l as RENDERER_DIST,
-  s as VITE_DEV_SERVER_URL
-};
