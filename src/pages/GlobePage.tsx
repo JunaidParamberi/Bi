@@ -63,7 +63,12 @@ function RealisticGlobePage() {
         )}
 
         {/* Globe Container */}
-        <div className="globe-container">
+
+        <div className="globe-container relative w-full h-full justify-center flex items-center">
+        <div
+        className='  absolute globe-glow z-50  '
+        style={{width : dimensions.width * 0.35, height : dimensions.width * 0.35 }}>
+          </div>
           <Globe
             ref={globeEl}
             globeImageUrl={gloImg}
@@ -74,8 +79,8 @@ function RealisticGlobePage() {
             enablePointerInteraction={false}
             width={dimensions.width * 0.55}  // Adjusting width based on current dimensions
             height={dimensions.width * 0.55} // Adjusting height based on current dimensions
-          />
-        </div>
+            />
+            </div>
 
         <div className="inner-glow" />
       </Link>

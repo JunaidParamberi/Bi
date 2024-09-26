@@ -147,14 +147,28 @@ const MapComponent: React.FC = () => {
             }}
             title={marker.country}
           >
-            <motion.img
-             initial={{ opacity: 0, y: -50, scale : 1.5 }}  // Start off above
-             animate={{ opacity: 1, y: 0, scale : 1 }}    // Slide in smoothly
-             exit={{ opacity: 0, y: 50, scale : 1 }}      // Slide out below
-             transition={{ duration: 0.8, ease: "easeOut" }}  // Smooth and quick transition
-            
-            src={pinImg} alt="Pin" />
-          </div>
+<motion.img
+    initial={{ opacity: 1, y: 0 }} // Start fully visible at the original position
+    animate={{ 
+        y: [0, -3, 0], // Float effect
+    }}    
+    transition={{
+        duration: 1 ,
+        ease: "easeInOut",
+        repeat: Infinity, // Repeat the animation
+        repeatType: "reverse", // Reverse the animation instead of looping
+    }}
+    whileHover={{ 
+        scale: 1.1, // Scale up on hover
+        
+        transition: { duration: 0.3 }, // Quick transition on hover
+    }} // Scale slightly on hover
+    src={pinImg} 
+    alt="Pin" 
+/>
+ 
+
+   </div>
         ))}
       </div>
     </div>

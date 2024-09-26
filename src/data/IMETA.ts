@@ -1,10 +1,12 @@
 // kenya
 import kenyaImageAc2 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3730.jpg"
-import kenyaImageAc3 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3803.jpg"
-
 import kenyaImageAc4 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3821.jpg"
 import kenyaImageAc5 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3849.jpg"
 import kenyaImageAc6 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3923.jpg"
+import kenyaAcVideo from '../assets/images/Stories/Kenya/Access to Healthcare/Access to Helath (1).mp4'
+
+import kenyaAcVideoThump from '../assets/images/Stories/Kenya/Access to Healthcare/Acces to healthcare.png'
+
 
 
 
@@ -21,6 +23,8 @@ import kenyaImageStopRab10 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A
 import kenyaImageStopRab11 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9707.jpg"
 import kenyaImageStopRab12 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9708.jpg"
 import kenyaImageStopRab13 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9767.jpg"
+import kenyaStopVideo from '../assets/images/Stories/Kenya/Stop Rabies/BI - Kenya Rabies - Film - v8 HQ .mp4'
+import kenyaStopVideoThump from '../assets/images/Stories/Kenya//Stop Rabies/Rabies.png'
 
 //UAE
 import UAEimg1 from "../assets/images/Stories/NEUAE/1.jpg"
@@ -30,33 +34,17 @@ import UAEimg4 from "../assets/images/Stories/NEUAE/4.jpg"
 import UAEimg5 from "../assets/images/Stories/NEUAE/5.jpg"
 
 //SA
-import SAimg1 from "../assets/images/Stories/SA/1.jpg"
-import SAimg2 from "../assets/images/Stories/SA/2.jpg"
-import SAimg3 from "../assets/images/Stories/SA/3.jpg"
-import SAimg4 from "../assets/images/Stories/SA/4.jpg"
-import SAimg5 from "../assets/images/Stories/SA/5.jpg"
-import SAimg6 from "../assets/images/Stories/SA/6.jpg"
-import SAimg7 from "../assets/images/Stories/SA/7.jpg"
-import SAimg8 from "../assets/images/Stories/SA/8.jpg"
-import SAimg9 from "../assets/images/Stories/SA/9.jpg"
-import SAimg10 from "../assets/images/Stories/SA/10.jpg"
-import SAimg11 from "../assets/images/Stories/SA/11.jpg"
-import SAimg12 from "../assets/images/Stories/SA/12.jpg"
-import SAimg13 from "../assets/images/Stories/SA/13.jpg"
-import SAimg14 from "../assets/images/Stories/SA/14.jpg"
+
 import SAimg15 from "../assets/images/Stories/SA/15.jpg"
 import SAimg16 from "../assets/images/Stories/SA/16.jpg"
 import SAimg17 from "../assets/images/Stories/SA/17.jpg"
 import SAimg18 from "../assets/images/Stories/SA/18.jpg"
 import SAimg19 from "../assets/images/Stories/SA/19.jpg"
 import SAimg20 from "../assets/images/Stories/SA/20.jpg"
-import SAimg21 from "../assets/images/Stories/SA/21.jpg"
-import SAimg22 from "../assets/images/Stories/SA/22.jpg"
-import SAimg23 from "../assets/images/Stories/SA/23.jpg"
 import SAimg24 from "../assets/images/Stories/SA/24.jpg"
 import SAimg25 from "../assets/images/Stories/SA/25.jpg"
 import SAimg26 from "../assets/images/Stories/SA/26.jpg"
-import SAimg27 from "../assets/images/Stories/SA/27.jpg"
+
 import SAimg28 from "../assets/images/Stories/SA/28.jpg"
 import SAimg29 from "../assets/images/Stories/SA/29.jpg"
 import SAimg30 from "../assets/images/Stories/SA/30.jpg"
@@ -80,9 +68,6 @@ import TRimg1 from "../assets/images/Stories/Turkey/1.jpeg";
 import TRimg2 from "../assets/images/Stories/Turkey/2.jpeg";
 import TRimg3 from "../assets/images/Stories/Turkey/3.jpeg";
 import TRimg4 from "../assets/images/Stories/Turkey/4.jpeg";
-import TRimg5 from "../assets/images/Stories/Turkey/5.jpeg";
-import TRimg6 from "../assets/images/Stories/Turkey/6.jpeg";
-
 import TRimg8 from "../assets/images/Stories/Turkey/8.jpeg";
 import TRimg9 from "../assets/images/Stories/Turkey/9.jpeg";
 import TRimg10 from "../assets/images/Stories/Turkey/10.jpeg";
@@ -90,11 +75,30 @@ import TRimg11 from "../assets/images/Stories/Turkey/11.jpeg";
 import TRimg12 from "../assets/images/Stories/Turkey/12.jpeg";
 import TRimg13 from "../assets/images/Stories/Turkey/13.jpeg";
 import TRimg14 from "../assets/images/Stories/Turkey/14.jpeg";
-import TRimg15 from "../assets/images/Stories/Turkey/15.jpeg";
-import TRimg16 from "../assets/images/Stories/Turkey/16.jpeg";
+
 import TRimg17 from "../assets/images/Stories/Turkey/17.jpeg";
 import TRimg18 from "../assets/images/Stories/Turkey/18.jpeg";
 import TRimg19 from "../assets/images/Stories/Turkey/19.jpeg";
+
+import rwandaImage from "../assets/images/Stories/Rwanda/1.jpg"
+
+//india
+import inImg1 from '../assets/images/Stories/India/1.jpg'
+import inImg2 from '../assets/images/Stories/India/2.jpg'
+import inImg3 from '../assets/images/Stories/India/3.jpg'
+import inImg4 from '../assets/images/Stories/India/4.jpg'
+import inImg5 from '../assets/images/Stories/India/5.jpg'
+import inImg6 from '../assets/images/Stories/India/6.jpg'
+import inImg7 from '../assets/images/Stories/India/7.jpg'
+import inImg8 from '../assets/images/Stories/India/8.jpg'
+import inImg9 from '../assets/images/Stories/India/9.jpg'
+import inImg10 from '../assets/images/Stories/India/10.jpg'
+import inImg11 from '../assets/images/Stories/India/11.jpg'
+import inImg12 from '../assets/images/Stories/India/12.jpg'
+import inImg13 from '../assets/images/Stories/India/13.jpg'
+
+
+import inImgCover from '../assets/images/Stories/India/The Cover.jpg'
 
 
 
@@ -110,8 +114,22 @@ export const  imetaData = [
         articles : [
             {
                 heading : "Stop Rabies",
-                coverImage : "",
+                coverImage : inImgCover,
                 images : [
+                    inImg1,
+                    inImg2,
+                    inImg3,
+                    inImg4,
+                    inImg5,
+                    inImg6,
+                    inImg7,
+                    inImg8,
+                    inImg9,
+                    inImg10,
+                    inImg11,
+                    inImg12,
+                    inImg13,
+                   
                     
                 ],
                 article : "Boehringer Ingelheim joined forces with Pet Practitioners Association of Mumbai (PPAM), a non-profit charitable organization to combat rabies in the Greater Mumbai area, to run free vaccination camps. The initiative aligns with the Indian national goal to eliminate dog-mediated rabies by 2030 through a two-pronged approach consisting of dog vaccinations and children education. As part of the partnership in 2023, Boehringer Ingelheim donated 30,000 doses of anti-rabies vaccinations and conducted a month-long awareness drive, with the support of Brihanmumbai Municipal Corporation (BMC), to educate 1,000 school students about rabies prevention and the human-animal bond. These efforts are being replicated in 2024. "
@@ -155,7 +173,7 @@ export const  imetaData = [
                     TRimg3, 
                     TRimg4, 
                   
-                    TRimg6, 
+                    
               
                     TRimg8, 
                     TRimg9, 
@@ -164,7 +182,7 @@ export const  imetaData = [
                     TRimg12, 
                     TRimg13, 
                     TRimg14, 
-                    TRimg15, 
+           
                
                     TRimg17, 
                     TRimg18, 
@@ -184,20 +202,22 @@ export const  imetaData = [
             {
                 heading : "Access to Healthcare",
                 coverImage :kenyaImageAc2,
+                videoThump :kenyaAcVideoThump,
                 images : [
                    
-                    kenyaImageAc2, 
-                    kenyaImageAc3, 
+                    kenyaAcVideo,
                     kenyaImageAc4, 
                     kenyaImageAc5, 
-                    kenyaImageAc6
+                    kenyaImageAc6,
                 ],
                 article : "‘Access to Healthcare’ is an end-to-end patient support program by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension, Chronic Obstructive Pulmonary Disease (COPD) and type 2 diabetes. The program is set to expand across the region in the coming years.  "
             },
             {
                 heading : "Stop Rabies",
                 coverImage :kenyaImageStopRab2,
+                videoThump :kenyaStopVideoThump,
                 images : [
+                    kenyaStopVideo,
                     kenyaImageStopRab1, 
                     kenyaImageStopRab2, 
                     kenyaImageStopRab3, 
@@ -225,7 +245,7 @@ export const  imetaData = [
         articles : [
             {
                 heading : "Coming Soon",
-                coverImage : "",
+                coverImage : rwandaImage,
                 images : [
                     
                 ],
@@ -246,33 +266,33 @@ export const  imetaData = [
                 heading : "Stop Rabies",
                 coverImage :  SAimg15 ,
                 images : [
-                    SAimg1,
-                    SAimg2,
-                    SAimg3,
-                    SAimg4,
-                    SAimg5,
-                    SAimg6,
-                    SAimg7,
-                    SAimg8,
-                    SAimg9,
-                    SAimg10,
-                    SAimg11,
-                    SAimg12,
-                    SAimg13,
-                    SAimg14,
-                    SAimg15,
+                    // SAimg1,
+                    // SAimg2,
+                    // SAimg3,
+                    // SAimg4,
+                    // SAimg5,
+                    // SAimg6,
+                    // SAimg7,
+                    // SAimg8,
+                    // SAimg9,
+                    // SAimg10,
+                    // SAimg11,
+                    // SAimg12,
+                    // SAimg13,
+                    // SAimg14,
+                    // SAimg15,
                     SAimg16,
                     SAimg17,
                     SAimg18,
                     SAimg19,
                     SAimg20,
-                    SAimg21,
-                    SAimg22,
-                    SAimg23,
+                    // SAimg21,
+                    // SAimg22,
+                    // SAimg23,
                     SAimg24,
                     SAimg25,
                     SAimg26,
-                    SAimg27,
+                    // SAimg27,
                     SAimg28,
                     SAimg29,
                     SAimg30,
