@@ -1,4 +1,4 @@
-import { Key, useState, useEffect } from 'react';
+import { Key, useState, useEffect, JSXElementConstructor, ReactElement, ReactNode, ReactPortal } from 'react';
 import cardImg from '../assets/images/Asset 24.png';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -15,6 +15,10 @@ type Article = {
   images?: string[];
   videoThump?: string;
   article: string;
+  lists?: {
+    listHead: string;
+    listPoints: string[];
+  }[];
 };
 
 interface CurrentData {
@@ -67,6 +71,10 @@ const CountryPage: React.FC = () => {
     const videoExtensions = ['.mp4', '.webm', '.ogg'];
     return videoExtensions.some(ext => src.endsWith(ext));
   };
+
+
+  console.log(data.lists)
+  
 
   return (
     <motion.div
@@ -158,31 +166,50 @@ const CountryPage: React.FC = () => {
                           <h1 className="text-[2.8vw]  font-bold w-full text-left  text-white my-4">
                             {newData.country}
                           </h1>
-            
+                          
                           <div className="flex w-full items-end">
                             {newData.articles.map((item: Article, index: Key) => (
-                              <button
+                              <motion.button
                                 key={index}
                                 onClick={() => handleClick(item)}
                                 className={`${
                                   data?.heading === item.heading
-                                    ? 'bg-accent-green text-dark-green px-5 py-2 font-semibold text-[1vw]'
-                                    : 'bg-black  text-white text-[0.9vw] px-5 py-[7px] font-semibold bg-opacity-20 '
-                                }`}
+                                    ? 'bg-accent-green text-dark-green px-[0.8vw] py-[0.4vw] font-semibold text-[1vw]'
+                                    : 'bg-black  text-white text-[0.9vw] px-[0.8vw] py-[0.7%] font-semibold bg-opacity-20 '
+                                } `}
                               >
                                 {item.heading}
-                              </button>
+                              </motion.button>
                             ))}
                           </div>
             
-                          <div className="border-accent-green border-[0.5px] h-[80%] max-w-full flex justify-center items-center mb-3">
-                            <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
-                              <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">{data?.article}</p>
+                          <div className={`border-accent-green border-[0.5px] ${data.images ? "min-h-[57%] max-h-[57%]" : "h-full " }  max-w-full flex justify-center items-center mb-3`}>
+                            <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]">
+                              <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw]">{data?.article}</p>
+
+                              <div className=' flex flex-col gap-[1vw] text-[1vw] xl:text-[0.9vw] text-white  p-[0.3vw]'>
+
+                              {
+                                data.lists?.map((ul: any, index: Key | null | undefined) => (
+                                  <div key={index} className=' flex flex-col gap-[0.5vw]'>
+                                    <h3 className=' font-semibold'>{ul.listHead} :</h3>
+                                    <ul className=' flex flex-col font-extralight px-[2vw] gap-[0.7vw] list-disc'>
+                                      {
+                                        ul.listPoints.map((li: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined) => (
+
+                                          <li>{li}</li>
+                                        ))
+                                      }
+                                    </ul>
+                                  </div>
+                                ))
+                              }
+                            </div>
                             </div>
                           </div>
             
                           {/* Image and Video Slider */}
-                          <div className="flex w-full h-[30%] overflow-x-auto gap-4 custom-scrollbar-y">
+                          {data.images && <div className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y">
                             {data.images?.map((mediaSrc: string, index: number) => (
                               <div key={index} className="relative">
                                 {loading && currentImageIndex === index ? (
@@ -198,7 +225,7 @@ const CountryPage: React.FC = () => {
                                         setLoading(true);
                                       }}
                                       src={data.videoThump ?? mediaSrc}
-                                      className="min-w-[15vw] xl:w-[513px] h-full object-cover cursor-zoom-in "
+                                      className="min-w-[15vw]  h-full object-cover cursor-zoom-in "
                                       onLoad={handleImageLoad}
                                       onError={() => setLoading(false)} // Handle error case
                                       alt="Video Thumbnail"
@@ -223,14 +250,14 @@ const CountryPage: React.FC = () => {
                                     src={mediaSrc}
                                     loading="lazy"
                                     alt="Image"
-                                    className="min-w-[15vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
+                                    className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
                                     onLoad={handleImageLoad}
                                     onError={() => setLoading(false)} // Handle error case
                                   />
                                 )}
                               </div>
                             ))}
-                          </div>
+                          </div>}
                         </motion.div>
                       </div>
                     </div>

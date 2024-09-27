@@ -5,7 +5,7 @@ import kenyaImageAc5 from "../assets/images/Stories/Kenya/Access to Healthcare/D
 import kenyaImageAc6 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3923.jpg"
 import kenyaAcVideo from '../assets/images/Stories/Kenya/Access to Healthcare/Access to Helath (1).mp4'
 
-import kenyaAcVideoThump from '../assets/images/Stories/Kenya/Access to Healthcare/Acces to healthcare.png'
+// import kenyaAcVideoThump from '../assets/images/Stories/Kenya/Access to Healthcare/Acces to healthcare.png'
 
 
 
@@ -23,14 +23,13 @@ import kenyaImageStopRab10 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A
 import kenyaImageStopRab11 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9707.jpg"
 import kenyaImageStopRab12 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9708.jpg"
 import kenyaImageStopRab13 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9767.jpg"
-import kenyaStopVideo from '../assets/images/Stories/Kenya/Stop Rabies/BI - Kenya Rabies - Film - v8 HQ .mp4'
-import kenyaStopVideoThump from '../assets/images/Stories/Kenya//Stop Rabies/Rabies.png'
+// import kenyaStopVideo from '../assets/images/Stories/Kenya/Stop Rabies/BI - Kenya Rabies - Film - v8 HQ .mp4'
+// import kenyaStopVideoThump from '../assets/images/Stories/Kenya//Stop Rabies/Rabies.png'
 
 //UAE
 import UAEimg1 from "../assets/images/Stories/NEUAE/1.jpg"
 import UAEimg2 from "../assets/images/Stories/NEUAE/2.jpg"
 import UAEimg3 from "../assets/images/Stories/NEUAE/3.jpg"
-import UAEimg4 from "../assets/images/Stories/NEUAE/4.jpg"
 import UAEimg5 from "../assets/images/Stories/NEUAE/5.jpg"
 
 //SA
@@ -74,11 +73,11 @@ import TRimg10 from "../assets/images/Stories/Turkey/10.jpeg";
 import TRimg11 from "../assets/images/Stories/Turkey/11.jpeg";
 import TRimg12 from "../assets/images/Stories/Turkey/12.jpeg";
 import TRimg13 from "../assets/images/Stories/Turkey/13.jpeg";
-import TRimg14 from "../assets/images/Stories/Turkey/14.jpeg";
+// import TRimg14 from "../assets/images/Stories/Turkey/14.jpeg";
 
-import TRimg17 from "../assets/images/Stories/Turkey/17.jpeg";
-import TRimg18 from "../assets/images/Stories/Turkey/18.jpeg";
-import TRimg19 from "../assets/images/Stories/Turkey/19.jpeg";
+// import TRimg17 from "../assets/images/Stories/Turkey/17.jpeg";
+// import TRimg18 from "../assets/images/Stories/Turkey/18.jpeg";
+// import TRimg19 from "../assets/images/Stories/Turkey/19.jpeg";
 
 import rwandaImage from "../assets/images/Stories/Rwanda/1.jpg"
 
@@ -98,7 +97,7 @@ import inImg12 from '../assets/images/Stories/India/12.jpg'
 import inImg13 from '../assets/images/Stories/India/13.jpg'
 
 
-import inImgCover from '../assets/images/Stories/India/The Cover.jpg'
+
 
 
 
@@ -114,7 +113,7 @@ export const  imetaData = [
         articles : [
             {
                 heading : "Stop Rabies",
-                coverImage : inImgCover,
+                coverImage :inImg1 ,
                 images : [
                     inImg1,
                     inImg2,
@@ -145,12 +144,11 @@ export const  imetaData = [
         articles : [
             {
                 heading : "More Green",
-                coverImage : UAEimg4,
+                coverImage : UAEimg5,
                 images : [
                     UAEimg1,
                     UAEimg2,
                     UAEimg3,
-                    UAEimg4,
                     UAEimg5,
                 ],
                 article : "In line with the national strategic goals to reduce carbon emissions and reach net zero by 2050, Boehringer Ingelheim contributed to the planting of 1,000 mangrove saplings in Ras al Khor Wildlife Sanctuary in Dubai in partnership with Ministry of Climate Change and Environment and Dubai Municipality. 50 Boehringer Ingelheim employees from across IMETA came together to participate in the initiative.",
@@ -172,21 +170,16 @@ export const  imetaData = [
                     TRimg2, 
                     TRimg3, 
                     TRimg4, 
-                  
-                    
-              
                     TRimg8, 
                     TRimg9, 
                     TRimg10, 
                     TRimg11, 
                     TRimg12, 
                     TRimg13, 
-                    TRimg14, 
+               
            
                
-                    TRimg17, 
-                    TRimg18, 
-                    TRimg19
+                    
                 ],
                 article : 'Kalben is an NGO based in Turkey with a mission to raise awareness and encourage adoption, fostering, and support of children under government protection. The NGO conducts several initiatives to bridge the gap between children under protection and the general population. Boehringer Ingelheim provided financial support to help build and establish the Kalben Children Village in the Ekinlik island in Marmara Sea. The Kalben Children Village is a summer destination for children under protection which aims to provide social support through recreational activities. The village held its soft opening in August with 10 children and officially opened in September. The local Sustainable Development team members have begun volunteering through time and activity support. '
             }
@@ -202,22 +195,41 @@ export const  imetaData = [
             {
                 heading : "Access to Healthcare",
                 coverImage :kenyaImageAc2,
-                videoThump :kenyaAcVideoThump,
+                // videoThump :kenyaAcVideoThump,
                 images : [
                    
-                    kenyaAcVideo,
+                    // kenyaAcVideo,
                     kenyaImageAc4, 
                     kenyaImageAc5, 
                     kenyaImageAc6,
                 ],
-                article : "‘Access to Healthcare’ is an end-to-end patient support program by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension, Chronic Obstructive Pulmonary Disease (COPD) and type 2 diabetes. The program is set to expand across the region in the coming years.  "
+                article : "‘Access to Healthcare’ is an end-to-end patient support program by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension, Chronic Obstructive Pulmonary Disease (COPD) and type 2 diabetes. The program is set to expand across the region in the coming years.  ",
+                lists : [
+                    {
+                        listHead : "Key success factors for the initiatives",
+                        listPoints : [
+                            "Handson approach on ground - Boehringer Ingelheim full-time associates with clear KPIs set.",
+                            "Direct enlisting of key hospitals and executing MoUs.",
+                            "Patient enrollment, retention and drop off – tracking on weekly basis with partners ",
+                            "CMEs and Round Tables",
+                            "ATH target Hospitals were selected due to eligibility of their patient profiles.",
+                        ]
+                    },
+                    {
+                        listHead : "Partnerships with Social Entrepreneurs",
+                        listPoints : [
+                            "Collaborate with Boehringer Ingelheim social entrepreneurs including: to leverage their network of clinics and screenings.",
+                          
+                        ]
+                    },
+                ]
             },
             {
                 heading : "Stop Rabies",
                 coverImage :kenyaImageStopRab2,
-                videoThump :kenyaStopVideoThump,
+                // videoThump :kenyaStopVideoThump,
                 images : [
-                    kenyaStopVideo,
+                    // kenyaStopVideo,
                     kenyaImageStopRab1, 
                     kenyaImageStopRab2, 
                     kenyaImageStopRab3, 
@@ -246,9 +258,6 @@ export const  imetaData = [
             {
                 heading : "Coming Soon",
                 coverImage : rwandaImage,
-                images : [
-                    
-                ],
                 article : 'Boehringer Ingelheim is set to bridge the health equity gap in Rwanda with a new initiative in the pipeline. '
             }
         ]

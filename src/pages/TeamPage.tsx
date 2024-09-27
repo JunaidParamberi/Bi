@@ -18,7 +18,7 @@ interface CardDetailsProps {
 const CardDetails: React.FC<CardDetailsProps> = ({ data, classeName }) => {
   const descriptionParts = data.des.split('(');
   return (
-    <div className={`${classeName} shadow-2xl top-1 flex flex-col w-full left-20 gap-3 absolute bg-dark-green border-accent-green border-[0.5px] z-50 py-5 px-4 text-white`}>
+    <div className={`${classeName} shadow-2xl top-[-0.6vw] flex flex-col w-full left-[5.2vw] gap-[0.5vw] absolute bg-dark-green border-accent-green border-[0.5px] z-[1000] py-[1.4vw] px-[1vw] text-white`}>
 
       
       <h1 className='text-[1.1vw] font-semibold'>{data.name}</h1>
@@ -67,7 +67,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`w-[14vw] h-[5.5vw] relative flex items-end ${data.name === "" && "opacity-0"} mt-2 cursor-pointer`}
+      className={`w-[14vw] h-[5.2vw] relative flex items-end ${data.name === "" && "opacity-0"} mt-[1vw] cursor-pointer`}
       onClick={onClick}
     >
       {showDetails && <CardDetails data={data} classeName={`${showDetails ? "futuristic-enter" : 'futuristic-exit hidden'}`} />}

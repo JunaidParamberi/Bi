@@ -16,14 +16,12 @@ import vlCoverImg from '../assets/Making More Health/00_The cover.jpeg'
 //Volunteering Activitie
 import hlImg1 from '../assets/volunteering/1.jpg'
 import hlImg2 from '../assets/volunteering/2.jpg'
-import hlImg3 from '../assets/volunteering/3.jpg'
 import hlImg4 from '../assets/volunteering/4.jpg'
 import hlImg5 from '../assets/volunteering/5.jpg'
 import hlImg6 from '../assets/volunteering/6.jpg'
 import hlImg7 from '../assets/volunteering/7.jpg'
 import hlImg8 from '../assets/volunteering/8.jpg'
 import hlImg9 from '../assets/volunteering/9.jpg'
-import hlImg10 from '../assets/volunteering/10.jpg'
 import hlImg11 from '../assets/volunteering/11.jpg'
 import hlImg12 from '../assets/volunteering/12.jpg'
 import hlImg13 from '../assets/volunteering/13.jpg'
@@ -38,7 +36,6 @@ import hlImg22 from '../assets/volunteering/22.jpg'
 import hlImg23 from '../assets/volunteering/23.jpg'
 import hlImg24 from '../assets/volunteering/24.jpg'
 import hlImg25 from '../assets/volunteering/25.jpg'
-import hlImg26 from '../assets/volunteering/26.jpg'
 import hlImg27 from '../assets/volunteering/27.jpg'
 import hlImg28 from '../assets/volunteering/28.jpg'
 import hlImg29 from '../assets/volunteering/29.jpg'
@@ -55,10 +52,10 @@ import hlCover from '../assets/volunteering/00_The cover .jpg'
 export const  storyData = [
     {   id : 1,
         title : "Volunteering Activitie",
-        text : `In 2023 alone, 447 employees actively participated in hands-on and skills-based volunteering work. 
+        text : `In 2023 alone, 485 employees actively participated in hands-on and skills-based volunteering work. 
                 Their collective efforts reached far, positively impacting 3,147 individuals across the region. 
                 Initiatives ranged from planting activities to working with vulnerable groups across the region. 
-                This year, 390 employees have participated in volunteer work to date. 
+                This year, 447 employees have participated in volunteer work to date. 
 
                 The success of the volunteering initiatives is testament to the support of IMETA leadership 
                 team and the SD4G champions who work relentlessly to make these opportunities available.`,
@@ -66,14 +63,12 @@ export const  storyData = [
         images : [
             hlImg1,
             hlImg2,
-            hlImg3,
             hlImg4,
             hlImg5,
             hlImg6,
             hlImg7,
             hlImg8,
             hlImg9,
-            hlImg10,
             hlImg11,
             hlImg12,
             hlImg13,
@@ -89,7 +84,6 @@ export const  storyData = [
             hlImg23,
             hlImg24,
             hlImg25,
-            hlImg26,
             hlImg27,
             hlImg28,
             hlImg29,
