@@ -1,6 +1,6 @@
 import { Key, useState, useEffect, JSXElementConstructor, ReactElement, ReactNode, ReactPortal } from 'react';
 import cardImg from '../assets/images/Asset 24.png';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { imetaData } from "../data/IMETA";
 import { PuffLoader } from 'react-spinners';
@@ -27,24 +27,25 @@ interface CurrentData {
 }
 
 const CountryPage: React.FC = () => {
+  const params = useParams()
   const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
   const [loading, setLoading] = useState(false); // Loading state
-  const location = useLocation();
-  const currentData = location.state as CurrentData;
-  const [data, setData] = useState<Article>(currentData.articles[0]);
-
+  const currentData = imetaData.filter(item => item.country === params.country);
+  const [data, setData] = useState<Article | null>(currentData.length > 0 ? currentData[0].articles[0] : null);
+  
   useEffect(() => {
     setLoading(false); // Reset loading when article data changes
   }, [data]);
-
+  
   const handleClick = (item: Article) => {
     setData(item);
     setCurrentImageIndex(null); // Reset the image index when changing articles
     setLoading(true); // Start loading when changing articles
   };
-
-  const filteredData = imetaData.filter(item => item.country === currentData.country);
+  
+  const filteredData = imetaData.filter(item => item.country === params.country);
+  console.log(filteredData)
   const newData = filteredData[0];
 
   const handlePrevClick = () => {

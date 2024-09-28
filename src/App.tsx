@@ -30,6 +30,7 @@ function App() {
           <Route path='world' element={<MapPage />} /> 
           <Route path='world/:country' element={<CountryPage />} /> 
           <Route path='team' element={<TeamPage/>} /> 
+          <Route path='*' element={<h1>ops 404</h1>} /> 
         </Route>
       </Routes>
     </div>
