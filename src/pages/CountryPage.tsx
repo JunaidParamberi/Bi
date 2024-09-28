@@ -1,6 +1,5 @@
 import { Key, useState, useEffect, JSXElementConstructor, ReactElement, ReactNode, ReactPortal } from 'react';
 import cardImg from '../assets/images/Asset 24.png';
-import { useLocation, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { imetaData } from "../data/IMETA";
 import { PuffLoader } from 'react-spinners';
@@ -8,6 +7,7 @@ import playBtn from '../assets/images/play.svg'
 import rightArrow from '../assets/images/chevron-right.svg'
 import leftArrow from '../assets/images/chevron-left.svg'
 import close from '../assets/images/cancel icon.svg'
+import { useParams } from 'react-router-dom';
 
 type Article = {
   coverImage?: string;
@@ -21,10 +21,6 @@ type Article = {
   }[];
 };
 
-interface CurrentData {
-  country: string;
-  articles: Article[];
-}
 
 const CountryPage: React.FC = () => {
   const params = useParams()
@@ -57,7 +53,7 @@ const CountryPage: React.FC = () => {
   };
 
   const handleNextClick = () => {
-    if (currentImageIndex !== null && currentImageIndex < (data.images?.length || 0) - 1) {
+    if (currentImageIndex !== null && currentImageIndex < (data?.images?.length || 0) - 1) {
       setSwipeDirection('left');
       setLoading(true); // Set loading to true when changing image
       setCurrentImageIndex(currentImageIndex + 1);
@@ -74,7 +70,7 @@ const CountryPage: React.FC = () => {
   };
 
 
-  console.log(data.lists)
+
   
 
   return (
@@ -120,18 +116,18 @@ const CountryPage: React.FC = () => {
                         transition={{ duration: 0.5 }} // Transition duration
                         className="h-[90%] w-auto flex justify-center items-center"
                       >
-                        {isVideo(data.images?.[currentImageIndex!] ?? '') ? (
+                        {isVideo(data?.images?.[currentImageIndex!] ?? '') ? (
                           <video
                             controls
                             autoPlay
                             className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
                           >
-                            <source src={data.images?.[currentImageIndex!] ?? ''} type="video/mp4" />
+                            <source src={data?.images?.[currentImageIndex!] ?? ''} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
                         ) : (
                           <img
-                            src={data.images?.[currentImageIndex!] ?? ''}
+                            src={data?.images?.[currentImageIndex!] ?? ''}
                             alt="media"
                             className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
                             onLoad={handleImageLoad} // Call when the image loads
@@ -142,9 +138,9 @@ const CountryPage: React.FC = () => {
                       {/* Right arrow button with custom image */}
                       <button
                         onClick={handleNextClick}
-                        disabled={currentImageIndex === (data.images?.length || 0) - 1}
+                        disabled={currentImageIndex === (data?.images?.length || 0) - 1}
                         className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
-                          currentImageIndex === (data.images?.length || 0) - 1 ? 'opacity-30 cursor-not-allowed' : ''
+                          currentImageIndex === (data?.images?.length || 0) - 1 ? 'opacity-30 cursor-not-allowed' : ''
                         }`}
                       >
                         <img src={rightArrow} alt="Next" className="w-[3vw] h-auto" />
@@ -154,7 +150,7 @@ const CountryPage: React.FC = () => {
             
                   <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
                     <div className="w-[90%] h-[90%] flex justify-between">
-                      <img src={data.coverImage ? data?.coverImage : cardImg} alt="" className="h-full w-[35%] object-cover" />
+                      <img src={data?.coverImage ? data?.coverImage : cardImg} alt="" className="h-full w-[35%] object-cover" />
             
                       <div className="h-full w-[63%] text-[#ffffff81] flex flex-col justify-between">
                         <motion.div
@@ -184,14 +180,14 @@ const CountryPage: React.FC = () => {
                             ))}
                           </div>
             
-                          <div className={`border-accent-green border-[0.5px] ${data.images ? "min-h-[57%] max-h-[57%]" : "h-full " }  max-w-full flex justify-center items-center mb-3`}>
+                          <div className={`border-accent-green border-[0.5px] ${data?.images ? "min-h-[57%] max-h-[57%]" : "h-full " }  max-w-full flex justify-center items-center mb-3`}>
                             <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]">
                               <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw]">{data?.article}</p>
 
                               <div className=' flex flex-col gap-[1vw] text-[1vw] xl:text-[0.9vw] text-white  p-[0.3vw]'>
 
                               {
-                                data.lists?.map((ul: any, index: Key | null | undefined) => (
+                                data?.lists?.map((ul: any, index: Key | null | undefined) => (
                                   <div key={index} className=' flex flex-col gap-[0.5vw]'>
                                     <h3 className=' font-semibold'>{ul.listHead} :</h3>
                                     <ul className=' flex flex-col font-extralight px-[2vw] gap-[0.7vw] list-disc'>
@@ -210,8 +206,8 @@ const CountryPage: React.FC = () => {
                           </div>
             
                           {/* Image and Video Slider */}
-                          {data.images && <div className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y">
-                            {data.images?.map((mediaSrc: string, index: number) => (
+                          {data?.images && <div className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y">
+                            {data?.images?.map((mediaSrc: string, index: number) => (
                               <div key={index} className="relative">
                                 {loading && currentImageIndex === index ? (
                                   <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -225,7 +221,7 @@ const CountryPage: React.FC = () => {
                                         setCurrentImageIndex(index);
                                         setLoading(true);
                                       }}
-                                      src={data.videoThump ?? mediaSrc}
+                                      src={data?.videoThump ?? mediaSrc}
                                       className="min-w-[15vw]  h-full object-cover cursor-zoom-in "
                                       onLoad={handleImageLoad}
                                       onError={() => setLoading(false)} // Handle error case

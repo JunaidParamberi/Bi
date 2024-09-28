@@ -85,7 +85,7 @@ if(!filteredData) {
             transition={{ duration: 0.9, ease: 'easeOut' }}
             className="w-[60%] flex flex-col h-full gap-[0.5vw]"
           >
-            <h1 className="text-[2.8vw] font-bold w-full text-left xl:text-[100px] text-white">{data.title}</h1>
+            <h1 className="text-[2.8vw] font-bold w-full text-left xl:text-[100px] text-white">{data?.title}</h1>
 
             <div className="border-accent-green border-[0.5px] min-h-[60%] max-h-[60%] max-w-full flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">

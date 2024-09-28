@@ -7,13 +7,10 @@ function createWindow() {
   win = new BrowserWindow({
     icon: path.join(__dirname, "src/assets/icons/Icon_Accent Green.icns"),
     fullscreen: true,
-    // Opens in full screen
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: false,
-      // Disable nodeIntegration for security
       contextIsolation: true
-      // Use context isolation for security
     }
   });
   const startURL = process.env.VITE_DEV_SERVER_URL || `file://${path.join(__dirname, "../dist/index.html")}`;

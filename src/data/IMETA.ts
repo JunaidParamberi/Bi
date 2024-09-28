@@ -3,7 +3,7 @@ import kenyaImageAc2 from "../assets/images/Stories/Kenya/Access to Healthcare/D
 import kenyaImageAc4 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3821.jpg"
 import kenyaImageAc5 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3849.jpg"
 import kenyaImageAc6 from "../assets/images/Stories/Kenya/Access to Healthcare/DSC_3923.jpg"
-import kenyaAcVideo from '../assets/images/Stories/Kenya/Access to Healthcare/Access to Helath (1).mp4'
+// import kenyaAcVideo from '../assets/images/Stories/Kenya/Access to Healthcare/Access to Helath (1).mp4'
 
 // import kenyaAcVideoThump from '../assets/images/Stories/Kenya/Access to Healthcare/Acces to healthcare.png'
 
@@ -29,8 +29,9 @@ import kenyaImageStopRab13 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A
 //UAE
 import UAEimg1 from "../assets/images/Stories/NEUAE/1.jpg"
 import UAEimg2 from "../assets/images/Stories/NEUAE/2.jpg"
-import UAEimg3 from "../assets/images/Stories/NEUAE/3.jpg"
+// import UAEimg3 from "../assets/images/Stories/NEUAE/3.jpg"
 import UAEimg5 from "../assets/images/Stories/NEUAE/5.jpg"
+import UAEimg6 from "../assets/images/Stories/NEUAE/6.jpg"
 
 //SA
 
@@ -115,7 +116,7 @@ export const  imetaData = [
                 heading : "Stop Rabies",
                 coverImage :inImg1 ,
                 images : [
-                    inImg1,
+                    // inImg1,
                     inImg2,
                     inImg3,
                     inImg4,
@@ -146,10 +147,10 @@ export const  imetaData = [
                 heading : "More Green",
                 coverImage : UAEimg5,
                 images : [
+                    UAEimg6,
                     UAEimg1,
                     UAEimg2,
-                    UAEimg3,
-                    UAEimg5,
+                    // UAEimg5,
                 ],
                 article : "In line with the national strategic goals to reduce carbon emissions and reach net zero by 2050, Boehringer Ingelheim contributed to the planting of 1,000 mangrove saplings in Ras al Khor Wildlife Sanctuary in Dubai in partnership with Ministry of Climate Change and Environment and Dubai Municipality. 50 Boehringer Ingelheim employees from across IMETA came together to participate in the initiative.",
             }
@@ -171,7 +172,7 @@ export const  imetaData = [
                     TRimg3, 
                     TRimg4, 
                     TRimg8, 
-                    TRimg9, 
+                    // TRimg9, 
                     TRimg10, 
                     TRimg11, 
                     TRimg12, 

@@ -131,7 +131,7 @@ const team2 = [
         {
             name : "Mohamed Amine Ouachem",
             occupation : 'NWA',
-            des : "Ruminant ( Ruminant Key Account Manager )",
+            des : "Ruminant Key Account Manager ( North West Africa OPU Champion)",
             image : amin
         },
         {
