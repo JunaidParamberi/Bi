@@ -60,6 +60,8 @@ const CountryPage: React.FC = () => {
     }
   };
 
+  //video removed
+
   const handleImageLoad = () => {
     setLoading(false); // Set loading to false after the image has loaded
   };
