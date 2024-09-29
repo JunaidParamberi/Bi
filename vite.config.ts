@@ -5,7 +5,10 @@ import react from '@vitejs/plugin-react';
 
 
 export default defineConfig({
-  assetsInclude: ['**/*.JPG'],
+  server: {
+    port: 3000 // or whichever port you'd like to use
+  },
+  assetsInclude: ['*/.JPG'],
   base: './',  // Ensure relative paths for web build to work without a server
   plugins: [
     react(),
