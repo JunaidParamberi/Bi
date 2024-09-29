@@ -327,6 +327,3 @@ export const  imetaData = [
  
     },
 ]
-
-
-

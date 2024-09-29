@@ -5,8 +5,8 @@
   "author": "junaidparamberi@gmail.com",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"wait-on http://localhost:3000 && electron .\"",
-    "build:web": "vite build --mode web",
+    "dev": "vite",
+    "build:web": "vite build",
     "build:electron": "tsc && vite build && electron-builder",
     "start:electron": "vite && electron .",
     "preview": "vite preview"
@@ -37,13 +37,11 @@
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "concurrently": "^9.0.1",
     "electron": "^30.0.1",
     "electron-builder": "^24.13.3",
     "typescript": "^5.6.2",
     "vite-plugin-electron": "^0.28.6",
-    "vite-plugin-electron-renderer": "^0.14.5",
-    "wait-on": "^8.0.1"
+    "vite-plugin-electron-renderer": "^0.14.5"
   },
   "main": "dist-electron/main.js",
   "build": {
