@@ -128,6 +128,7 @@ const MapComponent: React.FC = () => {
         {/* Map Image */}
         <img
           src={mapImg}
+          loading='lazy'
           className="absolute top-0 left-0 object-contain"
           alt="Map"
         />

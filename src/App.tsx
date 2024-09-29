@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import './App.css';
 import mainBg from './assets/images/Main BG.svg';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -10,10 +11,22 @@ import CountryPage from './pages/CountryPage';
 import GlobePage from './pages/GlobePage';
 import TeamPage from './pages/TeamPage';
 
-
 function App() {
-
   const location = useLocation();  // To track route changes for animations
+
+  useEffect(() => {
+    // Function to add lazy loading to images without it
+    const addLazyLoadingToImages = () => {
+      const images = document.querySelectorAll('img:not([loading])');
+      images.forEach((img) => {
+        img.setAttribute('loading', 'lazy');
+      });
+    };
+
+    // Add lazy loading on component mount
+    addLazyLoadingToImages();
+  }, []);
+
   return (
     <div className='app'>
       <img
@@ -24,13 +37,13 @@ function App() {
       <ParticlesBackground />
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<GenerelLeyout />}>
-          <Route index element={<GlobePage />} /> 
+          <Route index element={<GlobePage />} />
           <Route path='more' element={<MoreStories />} />
-          <Route path='more/:title' element={<StoryPage />} />  
-          <Route path='world' element={<MapPage />} /> 
-          <Route path='world/:country' element={<CountryPage />} /> 
-          <Route path='team' element={<TeamPage/>} /> 
-          <Route path='*' element={<h1>ops 404</h1>} /> 
+          <Route path='more/:title' element={<StoryPage />} />
+          <Route path='world' element={<MapPage />} />
+          <Route path='world/:country' element={<CountryPage />} />
+          <Route path='team' element={<TeamPage />} />
+          <Route path='*' element={<h1>ops 404</h1>} />
         </Route>
       </Routes>
     </div>
