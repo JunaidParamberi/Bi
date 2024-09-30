@@ -70,7 +70,6 @@ export const  storyData = [
             hlImg11,
             hlImg12,
             hlImg13,
-    
             hlImg15,
             hlImg16,
             hlImg17,
@@ -79,17 +78,8 @@ export const  storyData = [
             hlImg20,
             hlImg21,
             hlImg22,
-            hlImg24,
-            hlImg25,
-            hlImg28,
-            hlImg29,
-            hlImg30,
-            hlImg31,
-            hlImg32,
-            hlImg33,
-            hlImg34,
-            hlImg35,
-            hlImg36,
+          
+           
           
         ]
     },

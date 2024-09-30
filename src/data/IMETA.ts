@@ -61,6 +61,12 @@ import SAimg40 from "../assets/images/Stories/SA/40.jpg"
 import SAimg41 from "../assets/images/Stories/SA/41.jpg"
 import SAimg42 from "../assets/images/Stories/SA/42.jpg"
 import SAimg43 from "../assets/images/Stories/SA/43.jpg"
+import hlImg28 from '../assets/volunteering/28.jpg'
+import hlImg29 from '../assets/volunteering/29.jpg'
+import hlImg30 from '../assets/volunteering/30.jpg'
+import hlImg31 from '../assets/volunteering/31.jpg'
+import hlImg32 from '../assets/volunteering/32.jpg'
+import hlImg33 from '../assets/volunteering/33.jpg'
 
 
 //TR
@@ -347,6 +353,13 @@ export const  imetaData = [
                     SAimg41,
                     SAimg42,
                     SAimg43,
+
+                    hlImg28,
+                    hlImg29,
+                    hlImg30,
+                    hlImg31,
+                    hlImg32,
+                    hlImg33,
                 ],
             }
         ]
