@@ -33,10 +33,8 @@ import hlImg19 from '../assets/volunteering/19.jpg'
 import hlImg20 from '../assets/volunteering/20.jpg'
 import hlImg21 from '../assets/volunteering/21.jpg'
 import hlImg22 from '../assets/volunteering/22.jpg'
-import hlImg23 from '../assets/volunteering/23.jpg'
 import hlImg24 from '../assets/volunteering/24.jpg'
 import hlImg25 from '../assets/volunteering/25.jpg'
-import hlImg27 from '../assets/volunteering/27.jpg'
 import hlImg28 from '../assets/volunteering/28.jpg'
 import hlImg29 from '../assets/volunteering/29.jpg'
 import hlImg30 from '../assets/volunteering/30.jpg'
@@ -54,7 +52,7 @@ export const  storyData = [
         title : "Volunteering Activitie",
         text : `In 2023 alone, 485 employees actively participated in hands-on and skills-based volunteering work. 
                 Their collective efforts reached far, positively impacting 3,147 individuals across the region. 
-                Initiatives ranged from planting activities to working with vulnerable groups across the region. 
+                Initiatives ranged from planting activities to working with underserved groups across the region. 
                 This year, 447 employees have participated in volunteer work to date. 
 
                 The success of the volunteering initiatives is testament to the support of IMETA leadership 
@@ -81,10 +79,8 @@ export const  storyData = [
             hlImg20,
             hlImg21,
             hlImg22,
-            hlImg23,
             hlImg24,
             hlImg25,
-            hlImg27,
             hlImg28,
             hlImg29,
             hlImg30,
