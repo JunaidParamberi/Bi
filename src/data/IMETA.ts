@@ -74,6 +74,12 @@ import TRimg10 from "../assets/images/Stories/Turkey/10.jpeg";
 import TRimg11 from "../assets/images/Stories/Turkey/11.jpeg";
 import TRimg12 from "../assets/images/Stories/Turkey/12.jpeg";
 import TRimg13 from "../assets/images/Stories/Turkey/13.jpeg";
+import TRimg20 from "../assets/images/Stories/Turkey/20.jpg";
+import TRimg21 from "../assets/images/Stories/Turkey/21.jpg";
+import TRimg22 from "../assets/images/Stories/Turkey/22.jpg";
+import TRimg23 from "../assets/images/Stories/Turkey/23.jpg";
+import TRimg24 from "../assets/images/Stories/Turkey/24.jpg";
+
 // import TRimg14 from "../assets/images/Stories/Turkey/14.jpeg";
 
 // import TRimg17 from "../assets/images/Stories/Turkey/17.jpeg";
@@ -177,6 +183,12 @@ export const  imetaData = [
                     TRimg11, 
                     TRimg12, 
                     TRimg13, 
+                    TRimg20, 
+                    TRimg21, 
+                    TRimg22, 
+                    TRimg23, 
+                    TRimg24, 
+          
                
            
                

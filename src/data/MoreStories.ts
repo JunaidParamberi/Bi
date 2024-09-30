@@ -49,7 +49,7 @@ import hlCover from '../assets/volunteering/00_The cover .jpg'
 
 export const  storyData = [
     {   id : 1,
-        title : "Volunteering Activitie",
+        title : "Volunteering Activities",
         text : `In 2023 alone, 485 employees actively participated in hands-on and skills-based volunteering work. 
                 Their collective efforts reached far, positively impacting 3,147 individuals across the region. 
                 Initiatives ranged from planting activities to working with underserved groups across the region. 
