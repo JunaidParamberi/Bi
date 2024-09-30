@@ -50,12 +50,8 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
       {
         currentData?.articles.map(item => (
           
-          <h1 className="text-[0.9vw]  ">
-            {
-            currentData.articles.length > 1 &&  
-            currentData?.articles[0].heading ===  item?.heading ?  
-            item?.heading + " ," 
-            : item?.heading }</h1>
+          <h1 className="text-[0.9vw] mb-[0.3vw]  ">
+            { item?.heading }</h1>
         ))
       }
       </div>
