@@ -315,6 +315,22 @@ export const  imetaData = [
                     SAimg25,
                     SAimg26,
                     // SAimg27,
+                  
+                    
+                ],
+                article :'South Africa’s ‘Stop Rabies’ initiative has seen the vaccination of more than 19,000 dogs in 2023, logged in real-time through a Global Alliance for Rabies Control (GARC) surveillance app, with plans to vaccinate a further 20,000 dogs by the end of 2024. The door-to-door vaccinations were conducted in informal settlements around the Eastern Cape province with a goal to vaccinate 70 percent of the dog population by the end of 2025. '
+            },
+
+            {
+                heading : "More Green",
+                coverImage : SAimg35,
+                article : `
+                
+                Boehringer Ingelheim Southern Africa in 2023 showcased its commitment to our Sustainable Development for Generations framework at Diepsloot Primary School. The team was very proud to say that the day was filled with hope, inspiration, and a sense of purpose. 
+                Over 120 employees from around the country came together to contribute towards a more sustainable future and held activities which included the opening of a water filtration drinking station, and ensuring clean drinking water for the school children in collaboration with an Ashoka social entrepreneur; Kusini Water. They also doubled the size of the existing vegetable garden, which is used to prepare meals for the children, thereby ensuring the school gets closer to a sustainable food source not reliant on funding.
+                The team also went the extra mile and extended the lifecycle of laptops and donated them to the school for administrative activities.
+                `,
+                images : [
                     SAimg28,
                     SAimg29,
                     SAimg30,
@@ -322,7 +338,7 @@ export const  imetaData = [
                     SAimg32,
                     SAimg33,
                     SAimg34,
-                    SAimg35,
+                    
                     SAimg36,
                     SAimg37,
                     SAimg38,
@@ -331,9 +347,7 @@ export const  imetaData = [
                     SAimg41,
                     SAimg42,
                     SAimg43,
-                    
                 ],
-                article :'South Africa’s ‘Stop Rabies’ initiative has seen the vaccination of more than 19,000 dogs in 2023, logged in real-time through a Global Alliance for Rabies Control (GARC) surveillance app, with plans to vaccinate a further 20,000 dogs by the end of 2024. The door-to-door vaccinations were conducted in informal settlements around the Eastern Cape province with a goal to vaccinate 70 percent of the dog population by the end of 2025. '
             }
         ]
  

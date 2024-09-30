@@ -43,9 +43,22 @@ const CountryCard: React.FC<MyComponentProps> = ({ style, title, isVisible }) =>
       className={`absolute w-fit flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-16 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green z-50
         ${isVisible && !isAnimatingOut ? 'futuristic-enter' : 'futuristic-exit'}`}
     >
-      <div className=' flex h-full w-full flex-col gap-3'>
+      <div className=' flex h-full w-full flex-col gap-[1vw]'>
       <h1 className="text-[1.3vw]">{currentData?.country}</h1>
-      <h1 className="text-[0.9vw]  ">{currentData?.title}</h1>
+      
+      <div>
+      {
+        currentData?.articles.map(item => (
+          
+          <h1 className="text-[0.9vw]  ">
+            {
+            currentData.articles.length > 1 &&  
+            currentData?.articles[0].heading ===  item?.heading ?  
+            item?.heading + " ," 
+            : item?.heading }</h1>
+        ))
+      }
+      </div>
       <div>
         {currentData?.country ? (
           <Link 

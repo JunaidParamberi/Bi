@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import mainBg from './assets/images/Main BG.svg';
 import { Routes, Route, useLocation } from 'react-router-dom';
