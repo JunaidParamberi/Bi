@@ -17,13 +17,14 @@ import Ayse from '../assets/High resolution picture/Ayse Tombaz.png'
 import amy from '../assets/High resolution picture/Amy Emile.jpeg'
 import nassim from '../assets/High resolution picture/Nassim Ouagueni.png'
 import sara from '../assets/High resolution picture/Sara Badrig .png'
+import Derek from '../assets/High resolution picture/Derek O’Leary.jpeg'
 
 const team1 = [
     {
         name : "Derek O’Leary",
         occupation : 'CMD - IMETA',
         des : "Country Managing Director, IMETA",
-        image : "https://media.licdn.com/dms/image/v2/C5103AQFWn2Cxz_Qmlg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1536220846325?e=1732147200&v=beta&t=MR0zsIH3pSxULd10DZIhFgHLxmFDUZUAVjpr0FEKEds"
+        image : Derek
     },
     {
         name : "Hale Asikoglu Erkol",
