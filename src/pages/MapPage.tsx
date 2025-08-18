@@ -13,12 +13,12 @@ interface ButtonProps {
 // Imeta component
 export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
   return (
-    <div className="bg-dark-green border-accent-green border-[0.5px] w-full px-[10%]  xl:py-20  py-[15%] flex flex-col gap-5 rounded-none text-white">
+    <div className="bg-dark-green border-accent-green border-[0.5px] w-full px-[10%] xl:py-20 py-[15%] flex flex-col gap-5 rounded-none text-white">
       <h1 className="text-[2vw] xl:text-[2vw] ">IMETA</h1>
       <h2 className="text-[1vw] xl:text-[0.9vw] ">
         The IMETA region is unique in its rich cultural and demographic
         diversity; however, it also encompasses some of the world’s most
-        underserved communities.
+        underserved communities. <br /> <br />
       </h2>
       <div
         className="text-accent-green text-[0.8vw] cursor-pointer "
