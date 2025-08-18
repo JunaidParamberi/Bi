@@ -34,7 +34,10 @@ import kenyaImageStopRab11 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A
 import kenyaImageStopRab12 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9708.jpg";
 import kenyaImageStopRab13 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9767.jpg";
 import kenyaStopVideo from '../assets/images/Stories/Kenya/Stop Rabies/BI - Kenya Rabies - Film - v8 HQ .mp4';
+import kenyaStopVideo2 from '../assets/images/Stories/Kenya/Stop Rabies/Stope Rabies Video.mp4';
+
 import kenyaStopVideoThump from '../assets/images/Stories/Kenya//Stop Rabies/Rabies.png';
+import kenyaStopVideoThump2 from '../assets/images/Stories/Kenya//Stop Rabies/Stope Rabies VIdeo Thump.png';
 
 // UAE
 import UAEimg1 from "../assets/images/Stories/NEUAE/1.jpg";
@@ -230,6 +233,11 @@ export const imetaData = [
                         thumb: kenyaStopVideoThump,
                         caption: "Stop Rabies Vaccination Campaign",
                     },
+                    {
+                        src: kenyaStopVideo2,
+                        thumb: kenyaStopVideoThump2,
+                        caption: "Stop Rabies Vaccination Campaign 2",
+                    },
                 ],
                 images: [
                     kenyaImageStopRab1, kenyaImageStopRab2, kenyaImageStopRab3,
@@ -238,7 +246,7 @@ export const imetaData = [
                     kenyaImageStopRab10, kenyaImageStopRab11, kenyaImageStopRab12,
                     kenyaImageStopRab13,
                 ],
-                article: 'With our global expertise and rich legacy in dog vaccinations, including rabies, we have a responsibility to contribute to national rabies elimination efforts and support communities most affected by the disease. In Kenya, Boehringer Ingelheim’s efforts have led to the successful vaccination of more than 20,000 dogs in 2023, with plans to vaccinate a further 30,000 dogs by the end of 2024. The vaccination drive is further supported by Zipline’s drone delivery in remote areas without cold chain facilities.'
+                article: 'With our global expertise and rich legacy in dog vaccinations, including rabies, we have a responsibility to contribute to national rabies elimination efforts and support communities most affected by the disease. In Kenya, Boehringer Ingelheim’s efforts have led to the successful vaccination of more than 20,000 dogs in 2023, with plans to vaccinate a further 30,000 dogs by the end of 2024. The vaccination drive is further supported by Zipline’s drone delivery in remote areas without cold chain facilities. '
             },
         ]
     },
