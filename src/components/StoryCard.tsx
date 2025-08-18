@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 interface DataType {
   id: number;
   title: string;
   text: string;
+
   coverImage: string;
 }
 

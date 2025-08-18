@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { PuffLoader } from "react-spinners";
+import playBtn from "../assets/images/play.svg";
 
 import { storyData } from "../data/MoreStories";
 import rightArrow from "../assets/images/chevron-right.svg";
@@ -13,6 +14,11 @@ interface Story {
   coverImage: string;
   text: string;
   images: string[];
+  videos: {
+    src: string;
+    thumb: string;
+    caption: string;
+  }[];
   lists?: {
     listHead: string;
     listPoints: string[];
@@ -21,16 +27,32 @@ interface Story {
 
 export default function StoryPage() {
   const params = useParams();
-  const filteredData = storyData.find((data) => data.title === params.title);
+  const filteredDataRaw = storyData.find((data) => data.title === params.title);
+  const filteredData: Story | null = filteredDataRaw
+    ? {
+        ...filteredDataRaw,
+        videos: filteredDataRaw.videos ?? [],
+      }
+    : null;
 
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
-    null
-  );
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
     null
   );
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<Story | null>(filteredData || null);
+
+  // Combine images and videos for easy navigation
+  const media = data
+    ? [
+        ...data.videos.map((v) => ({
+          type: "video" as const,
+          src: v.src,
+          thumb: v.thumb,
+        })),
+        ...data.images.map((src) => ({ type: "image" as const, src })),
+      ]
+    : [];
 
   useEffect(() => {
     setData(filteredData || null);
@@ -45,25 +67,22 @@ export default function StoryPage() {
   }
 
   const handlePrevClick = () => {
-    if (currentImageIndex !== null && currentImageIndex > 0) {
+    if (currentIndex !== null && currentIndex > 0) {
       setSwipeDirection("right");
       setLoading(true);
-      setCurrentImageIndex(currentImageIndex - 1);
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
   const handleNextClick = () => {
-    if (
-      currentImageIndex !== null &&
-      currentImageIndex < (data?.images?.length || 0) - 1
-    ) {
+    if (currentIndex !== null && currentIndex < media.length - 1) {
       setSwipeDirection("left");
       setLoading(true);
-      setCurrentImageIndex(currentImageIndex + 1);
+      setCurrentIndex(currentIndex + 1);
     }
   };
 
-  const handleImageLoad = () => {
+  const handleMediaLoad = () => {
     setLoading(false);
   };
 
@@ -77,14 +96,16 @@ export default function StoryPage() {
     >
       <div className="bg-dark-green border-accent-green border-[0.5px] xl:h-[90%] h-full w-full flex justify-center items-center py-7">
         <div className="w-[90%] gap-7 xl:gap-16 flex h-[80%] justify-center items-start">
+          {/* Cover Image */}
           <div className="w-[50%] h-full">
             <img
-              src={data?.coverImage}
+              src={data?.coverImage ?? ""}
               alt="Cover"
               className="w-full h-full object-cover"
             />
           </div>
 
+          {/* Story Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,27 +121,25 @@ export default function StoryPage() {
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
                 <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">
                   {data?.text} <br />
-                  {data?.title === "Making More Health" ? (
+                  {data?.title === "Making More Health" && (
                     <>
                       <br />
                       Continuing the journey in 2024.
                     </>
-                  ) : (
-                    ""
                   )}
                 </p>
 
-                {/* ✅ Render lists if they exist */}
-                {data?.lists && data.lists.length > 0 && (
+                {/* Render lists if they exist */}
+                {data?.lists && data?.lists.length > 0 && (
                   <div className="flex flex-col gap-[1vw] mt-4 p-3">
-                    {data.lists.map((list, index) => (
-                      <div key={index} className="flex flex-col gap-[0.5vw]">
+                    {data?.lists.map((list, idx) => (
+                      <div key={idx} className="flex flex-col gap-[0.5vw]">
                         <h3 className="font-semibold text-white">
                           {list.listHead}:
                         </h3>
                         <ul className="list-disc pl-5 flex flex-col gap-[0.5vw] text-white text-[1vw]">
-                          {list.listPoints.map((point, pIndex) => (
-                            <li key={pIndex}>{point}</li>
+                          {list.listPoints.map((point, pIdx) => (
+                            <li key={pIdx}>{point}</li>
                           ))}
                         </ul>
                       </div>
@@ -130,27 +149,50 @@ export default function StoryPage() {
               </div>
             </div>
 
-            {/* Image slider */}
-            {data?.images && (
+            {/* Media Slider */}
+            {media.length > 0 && (
               <div className="flex w-full h-[40%] overflow-x-auto gap-4 custom-scrollbar-y">
-                {data.images.map((imageSrc: string, index: number) => (
-                  <div key={index} className="relative">
-                    {loading && currentImageIndex === index ? (
+                {media.map((item, idx) => (
+                  <div key={idx} className="relative">
+                    {loading && currentIndex === idx && (
                       <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
                         <PuffLoader color="#36d7b7" />
                       </div>
+                    )}
+
+                    {item.type === "video" ? (
+                      <div className="relative h-full">
+                        <img
+                          src={item.thumb}
+                          onClick={() => {
+                            setCurrentIndex(idx);
+                            setLoading(true);
+                          }}
+                          className="min-w-[15vw] h-full object-cover cursor-zoom-in"
+                          alt="Video Thumbnail"
+                          onLoad={handleMediaLoad}
+                        />
+                        <img
+                          src={playBtn}
+                          onClick={() => {
+                            setCurrentIndex(idx);
+                            setLoading(true);
+                          }}
+                          alt="Play Button"
+                          className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
+                        />
+                      </div>
                     ) : (
                       <img
+                        src={item.src}
                         onClick={() => {
-                          setCurrentImageIndex(index);
+                          setCurrentIndex(idx);
                           setLoading(true);
                         }}
-                        srcSet={`${imageSrc}?w=200 200w, ${imageSrc}?w=400 400w, ${imageSrc}?w=800 800w`}
                         loading="lazy"
                         alt="Story Image"
-                        className="min-w-[15vw] xl:w-[513px] h-full object-cover cursor-zoom-in"
-                        onLoad={handleImageLoad}
-                        onError={() => setLoading(false)}
+                        className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
+                        onLoad={handleMediaLoad}
                       />
                     )}
                   </div>
@@ -161,8 +203,8 @@ export default function StoryPage() {
         </div>
       </div>
 
-      {/* Modal for image viewer */}
-      {currentImageIndex !== null && (
+      {/* Modal for media viewer */}
+      {currentIndex !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -170,44 +212,60 @@ export default function StoryPage() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green"
         >
+          {/* Close Button */}
           <div
             className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
-            onClick={() => setCurrentImageIndex(null)}
+            onClick={() => setCurrentIndex(null)}
           >
             <img src={close} alt="Close" className="w-[1.5vw] h-auto" />
           </div>
 
+          {/* Prev Button */}
           <button
             onClick={handlePrevClick}
-            disabled={currentImageIndex === 0}
+            disabled={currentIndex === 0}
             className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
-              currentImageIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+              currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
             <img src={leftArrow} alt="Previous" className="w-[3vw] h-auto" />
           </button>
 
+          {/* Media Display */}
           <motion.div
-            key={currentImageIndex}
+            key={currentIndex}
             initial={{ opacity: 0, x: swipeDirection === "left" ? 100 : -100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: swipeDirection === "left" ? -100 : 100 }}
             transition={{ duration: 0.5 }}
             className="h-[90%] w-auto flex justify-center items-center"
           >
-            <img
-              src={data?.images?.[currentImageIndex!] ?? ""}
-              alt="Selected Story"
-              className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
-              onLoad={handleImageLoad}
-            />
+            {media[currentIndex].type === "image" ? (
+              <img
+                src={media[currentIndex].src}
+                alt="Selected Story"
+                className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
+                onLoad={handleMediaLoad}
+              />
+            ) : (
+              <video
+                controls
+                autoPlay
+                className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
+                onLoadedData={handleMediaLoad}
+              >
+                <source src={media[currentIndex].src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
           </motion.div>
 
+          {/* Next Button */}
           <button
             onClick={handleNextClick}
-            disabled={currentImageIndex === (data?.images?.length || 0) - 1}
+            disabled={currentIndex === media.length - 1}
             className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
-              currentImageIndex === (data?.images?.length || 0) - 1
+              currentIndex === media.length - 1
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}

@@ -254,12 +254,26 @@ export const imetaData = [
         id: 5,
         country: 'Rwanda',
         title: "Coming Soon",
+       
         articles: [
             {
                 heading: "Coming Soon",
                 coverImage: rwandaImage,
-                article: 'Boehringer Ingelheim is set to bridge the health equity gap in Rwanda with a new initiative in the pipeline.'
+                article: 'Boehringer Ingelheim is set to bridge the health equity gap in Rwanda with a new initiative in the pipeline.',
+                lists : [
+            {
+                listHead: "",
+                listPoints: [
+                    "Continuing our engagement with key government stakeholders",
+                    "Finalizing our partner selection process",
+                    "Signing an MoU with the Rwanda Non-Communicable Diseases Alliance",
+                    "Progressing with the product registration in the country",
+                ]
             }
+        ],
+            }, 
+
+        
         ]
     },
     {

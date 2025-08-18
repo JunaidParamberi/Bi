@@ -7,6 +7,7 @@ interface dataTypes {
   title: string;
   text: string;
   coverImage: string;
+
   lists?: {
     listHead: string;
     listPoints: string[];

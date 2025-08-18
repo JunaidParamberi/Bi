@@ -223,7 +223,9 @@ const CountryPage: React.FC = () => {
                   <div className="flex flex-col gap-[1vw] text-[1vw] xl:text-[0.9vw] text-white p-[0.3vw]">
                     {data?.lists?.map((ul: any, index: Key) => (
                       <div key={index} className="flex flex-col gap-[0.5vw]">
-                        <h3 className="font-semibold">{ul.listHead} :</h3>
+                        {ul.listHead && (
+                          <h3 className="font-semibold">{ul.listHead} :</h3>
+                        )}
                         <ul className="flex flex-col font-extralight px-[2vw] gap-[0.7vw] list-disc">
                           {ul.listPoints.map((li: any, liIndex: Key) => (
                             <li key={liIndex}>{li}</li>
