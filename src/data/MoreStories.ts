@@ -33,71 +33,87 @@ import hlImg19 from '../assets/volunteering/19.jpg'
 import hlImg20 from '../assets/volunteering/20.jpg'
 import hlImg21 from '../assets/volunteering/21.jpg'
 import hlImg22 from '../assets/volunteering/22.jpg'
-import hlImg24 from '../assets/volunteering/24.jpg'
-import hlImg25 from '../assets/volunteering/25.jpg'
-import hlImg28 from '../assets/volunteering/28.jpg'
-import hlImg29 from '../assets/volunteering/29.jpg'
-import hlImg30 from '../assets/volunteering/30.jpg'
-import hlImg31 from '../assets/volunteering/31.jpg'
-import hlImg32 from '../assets/volunteering/32.jpg'
-import hlImg33 from '../assets/volunteering/33.jpg'
-import hlImg34 from '../assets/volunteering/34.jpg'
-import hlImg35 from '../assets/volunteering/35.jpg'
-import hlImg36 from '../assets/volunteering/36.jpg'
+import hlImg23 from '../assets/volunteering/37.jpg'
+import hlImg24 from '../assets/volunteering/38.jpg'
+import hlImg25 from '../assets/volunteering/39.jpg'
+import hlImg26 from '../assets/volunteering/40.jpg'
+
 
 import hlCover from '../assets/volunteering/00_The cover .jpg'
 
-export const  storyData = [
-    {   id : 1,
-        title : "Volunteering Activities",
-        text : `In 2023 alone, 485 employees actively participated in hands-on and skills-based volunteering work. 
-                Their collective efforts reached far, positively impacting 3,147 individuals across the region. 
-                Initiatives ranged from planting activities to working with underserved groups across the region. 
-                This year, 447 employees have participated in volunteer work to date. 
-
-                The success of the volunteering initiatives is testament to the support of IMETA leadership 
-                team and the SD4G champions who work relentlessly to make these opportunities available.`,
-        coverImage : hlCover,
-        images : [
-            hlImg1,
-            hlImg2,
-            hlImg4,
-            hlImg5,
-            hlImg6,
-            hlImg7,
-            hlImg8,
-            hlImg9,
-            hlImg11,
-            hlImg12,
-            hlImg13,
-            hlImg15,
-            hlImg16,
-            hlImg17,
-            hlImg18,
-            hlImg19,
-            hlImg20,
-            hlImg21,
-            hlImg22,
-          
-           
-          
+export const storyData = [
+  {   
+    id : 1,
+    title : "Volunteering Activities",
+    text : `To date, over 1,000 employees actively participated in hands-on and skills-based
+    volunteering work. Their collective efforts reached far, positively impacting more than 4,000
+    individuals across the region. Initiatives ranged from planting activities to working with
+    vulnerable groups across the region. The success of the volunteer initiatives is testament to the
+    support of IMETA leadership team and the SD4G champions who work relentlessly to
+    make these opportunities available.`,
+    coverImage : hlCover,
+    images : [
+      hlImg1,
+      hlImg2,
+      hlImg4,
+      hlImg5,
+      hlImg6,
+      hlImg7,
+      hlImg8,
+      hlImg9,
+      hlImg11,
+      hlImg12,
+      hlImg13,
+      hlImg15,
+      hlImg16,
+      hlImg17,
+      hlImg18,
+      hlImg19,
+      hlImg20,
+      hlImg21,
+      hlImg22,
+      hlImg26,
+      hlImg23,
+      hlImg24,
+      hlImg25,
+    ],
+    lists: [
+      {
+        listHead: "In 2025, we are ",
+        listPoints: [
+          "Planning to establish a “Giving Back Month” across all IMETA.",
+          "Link all our activities to SD4G",
+          "Collaborate with Ashoka to hold a series a webinars and raise awareness about Diversity, Equity and Inclusion  ",
         ]
-    },
-    {   id : 2,
-        title : "Making More Health",
-        text : 'To date, 800 colleagues from the IMETA region have registered on Making More Health Connect platform and every month, an average of 15 individuals are actively engaged with social entrepreneurs. In 2023, 3 colleagues from IMETA participated in Making More Health Leadership Week and 2 colleagues participated in 2024. In total, 48 IMETA employees have mentored 10 different social entrepreneurs in Boehringer Ingelheim’s incubator, accelerator and social engagement programs. ',
-        coverImage : vlCoverImg,
-
-        images : [
-            vlImg1,
-            vlImg2,
-            vlImg3,
-            vlImg4,
-            vlImg5,
-            vlImg6,
-            vlImg7,
-            vlImg8,
-            vlImg9,
+      },
+      {
+        listHead: "In 2030, we aim to ",
+        listPoints: [
+          "Engage 2,500 colleagues in volunteering activities",
+          "Ensure a 40% female workforce with 30% of those in supervisory positions",
+          "Include a 55% rate of generation Y in supervisory roles, while 5% of employees are generation Z",
         ]
-    },
+      }
+    ]
+  },
+  {   
+    id : 2,
+    title : "Making More Health",
+    text : `To date, 800 colleagues from the IMETA region have registered on Making More Health Connect platform and every month, an average of 15 individuals are actively engaged with social entrepreneurs. In 2023, 3 colleagues from IMETA participated in Making More Health Leadership Week and 2 colleagues participated in 2024. In total, 48 IMETA employees have mentored 10 different social entrepreneurs in Boehringer Ingelheim’s incubator, accelerator and social engagement programs.`,
+    coverImage : vlCoverImg,
+    images : [
+      vlImg1,
+      vlImg2,
+      vlImg3,
+      vlImg4,
+      vlImg5,
+      vlImg6,
+      vlImg7,
+      vlImg8,
+      vlImg9,
+    ],
+    lists: [
+      
+    ]
+  },
 ]
