@@ -100,6 +100,10 @@ import TRimg24 from "../assets/images/Stories/Turkey/24.jpg";
 // import TRimg18 from "../assets/images/Stories/Turkey/18.jpeg";
 // import TRimg19 from "../assets/images/Stories/Turkey/19.jpeg";
 
+import TrVideo from "../assets/images/Stories/Turkey/Kalben Village.mp4";
+import TrVideoThump from "../assets/images/Stories/Turkey/Kalben Village Video Thump.png";
+
+
 import rwandaImage from "../assets/images/Stories/Rwanda/1.jpg";
 
 // India
@@ -153,10 +157,19 @@ export const imetaData = [
         id: 3,
         country: "Turkey",
         title: "Kalben Children Village",
+        
         articles: [
+            
             {
                 heading: "Kalben Children Village",
                 coverImage: TRimg9,
+                videos :[
+                    {
+                        src: TrVideo, 
+                        thumb: TrVideoThump, 
+                        caption: "Kalben Children Village Video",
+                    },
+                ],
                 images: [
                     TRimg1, TRimg2, TRimg3, TRimg4, TRimg8,
                     TRimg10, TRimg11, TRimg12, TRimg13, TRimg20,

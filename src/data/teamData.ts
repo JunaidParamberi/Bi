@@ -136,10 +136,10 @@ const team2 = [
             image : amin
         },
         {
-            name : "Hilde Von Gruning",
+            name : "Karzana Khan",
             occupation : 'Southern Africa',
             des : "MSL Southern Africa ( Southern Africa OPU Champion )",
-            image : hilde
+            image : ''
         },
         {
             name : "Anish Charles",
@@ -148,10 +148,10 @@ const team2 = [
             image : anish
         },
         {
-            name : "Sara Badrig",
-            occupation : 'Saudi Arabia, Gulf East Africa (SAGEA)',
-            des : "Communications Manager Saudi Arabia, Gulf East Africa ( Gulf East Africa OPU Champion )",
-            image : sara
+            name : "SAGEA champion to be announced",
+            occupation : '',
+            des : "",
+            image : ''
         }
         ]
 
