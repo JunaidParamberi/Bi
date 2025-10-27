@@ -18,7 +18,9 @@ export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
       <h2 className="text-[1vw] xl:text-[0.9vw] ">
         The IMETA region is unique in its rich cultural and demographic
         diversity; however, it also encompasses some of the world’s most
-        underserved communities. <br /> <br />
+        underserved communities. The Boehringer Ingelheim team in IMETA is
+        comprised of close to 1,600 exceptional team members from 45
+        nationalities who proudly serve over 70 countries. <br /> <br />
       </h2>
       <div
         className="text-accent-green text-[0.8vw] cursor-pointer "
@@ -62,7 +64,7 @@ function MapPage() {
           <div className="flex flex-col gap-1">
             <span className="text-gray-300 text-[0.8vw]">DISCLIMER </span>
             <span className="text-gray-300 text-[0.8vw]">
-              *The data provided on this platform are updated as of January 10,
+              *The data provided on this platform are updated as of October 27,
               2025”
             </span>
           </div>

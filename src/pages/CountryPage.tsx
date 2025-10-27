@@ -216,7 +216,7 @@ const CountryPage: React.FC = () => {
                 } max-w-full flex justify-center items-center mb-3`}
               >
                 <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]">
-                  <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw]">
+                  <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw] whitespace-pre-line">
                     {data?.article}
                   </p>
 

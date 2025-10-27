@@ -149,7 +149,7 @@ export const imetaData = [
                 images: [
                     UAEimg6, UAEimg1, UAEimg2,
                 ],
-                article: "In line with the national strategic goals to reduce carbon emissions and reach net zero by 2050, Boehringer Ingelheim contributed to the planting of 1,000 mangrove saplings in Ras al Khor Wildlife Sanctuary in Dubai in partnership with Ministry of Climate Change and Environment and Dubai Municipality. 50 Boehringer Ingelheim employees from across IMETA came together to participate in the initiative.",
+                article: "In line with the national strategic goals to reduce carbon emissions and reach net zero by 2050, Boehringer Ingelheim contributed to the planting of 1,000 mangrove saplings in Ras al Khor Wildlife Sanctuary in Dubai in partnership with Ministry of Climate Change and Environment and Dubai Municipality. 50 Boehringer Ingelheim employees from across IMETA came together to participate in the initiative. ",
             }
         ]
     },
@@ -175,7 +175,11 @@ export const imetaData = [
                     TRimg10, TRimg11, TRimg12, TRimg13, TRimg20,
                     TRimg21, TRimg22, TRimg23, TRimg24,
                 ],
-                article: 'Kalben is an NGO based in Turkey with a mission to raise awareness and encourage adoption, fostering, and support of children under government protection. The NGO conducts several initiatives to bridge the gap between children under protection and the general population. Boehringer Ingelheim provided financial support to help build and establish the Kalben Children Village in the Ekinlik island in Marmara Sea. The Kalben Children Village is a summer destination for children under protection which aims to provide social support through recreational activities. The village held its soft opening in August with 10 children and officially opened in September. The local Sustainable Development team members have begun volunteering through time and activity support.'
+                article: `Kalben is an NGO based in Turkey with a mission to raise awareness and encourage adoption, fostering, and support of children under government protection. The NGO conducts several initiatives to bridge the gap between children under protection and the general population. Boehringer Ingelheim provided financial support to help build and establish the Kalben Children Village in the Ekinlik island in Marmara Sea. The Kalben Children Village is a summer destination for children under protection which aims to provide social support through recreational activities. 
+
+                            The village held its soft opening in 2024 with 10 children. The official launch was in May 2025 with several volunteering activities taking place throughout the year. To date, we have engaged with over 50 children at the village, making a positive impact on their lives.`
+                
+
             }
         ]
     },
@@ -207,7 +211,7 @@ export const imetaData = [
                    kenyaImageAc7,kenyaImageAc8, kenyaImageAc9, kenyaImageAc4, kenyaImageAc5, kenyaImageAc6,
                      kenyaImageAc10, kenyaImageAc11, kenyaImageAc12, kenyaImageAc13, kenyaImageAc14,
                 ],
-                article: "‘Access to Healthcare’ is an end-to-end patient support program by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension and type 2 diabetes. The program is set to expand across the region in the coming years. ",
+                article: "‘Access to Healthcare’ is an end-to-end patient support program launched by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension and type 2 diabetes. The program is set to expand across the region in the coming years.  ",
                 subArticles: [
                     {
                         heading: "Innovation :",
@@ -219,20 +223,18 @@ export const imetaData = [
                         listHead: "As of December 2024, we ",
                         listPoints: [
                             "Arranged for weekly pop-up clinics in partnership with Zuri Health for screening purposes",
-                            "Engaged with more than 250 physicians",
-                            "Implemented 20 signed MoUs with different hospitals",
-                            "Enrolled over 2000 patients",
-                            "Worked on an enhancing the network of access for patients",
+                            "Engaged with more than 30,000 physicians ",
+                            "Implemented 30 signed MoUs with different hospitals ",
+                            "Enrolled over 7,500 patients ",
+                            "Worked on an enhancing the network of access for patients ",
                         ]
                     },
                     {
-                        listHead: "In 2025, we aim to ",
+                        listHead: "In 2026, we aim to ",
                         listPoints: [
-                            "Enroll 16,000 patients",
-                            "Onboard 10 more facilities in Ampath, Eldoret",
-                            "Sign an MoU with Mission for Essential Drugs and Supplies (MEDS); allowing us access to 700 hospitals across Kenya",
-                            "Utilize our partnerships with social entrepreneurs even further and explore future ones",
-                            "Digitalize our reporting amongst all our stakeholders"
+                            "Enrol 20,000 patients ",
+                            "Onboard strategic partners to support reaching as many patients as possible in underserved communities ",
+                          
                         ]
                     },
                 ]
@@ -259,7 +261,7 @@ export const imetaData = [
                     kenyaImageStopRab10, kenyaImageStopRab11, kenyaImageStopRab12,
                     kenyaImageStopRab13,
                 ],
-                article: 'With our global expertise and rich legacy in dog vaccinations, including rabies, we have a responsibility to contribute to national rabies elimination efforts and support communities most affected by the disease. In Kenya, Boehringer Ingelheim’s efforts have led to the successful vaccination of more than 20,000 dogs in 2023, with plans to vaccinate a further 30,000 dogs by the end of 2024. The vaccination drive is further supported by Zipline’s drone delivery in remote areas without cold chain facilities. '
+                article: 'With our global expertise and rich legacy in dog vaccinations, including rabies, we have a responsibility to contribute to national rabies elimination efforts and support communities most affected by the disease. In Kenya, Boehringer Ingelheim’s efforts have led to the successful vaccination of more than 35,000 dogs and educated over 130,000 children in 2025. '
             },
         ]
     },
@@ -277,10 +279,10 @@ export const imetaData = [
             {
                 listHead: "",
                 listPoints: [
-                    "Continuing our engagement with key government stakeholders",
-                    "Finalizing our partner selection process",
+                    "Continuing our engagement with key government stakeholders ",
+                    "Finalizing our partner selection process ",
                     "Signing an MoU with the Rwanda Non-Communicable Diseases Alliance",
-                    "Progressing with the product registration in the country",
+                    "Progressing with the product registration in the country ",
                 ]
             }
         ],
@@ -301,7 +303,7 @@ export const imetaData = [
                     SAimg16, SAimg17, SAimg18, SAimg19, SAimg20,
                     SAimg24, SAimg25, SAimg26,
                 ],
-                article: 'South Africa’s ‘Stop Rabies’ initiative has seen the vaccination of more than 19,000 dogs in 2023, logged in real-time through a Global Alliance for Rabies Control (GARC) surveillance app, with plans to vaccinate a further 20,000 dogs by the end of 2024. The door-to-door vaccinations were conducted in informal settlements around the Eastern Cape province with a goal to vaccinate 70 percent of the dog population by the end of 2025.'
+                article: 'South Africa’s ‘Stop Rabies’ initiative has seen the vaccination of more than 19,000 dogs in 2023, logged in real-time through a Global Alliance for Rabies Control (GARC) surveillance app, with plans to vaccinate a further 20,000 dogs by the end of 2024. The door-to-door vaccinations were conducted in informal settlements around the Eastern Cape province with a goal to vaccinate 70 percent of the dog population by the end of 2025. '
             },
             {
                 heading: "More Green",
@@ -317,6 +319,44 @@ export const imetaData = [
                     hlImg28, hlImg29, hlImg30, hlImg31, hlImg32, hlImg33,
                 ],
             }
+        ]
+    },
+    {
+        id: 7,
+        country: 'Egypt',
+        title: "Stop Rabies",
+        articles: [
+            {
+                heading: "Stop Rabies",
+                coverImage: SAimg15,
+                images: [
+                    SAimg16, SAimg17, SAimg18, SAimg19, SAimg20,
+                    SAimg24, SAimg25, SAimg26,
+                ],
+                article: `Boehringer Ingelheim Egypt launched a pioneering public-private partnership with Egypt’s General Organization of Veterinary Services (GOVS). The partnership aims to eliminate dog-mediated human rabies and reinforce the company’s leading position in animal health and purpose-driven innovation.
+                
+                        The inauguartion event of the partnership convened senior government officials, veterinary experts and national media to announce the first of its kind collaboration, marked by the signing of a Memorandum of Understanding (MoU) that set the stage for nationwide vaccination campaigns and public awareness efforts, starting in Al Ismailia.`
+            },
+            
+        ]
+    },
+    {
+        id: 8,
+        country: 'Lebanon',
+        title: "Solarize Project",
+        articles: [
+            {
+                heading: "Solarize Project",
+                coverImage: SAimg15,
+                images: [
+                    SAimg16, SAimg17, SAimg18, SAimg19, SAimg20,
+                    SAimg24, SAimg25, SAimg26,
+                ],
+                article: `A milestone project made possible through months of hard work, coordination, and team dedication. Jana Al Ayadi, a Women’s Cooperative in Lebanon, is led by 12 active women and indirectly supports more than 50 households. The cooperative specializes in natural, preservative-free agro-food products and plays a vital role in the local economic development.
+
+The Cooperative received a donation from Boehringer Ingelheim to facilitate the installation of a solar energy system and assist in obtaining an ISO certification. This initiative aims to enhance the Cooperative’s operational efficiency and sustainability, ensuring long-term growth and resilience.`
+            },
+            
         ]
     },
 ];

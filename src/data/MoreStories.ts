@@ -48,12 +48,7 @@ export const storyData = [
     {   
         id : 1,
         title : "Volunteering Activities",
-        text : `To date, over 1,000 employees actively participated in hands-on and skills-based
-        volunteering work. Their collective efforts reached far, positively impacting more than 4,000
-        individuals across the region. Initiatives ranged from planting activities to working with
-        vulnerable groups across the region. The success of the volunteer initiatives is testament to the
-        support of IMETA leadership team and the SD4G champions who work relentlessly to
-        make these opportunities available.`,
+        text : `To date, over 1,000 employees actively participated in hands-on and skills-based volunteering work. Their collective efforts reached far, positively impacting more than 4,000 individuals across the region. Initiatives ranged from planting activities to working with vulnerable groups across the region. The success of the volunteer initiatives is testament to the support of IMETA leadership team and the SD4G champions who work relentlessly to make these opportunities available.`,
         coverImage : vlCoverImg,
 
         videos: [
@@ -93,6 +88,14 @@ export const storyData = [
             vlImg25,
         ],
         lists: [
+            {
+                listHead: "Ever since 2023, we have: ",
+                listPoints: [
+                    "Launched the Voluteering Time Off on Success Factors and the SD4G volunteering platform ",
+                    "We have accumulated a total of XXX hours ",
+                    "877 employees actively volunteered in different initiatives  ",
+                ]
+            },
             {
                 listHead: "In 2025, we are ",
                 listPoints: [
