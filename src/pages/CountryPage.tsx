@@ -209,7 +209,7 @@ const CountryPage: React.FC = () => {
               </div>
 
               <div
-                className={`border-accent-green border-[0.5px] ${
+                className={`border-accent-green w-full border-[0.5px] ${
                   data?.images || data?.videos
                     ? "min-h-[57%] max-h-[57%]"
                     : "h-full"
