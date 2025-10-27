@@ -134,10 +134,10 @@ export default function StoryPage() {
                   <div className="flex flex-col gap-[1vw] mt-4 p-3">
                     {data?.lists.map((list, idx) => (
                       <div key={idx} className="flex flex-col gap-[0.5vw]">
-                        <h3 className="font-semibold text-white">
+                        <h3 className="font-semibold text-white text-[1vw] xl:text-[0.9vw]">
                           {list.listHead}:
                         </h3>
-                        <ul className="list-disc pl-5 flex flex-col gap-[0.5vw] text-white text-[1vw]">
+                        <ul className="list-disc pl-5 flex flex-col gap-[0.5vw] text-[1vw] xl:text-[0.9vw] text-white">
                           {list.listPoints.map((point, pIdx) => (
                             <li key={pIdx}>{point}</li>
                           ))}

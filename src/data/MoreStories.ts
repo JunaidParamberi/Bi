@@ -89,21 +89,14 @@ export const storyData = [
         ],
         lists: [
             {
-                listHead: "Ever since 2023, we have: ",
+                listHead: "Ever since 2023, we have ",
                 listPoints: [
                     "Launched the Voluteering Time Off on Success Factors and the SD4G volunteering platform ",
                     "We have accumulated a total of XXX hours ",
                     "877 employees actively volunteered in different initiatives  ",
                 ]
             },
-            {
-                listHead: "In 2025, we are ",
-                listPoints: [
-                    "Planning to establish a “Giving Back Month” across all IMETA.",
-                    "Link all our activities to SD4G",
-                    "Collaborate with Ashoka to hold a series a webinars and raise awareness about Diversity, Equity and Inclusion  ",
-                ]
-            },
+            
             {
                 listHead: "In 2030, we aim to ",
                 listPoints: [

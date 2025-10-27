@@ -220,13 +220,13 @@ export const imetaData = [
                 ],
                 lists: [
                     {
-                        listHead: "As of December 2024, we ",
+                        listHead: "As of October 2025, we: ",
                         listPoints: [
                             "Arranged for weekly pop-up clinics in partnership with Zuri Health for screening purposes",
                             "Engaged with more than 30,000 physicians ",
                             "Implemented 30 signed MoUs with different hospitals ",
                             "Enrolled over 7,500 patients ",
-                            "Worked on an enhancing the network of access for patients ",
+                            "Worked on enhancing the network of access for patients ",
                         ]
                     },
                     {
@@ -274,7 +274,7 @@ export const imetaData = [
             {
                 heading: "Coming Soon",
                 coverImage: rwandaImage,
-                article: 'Boehringer Ingelheim is set to bridge the health equity gap in Rwanda with a new initiative in the pipeline.',
+                article: '',
                 lists : [
             {
                 listHead: "",
