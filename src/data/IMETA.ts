@@ -16,9 +16,14 @@ import kenyaImageAc14 from "../assets/images/Stories/Kenya/Access to Healthcare/
 import kenyaAcVideo from '../assets/images/Stories/Kenya/Access to Healthcare/Access to Helath (1).mp4'
 import kenyaAcVideo2 from '../assets/images/Stories/Kenya/Access to Healthcare/Bridging the healthcare.mp4'
 import kenyaAcVideo3 from '../assets/images/Stories/Kenya/Access to Healthcare/Binah.ai video.mp4'
+import kenyaAcVideo4 from '../assets/images/Stories/Kenya/Access to Healthcare/ATH Team.mp4'
+import kenyaAcVideo5 from '../assets/images/Stories/Kenya/Access to Healthcare/ATH_Film_Final_1.mp4'
+
 import kenyaAcVideoThump from '../assets/images/Stories/Kenya/Access to Healthcare/Acces to healthcare.png'
 import kenyaAcVideoThump2 from '../assets/images/Stories/Kenya/Access to Healthcare/Bridging the healthcare Thump.png'
 import kenyaAcVideoThump3 from '../assets/images/Stories/Kenya/Access to Healthcare/Binah.ai video thump.png'
+import kenyaAcVideoThump4 from '../assets/images/Stories/Kenya/Access to Healthcare/ATH_Team_Thump.png'
+import kenyaAcVideoThump5 from '../assets/images/Stories/Kenya/Access to Healthcare/ATH_FILM_THUMP.png'
 
 import kenyaImageStopRab1 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9846.jpg";
 import kenyaImageStopRab2 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9906.jpg";
@@ -33,11 +38,14 @@ import kenyaImageStopRab10 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A
 import kenyaImageStopRab11 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9707.jpg";
 import kenyaImageStopRab12 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9708.jpg";
 import kenyaImageStopRab13 from "../assets/images/Stories/Kenya/Stop Rabies/5H8A9767.jpg";
+
 import kenyaStopVideo from '../assets/images/Stories/Kenya/Stop Rabies/BI - Kenya Rabies - Film - v8 HQ .mp4';
 import kenyaStopVideo2 from '../assets/images/Stories/Kenya/Stop Rabies/Stope Rabies Video.mp4';
+import kenyaStopVideo3 from '../assets/images/Stories/Kenya/Stop Rabies/Waleed & Nassim 0001 HD All new s.mp4';
 
 import kenyaStopVideoThump from '../assets/images/Stories/Kenya//Stop Rabies/Rabies.png';
 import kenyaStopVideoThump2 from '../assets/images/Stories/Kenya//Stop Rabies/Stope Rabies VIdeo Thump.png';
+import kenyaStopVideoThump3 from '../assets/images/Stories/Kenya//Stop Rabies/Waleed & Nassim 0001 HD All new s.png';
 
 // UAE
 import UAEimg1 from "../assets/images/Stories/NEUAE/1.jpg";
@@ -101,7 +109,9 @@ import TRimg24 from "../assets/images/Stories/Turkey/24.jpg";
 // import TRimg19 from "../assets/images/Stories/Turkey/19.jpeg";
 
 import TrVideo from "../assets/images/Stories/Turkey/Kalben Village.mp4";
+import TrVideo2 from "../assets/images/Stories/Turkey/BOEHRINGER_INGELHEIM_Kalben.mp4";
 import TrVideoThump from "../assets/images/Stories/Turkey/Kalben Village Video Thump.png";
+import TrVideoThump1 from "../assets/images/Stories/Turkey/BOEHRINGER_INGELHEIM_Kalben THUMP.png";
 
 
 import rwandaImage from "../assets/images/Stories/Rwanda/1.jpg";
@@ -120,6 +130,17 @@ import inImg10 from '../assets/images/Stories/India/10.jpg';
 import inImg11 from '../assets/images/Stories/India/11.jpg';
 import inImg12 from '../assets/images/Stories/India/12.jpg';
 import inImg13 from '../assets/images/Stories/India/13.jpg';
+
+// Lembanon
+import lbImg1 from '../assets/images/Stories/Lebanon/1.jpg';
+import lbImg2 from '../assets/images/Stories/Lebanon/2.jpg';
+import lbImg3 from '../assets/images/Stories/Lebanon/3.jpg';
+import lbImg4 from '../assets/images/Stories/Lebanon/4.jpg';
+import lbImg5 from '../assets/images/Stories/Lebanon/5.jpg';
+import lbImg6 from '../assets/images/Stories/Lebanon/6.jpg';
+import lbImg7 from '../assets/images/Stories/Lebanon/7.jpg';
+import lbImg8 from '../assets/images/Stories/Lebanon/8.jpg';
+import lbImg9 from '../assets/images/Stories/Lebanon/9.jpg';
 
 export const imetaData = [
     {
@@ -169,6 +190,11 @@ export const imetaData = [
                         thumb: TrVideoThump, 
                         caption: "Kalben Children Village Video",
                     },
+                    {
+                        src: TrVideo2, 
+                        thumb: TrVideoThump1, 
+                        caption: "Turkey Kalben Video",
+                    },
                 ],
                 images: [
                     TRimg1, TRimg2, TRimg3, TRimg4, TRimg8,
@@ -205,6 +231,16 @@ export const imetaData = [
                         src: kenyaAcVideo3, 
                         thumb: kenyaAcVideoThump3, 
                         caption: "Binah.ai Video",
+                    },
+                    {
+                        src: kenyaAcVideo4, 
+                        thumb: kenyaAcVideoThump4, 
+                        caption: "ATH TEAM",
+                    },
+                    {
+                        src: kenyaAcVideo5, 
+                        thumb: kenyaAcVideoThump5, 
+                        caption: "ATH FILM",
                     },
                 ],
                 images: [
@@ -252,6 +288,11 @@ export const imetaData = [
                         src: kenyaStopVideo2,
                         thumb: kenyaStopVideoThump2,
                         caption: "Stop Rabies Vaccination Campaign 2",
+                    },
+                    {
+                        src: kenyaStopVideo3,
+                        thumb: kenyaStopVideoThump3,
+                        caption: "Waleed & Nassim Video",
                     },
                 ],
                 images: [
@@ -347,10 +388,10 @@ export const imetaData = [
         articles: [
             {
                 heading: "Solarize Project",
-                coverImage: SAimg15,
+                coverImage: lbImg9,
                 images: [
-                    SAimg16, SAimg17, SAimg18, SAimg19, SAimg20,
-                    SAimg24, SAimg25, SAimg26,
+                    lbImg1, lbImg2, lbImg3, lbImg4, lbImg5,
+                    lbImg6, lbImg7, lbImg8, lbImg9,
                 ],
                 article: `A milestone project made possible through months of hard work, coordination, and team dedication. Jana Al Ayadi, a Women’s Cooperative in Lebanon, is led by 12 active women and indirectly supports more than 50 households. The cooperative specializes in natural, preservative-free agro-food products and plays a vital role in the local economic development.
 

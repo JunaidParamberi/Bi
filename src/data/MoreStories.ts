@@ -35,6 +35,16 @@ import vlImg23 from '../assets/volunteering/37.jpg'
 import vlImg24 from '../assets/volunteering/38.jpg'
 import vlImg25 from '../assets/volunteering/39.jpg'
 import vlImg26 from '../assets/volunteering/40.jpg'
+import vlImg27 from '../assets/volunteering/41.jpg'
+import vlImg28 from '../assets/volunteering/42.jpg'
+import vlImg29 from '../assets/volunteering/43.jpg'
+import vlImg30 from '../assets/volunteering/44.jpg'
+import vlImg31 from '../assets/volunteering/45.png'
+import vlImg32 from '../assets/volunteering/46.png'
+import vlImg33 from '../assets/volunteering/47.jpg'
+import vlImg34 from '../assets/volunteering/48.jpg'
+import vlImg35 from '../assets/volunteering/49.jpg'
+
 import vlVideo from '../assets/volunteering/BI_Faces of Change.mp4'
 import vlVideoThump from '../assets/volunteering/BI_Faces of Change thump.png'
 
@@ -86,6 +96,16 @@ export const storyData = [
             vlImg23,
             vlImg24,
             vlImg25,
+            vlImg26,
+            vlImg27,
+            vlImg28,
+            vlImg29,
+            vlImg30,
+            vlImg31,
+            vlImg32,
+            vlImg33,
+            vlImg34,
+            vlImg35,
         ],
         lists: [
             {
