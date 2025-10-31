@@ -58,7 +58,8 @@ export const storyData = [
     {   
         id : 1,
         title : "Volunteering Activities",
-        text : `To date, over 1,000 employees actively participated in hands-on and skills-based volunteering work. Their collective efforts reached far, positively impacting more than 4,000 individuals across the region. Initiatives ranged from planting activities to working with vulnerable groups across the region. The success of the volunteer initiatives is testament to the support of IMETA leadership team and the SD4G champions who work relentlessly to make these opportunities available.`,
+        text : ``,
+        coverText : `To date, over 1,000 employees actively participated in hands-on and skills-based volunteering work. Their collective efforts reached far, positively impacting more than 4,000 individuals across the region. Initiatives ranged from planting activities to working with vulnerable groups across the region. The success of the volunteer initiatives is testament to the support of IMETA leadership team and the SD4G champions who work relentlessly to make these opportunities available.`,
         coverImage : vlCoverImg,
 
         videos: [
@@ -131,6 +132,7 @@ export const storyData = [
         id : 2,
         title : "Making More Health",
         text : `To date, 800 colleagues from the IMETA region have registered on Making More Health Connect platform and every month, an average of 15 individuals are actively engaged with social entrepreneurs. In 2023, 3 colleagues from IMETA participated in Making More Health Leadership Week and 2 colleagues participated in 2024. In total, 48 IMETA employees have mentored 10 different social entrepreneurs in Boehringer Ingelheim’s incubator, accelerator and social engagement programs.`,
+        coverText : `To date, 800 colleagues from the IMETA region have registered on Making More Health Connect platform and every month, an average of 15 individuals are actively engaged with social entrepreneurs. In 2023, 3 colleagues from IMETA participated in Making More Health Leadership Week and 2 colleagues participated in 2024. In total, 48 IMETA employees have mentored 10 different social entrepreneurs in Boehringer Ingelheim’s incubator, accelerator and social engagement programs.`,
         coverImage : hlCoverImg,
         images : [
             hlImg1,

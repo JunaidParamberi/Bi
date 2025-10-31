@@ -13,6 +13,7 @@ interface Story {
   title: string;
   coverImage: string;
   text: string;
+  coverText: string;
   images: string[];
   videos: {
     src: string;
@@ -119,15 +120,17 @@ export default function StoryPage() {
 
             <div className="border-accent-green border-[0.5px] min-h-[60%] max-h-[60%] max-w-full flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
-                <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">
-                  {data?.text} <br />
-                  {data?.title === "Making More Health" && (
-                    <>
-                      <br />
-                      Continuing the journey in 2024.
-                    </>
-                  )}
-                </p>
+                {data?.text && (
+                  <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">
+                    {data?.text} <br />
+                    {data?.title === "Making More Health" && (
+                      <>
+                        <br />
+                        Continuing the journey in 2024.
+                      </>
+                    )}
+                  </p>
+                )}
 
                 {/* Render lists if they exist */}
                 {data?.lists && data?.lists.length > 0 && (

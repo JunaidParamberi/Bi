@@ -140,11 +140,8 @@ function MapPage() {
                 The IMETA region is unique in its rich cultural and demographic
                 diversity; however, it also encompasses some of the world’s most
                 underserved communities. The Boehringer Ingelheim team in IMETA
-                is comprised of over 1,650 exceptional team members from 45
-                nationalities who proudly serve over 70 countries, or 45 percent
-                of the world’s population. Furthermore, 50 percent of Boehringer
-                Ingelheim’s global sustainability efforts are being implemented
-                in the region, reflecting the needs of underserved communities.
+                is comprised of close to 1,600 exceptional team members from 45
+                nationalities who proudly serve over 70 countries.
               </p>
             </div>
           </motion.div>

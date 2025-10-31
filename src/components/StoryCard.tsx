@@ -4,6 +4,7 @@ interface DataType {
   id: number;
   title: string;
   text: string;
+  coverText: string;
 
   coverImage: string;
 }
@@ -26,7 +27,7 @@ function StoryCard({ item }: StoryCardProps) {
 
         {/* Use the line-clamp utility to limit text to 3 lines */}
         <p className="text-[1vw] xl:text-[0.9vw] text-white xl:leading-[1.2] line-clamp-3 ">
-          {item.text}
+          {item.coverText}
         </p>
 
         <div>
