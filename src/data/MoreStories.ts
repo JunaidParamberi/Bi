@@ -113,7 +113,6 @@ export const storyData = [
                 listHead: "Ever since 2023, we have ",
                 listPoints: [
                     "Launched the Voluteering Time Off on Success Factors and the SD4G volunteering platform ",
-                    "We have accumulated a total of 1000 hours ",
                     "877 employees actively volunteered in different initiatives  ",
                 ]
             },

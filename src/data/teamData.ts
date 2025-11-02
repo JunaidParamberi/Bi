@@ -18,6 +18,8 @@ import amy from '../assets/High resolution picture/Amy Emile.jpeg'
 import nassim from '../assets/High resolution picture/Nassim Ouagueni.png'
 // import sara from '../assets/High resolution picture/Sara Badrig .png'
 import Derek from '../assets/High resolution picture/Derek O’Leary.jpeg'
+import farzana from '../assets/High resolution picture/Farzana.jpg'
+import Maryam from '../assets/High resolution picture/Maryam.jpg'
 
 const team1 = [
     {
@@ -139,7 +141,7 @@ const team2 = [
             name : "Farzana Khan",
             occupation : 'Southern Africa',
             des : "MSL Southern Africa ( Southern Africa OPU Champion )",
-            image : ''
+            image : farzana
         },
         {
             name : "Anish Charles",
@@ -148,11 +150,17 @@ const team2 = [
             image : anish
         },
         {
-            name : "SAGEA champion to be announced",
-            occupation : '',
-            des : "",
+            name : "Mariam Bishara",
+            occupation : 'New Africa (NEWA)',
+            des : "New Africa ( North East West Africa OPU Champion )",
+            image : Maryam
+        },
+        {
+            name : "Isra Attiah",
+            occupation : 'SAGEA Champion ',
+            des : "Saudi Arabia, Gulf East Africa (SAGEA) Champion ",
             image : ''
-        }
+        },
         ]
 
     }
