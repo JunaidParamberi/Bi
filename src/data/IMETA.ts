@@ -141,6 +141,20 @@ import lbImg6 from '../assets/images/Stories/Lebanon/6.jpg';
 import lbImg7 from '../assets/images/Stories/Lebanon/7.jpg';
 import lbImg8 from '../assets/images/Stories/Lebanon/8.jpg';
 import lbImg9 from '../assets/images/Stories/Lebanon/9.jpg';
+import lbImg10 from '../assets/images/Stories/Lebanon/10.jpg';
+import lbImg11 from '../assets/images/Stories/Lebanon/11.jpg';
+import lbImg12 from '../assets/images/Stories/Lebanon/13.jpg';
+import lbImg14 from '../assets/images/Stories/Lebanon/14.jpg';
+import lbImg15 from '../assets/images/Stories/Lebanon/15.jpg';
+import lbImg16 from '../assets/images/Stories/Lebanon/16.jpg';
+
+// egypt photos
+import egImg1 from '../assets/images/Stories/Egypt/1.jpg';
+import egImg2 from '../assets/images/Stories/Egypt/2.jpg';
+import egImg3 from '../assets/images/Stories/Egypt/3.jpg';
+import egImg4 from '../assets/images/Stories/Egypt/4.jpg';
+
+
 
 export const imetaData = [
     {
@@ -203,7 +217,7 @@ export const imetaData = [
                 ],
                 article: `Kalben is an NGO based in Turkey with a mission to raise awareness and encourage adoption, fostering, and support of children under government protection. The NGO conducts several initiatives to bridge the gap between children under protection and the general population. Boehringer Ingelheim provided financial support to help build and establish the Kalben Children Village in the Ekinlik island in Marmara Sea. The Kalben Children Village is a summer destination for children under protection which aims to provide social support through recreational activities. 
 
-                            The village held its soft opening in 2024 with 10 children. The official launch was in May 2025 with several volunteering activities taking place throughout the year. To date, we have engaged with over 50 children at the village, making a positive impact on their lives.`
+                            The village held its soft opening in 2024 with 90 children. The official launch was in May 2025 with several volunteering activities taking place throughout the year. To date, we have engaged with over 50 children at the village, making a positive impact on their lives.`
                 
 
             }
@@ -270,6 +284,8 @@ export const imetaData = [
                         listPoints: [
                             "Enrol 20,000 patients ",
                             "Onboard strategic partners to support reaching as many patients as possible in underserved communities ",
+                            "Actively engaging with more than 465 unique physicians along with more than 100 awareness meetings ",
+                            "Reached more than 100,000 patients and enrolled 7,650 patients on treatment with continuous care and support for at least 12 months.",
                           
                         ]
                     },
@@ -289,11 +305,7 @@ export const imetaData = [
                         thumb: kenyaStopVideoThump2,
                         caption: "Stop Rabies Vaccination Campaign 2",
                     },
-                    {
-                        src: kenyaStopVideo3,
-                        thumb: kenyaStopVideoThump3,
-                        caption: "Waleed & Nassim Video",
-                    },
+                
                 ],
                 images: [
                     kenyaImageStopRab1, kenyaImageStopRab2, kenyaImageStopRab3,
@@ -369,17 +381,27 @@ export const imetaData = [
         articles: [
             {
                 heading: "Stop Rabies",
-                coverImage: SAimg15,
+                coverImage: egImg2,
+                 videos: [
+                    
+                    {
+                        src: kenyaStopVideo3,
+                        thumb: kenyaStopVideoThump3,
+                        caption: "Waleed & Nassim Video",
+                    },
+                ],
                 images: [
-                    SAimg16, SAimg17, SAimg18, SAimg19, SAimg20,
-                    SAimg24, SAimg25, SAimg26,
+                    egImg1, egImg2, egImg3, egImg4,
                 ],
                 article: `Boehringer Ingelheim Egypt launched a pioneering public-private partnership with Egypt’s General Organization of Veterinary Services (GOVS). The partnership aims to eliminate dog-mediated human rabies and reinforce the company’s leading position in animal health and purpose-driven innovation.
                 
                         The inauguartion event of the partnership convened senior government officials, veterinary experts and national media to announce the first of its kind collaboration, marked by the signing of a Memorandum of Understanding (MoU) that set the stage for nationwide vaccination campaigns and public awareness efforts, starting in Al Ismailia.`
             },
+
+            
             
         ]
+        
     },
     {
         id: 8,
@@ -391,7 +413,8 @@ export const imetaData = [
                 coverImage: lbImg9,
                 images: [
                     lbImg1, lbImg2, lbImg3, lbImg4, lbImg5,
-                    lbImg6, lbImg7, lbImg8, lbImg9,
+                    lbImg6, lbImg7, lbImg8, lbImg9, lbImg10,
+                    lbImg11, lbImg12, lbImg14, lbImg15,  lbImg16,
                 ],
                 article: `A milestone project made possible through months of hard work, coordination, and team dedication. Jana Al Ayadi, a Women’s Cooperative in Lebanon, is led by 12 active women and indirectly supports more than 50 households. The cooperative specializes in natural, preservative-free agro-food products and plays a vital role in the local economic development.
 

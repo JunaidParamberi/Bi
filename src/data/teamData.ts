@@ -97,12 +97,12 @@ const team2 = [
             des : "Sustainability and Animal Health Communications Manager, IMETA ( Communications Lead )",
             image : mirna
         },
-        {
-            name : "Michelle Enslin",
-            occupation : 'Stop rabies coordinator ',
-            des : "Regional Product Manager, Pets, IMETA ( Stop Rabies Coordinator )",
-            image : michele
-        },
+        // {
+        //     name : "Michelle Enslin",
+        //     occupation : 'Stop rabies coordinator ',
+        //     des : "Regional Product Manager, Pets, IMETA ( Stop Rabies Coordinator )",
+        //     image : michele
+        // },
         ]
 
     },
@@ -136,7 +136,7 @@ const team2 = [
             image : amin
         },
         {
-            name : "Karzana Khan",
+            name : "Farzana Khan",
             occupation : 'Southern Africa',
             des : "MSL Southern Africa ( Southern Africa OPU Champion )",
             image : ''
