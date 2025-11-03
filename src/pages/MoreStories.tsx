@@ -6,6 +6,7 @@ interface dataTypes {
   id: number;
   title: string;
   text: string;
+  coverText: string;
   coverImage: string;
 
   lists?: {
@@ -29,10 +30,11 @@ const MoreStories: React.FC = () => {
             More Stories
           </h1>
 
-          <div className="flex w-full h-full items-center gap-20">
+          <div className="flex w-full h-full items-start gap-10">
             {storyData.map((data: dataTypes) => (
               <motion.div
                 key={data.id}
+                className="flex-1" // 👈 Each takes equal space
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}

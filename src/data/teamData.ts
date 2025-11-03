@@ -125,12 +125,7 @@ const team2 = [
             des : "Communications Manager Near East & UAE ( Near East & UAE OPU Champion )",
             image : llda
         },
-        {
-            name : "Amy Emile",
-            occupation : 'New Africa (NEWA)',
-            des : "Accounting Manager, North East West Africa ( North East West Africa OPU Champion )",
-            image : amy
-        },
+    
         {
             name : "Mohamed Amine Ouachem",
             occupation : 'NWA',

@@ -15,7 +15,7 @@ interface StoryCardProps {
 
 function StoryCard({ item }: StoryCardProps) {
   return (
-    <div className="w-full flex flex-col gap-4 xl:gap-16">
+    <div className=" flex flex-col gap-4 xl:gap-16">
       <img
         src={item.coverImage}
         alt={item.title}

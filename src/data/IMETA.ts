@@ -141,12 +141,6 @@ import lbImg6 from '../assets/images/Stories/Lebanon/6.jpg';
 import lbImg7 from '../assets/images/Stories/Lebanon/7.jpg';
 import lbImg8 from '../assets/images/Stories/Lebanon/8.jpg';
 import lbImg9 from '../assets/images/Stories/Lebanon/9.jpg';
-import lbImg10 from '../assets/images/Stories/Lebanon/10.jpg';
-import lbImg11 from '../assets/images/Stories/Lebanon/11.jpg';
-import lbImg12 from '../assets/images/Stories/Lebanon/13.jpg';
-import lbImg14 from '../assets/images/Stories/Lebanon/14.jpg';
-import lbImg15 from '../assets/images/Stories/Lebanon/15.jpg';
-import lbImg16 from '../assets/images/Stories/Lebanon/16.jpg';
 
 // egypt photos
 import egImg1 from '../assets/images/Stories/Egypt/1.jpg';
@@ -217,7 +211,7 @@ export const imetaData = [
                 ],
                 article: `Kalben is an NGO based in Turkey with a mission to raise awareness and encourage adoption, fostering, and support of children under government protection. The NGO conducts several initiatives to bridge the gap between children under protection and the general population. Boehringer Ingelheim provided financial support to help build and establish the Kalben Children Village in the Ekinlik island in Marmara Sea. The Kalben Children Village is a summer destination for children under protection which aims to provide social support through recreational activities. 
 
-                            The village held its soft opening in 2024 with 90 children. The official launch was in May 2025 with several volunteering activities taking place throughout the year. To date, we have engaged with over 50 children at the village, making a positive impact on their lives.`
+                            The village held its soft opening in 2024 with 50 children. The official launch was in May 2025 with several volunteering activities taking place throughout the year. To date, we have engaged with over 90 children at the village, making a positive impact on their lives.`
                 
 
             }
@@ -273,19 +267,17 @@ export const imetaData = [
                         listHead: "As of October 2025, we: ",
                         listPoints: [
                             "Arranged for weekly pop-up clinics in partnership with Zuri Health for screening purposes",
-                            "Engaged with more than 30,000 physicians ",
                             "Implemented 30 signed MoUs with different hospitals ",
-                            "Enrolled over 7,500 patients ",
                             "Worked on enhancing the network of access for patients ",
                         ]
                     },
                     {
-                        listHead: "In 2026, we aim to ",
+                        listHead: "In 2025, we aim to ",
                         listPoints: [
                             "Enrol 20,000 patients ",
                             "Onboard strategic partners to support reaching as many patients as possible in underserved communities ",
-                            "Actively engaging with more than 465 unique physicians along with more than 100 awareness meetings ",
-                            "Reached more than 100,000 patients and enrolled 7,650 patients on treatment with continuous care and support for at least 12 months.",
+                            "Actively engaging with more than 465 ",
+                            "Reached more than 100,000 patients and enrolled 7,650 ",
                           
                         ]
                     },
@@ -413,8 +405,8 @@ export const imetaData = [
                 coverImage: lbImg9,
                 images: [
                     lbImg1, lbImg2, lbImg3, lbImg4, lbImg5,
-                    lbImg6, lbImg7, lbImg8, lbImg9, lbImg10,
-                    lbImg11, lbImg12, lbImg14, lbImg15,  lbImg16,
+                    lbImg6, lbImg7, lbImg8, lbImg9,
+                
                 ],
                 article: `A milestone project made possible through months of hard work, coordination, and team dedication. Jana Al Ayadi, a Women’s Cooperative in Lebanon, is led by 12 active women and indirectly supports more than 50 households. The cooperative specializes in natural, preservative-free agro-food products and plays a vital role in the local economic development.
 

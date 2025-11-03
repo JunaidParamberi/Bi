@@ -49,6 +49,15 @@ import vlVideo from '../assets/volunteering/BI_Faces of Change.mp4'
 import vlVideoThump from '../assets/volunteering/BI_Faces of Change thump.png'
 
 
+import lbImg10 from '../assets/images/Stories/Lebanon/10.jpg';
+import lbImg11 from '../assets/images/Stories/Lebanon/11.jpg';
+import lbImg12 from '../assets/images/Stories/Lebanon/13.jpg';
+import lbImg14 from '../assets/images/Stories/Lebanon/14.jpg';
+import lbImg15 from '../assets/images/Stories/Lebanon/15.jpg';
+import lbImg16 from '../assets/images/Stories/Lebanon/16.jpg';
+
+
+
 
 import vlCoverImg from '../assets/volunteering/00_The cover .jpg' // Add this if you have a cover image
 
@@ -59,7 +68,7 @@ export const storyData = [
         id : 1,
         title : "Volunteering Activities",
         text : ``,
-        coverText : `To date, over 1,000 employees actively participated in hands-on and skills-based volunteering work. Their collective efforts reached far, positively impacting more than 4,000 individuals across the region. Initiatives ranged from planting activities to working with vulnerable groups across the region. The success of the volunteer initiatives is testament to the support of IMETA leadership team and the SD4G champions who work relentlessly to make these opportunities available.`,
+        coverText : `To date, employees have actively contributed over 1,000 hours to hands-on and skills-based volunteering activities. Their collective efforts reached far, positively impacting more than 4,000 individuals across the region. Initiatives ranged from planting... `,
         coverImage : vlCoverImg,
 
         videos: [
@@ -107,12 +116,19 @@ export const storyData = [
             vlImg33,
             vlImg34,
             vlImg35,
+            lbImg10,
+            lbImg11,
+            lbImg12,
+            lbImg14,
+            lbImg15,
+            lbImg16,
         ],
         lists: [
             {
                 listHead: "Ever since 2023, we have ",
                 listPoints: [
                     "Launched the Voluteering Time Off on Success Factors and the SD4G volunteering platform ",
+
                     "877 employees actively volunteered in different initiatives  ",
                 ]
             },
