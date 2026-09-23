@@ -8,10 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "media:extract": "node scripts/media/extract-data.mjs",
-    "media:build": "node scripts/media/build-media.mjs",
-    "media:upload": "node scripts/media/upload-media.mjs",
-    "media": "npm run media:extract && npm run media:build && npm run media:upload"
+    "media:add": "node scripts/media/add-media.mjs"
   },
   "dependencies": {
     "@tsparticles/engine": "^3.9.1",
