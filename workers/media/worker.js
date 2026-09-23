@@ -18,10 +18,11 @@ export default {
     const key = decodeURIComponent(new URL(request.url).pathname.slice(1));
     if (!key.startsWith('m/') || key.includes('..')) return new Response('Not found', { status: 404, headers: CORS });
 
+    const wantsRange = request.headers.has('Range');
     const object =
       request.method === 'HEAD'
         ? await env.MEDIA.head(key)
-        : await env.MEDIA.get(key, { range: request.headers, onlyIf: request.headers });
+        : await env.MEDIA.get(key, { range: wantsRange ? request.headers : undefined, onlyIf: request.headers });
     if (!object) return new Response('Not found', { status: 404, headers: CORS });
 
     const headers = new Headers(CORS);
@@ -36,7 +37,7 @@ export default {
     // A failed If-None-Match / If-Modified-Since precondition returns metadata without a body
     if (!('body' in object)) return new Response(null, { status: 304, headers });
 
-    if (object.range) {
+    if (wantsRange && object.range) {
       // R2 reports either { offset, length } or { suffix }; unused fields may be present but undefined
       const r = object.range;
       const start = r.suffix !== undefined ? object.size - r.suffix : (r.offset ?? 0);
