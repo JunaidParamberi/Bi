@@ -3,38 +3,21 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import playBtn from "../assets/images/play.svg";
 
-import { storyData } from "../data/MoreStories";
+import { stories, mediaUrl, type Story } from "../content";
 import rightArrow from "../assets/images/chevron-right.svg";
 import leftArrow from "../assets/images/chevron-left.svg";
 import close from "../assets/images/cancel icon.svg";
 import SmartImage from "../components/SmartImage";
 import LightboxMedia, { LightboxItem } from "../components/LightboxMedia";
 
-interface Story {
-  title: string;
-  coverImage: string;
-  text: string;
-  coverText: string;
-  images: string[];
-  videos: {
-    src: string;
-    thumb: string;
-    caption: string;
-  }[];
-  lists?: {
-    listHead: string;
-    listPoints: string[];
-  }[];
-}
-
 export default function StoryPage() {
   const params = useParams();
 
   // Memoised so the story object is stable between renders
-  const data: Story | null = useMemo(() => {
-    const raw = storyData.find((item) => item.title === params.title);
-    return raw ? { ...raw, videos: raw.videos ?? [] } : null;
-  }, [params.title]);
+  const data: Story | null = useMemo(
+    () => stories.find((item) => item.title === params.title) ?? null,
+    [params.title]
+  );
 
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
@@ -42,16 +25,22 @@ export default function StoryPage() {
   );
 
   // Combine images and videos for easy navigation
-  const media: LightboxItem[] = useMemo(
+  // src is the full image or HLS playlist for the lightbox; preview is the small slider image
+  const media: (LightboxItem & { preview: string })[] = useMemo(
     () =>
       data
         ? [
-            ...data.videos.map((v) => ({
+            ...(data.videos ?? []).map((v) => ({
               type: "video" as const,
-              src: v.src,
-              thumb: v.thumb,
+              src: mediaUrl(v.src.hls),
+              thumb: mediaUrl(v.thumb.full),
+              preview: mediaUrl(v.thumb.thumb),
             })),
-            ...data.images.map((src) => ({ type: "image" as const, src })),
+            ...data.images.map((image) => ({
+              type: "image" as const,
+              src: mediaUrl(image.full),
+              preview: mediaUrl(image.thumb),
+            })),
           ]
         : [],
     [data]
@@ -88,7 +77,7 @@ export default function StoryPage() {
           {/* Cover Image */}
           <div className="w-[50%] h-full">
             <SmartImage
-              src={data?.coverImage ?? ""}
+              src={data?.coverImage ? mediaUrl(data.coverImage.full) : ""}
               fetchPriority="high"
               alt="Cover"
               className="w-full h-full object-cover"
@@ -150,7 +139,7 @@ export default function StoryPage() {
                     {item.type === "video" ? (
                       <div className="relative h-full">
                         <SmartImage
-                          src={item.thumb}
+                          src={item.preview}
                           onClick={() => setCurrentIndex(idx)}
                           loading="lazy"
                           className="min-w-[15vw] h-full object-cover cursor-zoom-in"
@@ -165,7 +154,7 @@ export default function StoryPage() {
                       </div>
                     ) : (
                       <SmartImage
-                        src={item.src}
+                        src={item.preview}
                         onClick={() => setCurrentIndex(idx)}
                         loading="lazy"
                         alt="Story Image"

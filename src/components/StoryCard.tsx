@@ -1,23 +1,16 @@
 import { Link } from "react-router-dom";
-
-interface DataType {
-  id: number;
-  title: string;
-  text: string;
-  coverText: string;
-
-  coverImage: string;
-}
+import { mediaUrl, type Story } from "../content";
+import SmartImage from "./SmartImage";
 
 interface StoryCardProps {
-  item: DataType;
+  item: Story;
 }
 
 function StoryCard({ item }: StoryCardProps) {
   return (
     <div className=" flex flex-col gap-4 xl:gap-16">
-      <img
-        src={item.coverImage}
+      <SmartImage
+        src={mediaUrl(item.coverImage.full)}
         alt={item.title}
         className="h-[35vh] min-w-full object-cover"
       />

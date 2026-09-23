@@ -255,7 +255,7 @@ export const imetaData = [
                    kenyaImageAc7,kenyaImageAc8, kenyaImageAc9, kenyaImageAc4, kenyaImageAc5, kenyaImageAc6,
                      kenyaImageAc10, kenyaImageAc11, kenyaImageAc12, kenyaImageAc13, kenyaImageAc14,
                 ],
-                article: "‘Access to Healthcare’ is an end-to-end patient support program launched by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension and type 2 diabetes. The program is set to expand across the region in the coming years.  ",
+                article: "‘Access to Healthcare’ is an end-to-end patient support program launched by Boehringer Ingelheim, in partnership with mPharma, offering equitable healthcare access for underserved communities in Kenya. Launched in September 2022, the initiative aims to enhance disease management, provide medical treatments, and ensure patient adherence to medication for non-communicable diseases such as hypertension and type 2 diabetes. The program is set to expand across the region in the coming years.",
                 subArticles: [
                     {
                         heading: "Innovation :",
@@ -267,18 +267,10 @@ export const imetaData = [
                         listHead: "As of October 2025, we: ",
                         listPoints: [
                             "Arranged for weekly pop-up clinics in partnership with Zuri Health for screening purposes",
-                            "Implemented 30 signed MoUs with different hospitals ",
+                            "Implemented 30 signed MoUs with different hospitals",
                             "Worked on enhancing the network of access for patients ",
-                        ]
-                    },
-                    {
-                        listHead: "In 2025, we aim to ",
-                        listPoints: [
-                            "Enrol 20,000 patients ",
-                            "Onboard strategic partners to support reaching as many patients as possible in underserved communities ",
-                            "Actively engaging with more than 465 ",
-                            "Reached more than 100,000 patients and enrolled 7,650 ",
-                          
+                            "Actively engaged with more than 465 physicians ",
+                            "Reached more than 100,000 patients and enrolled 7,650",
                         ]
                     },
                 ]

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import mapImg from "../assets/images/Map.svg";
 import pinImg from "../assets/images/Pin.svg";
-import { imetaData } from "../data/IMETA"; // Change to .js if necessary
+import { countries } from "../content";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -25,7 +25,7 @@ const CountryCard: React.FC<MyComponentProps> = ({
   title,
   isVisible,
 }) => {
-  const currentData = imetaData.find((data) => data.country === title);
+  const currentData = countries.find((data) => data.country === title);
 
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 

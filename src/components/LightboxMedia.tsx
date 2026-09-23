@@ -1,5 +1,65 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { PuffLoader } from 'react-spinners';
+
+interface HlsVideoProps {
+  src: string;
+  poster?: string;
+  className: string;
+  onCanPlay: () => void;
+  onWaiting: () => void;
+  onPlaying: () => void;
+  onError: () => void;
+}
+
+// Streams an HLS playlist: hls.js where Media Source Extensions exist, native playback elsewhere (Safari/iOS)
+function HlsVideo({ src, poster, className, onCanPlay, onWaiting, onPlaying, onError }: HlsVideoProps) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    let destroyed = false;
+    let hls: { destroy: () => void } | undefined;
+
+    import('hls.js').then(({ default: Hls }) => {
+      if (destroyed) return;
+      if (Hls.isSupported()) {
+        const instance = new Hls({ capLevelToPlayerSize: false, startLevel: -1 });
+        instance.on(Hls.Events.ERROR, (_event, data) => {
+          if (data.fatal) onError();
+        });
+        instance.loadSource(src);
+        instance.attachMedia(video);
+        hls = instance;
+      } else {
+        video.src = src;
+      }
+    });
+
+    return () => {
+      destroyed = true;
+      hls?.destroy();
+    };
+    // callbacks are recreated each render; the stream only needs to reload when src changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src]);
+
+  return (
+    <video
+      ref={ref}
+      controls
+      autoPlay
+      playsInline
+      preload='auto'
+      poster={poster}
+      className={className}
+      onCanPlay={onCanPlay}
+      onWaiting={onWaiting}
+      onPlaying={onPlaying}
+      onError={onError}
+    />
+  );
+}
 
 export type LightboxItem = {
   src: string;
@@ -43,22 +103,16 @@ function LightboxMedia({ media, index, className }: LightboxMediaProps) {
         </div>
       )}
       {item.type === 'video' ? (
-        <video
+        <HlsVideo
           key={item.src}
-          controls
-          autoPlay
-          playsInline
-          preload='auto'
+          src={item.src}
           poster={item.thumb}
           className={className}
           onCanPlay={markReady}
           onWaiting={() => setBuffering(true)}
           onPlaying={() => setBuffering(false)}
           onError={markReady}
-        >
-          <source src={item.src} type='video/mp4' />
-          Your browser does not support the video tag.
-        </video>
+        />
       ) : (
         <img
           key={item.src}

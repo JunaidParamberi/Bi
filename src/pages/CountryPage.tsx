@@ -1,7 +1,7 @@
 import { Key, useMemo, useState } from "react";
 import cardImg from "../assets/images/Asset 24.png";
 import { motion } from "framer-motion";
-import { imetaData } from "../data/IMETA";
+import { countries, mediaUrl, type Article } from "../content";
 import playBtn from "../assets/images/play.svg";
 import rightArrow from "../assets/images/chevron-right.svg";
 import leftArrow from "../assets/images/chevron-left.svg";
@@ -10,25 +10,13 @@ import { useParams } from "react-router-dom";
 import SmartImage from "../components/SmartImage";
 import LightboxMedia from "../components/LightboxMedia";
 
-type Article = {
-  coverImage?: string;
-  heading: string;
-  images?: string[];
-  videos?: { src: string; thumb?: string; caption?: string }[];
-  article: string;
-  lists?: {
-    listHead: string;
-    listPoints: string[];
-  }[];
-  subArticles?: {
-    heading: string;
-    article: string;
-  }[];
-};
-
 type MediaItem = {
+  // full-size image or HLS playlist, shown in the lightbox
   src: string;
   type: "image" | "video";
+  // small image for the slider
+  preview: string;
+  // video poster shown before playback
   thumb?: string;
   caption?: string;
 };
@@ -42,7 +30,7 @@ const CountryPage: React.FC = () => {
     null
   );
 
-  const currentData = imetaData.filter(
+  const currentData = countries.filter(
     (item) => item.country === params.country
   );
   const [data, setData] = useState<Article | null>(
@@ -54,7 +42,7 @@ const CountryPage: React.FC = () => {
     setCurrentImageIndex(null);
   };
 
-  const filteredData = imetaData.filter(
+  const filteredData = countries.filter(
     (item) => item.country === params.country
   );
   const newData = filteredData[0];
@@ -63,13 +51,17 @@ const CountryPage: React.FC = () => {
   const media: MediaItem[] = useMemo(
     () => [
       ...(data?.videos?.map((video) => ({
-        src: video.src,
+        src: mediaUrl(video.src.hls),
         type: "video" as "video",
-        thumb: video.thumb,
+        preview: mediaUrl(video.thumb.thumb),
+        thumb: mediaUrl(video.thumb.full),
         caption: video.caption,
       })) || []),
-      ...(data?.images?.map((src) => ({ src, type: "image" as "image" })) ||
-        []),
+      ...(data?.images?.map((image) => ({
+        src: mediaUrl(image.full),
+        type: "image" as "image",
+        preview: mediaUrl(image.thumb),
+      })) || []),
     ],
     [data]
   );
@@ -158,8 +150,8 @@ const CountryPage: React.FC = () => {
       <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
         <div className="w-[90%] h-[90%] flex justify-between">
           <SmartImage
-            key={data?.coverImage || cardImg}
-            src={data?.coverImage || cardImg}
+            key={data?.coverImage?.full || cardImg}
+            src={data?.coverImage ? mediaUrl(data.coverImage.full) : cardImg}
             fetchPriority="high"
             alt=""
             className="h-full w-[35%] object-cover"
@@ -244,7 +236,7 @@ const CountryPage: React.FC = () => {
                         <div className="relative h-full">
                           <SmartImage
                             onClick={() => setCurrentImageIndex(index)}
-                            src={item.thumb ?? item.src}
+                            src={item.preview}
                             loading="lazy"
                             className="min-w-[15vw] h-full object-cover cursor-zoom-in"
                             alt="Video Thumbnail"
@@ -259,7 +251,7 @@ const CountryPage: React.FC = () => {
                       ) : (
                         <SmartImage
                           onClick={() => setCurrentImageIndex(index)}
-                          src={item.src}
+                          src={item.preview}
                           loading="lazy"
                           alt="Image"
                           className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
