@@ -1,7 +1,6 @@
 import MapComponent from "../components/Map.tsx";
 import { Link } from "react-router-dom";
 import Button from "../components/Button.tsx";
-import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -38,15 +37,6 @@ function MapPage() {
 
   const handleClick = () => {
     setIsActive(true); // Set the state to true when clicked
-  };
-
-  const styles = {
-    icon: {
-      "@media (min-width: 3840px)": {
-        width: "4rem", // Width for xl screens (min-width: 3840px)
-        height: "4rem", // Height for xl screens
-      },
-    },
   };
 
   return (
@@ -127,12 +117,15 @@ function MapPage() {
               className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer"
               onClick={() => setIsActive(false)}
             >
-              <CloseIcon
-                sx={styles.icon}
-                fontSize="large"
-                className=" xl:w-11 xl:h-11"
-                color="inherit"
-              />
+              {/* Same path and sizing as the MUI Close icon it replaces */}
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                fill="currentColor"
+                className="imeta-close-icon w-[2.1875rem] h-[2.1875rem] inline-block shrink-0"
+              >
+                <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </svg>
             </div>
             <div className="flex flex-col gap-3 xl:gap-16 text-white">
               <h2 className="text-[2.5vw]">IMETA</h2>

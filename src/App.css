@@ -2,7 +2,8 @@
 /* Head Font Regular */
 @font-face {
   font-family: 'BoehringerForwardHead';
-  src: url('./fonts/BoehringerForwardHead.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardHead.woff2') format('woff2');
+  font-display: block;
   font-weight: 400; /* Regular weight */
   font-style: normal;
 }
@@ -10,7 +11,8 @@
 /* Head Font Bold */
 @font-face {
   font-family: 'BoehringerForwardHead';
-  src: url('./fonts/BoehringerForwardHead-Bd.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardHead-Bd.woff2') format('woff2');
+  font-display: block;
   font-weight: 700; /* Bold weight */
   font-style: normal;
 }
@@ -18,7 +20,8 @@
 /* Head Font Italic */
 @font-face {
   font-family: 'BoehringerForwardHead';
-  src: url('./fonts/BoehringerForwardHead-It.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardHead-It.woff2') format('woff2');
+  font-display: block;
   font-weight: 400; /* Regular weight for italic */
   font-style: italic;
 }
@@ -26,7 +29,8 @@
 /* Head Font Bold Italic */
 @font-face {
   font-family: 'BoehringerForwardHead';
-  src: url('./fonts/BoehringerForwardHead-BdIt.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardHead-BdIt.woff2') format('woff2');
+  font-display: block;
   font-weight: 700; /* Bold weight for italic */
   font-style: italic;
 }
@@ -34,23 +38,17 @@
 /* Text Font Regular */
 @font-face {
   font-family: 'BoehringerForwardText';
-  src: url('./fonts/BoehringerForwardText.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardText.woff2') format('woff2');
+  font-display: block;
   font-weight: 400; /* Regular weight */
-  font-style: normal;
-}
-
-/* Text Font Extralight */
-@font-face {
-  font-family: 'BoehringerForwardText';
-  src: url('./fonts/BoehringerForwardText-Extralight.ttf') format('truetype');
-  font-weight: 200; /* Extralight weight */
   font-style: normal;
 }
 
 /* Text Font Bold */
 @font-face {
   font-family: 'BoehringerForwardText';
-  src: url('./fonts/BoehringerForwardText-Bd.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardText-Bd.woff2') format('woff2');
+  font-display: block;
   font-weight: 700; /* Bold weight */
   font-style: normal;
 }
@@ -58,7 +56,8 @@
 /* Text Font Italic */
 @font-face {
   font-family: 'BoehringerForwardText';
-  src: url('./fonts/BoehringerForwardText-It.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardText-It.woff2') format('woff2');
+  font-display: block;
   font-weight: 400; /* Regular weight for italic */
   font-style: italic;
 }
@@ -66,7 +65,8 @@
 /* Text Font Bold Italic */
 @font-face {
   font-family: 'BoehringerForwardText';
-  src: url('./fonts/BoehringerForwardText-BdIt.ttf') format('truetype');
+  src: url('./fonts/BoehringerForwardText-BdIt.woff2') format('woff2');
+  font-display: block;
   font-weight: 700; /* Bold weight for italic */
   font-style: italic;
 }
@@ -522,4 +522,38 @@ stroke: none;
   0 0 40px var(--Accent-Green);
   border-radius: 50%;
 
+}
+/* SmartImage: shimmer while loading, fade in once decoded */
+.smart-img[data-status="loading"] {
+  color: transparent;
+  background: linear-gradient(100deg, rgba(0, 228, 124, 0.04) 30%, rgba(0, 228, 124, 0.14) 50%, rgba(0, 228, 124, 0.04) 70%);
+  background-size: 300% 100%;
+  animation: smartImgShimmer 1.4s ease-in-out infinite;
+}
+
+.smart-img[data-status="loaded"] {
+  animation: smartImgFade 0.4s ease-out;
+}
+
+.smart-img[data-status="error"] {
+  color: transparent;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes smartImgShimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@keyframes smartImgFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* IMETA modal close icon: matches the old MUI icon size on 4K panels */
+@media (min-width: 3840px) {
+  .imeta-close-icon {
+    width: 4rem;
+    height: 4rem;
+  }
 }

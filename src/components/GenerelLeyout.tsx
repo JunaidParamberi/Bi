@@ -1,6 +1,8 @@
-
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
+import PageLoader from './PageLoader';
+import ChunkErrorBoundary from './ChunkErrorBoundary';
 import logo from '../assets/icons/Logo_Accent Green.svg';
 import { useLocation } from 'react-router-dom';
 
@@ -13,7 +15,11 @@ function GeneralLayout() {
     <div className=' relative w-full h-screen flex flex-col justify-center items-center'>
         <div className='  w-[90%] h-full flex flex-col justify-between items-center'>
             <div className='w-full flex justify-center items-center flex-col h-[90vh]  '>
-                <Outlet /> 
+                <ChunkErrorBoundary>
+                    <Suspense fallback={<PageLoader />}>
+                        <Outlet />
+                    </Suspense>
+                </ChunkErrorBoundary>
             </div>
 
         <div className='flex justify-between items-end h-[15vh] py-6 w-[90%] absolute bottom-0 xl:bottom-10 '>

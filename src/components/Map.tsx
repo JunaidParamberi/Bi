@@ -29,7 +29,6 @@ const CountryCard: React.FC<MyComponentProps> = ({
 
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
-  console.log(imetaData);
   useEffect(() => {
     if (!isVisible) {
       // Trigger exit animation before removing the card
@@ -54,7 +53,7 @@ const CountryCard: React.FC<MyComponentProps> = ({
 
         <div>
           {currentData?.articles.map((item) => (
-            <h1 className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</h1>
+            <h1 key={item.heading} className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</h1>
           ))}
         </div>
         <div>
@@ -143,7 +142,7 @@ const MapComponent: React.FC = () => {
         {/* Map Image */}
         <img
           src={mapImg}
-          loading="lazy"
+          decoding="async"
           className="absolute top-0 left-0 object-contain"
           alt="Map"
         />
