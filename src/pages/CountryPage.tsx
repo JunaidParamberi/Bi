@@ -1,33 +1,22 @@
-import { Key, useState, useEffect } from "react";
+import { Key, useMemo, useState } from "react";
 import cardImg from "../assets/images/Asset 24.png";
 import { motion } from "framer-motion";
-import { imetaData } from "../data/IMETA";
-import { PuffLoader } from "react-spinners";
+import { countries, mediaUrl, type Article } from "../content";
 import playBtn from "../assets/images/play.svg";
 import rightArrow from "../assets/images/chevron-right.svg";
 import leftArrow from "../assets/images/chevron-left.svg";
 import close from "../assets/images/cancel icon.svg";
 import { useParams } from "react-router-dom";
-
-type Article = {
-  coverImage?: string;
-  heading: string;
-  images?: string[];
-  videos?: { src: string; thumb?: string; caption?: string }[];
-  article: string;
-  lists?: {
-    listHead: string;
-    listPoints: string[];
-  }[];
-  subArticles?: {
-    heading: string;
-    article: string;
-  }[];
-};
+import SmartImage from "../components/SmartImage";
+import LightboxMedia from "../components/LightboxMedia";
 
 type MediaItem = {
+  // full-size image or HLS playlist, shown in the lightbox
   src: string;
   type: "image" | "video";
+  // small image for the slider
+  preview: string;
+  // video poster shown before playback
   thumb?: string;
   caption?: string;
 };
@@ -40,45 +29,46 @@ const CountryPage: React.FC = () => {
   const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
     null
   );
-  const [loading, setLoading] = useState(false);
 
-  const currentData = imetaData.filter(
+  const currentData = countries.filter(
     (item) => item.country === params.country
   );
   const [data, setData] = useState<Article | null>(
     currentData.length > 0 ? currentData[0].articles[0] : null
   );
 
-  useEffect(() => {
-    setLoading(false);
-  }, [data]);
-
   const handleClick = (item: Article) => {
     setData(item);
     setCurrentImageIndex(null);
-    setLoading(true);
   };
 
-  const filteredData = imetaData.filter(
+  const filteredData = countries.filter(
     (item) => item.country === params.country
   );
   const newData = filteredData[0];
 
   // Combine images and videos into single media array
-  const media: MediaItem[] = [
-    ...(data?.videos?.map((video) => ({
-      src: video.src,
-      type: "video" as "video",
-      thumb: video.thumb,
-      caption: video.caption,
-    })) || []),
-    ...(data?.images?.map((src) => ({ src, type: "image" as "image" })) || []),
-  ];
+  const media: MediaItem[] = useMemo(
+    () => [
+      ...(data?.videos?.map((video) => ({
+        src: mediaUrl(video.src.hls),
+        type: "video" as "video",
+        preview: mediaUrl(video.thumb.thumb),
+        thumb: mediaUrl(video.thumb.full),
+        caption: video.caption,
+      })) || []),
+      ...(data?.images?.map((image) => ({
+        src: mediaUrl(image.full),
+        type: "image" as "image",
+        preview: mediaUrl(image.thumb),
+      })) || []),
+    ],
+    [data]
+  );
 
   const handlePrevClick = () => {
     if (currentImageIndex !== null && currentImageIndex > 0) {
       setSwipeDirection("right");
-      setLoading(true);
       setCurrentImageIndex(currentImageIndex - 1);
     }
   };
@@ -86,12 +76,9 @@ const CountryPage: React.FC = () => {
   const handleNextClick = () => {
     if (currentImageIndex !== null && currentImageIndex < media.length - 1) {
       setSwipeDirection("left");
-      setLoading(true);
       setCurrentImageIndex(currentImageIndex + 1);
     }
   };
-
-  const handleImageLoad = () => setLoading(false);
 
   return (
     <motion.div
@@ -137,23 +124,11 @@ const CountryPage: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="h-[90%] w-auto flex justify-center items-center"
           >
-            {media[currentImageIndex]?.type === "video" ? (
-              <video
-                controls
-                autoPlay
-                className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
-              >
-                <source src={media[currentImageIndex]?.src} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <img
-                src={media[currentImageIndex]?.src}
-                alt="media"
-                className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
-                onLoad={handleImageLoad}
-              />
-            )}
+            <LightboxMedia
+              media={media}
+              index={currentImageIndex}
+              className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
+            />
           </motion.div>
 
           {/* Right arrow */}
@@ -174,8 +149,10 @@ const CountryPage: React.FC = () => {
       {/* Main content */}
       <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
         <div className="w-[90%] h-[90%] flex justify-between">
-          <img
-            src={data?.coverImage || cardImg}
+          <SmartImage
+            key={data?.coverImage?.full || cardImg}
+            src={data?.coverImage ? mediaUrl(data.coverImage.full) : cardImg}
+            fetchPriority="high"
             alt=""
             className="h-full w-[35%] object-cover"
           />
@@ -253,48 +230,31 @@ const CountryPage: React.FC = () => {
               {(data?.images || data?.videos) && (
                 <div className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y">
                   {media.map((item: MediaItem, index: number) => (
-                    <div key={index} className="relative">
-                      {loading && currentImageIndex === index && (
-                        <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                          <PuffLoader color="#36d7b7" />
-                        </div>
-                      )}
+                    <div key={`${item.src}-${index}`} className="relative">
 
                       {item.type === "video" ? (
                         <div className="relative h-full">
-                          <img
-                            onClick={() => {
-                              setCurrentImageIndex(index);
-                              setLoading(true);
-                            }}
-                            src={item.thumb ?? item.src}
+                          <SmartImage
+                            onClick={() => setCurrentImageIndex(index)}
+                            src={item.preview}
+                            loading="lazy"
                             className="min-w-[15vw] h-full object-cover cursor-zoom-in"
-                            onLoad={handleImageLoad}
-                            onError={() => setLoading(false)}
                             alt="Video Thumbnail"
                           />
                           <img
                             src={playBtn}
-                            onClick={() => {
-                              setCurrentImageIndex(index);
-                              setLoading(true);
-                            }}
+                            onClick={() => setCurrentImageIndex(index)}
                             alt="Play Button"
                             className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
                           />
                         </div>
                       ) : (
-                        <img
-                          onClick={() => {
-                            setCurrentImageIndex(index);
-                            setLoading(true);
-                          }}
-                          src={item.src}
+                        <SmartImage
+                          onClick={() => setCurrentImageIndex(index)}
+                          src={item.preview}
                           loading="lazy"
                           alt="Image"
                           className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
-                          onLoad={handleImageLoad}
-                          onError={() => setLoading(false)}
                         />
                       )}
                     </div>

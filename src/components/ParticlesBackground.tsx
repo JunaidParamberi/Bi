@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import {
-  type Container,
   type ISourceOptions,
   MoveDirection,
   OutMode,
@@ -21,10 +20,6 @@ const ParticlesBackground = () => {
     });
   }, []);
 
-  const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container);
-  };
-
   const options: ISourceOptions = useMemo(
     () => ({
       background: {
@@ -32,7 +27,7 @@ const ParticlesBackground = () => {
           value: "transparent", // Dark blue background
         },
       },
-      fpsLimit: 120, // Frame rate limit
+      fpsLimit: 60, // Same motion as before; halves GPU work on high refresh LED panels
       interactivity: {
         events: {
           onClick: {
@@ -102,7 +97,6 @@ const ParticlesBackground = () => {
   return init ? (
     <Particles
       id="tsparticles"
-      particlesLoaded={particlesLoaded}
       options={options}
     />
   ) : (

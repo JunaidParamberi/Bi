@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import mapImg from "../assets/images/Map.svg";
 import pinImg from "../assets/images/Pin.svg";
-import { imetaData } from "../data/IMETA"; // Change to .js if necessary
+import { countries } from "../content";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -25,11 +25,10 @@ const CountryCard: React.FC<MyComponentProps> = ({
   title,
   isVisible,
 }) => {
-  const currentData = imetaData.find((data) => data.country === title);
+  const currentData = countries.find((data) => data.country === title);
 
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
-  console.log(imetaData);
   useEffect(() => {
     if (!isVisible) {
       // Trigger exit animation before removing the card
@@ -54,7 +53,7 @@ const CountryCard: React.FC<MyComponentProps> = ({
 
         <div>
           {currentData?.articles.map((item) => (
-            <h1 className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</h1>
+            <h1 key={item.heading} className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</h1>
           ))}
         </div>
         <div>
@@ -143,7 +142,7 @@ const MapComponent: React.FC = () => {
         {/* Map Image */}
         <img
           src={mapImg}
-          loading="lazy"
+          decoding="async"
           className="absolute top-0 left-0 object-contain"
           alt="Map"
         />

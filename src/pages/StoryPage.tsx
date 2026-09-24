@@ -1,76 +1,58 @@
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PuffLoader } from "react-spinners";
 import playBtn from "../assets/images/play.svg";
 
-import { storyData } from "../data/MoreStories";
+import { stories, mediaUrl, type Story } from "../content";
 import rightArrow from "../assets/images/chevron-right.svg";
 import leftArrow from "../assets/images/chevron-left.svg";
 import close from "../assets/images/cancel icon.svg";
-
-interface Story {
-  title: string;
-  coverImage: string;
-  text: string;
-  coverText: string;
-  images: string[];
-  videos: {
-    src: string;
-    thumb: string;
-    caption: string;
-  }[];
-  lists?: {
-    listHead: string;
-    listPoints: string[];
-  }[];
-}
+import SmartImage from "../components/SmartImage";
+import LightboxMedia, { LightboxItem } from "../components/LightboxMedia";
 
 export default function StoryPage() {
   const params = useParams();
-  const filteredDataRaw = storyData.find((data) => data.title === params.title);
-  const filteredData: Story | null = filteredDataRaw
-    ? {
-        ...filteredDataRaw,
-        videos: filteredDataRaw.videos ?? [],
-      }
-    : null;
+
+  // Memoised so the story object is stable between renders
+  const data: Story | null = useMemo(
+    () => stories.find((item) => item.title === params.title) ?? null,
+    [params.title]
+  );
 
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
     null
   );
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<Story | null>(filteredData || null);
 
   // Combine images and videos for easy navigation
-  const media = data
-    ? [
-        ...data.videos.map((v) => ({
-          type: "video" as const,
-          src: v.src,
-          thumb: v.thumb,
-        })),
-        ...data.images.map((src) => ({ type: "image" as const, src })),
-      ]
-    : [];
+  // src is the full image or HLS playlist for the lightbox; preview is the small slider image
+  const media: (LightboxItem & { preview: string })[] = useMemo(
+    () =>
+      data
+        ? [
+            ...(data.videos ?? []).map((v) => ({
+              type: "video" as const,
+              src: mediaUrl(v.src.hls),
+              thumb: mediaUrl(v.thumb.full),
+              preview: mediaUrl(v.thumb.thumb),
+            })),
+            ...data.images.map((image) => ({
+              type: "image" as const,
+              src: mediaUrl(image.full),
+              preview: mediaUrl(image.thumb),
+            })),
+          ]
+        : [],
+    [data]
+  );
 
-  useEffect(() => {
-    setData(filteredData || null);
-  }, [filteredData]);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [filteredData]);
-
-  if (!filteredData) {
+  if (!data) {
     return <h1>Loading</h1>;
   }
 
   const handlePrevClick = () => {
     if (currentIndex !== null && currentIndex > 0) {
       setSwipeDirection("right");
-      setLoading(true);
       setCurrentIndex(currentIndex - 1);
     }
   };
@@ -78,13 +60,8 @@ export default function StoryPage() {
   const handleNextClick = () => {
     if (currentIndex !== null && currentIndex < media.length - 1) {
       setSwipeDirection("left");
-      setLoading(true);
       setCurrentIndex(currentIndex + 1);
     }
-  };
-
-  const handleMediaLoad = () => {
-    setLoading(false);
   };
 
   return (
@@ -99,8 +76,9 @@ export default function StoryPage() {
         <div className="w-[90%] gap-7 xl:gap-16 flex h-[80%] justify-center items-start">
           {/* Cover Image */}
           <div className="w-[50%] h-full">
-            <img
-              src={data?.coverImage ?? ""}
+            <SmartImage
+              src={data?.coverImage ? mediaUrl(data.coverImage.full) : ""}
+              fetchPriority="high"
               alt="Cover"
               className="w-full h-full object-cover"
             />
@@ -156,46 +134,31 @@ export default function StoryPage() {
             {media.length > 0 && (
               <div className="flex w-full h-[40%] overflow-x-auto gap-4 custom-scrollbar-y">
                 {media.map((item, idx) => (
-                  <div key={idx} className="relative">
-                    {loading && currentIndex === idx && (
-                      <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                        <PuffLoader color="#36d7b7" />
-                      </div>
-                    )}
+                  <div key={`${item.src}-${idx}`} className="relative">
 
                     {item.type === "video" ? (
                       <div className="relative h-full">
-                        <img
-                          src={item.thumb}
-                          onClick={() => {
-                            setCurrentIndex(idx);
-                            setLoading(true);
-                          }}
+                        <SmartImage
+                          src={item.preview}
+                          onClick={() => setCurrentIndex(idx)}
+                          loading="lazy"
                           className="min-w-[15vw] h-full object-cover cursor-zoom-in"
                           alt="Video Thumbnail"
-                          onLoad={handleMediaLoad}
                         />
                         <img
                           src={playBtn}
-                          onClick={() => {
-                            setCurrentIndex(idx);
-                            setLoading(true);
-                          }}
+                          onClick={() => setCurrentIndex(idx)}
                           alt="Play Button"
                           className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
                         />
                       </div>
                     ) : (
-                      <img
-                        src={item.src}
-                        onClick={() => {
-                          setCurrentIndex(idx);
-                          setLoading(true);
-                        }}
+                      <SmartImage
+                        src={item.preview}
+                        onClick={() => setCurrentIndex(idx)}
                         loading="lazy"
                         alt="Story Image"
                         className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
-                        onLoad={handleMediaLoad}
                       />
                     )}
                   </div>
@@ -243,24 +206,11 @@ export default function StoryPage() {
             transition={{ duration: 0.5 }}
             className="h-[90%] w-auto flex justify-center items-center"
           >
-            {media[currentIndex].type === "image" ? (
-              <img
-                src={media[currentIndex].src}
-                alt="Selected Story"
-                className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
-                onLoad={handleMediaLoad}
-              />
-            ) : (
-              <video
-                controls
-                autoPlay
-                className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
-                onLoadedData={handleMediaLoad}
-              >
-                <source src={media[currentIndex].src} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
+            <LightboxMedia
+              media={media}
+              index={currentIndex}
+              className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
+            />
           </motion.div>
 
           {/* Next Button */}

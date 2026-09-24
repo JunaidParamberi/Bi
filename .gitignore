@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# media pipeline output and secrets
+media-build
+.env.local

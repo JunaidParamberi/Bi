@@ -1,30 +1,40 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import './App.css';
-import mainBg from './assets/images/Main BG.svg';
+import mainBg from './assets/images/main-bg.webp';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import GenerelLeyout from './components/GenerelLeyout';
-import MapPage from './pages/MapPage';
-import MoreStories from './pages/MoreStories';
 import ParticlesBackground from './components/ParticlesBackground';
-import StoryPage from './pages/StoryPage';
-import CountryPage from './pages/CountryPage';
-import GlobePage from './pages/GlobePage';
-import TeamPage from './pages/TeamPage';
+
+// Each page is split into its own chunk so the first screen only downloads what it needs
+const loadGlobePage = () => import('./pages/GlobePage');
+const loadMapPage = () => import('./pages/MapPage');
+const loadMoreStories = () => import('./pages/MoreStories');
+const loadStoryPage = () => import('./pages/StoryPage');
+const loadCountryPage = () => import('./pages/CountryPage');
+const loadTeamPage = () => import('./pages/TeamPage');
+
+const GlobePage = lazy(loadGlobePage);
+const MapPage = lazy(loadMapPage);
+const MoreStories = lazy(loadMoreStories);
+const StoryPage = lazy(loadStoryPage);
+const CountryPage = lazy(loadCountryPage);
+const TeamPage = lazy(loadTeamPage);
 
 function App() {
   const location = useLocation();  // To track route changes for animations
 
   useEffect(() => {
-    // Function to add lazy loading to images without it
-    const addLazyLoadingToImages = () => {
-      const images = document.querySelectorAll('img:not([loading])');
-      images.forEach((img) => {
-        img.setAttribute('loading', 'lazy');
-      });
+    // Warm up the remaining page chunks once the browser is idle, so navigation stays instant
+    const prefetch = () => {
+      [loadMapPage, loadCountryPage, loadMoreStories, loadStoryPage, loadTeamPage, loadGlobePage]
+        .forEach((load) => load());
     };
-
-    // Add lazy loading on component mount
-    addLazyLoadingToImages();
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(prefetch, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(prefetch, 2000);
+    return () => clearTimeout(id);
   }, []);
 
   return (
@@ -32,6 +42,8 @@ function App() {
       <img
         src={mainBg}
         alt="mainbg"
+        fetchPriority="high"
+        decoding="async"
         className='min-w-full min-h-[100vh] object-cover bg-no-repeat absolute z-[-100]'
       />
       <ParticlesBackground />
