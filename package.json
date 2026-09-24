@@ -14,9 +14,9 @@
     "media:add": "node scripts/media/add-media.mjs"
   },
   "dependencies": {
-    "@tsparticles/engine": "^3.9.1",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.9.1",
+    "@tsparticles/engine": "^4.4.0",
+    "@tsparticles/react": "^4.4.0",
+    "@tsparticles/slim": "^4.4.0",
     "framer-motion": "^13.4.3",
     "hls.js": "^1.7.3",
     "react": "^19.3.0",

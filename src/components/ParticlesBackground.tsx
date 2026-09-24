@@ -1,24 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { useMemo } from "react";
+import Particles, { ParticlesProvider, useParticlesProvider } from "@tsparticles/react";
 import {
+  type Engine,
   type ISourceOptions,
   MoveDirection,
   OutMode,
 } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; // using slim version of tsparticles
 
-const ParticlesBackground = () => {
-  const [init, setInit] = useState(false);
+// load the slim version to reduce the bundle size; runs once per application lifetime
+const loadEngine = (engine: Engine) => loadSlim(engine);
 
-  // this should be run only once per application lifetime
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      // load the slim version to reduce the bundle size
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
+const ParticlesField = () => {
+  const { loaded } = useParticlesProvider();
 
   const options: ISourceOptions = useMemo(
     () => ({
@@ -73,7 +67,6 @@ const ParticlesBackground = () => {
         number: {
           density: {
             enable: true, // Enable particle density
-            area: 800,
           },
           value: 300, // Number of particles
         },
@@ -85,7 +78,6 @@ const ParticlesBackground = () => {
         },
         size: {
           value: { min: 0.5, max: 3 }, // Smaller size range
-          random: true,
         },
       },
       detectRetina: true, // Enable retina detection
@@ -93,15 +85,14 @@ const ParticlesBackground = () => {
     [],
   );
 
-  // Only render the particles if initialized
-  return init ? (
-    <Particles
-      id="tsparticles"
-      options={options}
-    />
-  ) : (
-    <></>
-  );
+  // Only render the particles once the engine has loaded
+  return loaded ? <Particles id="tsparticles" options={options} /> : null;
 };
+
+const ParticlesBackground = () => (
+  <ParticlesProvider init={loadEngine}>
+    <ParticlesField />
+  </ParticlesProvider>
+);
 
 export default ParticlesBackground;
