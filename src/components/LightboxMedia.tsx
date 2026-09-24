@@ -1,83 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrandLoader from './BrandLoader';
-
-interface HlsVideoProps {
-  src: string;
-  poster?: string;
-  // small, usually already cached image shown until the full poster has decoded
-  posterPreview?: string;
-  className: string;
-  onCanPlay: () => void;
-  onWaiting: () => void;
-  onPlaying: () => void;
-  onError: () => void;
-}
-
-// Streams an HLS playlist: hls.js where Media Source Extensions exist, native playback elsewhere (Safari/iOS)
-function HlsVideo({ src, poster, posterPreview, className, onCanPlay, onWaiting, onPlaying, onError }: HlsVideoProps) {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [posterSrc, setPosterSrc] = useState(posterPreview ?? poster);
-
-  useEffect(() => {
-    // Swap to the full poster only once it is decoded, so it never paints in from the top
-    if (!poster || poster === posterPreview) return;
-    let cancelled = false;
-    const img = new Image();
-    img.src = poster;
-    img.decode().then(
-      () => !cancelled && setPosterSrc(poster),
-      () => undefined
-    );
-    return () => {
-      cancelled = true;
-    };
-  }, [poster, posterPreview]);
-
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-    let destroyed = false;
-    let hls: { destroy: () => void } | undefined;
-
-    import('hls.js').then(({ default: Hls }) => {
-      if (destroyed) return;
-      if (Hls.isSupported()) {
-        const instance = new Hls({ capLevelToPlayerSize: false, startLevel: -1 });
-        instance.on(Hls.Events.ERROR, (_event, data) => {
-          if (data.fatal) onError();
-        });
-        instance.loadSource(src);
-        instance.attachMedia(video);
-        hls = instance;
-      } else {
-        video.src = src;
-      }
-    });
-
-    return () => {
-      destroyed = true;
-      hls?.destroy();
-    };
-    // callbacks are recreated each render; the stream only needs to reload when src changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src]);
-
-  return (
-    <video
-      ref={ref}
-      controls
-      autoPlay
-      playsInline
-      preload='auto'
-      poster={posterSrc}
-      className={className}
-      onCanPlay={onCanPlay}
-      onWaiting={onWaiting}
-      onPlaying={onPlaying}
-      onError={onError}
-    />
-  );
-}
+import BrandVideoPlayer from './BrandVideoPlayer';
 
 export type LightboxItem = {
   // full image or HLS playlist
@@ -134,12 +57,12 @@ function LightboxMedia({ media, index, className }: LightboxMediaProps) {
       style={{ aspectRatio: `${item.width} / ${item.height}` }}
     >
       {item.type === 'video' ? (
-        <HlsVideo
+        <BrandVideoPlayer
           key={item.src}
           src={item.src}
           poster={item.thumb}
           posterPreview={item.preview}
-          className='absolute inset-0 w-full h-full object-cover'
+          className='absolute inset-0 w-full h-full'
           onCanPlay={markReady}
           onWaiting={() => setBuffering(true)}
           onPlaying={() => setBuffering(false)}

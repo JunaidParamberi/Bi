@@ -602,3 +602,76 @@ stroke: none;
   from { opacity: 0.35; }
   to { opacity: 0.9; }
 }
+
+/* BrandVideoPlayer: custom controls in the BI palette */
+.brand-player:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.brand-player-btn {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: inherit;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.brand-player-btn:hover,
+.brand-player-btn:focus-visible {
+  color: var(--Accent-Green);
+  transform: scale(1.1);
+  outline: none;
+}
+
+.brand-player-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--Accent-Green) var(--fill), rgba(229, 227, 222, 0.3) var(--fill));
+  cursor: pointer;
+}
+
+.brand-player-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--Accent-Green);
+}
+
+.brand-player-volume::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: var(--Accent-Green);
+}
+
+@media (min-width: 3040px) {
+  .brand-player-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .brand-player-volume { height: 6px; }
+  .brand-player-volume::-webkit-slider-thumb { width: 24px; height: 24px; }
+  .brand-player-volume::-moz-range-thumb { width: 24px; height: 24px; }
+}
+
+/* Keyboard focus frame for slider thumbnails, drawn above the image */
+.thumb-focus::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: box-shadow 150ms ease;
+}
+
+.thumb-focus:focus-visible::after {
+  box-shadow: inset 0 0 0 3px var(--Accent-Green);
+}
