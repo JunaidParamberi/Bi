@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { team1, team2, mediaUrl, type TeamMember } from '../content';
+import SmartImage from '../components/SmartImage';
 
 interface CardDetailsProps {
   data: TeamMember;
@@ -38,6 +39,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
   const teamContainerRef = useRef<HTMLDivElement | null>(null);
   const [imageFailed, setImageFailed] = useState(false);
   const showPhoto = !!data.image && !imageFailed;
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (teamContainerRef.current && !teamContainerRef.current.contains(event.target as Node)) {
@@ -66,9 +68,10 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
     >
       {showDetails && <CardDetails data={data} classeName={`${showDetails ? "futuristic-enter" : 'futuristic-exit hidden'}`} />}
       <div className='w-[32%] h-[95%] ml-3 xl:mb-9 xl:ml-6 absolute border-accent-green border-[0.5px] mb-3'>
-        <div className={`w-full h-full overflow-hidden flex justify-center items-center ${showPhoto ? '' : 'bg-[#bdbdbd] text-white'}`}>
+        <div className={`w-full h-full overflow-hidden flex justify-center items-center ${showPhoto ? (photoLoaded ? '' : 'skeleton') : 'bg-[#bdbdbd] text-white'}`}>
           {showPhoto ? (
-            <img src={data.image ? mediaUrl(data.image.thumb) : ''} alt={data.name} loading='lazy' decoding='async' className='w-full h-full object-cover' onError={() => setImageFailed(true)} />
+            // The wrapper keeps the skeleton until the photo has loaded, so the box is never empty while it fades in
+            <SmartImage src={data.image ? mediaUrl(data.image.thumb) : ''} alt={data.name} loading='lazy' className='w-full h-full object-cover' onLoad={() => setPhotoLoaded(true)} onError={() => setImageFailed(true)} />
           ) : (
             // Same placeholder MUI Avatar showed for members without a photo
             <svg viewBox='0 0 24 24' aria-hidden='true' fill='currentColor' className='w-[75%] h-[75%]'>
