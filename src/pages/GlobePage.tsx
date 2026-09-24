@@ -5,6 +5,7 @@ import RadarWave from '../components/RadarWave';
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import BrandLoader from '../components/BrandLoader';
+import { bootReady } from '../boot';
 
 function RealisticGlobePage() {
   const globeEl = useRef<GlobeMethods | undefined>(undefined);
@@ -39,6 +40,7 @@ function RealisticGlobePage() {
       controls.enableRotate = false;
     }
     setIsGlobeLoaded(true);
+    bootReady('page');
   };
 
   return (

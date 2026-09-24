@@ -1,10 +1,17 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import PageLoader from './PageLoader';
 import ChunkErrorBoundary from './ChunkErrorBoundary';
+import { bootReady } from '../boot';
 import logo from '../assets/icons/Logo_Accent Green.svg';
 import { useLocation } from 'react-router-dom';
+
+// Rendered inside the Suspense boundary, so its effect only runs once the page's code has loaded
+function PageReady() {
+  useEffect(() => bootReady('page'), []);
+  return null;
+}
 
 function GeneralLayout() {
 
@@ -18,6 +25,8 @@ function GeneralLayout() {
                 <ChunkErrorBoundary>
                     <Suspense fallback={<PageLoader />}>
                         <Outlet />
+                        {/* The globe page reports ready itself once its scene is built */}
+                        {location.pathname !== '/' && <PageReady />}
                     </Suspense>
                 </ChunkErrorBoundary>
             </div>

@@ -4,6 +4,7 @@ import mainBg from './assets/images/main-bg.webp';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import GenerelLeyout from './components/GenerelLeyout';
 import ParticlesBackground from './components/ParticlesBackground';
+import { bootReady } from './boot';
 
 // Each page is split into its own chunk so the first screen only downloads what it needs
 const loadGlobePage = () => import('./pages/GlobePage');
@@ -44,6 +45,10 @@ function App() {
         alt="mainbg"
         fetchPriority="high"
         decoding="async"
+        // cached images can finish before onLoad is attached
+        ref={(img) => { if (img?.complete) bootReady('background'); }}
+        onLoad={() => bootReady('background')}
+        onError={() => bootReady('background')}
         className='min-w-full min-h-[100vh] object-cover bg-no-repeat absolute z-[-100]'
       />
       <ParticlesBackground />
