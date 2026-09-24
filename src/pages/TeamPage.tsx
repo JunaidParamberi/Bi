@@ -1,14 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
+import { useKeyboard } from '../hooks/useKeyboard';
 import { motion } from 'framer-motion';
-import { team1, team2 } from '../data/teamData.ts';
-
-interface TeamMember {
-  name: string;
-  occupation: string;
-  image: string;
-  des: string;
-}
+import { team1, team2, mediaUrl, type TeamMember } from '../content';
+import SmartImage from '../components/SmartImage';
 
 interface CardDetailsProps {
   data: TeamMember;
@@ -44,6 +38,9 @@ interface TeamCardProps {
 
 const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }) => {
   const teamContainerRef = useRef<HTMLDivElement | null>(null);
+  const [imageFailed, setImageFailed] = useState(false);
+  const showPhoto = !!data.image && !imageFailed;
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (teamContainerRef.current && !teamContainerRef.current.contains(event.target as Node)) {
@@ -72,11 +69,17 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
     >
       {showDetails && <CardDetails data={data} classeName={`${showDetails ? "futuristic-enter" : 'futuristic-exit hidden'}`} />}
       <div className='w-[32%] h-[95%] ml-3 xl:mb-9 xl:ml-6 absolute border-accent-green border-[0.5px] mb-3'>
-        <Avatar
-          src={data.image}
-          sx={{ width: "100%", height: "100%", objectFit: "cover" }}
-          variant='square'
-        />
+        <div className={`w-full h-full overflow-hidden flex justify-center items-center ${showPhoto ? (photoLoaded ? '' : 'skeleton') : 'bg-[#bdbdbd] text-white'}`}>
+          {showPhoto ? (
+            // The wrapper keeps the skeleton until the photo has loaded, so the box is never empty while it fades in
+            <SmartImage src={data.image ? mediaUrl(data.image.thumb) : ''} alt={data.name} loading='lazy' className='w-full h-full object-cover' onLoad={() => setPhotoLoaded(true)} onError={() => setImageFailed(true)} />
+          ) : (
+            // Same placeholder MUI Avatar showed for members without a photo
+            <svg viewBox='0 0 24 24' aria-hidden='true' fill='currentColor' className='w-[75%] h-[75%]'>
+              <path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4m0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4' />
+            </svg>
+          )}
+        </div>
       </div>
       <div className='text-left w-full pl-4 flex h-[90%] bg-black bg-opacity-50 justify-center items-center pr-1 border-[#00e47d7f] border-[0.1px]'>
         <div className='w-[38%]' />
@@ -91,6 +94,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
 
 const TeamPage: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  useKeyboard({ Escape: () => setSelectedMember(null) }, selectedMember !== null);
 
   return (
     <div className='w-full h-full flex justify-center items-center py-6'>

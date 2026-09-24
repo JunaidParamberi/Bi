@@ -1,91 +1,59 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PuffLoader } from "react-spinners";
 import playBtn from "../assets/images/play.svg";
 
-import { storyData } from "../data/MoreStories";
+import { stories, mediaUrl, type Story } from "../content";
 import rightArrow from "../assets/images/chevron-right.svg";
 import leftArrow from "../assets/images/chevron-left.svg";
 import close from "../assets/images/cancel icon.svg";
-
-interface Story {
-  title: string;
-  coverImage: string;
-  text: string;
-  coverText: string;
-  images: string[];
-  videos: {
-    src: string;
-    thumb: string;
-    caption: string;
-  }[];
-  lists?: {
-    listHead: string;
-    listPoints: string[];
-  }[];
-}
+import SmartImage from "../components/SmartImage";
+import LightboxMedia, { LightboxItem } from "../components/LightboxMedia";
+import { useLightbox } from "../hooks/useLightbox";
+import { handleRowKeys } from "../hooks/useKeyboard";
 
 export default function StoryPage() {
   const params = useParams();
-  const filteredDataRaw = storyData.find((data) => data.title === params.title);
-  const filteredData: Story | null = filteredDataRaw
-    ? {
-        ...filteredDataRaw,
-        videos: filteredDataRaw.videos ?? [],
-      }
-    : null;
 
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
-    null
+  // Memoised so the story object is stable between renders
+  const data: Story | null = useMemo(
+    () => stories.find((item) => item.title === params.title) ?? null,
+    [params.title]
   );
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<Story | null>(filteredData || null);
 
   // Combine images and videos for easy navigation
-  const media = data
-    ? [
-        ...data.videos.map((v) => ({
-          type: "video" as const,
-          src: v.src,
-          thumb: v.thumb,
-        })),
-        ...data.images.map((src) => ({ type: "image" as const, src })),
-      ]
-    : [];
+  // src is the full image or HLS playlist for the lightbox; preview is the small slider image
+  const media: (LightboxItem & { preview: string })[] = useMemo(
+    () =>
+      data
+        ? [
+            ...(data.videos ?? []).map((v) => ({
+              type: "video" as const,
+              src: mediaUrl(v.src.hls),
+              thumb: mediaUrl(v.thumb.full),
+              preview: mediaUrl(v.thumb.thumb),
+              width: v.src.width,
+              height: v.src.height,
+            })),
+            ...data.images.map((image) => ({
+              type: "image" as const,
+              src: mediaUrl(image.full),
+              preview: mediaUrl(image.thumb),
+              width: image.width,
+              height: image.height,
+            })),
+          ]
+        : [],
+    [data]
+  );
 
-  useEffect(() => {
-    setData(filteredData || null);
-  }, [filteredData]);
+  const lightbox = useLightbox(media.length);
+  const currentIndex = lightbox.index;
+  const swipeDirection = lightbox.direction;
 
-  useEffect(() => {
-    setLoading(false);
-  }, [filteredData]);
-
-  if (!filteredData) {
+  if (!data) {
     return <h1>Loading</h1>;
   }
-
-  const handlePrevClick = () => {
-    if (currentIndex !== null && currentIndex > 0) {
-      setSwipeDirection("right");
-      setLoading(true);
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
-  const handleNextClick = () => {
-    if (currentIndex !== null && currentIndex < media.length - 1) {
-      setSwipeDirection("left");
-      setLoading(true);
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const handleMediaLoad = () => {
-    setLoading(false);
-  };
 
   return (
     <motion.div
@@ -99,8 +67,9 @@ export default function StoryPage() {
         <div className="w-[90%] gap-7 xl:gap-16 flex h-[80%] justify-center items-start">
           {/* Cover Image */}
           <div className="w-[50%] h-full">
-            <img
-              src={data?.coverImage ?? ""}
+            <SmartImage
+              src={data?.coverImage ? mediaUrl(data.coverImage.full) : ""}
+              fetchPriority="high"
               alt="Cover"
               className="w-full h-full object-cover"
             />
@@ -154,51 +123,44 @@ export default function StoryPage() {
 
             {/* Media Slider */}
             {media.length > 0 && (
-              <div className="flex w-full h-[40%] overflow-x-auto gap-4 custom-scrollbar-y">
+              <div
+                className="flex w-full h-[40%] overflow-x-auto gap-4 custom-scrollbar-y"
+                onKeyDown={handleRowKeys}
+              >
                 {media.map((item, idx) => (
-                  <div key={idx} className="relative">
-                    {loading && currentIndex === idx && (
-                      <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                        <PuffLoader color="#36d7b7" />
-                      </div>
-                    )}
+                  <button
+                    key={`${item.src}-${idx}`}
+                    ref={lightbox.thumbRef(idx)}
+                    type="button"
+                    data-row-item
+                    aria-label={`Open ${item.type === "video" ? "video" : "photo"} ${idx + 1} of ${media.length}`}
+                    onClick={() => lightbox.open(idx)}
+                    className="thumb-focus relative shrink-0 cursor-zoom-in outline-none"
+                  >
 
                     {item.type === "video" ? (
                       <div className="relative h-full">
-                        <img
-                          src={item.thumb}
-                          onClick={() => {
-                            setCurrentIndex(idx);
-                            setLoading(true);
-                          }}
+                        <SmartImage
+                          src={item.preview}
+                          loading="lazy"
                           className="min-w-[15vw] h-full object-cover cursor-zoom-in"
                           alt="Video Thumbnail"
-                          onLoad={handleMediaLoad}
                         />
                         <img
                           src={playBtn}
-                          onClick={() => {
-                            setCurrentIndex(idx);
-                            setLoading(true);
-                          }}
                           alt="Play Button"
                           className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
                         />
                       </div>
                     ) : (
-                      <img
-                        src={item.src}
-                        onClick={() => {
-                          setCurrentIndex(idx);
-                          setLoading(true);
-                        }}
+                      <SmartImage
+                        src={item.preview}
                         loading="lazy"
                         alt="Story Image"
                         className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
-                        onLoad={handleMediaLoad}
                       />
                     )}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -213,25 +175,33 @@ export default function StoryPage() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green"
+          ref={lightbox.dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Media viewer"
+          tabIndex={-1}
+          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-none"
         >
           {/* Close Button */}
-          <div
+          <button
+            type="button"
+            aria-label="Close (Esc)"
             className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
-            onClick={() => setCurrentIndex(null)}
+            onClick={lightbox.close}
           >
-            <img src={close} alt="Close" className="w-[1.5vw] h-auto" />
-          </div>
+            <img src={close} alt="" className="w-[1.5vw] h-auto" />
+          </button>
 
           {/* Prev Button */}
           <button
-            onClick={handlePrevClick}
+            onClick={lightbox.prev}
+            aria-label="Previous (←)"
             disabled={currentIndex === 0}
             className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
               currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            <img src={leftArrow} alt="Previous" className="w-[3vw] h-auto" />
+            <img src={leftArrow} alt="" className="w-[3vw] h-auto" />
           </button>
 
           {/* Media Display */}
@@ -243,29 +213,17 @@ export default function StoryPage() {
             transition={{ duration: 0.5 }}
             className="h-[90%] w-auto flex justify-center items-center"
           >
-            {media[currentIndex].type === "image" ? (
-              <img
-                src={media[currentIndex].src}
-                alt="Selected Story"
-                className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
-                onLoad={handleMediaLoad}
-              />
-            ) : (
-              <video
-                controls
-                autoPlay
-                className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
-                onLoadedData={handleMediaLoad}
-              >
-                <source src={media[currentIndex].src} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
+            <LightboxMedia
+              media={media}
+              index={currentIndex}
+              className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
+            />
           </motion.div>
 
           {/* Next Button */}
           <button
-            onClick={handleNextClick}
+            onClick={lightbox.next}
+            aria-label="Next (→)"
             disabled={currentIndex === media.length - 1}
             className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
               currentIndex === media.length - 1
@@ -273,7 +231,7 @@ export default function StoryPage() {
                 : ""
             }`}
           >
-            <img src={rightArrow} alt="Next" className="w-[3vw] h-auto" />
+            <img src={rightArrow} alt="" className="w-[3vw] h-auto" />
           </button>
         </motion.div>
       )}

@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
-import gloImg from '../assets/images/globe-bg.png';
+import gloImg from '../assets/images/globe-bg.webp';
 import RadarWave from '../components/RadarWave';
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { PuffLoader } from 'react-spinners';
+import BrandLoader from '../components/BrandLoader';
+import { bootReady } from '../boot';
 
 function RealisticGlobePage() {
   const globeEl = useRef<GlobeMethods | undefined>(undefined);
@@ -12,16 +13,24 @@ function RealisticGlobePage() {
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
+    // Debounced so dragging a window edge does not rebuild the globe on every pixel
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
-      setDimensions({ width: window.innerWidth, height: window.innerHeight });
-      setIsGlobeLoaded(false); // Set globe to not loaded to show loader
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        setDimensions({ width: window.innerWidth, height: window.innerHeight });
+      }, 200);
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
-  useEffect(() => {
+  // Called by react-globe.gl once the scene and texture are ready
+  const handleGlobeReady = () => {
     if (globeEl.current) {
       const controls = globeEl.current.controls();
       controls.autoRotate = true;
@@ -30,16 +39,9 @@ function RealisticGlobePage() {
       controls.enablePan = false;
       controls.enableRotate = false;
     }
-
-    // Simulate loading time
-    const loadTimeout = setTimeout(() => {
-      setIsGlobeLoaded(true);
-    }, 1500);
-
-    return () => {
-      clearTimeout(loadTimeout);
-    };
-  }, [dimensions]); // Re-run effect when dimensions change
+    setIsGlobeLoaded(true);
+    bootReady('page');
+  };
 
   return (
     <motion.div
@@ -58,7 +60,7 @@ function RealisticGlobePage() {
 
         {!isGlobeLoaded && (
           <div className="absolute w-full h-full flex justify-center items-center">
-            <PuffLoader size={100} />
+            <BrandLoader />
           </div>
         )}
 
@@ -70,6 +72,7 @@ function RealisticGlobePage() {
           ></div>
           <Globe
             ref={globeEl}
+            onGlobeReady={handleGlobeReady}
             globeImageUrl={gloImg}
             showAtmosphere={true}
             atmosphereColor="#00e47c"

@@ -1,19 +1,6 @@
 import StoryCard from "../components/StoryCard";
-import { storyData } from "../data/MoreStories";
+import { stories } from "../content";
 import { motion } from "framer-motion";
-
-interface dataTypes {
-  id: number;
-  title: string;
-  text: string;
-  coverText: string;
-  coverImage: string;
-
-  lists?: {
-    listHead: string;
-    listPoints: string[];
-  }[];
-}
 
 const MoreStories: React.FC = () => {
   return (
@@ -31,7 +18,7 @@ const MoreStories: React.FC = () => {
           </h1>
 
           <div className="flex w-full h-full items-start gap-10">
-            {storyData.map((data: dataTypes) => (
+            {stories.map((data) => (
               <motion.div
                 key={data.id}
                 className="flex-1" // 👈 Each takes equal space
