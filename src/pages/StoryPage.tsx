@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import playBtn from "../assets/images/play.svg";
@@ -9,6 +9,8 @@ import leftArrow from "../assets/images/chevron-left.svg";
 import close from "../assets/images/cancel icon.svg";
 import SmartImage from "../components/SmartImage";
 import LightboxMedia, { LightboxItem } from "../components/LightboxMedia";
+import { useLightbox } from "../hooks/useLightbox";
+import { handleRowKeys } from "../hooks/useKeyboard";
 
 export default function StoryPage() {
   const params = useParams();
@@ -17,11 +19,6 @@ export default function StoryPage() {
   const data: Story | null = useMemo(
     () => stories.find((item) => item.title === params.title) ?? null,
     [params.title]
-  );
-
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
-    null
   );
 
   // Combine images and videos for easy navigation
@@ -50,23 +47,13 @@ export default function StoryPage() {
     [data]
   );
 
+  const lightbox = useLightbox(media.length);
+  const currentIndex = lightbox.index;
+  const swipeDirection = lightbox.direction;
+
   if (!data) {
     return <h1>Loading</h1>;
   }
-
-  const handlePrevClick = () => {
-    if (currentIndex !== null && currentIndex > 0) {
-      setSwipeDirection("right");
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
-  const handleNextClick = () => {
-    if (currentIndex !== null && currentIndex < media.length - 1) {
-      setSwipeDirection("left");
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
 
   return (
     <motion.div
@@ -136,22 +123,31 @@ export default function StoryPage() {
 
             {/* Media Slider */}
             {media.length > 0 && (
-              <div className="flex w-full h-[40%] overflow-x-auto gap-4 custom-scrollbar-y">
+              <div
+                className="flex w-full h-[40%] overflow-x-auto gap-4 custom-scrollbar-y"
+                onKeyDown={handleRowKeys}
+              >
                 {media.map((item, idx) => (
-                  <div key={`${item.src}-${idx}`} className="relative">
+                  <button
+                    key={`${item.src}-${idx}`}
+                    ref={lightbox.thumbRef(idx)}
+                    type="button"
+                    data-row-item
+                    aria-label={`Open ${item.type === "video" ? "video" : "photo"} ${idx + 1} of ${media.length}`}
+                    onClick={() => lightbox.open(idx)}
+                    className="thumb-focus relative shrink-0 cursor-zoom-in outline-none"
+                  >
 
                     {item.type === "video" ? (
                       <div className="relative h-full">
                         <SmartImage
                           src={item.preview}
-                          onClick={() => setCurrentIndex(idx)}
                           loading="lazy"
                           className="min-w-[15vw] h-full object-cover cursor-zoom-in"
                           alt="Video Thumbnail"
                         />
                         <img
                           src={playBtn}
-                          onClick={() => setCurrentIndex(idx)}
                           alt="Play Button"
                           className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
                         />
@@ -159,13 +155,12 @@ export default function StoryPage() {
                     ) : (
                       <SmartImage
                         src={item.preview}
-                        onClick={() => setCurrentIndex(idx)}
                         loading="lazy"
                         alt="Story Image"
                         className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
                       />
                     )}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -180,25 +175,33 @@ export default function StoryPage() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green"
+          ref={lightbox.dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Media viewer"
+          tabIndex={-1}
+          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-none"
         >
           {/* Close Button */}
-          <div
+          <button
+            type="button"
+            aria-label="Close (Esc)"
             className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
-            onClick={() => setCurrentIndex(null)}
+            onClick={lightbox.close}
           >
-            <img src={close} alt="Close" className="w-[1.5vw] h-auto" />
-          </div>
+            <img src={close} alt="" className="w-[1.5vw] h-auto" />
+          </button>
 
           {/* Prev Button */}
           <button
-            onClick={handlePrevClick}
+            onClick={lightbox.prev}
+            aria-label="Previous (←)"
             disabled={currentIndex === 0}
             className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
               currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            <img src={leftArrow} alt="Previous" className="w-[3vw] h-auto" />
+            <img src={leftArrow} alt="" className="w-[3vw] h-auto" />
           </button>
 
           {/* Media Display */}
@@ -219,7 +222,8 @@ export default function StoryPage() {
 
           {/* Next Button */}
           <button
-            onClick={handleNextClick}
+            onClick={lightbox.next}
+            aria-label="Next (→)"
             disabled={currentIndex === media.length - 1}
             className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
               currentIndex === media.length - 1
@@ -227,7 +231,7 @@ export default function StoryPage() {
                 : ""
             }`}
           >
-            <img src={rightArrow} alt="Next" className="w-[3vw] h-auto" />
+            <img src={rightArrow} alt="" className="w-[3vw] h-auto" />
           </button>
         </motion.div>
       )}

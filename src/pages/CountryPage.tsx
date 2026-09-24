@@ -9,6 +9,8 @@ import close from "../assets/images/cancel icon.svg";
 import { useParams } from "react-router-dom";
 import SmartImage from "../components/SmartImage";
 import LightboxMedia from "../components/LightboxMedia";
+import { useLightbox } from "../hooks/useLightbox";
+import { handleRowKeys } from "../hooks/useKeyboard";
 
 type MediaItem = {
   // full-size image or HLS playlist, shown in the lightbox
@@ -25,13 +27,6 @@ type MediaItem = {
 
 const CountryPage: React.FC = () => {
   const params = useParams();
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
-    null
-  );
-  const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
-    null
-  );
-
   const currentData = countries.filter(
     (item) => item.country === params.country
   );
@@ -41,7 +36,7 @@ const CountryPage: React.FC = () => {
 
   const handleClick = (item: Article) => {
     setData(item);
-    setCurrentImageIndex(null);
+    lightbox.close();
   };
 
   const filteredData = countries.filter(
@@ -72,19 +67,9 @@ const CountryPage: React.FC = () => {
     [data]
   );
 
-  const handlePrevClick = () => {
-    if (currentImageIndex !== null && currentImageIndex > 0) {
-      setSwipeDirection("right");
-      setCurrentImageIndex(currentImageIndex - 1);
-    }
-  };
-
-  const handleNextClick = () => {
-    if (currentImageIndex !== null && currentImageIndex < media.length - 1) {
-      setSwipeDirection("left");
-      setCurrentImageIndex(currentImageIndex + 1);
-    }
-  };
+  const lightbox = useLightbox(media.length);
+  const currentImageIndex = lightbox.index;
+  const swipeDirection = lightbox.direction;
 
   return (
     <motion.div
@@ -101,24 +86,32 @@ const CountryPage: React.FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green"
+          ref={lightbox.dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Media viewer"
+          tabIndex={-1}
+          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-none"
         >
-          <div
+          <button
+            type="button"
+            aria-label="Close (Esc)"
             className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
-            onClick={() => setCurrentImageIndex(null)}
+            onClick={lightbox.close}
           >
-            <img src={close} alt="Close" className="w-[1.5vw] h-auto" />
-          </div>
+            <img src={close} alt="" className="w-[1.5vw] h-auto" />
+          </button>
 
           {/* Left arrow */}
           <button
-            onClick={handlePrevClick}
+            onClick={lightbox.prev}
+            aria-label="Previous (←)"
             disabled={currentImageIndex === 0}
             className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
               currentImageIndex === 0 ? "opacity-30 cursor-not-allowed" : ""
             }`}
           >
-            <img src={leftArrow} alt="Previous" className="w-[3vw] h-auto" />
+            <img src={leftArrow} alt="" className="w-[3vw] h-auto" />
           </button>
 
           {/* Media Display */}
@@ -139,7 +132,8 @@ const CountryPage: React.FC = () => {
 
           {/* Right arrow */}
           <button
-            onClick={handleNextClick}
+            onClick={lightbox.next}
+            aria-label="Next (→)"
             disabled={currentImageIndex === media.length - 1}
             className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
               currentImageIndex === media.length - 1
@@ -147,7 +141,7 @@ const CountryPage: React.FC = () => {
                 : ""
             }`}
           >
-            <img src={rightArrow} alt="Next" className="w-[3vw] h-auto" />
+            <img src={rightArrow} alt="" className="w-[3vw] h-auto" />
           </button>
         </motion.div>
       )}
@@ -234,14 +228,24 @@ const CountryPage: React.FC = () => {
 
               {/* Media Slider */}
               {(data?.images || data?.videos) && (
-                <div className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y">
+                <div
+                  className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y"
+                  onKeyDown={handleRowKeys}
+                >
                   {media.map((item: MediaItem, index: number) => (
-                    <div key={`${item.src}-${index}`} className="relative">
+                    <button
+                      key={`${item.src}-${index}`}
+                      ref={lightbox.thumbRef(index)}
+                      type="button"
+                      data-row-item
+                      aria-label={`Open ${item.type === "video" ? "video" : "photo"} ${index + 1} of ${media.length}`}
+                      onClick={() => lightbox.open(index)}
+                      className="thumb-focus relative shrink-0 cursor-zoom-in outline-none"
+                    >
 
                       {item.type === "video" ? (
                         <div className="relative h-full">
                           <SmartImage
-                            onClick={() => setCurrentImageIndex(index)}
                             src={item.preview}
                             loading="lazy"
                             className="min-w-[15vw] h-full object-cover cursor-zoom-in"
@@ -249,21 +253,19 @@ const CountryPage: React.FC = () => {
                           />
                           <img
                             src={playBtn}
-                            onClick={() => setCurrentImageIndex(index)}
                             alt="Play Button"
                             className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
                           />
                         </div>
                       ) : (
                         <SmartImage
-                          onClick={() => setCurrentImageIndex(index)}
                           src={item.preview}
                           loading="lazy"
                           alt="Image"
                           className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
                         />
                       )}
-                    </div>
+                    </button>
                   ))}
                 </div>
               )}

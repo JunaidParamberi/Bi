@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useKeyboard } from '../hooks/useKeyboard';
 import { motion } from 'framer-motion';
 import { team1, team2, mediaUrl, type TeamMember } from '../content';
 import SmartImage from '../components/SmartImage';
@@ -93,6 +94,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
 
 const TeamPage: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  useKeyboard({ Escape: () => setSelectedMember(null) }, selectedMember !== null);
 
   return (
     <div className='w-full h-full flex justify-center items-center py-6'>

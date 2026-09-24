@@ -2,6 +2,7 @@ import MapComponent from "../components/Map.tsx";
 import { Link } from "react-router-dom";
 import Button from "../components/Button.tsx";
 import { useState } from "react";
+import { useKeyboard } from "../hooks/useKeyboard";
 import { motion } from "framer-motion";
 
 // Define the ButtonProps interface for the activate function
@@ -38,6 +39,8 @@ function MapPage() {
   const handleClick = () => {
     setIsActive(true); // Set the state to true when clicked
   };
+
+  useKeyboard({ Escape: () => setIsActive(false) }, isActive);
 
   return (
     <>
