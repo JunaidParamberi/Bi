@@ -4,7 +4,7 @@ import gloImg from '../assets/images/globe-bg.webp';
 import RadarWave from '../components/RadarWave';
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { PuffLoader } from 'react-spinners';
+import BrandLoader from '../components/BrandLoader';
 
 function RealisticGlobePage() {
   const globeEl = useRef<GlobeMethods | undefined>(undefined);
@@ -58,7 +58,7 @@ function RealisticGlobePage() {
 
         {!isGlobeLoaded && (
           <div className="absolute w-full h-full flex justify-center items-center">
-            <PuffLoader size={100} />
+            <BrandLoader />
           </div>
         )}
 
