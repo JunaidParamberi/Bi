@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
-import mapImg from "../assets/images/Map.svg";
+// Raster exports of Map.svg: the 1 MB vector took seconds to download and draw, so the pins
+// appeared on an empty background. Same artwork, ~115 KB at 1x.
+import mapImg from "../assets/images/map-1920.webp";
+import mapImg2x from "../assets/images/map-3826.webp";
 import pinImg from "../assets/images/Pin.svg";
 import { countries } from "../content";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import BrandLoader from "./BrandLoader";
 
 // Marker type definition
 interface Marker {
@@ -91,6 +95,15 @@ const MapComponent: React.FC = () => {
   const [activeCountry, setActiveCountry] = useState<string>("");
   const [position, setPosition] = useState<Marker | undefined>(undefined);
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<HTMLImageElement | null>(null);
+  // Pins wait for the map, so they never float over an empty background
+  const [mapReady, setMapReady] = useState(false);
+
+  useEffect(() => {
+    // a cached image can finish before React attaches onLoad
+    const img = mapRef.current;
+    if (img?.complete && img.naturalWidth > 0) setMapReady(true);
+  }, []);
 
   const handleClick = (country: string) => {
     setActiveCountry(country);
@@ -141,14 +154,30 @@ const MapComponent: React.FC = () => {
       >
         {/* Map Image */}
         <img
+          ref={mapRef}
           src={mapImg}
+          srcSet={`${mapImg} 1920w, ${mapImg2x} 3826w`}
+          sizes="85vw"
+          width={1913}
+          height={1000}
+          fetchPriority="high"
           decoding="async"
-          className="absolute top-0 left-0 object-contain"
+          onLoad={() => setMapReady(true)}
+          onError={() => setMapReady(true)}
+          className={`absolute top-0 left-0 w-full h-auto transition-opacity duration-500 ${
+            mapReady ? "opacity-100" : "opacity-0"
+          }`}
           alt="Map"
         />
 
+        {!mapReady && (
+          <div className="absolute inset-0 flex justify-center items-center">
+            <BrandLoader />
+          </div>
+        )}
+
         {/* Markers */}
-        {markers.map((marker) => (
+        {mapReady && markers.map((marker) => (
           <div
             key={marker.id}
             onClick={() => handleClick(marker.country)}
@@ -161,15 +190,19 @@ const MapComponent: React.FC = () => {
             title={marker.country}
           >
             <motion.img
-              initial={{ opacity: 1, y: 0 }} // Start fully visible at the original position
+              initial={{ opacity: 0, y: -12 }} // Drop in once the map is on screen
               animate={{
+                opacity: 1,
                 y: [0, -3, 0], // Float effect
               }}
               transition={{
-                duration: 1,
-                ease: "easeInOut",
-                repeat: Infinity, // Repeat the animation
-                repeatType: "reverse", // Reverse the animation instead of looping
+                opacity: { duration: 0.4, delay: 0.3 + marker.id * 0.06 },
+                y: {
+                  duration: 1,
+                  ease: "easeInOut",
+                  repeat: Infinity, // Repeat the animation
+                  repeatType: "reverse", // Reverse the animation instead of looping
+                },
               }}
               whileHover={{
                 scale: 1.1, // Scale up on hover
