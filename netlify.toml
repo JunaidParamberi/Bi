@@ -1,6 +1,0 @@
-# Netlify only: send every route to the app so client-side routing works.
-# (Cloudflare reads wrangler.jsonc instead and rejects this rule in _redirects.)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
