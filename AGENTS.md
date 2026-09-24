@@ -4,7 +4,7 @@ React 18 + TypeScript + Vite 7 + Tailwind 3 single-page app (Boehringer Ingelhei
 
 ## Commands
 
-- Node 22 is pinned via `.nvmrc` (Cloudflare Pages also sets `NODE_VERSION=22`; Vite 7 requires ≥20.19/22.12 — Node 18 will fail the build)
+- Node 24 (LTS) is pinned via `.nvmrc` (Cloudflare Pages also sets `NODE_VERSION=24`; Vite 7 requires ≥20.19/22.12 — Node 18 will fail the build)
 - `npm run dev` — dev server
 - `npm run build` — **this is also the typecheck**: `tsc && vite build`. Run it before considering work done.
 - Typecheck only: `npx tsc --noEmit`
