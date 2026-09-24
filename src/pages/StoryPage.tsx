@@ -35,11 +35,15 @@ export default function StoryPage() {
               src: mediaUrl(v.src.hls),
               thumb: mediaUrl(v.thumb.full),
               preview: mediaUrl(v.thumb.thumb),
+              width: v.src.width,
+              height: v.src.height,
             })),
             ...data.images.map((image) => ({
               type: "image" as const,
               src: mediaUrl(image.full),
               preview: mediaUrl(image.thumb),
+              width: image.width,
+              height: image.height,
             })),
           ]
         : [],

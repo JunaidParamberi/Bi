@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { PuffLoader } from 'react-spinners';
+import BrandLoader from './BrandLoader';
 
 interface HlsVideoProps {
   src: string;
   poster?: string;
+  // small, usually already cached image shown until the full poster has decoded
+  posterPreview?: string;
   className: string;
   onCanPlay: () => void;
   onWaiting: () => void;
@@ -12,8 +14,24 @@ interface HlsVideoProps {
 }
 
 // Streams an HLS playlist: hls.js where Media Source Extensions exist, native playback elsewhere (Safari/iOS)
-function HlsVideo({ src, poster, className, onCanPlay, onWaiting, onPlaying, onError }: HlsVideoProps) {
+function HlsVideo({ src, poster, posterPreview, className, onCanPlay, onWaiting, onPlaying, onError }: HlsVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [posterSrc, setPosterSrc] = useState(posterPreview ?? poster);
+
+  useEffect(() => {
+    // Swap to the full poster only once it is decoded, so it never paints in from the top
+    if (!poster || poster === posterPreview) return;
+    let cancelled = false;
+    const img = new Image();
+    img.src = poster;
+    img.decode().then(
+      () => !cancelled && setPosterSrc(poster),
+      () => undefined
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [poster, posterPreview]);
 
   useEffect(() => {
     const video = ref.current;
@@ -51,7 +69,7 @@ function HlsVideo({ src, poster, className, onCanPlay, onWaiting, onPlaying, onE
       autoPlay
       playsInline
       preload='auto'
-      poster={poster}
+      poster={posterSrc}
       className={className}
       onCanPlay={onCanPlay}
       onWaiting={onWaiting}
@@ -62,9 +80,16 @@ function HlsVideo({ src, poster, className, onCanPlay, onWaiting, onPlaying, onE
 }
 
 export type LightboxItem = {
+  // full image or HLS playlist
   src: string;
   type: 'image' | 'video';
+  // full-size video poster
   thumb?: string;
+  // small image already shown in the slider
+  preview?: string;
+  // intrinsic size, so the frame can be drawn at the right shape before anything loads
+  width: number;
+  height: number;
 };
 
 interface LightboxMediaProps {
@@ -89,25 +114,32 @@ function LightboxMedia({ media, index, className }: LightboxMediaProps) {
     [media[index - 1], media[index + 1]].forEach((neighbour) => {
       if (!neighbour) return;
       const url = neighbour.type === 'image' ? neighbour.src : neighbour.thumb;
-      if (url) new Image().src = url;
+      if (!url) return;
+      const img = new Image();
+      img.src = url;
+      // decode ahead of time so the next photo appears in one piece
+      img.decode().catch(() => undefined);
     });
   }, [media, index]);
 
   if (!item) return null;
 
+  const ready = readySrc === item.src;
+
   return (
-    <>
-      {loading && (
-        <div className='absolute inset-0 flex justify-center items-center pointer-events-none'>
-          <PuffLoader color='#36d7b7' size={100} />
-        </div>
-      )}
+    // The frame carries the border and the media's real proportions, so it keeps its size
+    // and shows a skeleton until the media is ready
+    <div
+      className={`relative overflow-hidden ${ready ? '' : 'skeleton'} ${className}`}
+      style={{ aspectRatio: `${item.width} / ${item.height}` }}
+    >
       {item.type === 'video' ? (
         <HlsVideo
           key={item.src}
           src={item.src}
           poster={item.thumb}
-          className={className}
+          posterPreview={item.preview}
+          className='absolute inset-0 w-full h-full object-cover'
           onCanPlay={markReady}
           onWaiting={() => setBuffering(true)}
           onPlaying={() => setBuffering(false)}
@@ -119,12 +151,18 @@ function LightboxMedia({ media, index, className }: LightboxMediaProps) {
           src={item.src}
           alt='media'
           decoding='async'
-          className={className}
-          onLoad={markReady}
+          // hidden until fully decoded, then faded in, so large photos never paint in from the top
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${ready ? 'opacity-100' : 'opacity-0'}`}
+          onLoad={(e) => e.currentTarget.decode().then(markReady, markReady)}
           onError={markReady}
         />
       )}
-    </>
+      {loading && (
+        <div className='absolute inset-0 flex justify-center items-center pointer-events-none'>
+          <BrandLoader />
+        </div>
+      )}
+    </div>
   );
 }
 

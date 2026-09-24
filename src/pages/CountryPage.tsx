@@ -19,6 +19,8 @@ type MediaItem = {
   // video poster shown before playback
   thumb?: string;
   caption?: string;
+  width: number;
+  height: number;
 };
 
 const CountryPage: React.FC = () => {
@@ -56,11 +58,15 @@ const CountryPage: React.FC = () => {
         preview: mediaUrl(video.thumb.thumb),
         thumb: mediaUrl(video.thumb.full),
         caption: video.caption,
+        width: video.src.width,
+        height: video.src.height,
       })) || []),
       ...(data?.images?.map((image) => ({
         src: mediaUrl(image.full),
         type: "image" as "image",
         preview: mediaUrl(image.thumb),
+        width: image.width,
+        height: image.height,
       })) || []),
     ],
     [data]
