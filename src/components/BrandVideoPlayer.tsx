@@ -92,8 +92,8 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const hlsRef = useRef<HlsHandle>();
-  const hideTimer = useRef<number>();
+  const hlsRef = useRef<HlsHandle | undefined>(undefined);
+  const hideTimer = useRef<number | undefined>(undefined);
 
   const [posterSrc, setPosterSrc] = useState(posterPreview ?? poster);
   const [playing, setPlaying] = useState(false);
