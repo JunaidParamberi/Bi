@@ -16,7 +16,7 @@ React 18 + TypeScript + Vite 8 + Tailwind 3 single-page app (Boehringer Ingelhei
 
 - Routing is `BrowserRouter` (history API), **not** hash routing, and `vite.config.ts` sets `base: '/'` explicitly so deep links like `/world/Kenya` resolve assets. The README's claim of "relative asset paths and hash routing" is stale — trust the config.
 - Production hosting is **Cloudflare Pages** (project `bi-imeta`, builds `main` → `dist/`, live at https://bi.moonframestudio.com via a GoDaddy CNAME to `bi-imeta.pages.dev`). Pages serves `index.html` for unknown routes by default; `public/_headers` sets noindex and long-lived asset caching.
-- Don't add `public/_redirects` with `/* /index.html 200`: Cloudflare rejects it as an infinite loop. `vercel.json` keeps an equivalent rewrite and headers in case the site ever moves to Vercel. Netlify hosting has been removed.
+- Don't add `public/_redirects` with `/* /index.html 200`: Cloudflare rejects it as an infinite loop. Netlify and Vercel hosting have been removed; Cloudflare Pages is the only host.
 
 ## Content & media pipeline
 
