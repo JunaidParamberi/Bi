@@ -1,10 +1,10 @@
 # AGENTS.md
 
-React 18 + TypeScript + Vite 7 + Tailwind 3 single-page app (Boehringer Ingelheim IMETA SD4G site). Not a monorepo; npm only (`package-lock.json` — don't introduce pnpm/yarn).
+React 18 + TypeScript + Vite 8 + Tailwind 3 single-page app (Boehringer Ingelheim IMETA SD4G site). Not a monorepo; npm only (`package-lock.json` — don't introduce pnpm/yarn).
 
 ## Commands
 
-- Node 24 (LTS) is pinned via `.nvmrc` (Cloudflare Pages also sets `NODE_VERSION=24`; Vite 7 requires ≥20.19/22.12 — Node 18 will fail the build)
+- Node 24 (LTS) is pinned via `.nvmrc` (Cloudflare Pages also sets `NODE_VERSION=24`; Vite 8 requires ≥20.19/22.12 — Node 18 will fail the build)
 - `npm run dev` — dev server
 - `npm run build` — **this is also the typecheck**: `tsc && vite build`. Run it before considering work done.
 - Typecheck only: `npx tsc --noEmit`
