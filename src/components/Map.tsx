@@ -73,7 +73,10 @@ const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ mark
 
           <div>
             {currentData?.articles.map((item) => (
-              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] leading-snug text-balance mb-[0.5vw]">{item?.heading}</motion.h1>
+              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] leading-snug text-balance mb-[0.5vw]">
+                {/* Card shows only the main title; a subtitle after " – " stays on the country page */}
+                {item.heading.split(" – ")[0]}
+              </motion.h1>
             ))}
           </div>
           <motion.div variants={lineVariants}>
