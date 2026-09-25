@@ -6,6 +6,10 @@ import { startBoot } from './boot';
 
 startBoot();
 
+// Native-app feel: no browser drag ghosts (images, links) and no right-click / long-press menu
+document.addEventListener('dragstart', (e) => e.preventDefault());
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
