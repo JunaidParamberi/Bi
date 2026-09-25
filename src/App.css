@@ -329,44 +329,6 @@ stroke: none;
 }
 
 /* Animation for opening (from the top-left corner) */
-@keyframes growFromTopLeft {
-  0% {
-    
-    transform: scale(0);
-    transform-origin: top left;
-  }
-  100% {
-   
-    transform: scale(1);
-    transform-origin: top left;
-  }
-}
-
-/* Animation for closing (reverse of opening) */
-@keyframes shrinkToTopLeft {
-  0% {
-  
-    transform: scale(1);
-    transform-origin: top left;
-  }
-  100% {
-  
-    transform: scale(0);
-    transform-origin: top left;
-  }
-}
-
-/* Apply animations */
-.futuristic-enter {
-  animation: growFromTopLeft 0.3s ease-out forwards;
-}
-
-.futuristic-exit {
-  animation: shrinkToTopLeft 0.3s ease-in  forwards;
-}
-
-
-
 @keyframes growFromCenter {
   0% {
     opacity: 0;

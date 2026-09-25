@@ -6,7 +6,8 @@ import mapImg2x from "../assets/images/map-3826.webp";
 import pinImg from "../assets/images/Pin.svg";
 import { countries } from "../content";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useFitInViewport } from "../hooks/useFitInViewport";
 import BrandLoader from "./BrandLoader";
 
 // Marker type definition
@@ -17,66 +18,82 @@ interface Marker {
   left: string;
 }
 
-interface MyComponentProps {
-  style?: React.CSSProperties; // Optional style prop with CSSProperties type
-  title: string; // Title prop
-  isVisible: boolean; // Added to the interface
-}
+// Popup is kept this far from the pin, on whichever side has room
+const CARD_GAP = 15;
 
-// CountryCard component with props typed
-const CountryCard: React.FC<MyComponentProps> = ({
-  style,
-  title,
-  isVisible,
-}) => {
-  const currentData = countries.find((data) => data.country === title);
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.85, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1], when: "beforeChildren", staggerChildren: 0.05 },
+  },
+  exit: { opacity: 0, scale: 0.92, filter: "blur(4px)", transition: { duration: 0.18, ease: "easeIn" } },
+} as const;
 
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+const lineVariants = {
+  hidden: { opacity: 0, x: -8 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.25, ease: "easeOut" } },
+} as const;
 
-  useEffect(() => {
-    if (!isVisible) {
-      // Trigger exit animation before removing the card
-      setIsAnimatingOut(true);
-      const timer = setTimeout(() => {
-        setIsAnimatingOut(false); // Ensure it's cleaned up properly
-      }, 600); // Duration of the exit animation
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible]);
+// Country popup anchored to its pin; flips/nudges itself so it never leaves the screen or covers the navbar
+const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ marker }, cardRef) => {
+  const currentData = countries.find((data) => data.country === marker.country);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const fit = useFitInViewport(boxRef, { flipGap: CARD_GAP });
 
   return (
+    // Unscaled box used for measuring; the motion child inside does the animating
     <div
-      style={style}
-      className={`absolute w-fit flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-16 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green z-50
-        ${
-          isVisible && !isAnimatingOut ? "futuristic-enter" : "futuristic-exit"
-        }`}
+      ref={(el) => {
+        boxRef.current = el;
+        if (typeof cardRef === "function") cardRef(el);
+        else if (cardRef) cardRef.current = el;
+      }}
+      className="absolute z-50"
+      style={{
+        top: marker.top,
+        left: marker.left,
+        margin: CARD_GAP,
+        transform: `translate(${fit.x}px, ${fit.y}px)`,
+      }}
     >
-      <div className=" flex h-full w-full flex-col gap-[1vw]">
-        <h1 className="text-[1.3vw]">{currentData?.country}</h1>
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+        // Grow out of the corner nearest the pin
+        style={{ transformOrigin: `${fit.flipX ? "right" : "left"} ${fit.flipY ? "bottom" : "top"}` }}
+        className="w-max flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-16 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green shadow-2xl"
+      >
+        <div className=" flex h-full w-full flex-col gap-[1vw]">
+          <motion.h1 variants={lineVariants} className="text-[1.3vw]">{currentData?.country}</motion.h1>
 
-        <div>
-          {currentData?.articles.map((item) => (
-            <h1 key={item.heading} className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</h1>
-          ))}
+          <div>
+            {currentData?.articles.map((item) => (
+              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</motion.h1>
+            ))}
+          </div>
+          <motion.div variants={lineVariants}>
+            {currentData?.country ? (
+              <Link
+                to={currentData.country}
+                state={currentData}
+                className="text-accent-green text-[0.8vw] "
+              >
+                Read More
+              </Link>
+            ) : (
+              <span className="text-accent-green text-[14px]">Read More</span>
+            )}
+          </motion.div>
         </div>
-        <div>
-          {currentData?.country ? (
-            <Link
-              to={currentData.country}
-              state={currentData}
-              className="text-accent-green text-[0.8vw] "
-            >
-              Read More
-            </Link>
-          ) : (
-            <span className="text-accent-green text-[14px]">Read More</span>
-          )}
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
-};
+});
 // Marker data
 const markers: Marker[] = [
   { id: 1, country: "India", top: "50%", left: "70%" },
@@ -137,16 +154,6 @@ const MapComponent: React.FC = () => {
       className="relative w-full h-full flex justify-center items-center"
       style={{ position: "relative" }}
     >
-      {/* Show CountryCard only if activeCountry is selected */}
-      {activeCountry && position && (
-        <div ref={cardRef}>
-          <CountryCard
-            title={activeCountry}
-            style={{ top: position.top, left: position.left, margin: "15px" }}
-            isVisible={!!activeCountry} // Control visibility
-          />
-        </div>
-      )}
       {/* Container for responsive scaling */}
       <div
         className="relative"
@@ -214,6 +221,11 @@ const MapComponent: React.FC = () => {
             />
           </div>
         ))}
+
+        {/* Same coordinate space as the pins, so the card sits right next to its pin */}
+        <AnimatePresence>
+          {position && <CountryCard key={position.country} ref={cardRef} marker={position} />}
+        </AnimatePresence>
       </div>
     </div>
   );

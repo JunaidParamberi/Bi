@@ -48,7 +48,7 @@ function Navbar() {
 
 
   return (
-    <div className=" card-wrapper ">
+    <div className=" card-wrapper " data-app-navbar>
       <div className=" card-content">
 
     <div className=" active:opacity-70 duration-300 transition-all">
