@@ -10,16 +10,21 @@ import { bootReady } from '../boot';
 function RealisticGlobePage() {
   const globeEl = useRef<GlobeMethods | undefined>(undefined);
   const [isGlobeLoaded, setIsGlobeLoaded] = useState(false);
-  const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+  // The globe fills the 16:9 app stage, not the whole window
+  const stageSize = () => {
+    const stage = document.querySelector('.app-stage');
+    return stage
+      ? { width: stage.clientWidth, height: stage.clientHeight }
+      : { width: window.innerWidth, height: window.innerHeight };
+  };
+  const [dimensions, setDimensions] = useState(stageSize);
 
   useEffect(() => {
     // Debounced so dragging a window edge does not rebuild the globe on every pixel
     let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        setDimensions({ width: window.innerWidth, height: window.innerHeight });
-      }, 200);
+      resizeTimer = setTimeout(() => setDimensions(stageSize()), 200);
     };
 
     window.addEventListener('resize', handleResize);
@@ -45,7 +50,7 @@ function RealisticGlobePage() {
 
   return (
     <motion.div
-      className="w-screen h-screen flex justify-center items-center relative"
+      className="w-full h-full flex justify-center items-center relative"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}

@@ -26,7 +26,7 @@ function NavItem({ to, icon, alt }: { to: string; icon: string; alt: string }) {
           <img
             src={icon}
             alt={alt}
-            className="relative w-[1.4vw] h-[1.4vw] xl:w-[50px] xl:h-[50px] duration-300 transition-all"
+            className="relative w-[1.4cqw] h-[1.4cqw] xl:w-[50px] xl:h-[50px] duration-300 transition-all"
           />
         </>
       )}
@@ -56,12 +56,12 @@ function Navbar() {
       <img
         src={ArrowLeft}
         alt="arrow-left"
-        className="w-[1.4vw] h-[1.4vw]  cursor-pointer  mr-[3.1vw] "
+        className="w-[1.4cqw] h-[1.4cqw]  cursor-pointer  mr-[3.1cqw] "
         onClick={goBackward} // Call goBackward on click
         />
     </div>
 
-      <div className="flex items-center gap-[1.5vw] ">
+      <div className="flex items-center gap-[1.5cqw] ">
         <NavItem to="/more" icon={More} alt="more" />
         <NavItem to="/" icon={Globe} alt="globe" />
         <NavItem to="/world" icon={Home} alt="home" />
@@ -72,7 +72,7 @@ function Navbar() {
       <img
         src={ArrowRight}
         alt="arrow-right"
-        className="w-[1.4vw] h-[1.4vw] cursor-pointer ml-[3.1vw]"
+        className="w-[1.4cqw] h-[1.4cqw] cursor-pointer ml-[3.1cqw]"
         onClick={goForward} // Call goForward on click
         />
     </div>

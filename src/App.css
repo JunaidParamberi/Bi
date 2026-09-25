@@ -61,7 +61,7 @@
 }
 
 @utility card-content {
-  @apply flex h-full bg-black justify-between w-full items-center rounded-full px-[1.5vw] py-[0.5vw]  z-10; /* Set z-index to 10 */
+  @apply flex h-full bg-black justify-between w-full items-center rounded-full px-[1.5cqw] py-[0.5cqw]  z-10; /* Set z-index to 10 */
 }
 
 @layer base {
@@ -153,6 +153,18 @@
     height: 100vh;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Every page is laid out for a 16:9 screen in container units (cqw/cqh), so the whole UI scales as
+     one 16:9 stage that fits any window; extra width or height just shows the background */
+  .app-stage {
+    position: relative;
+    container-type: size;
+    width: min(100vw, calc(100vh * 16 / 9));
+    height: min(100vh, calc(100vw * 9 / 16));
   }
 
   .app > p {
@@ -340,7 +352,7 @@ stroke: none;
   top: 0;
   left: 0;
   width: 90%;
-  height: 100vh;
+  height: 100cqh;
   background: radial-gradient(circle, rgba(0, 228, 124, 0.5) 0%, rgba(0, 228, 124, 0) 70%);
   pointer-events: none; /* Allow clicks to pass through */
   z-index: -10; /* Position above the globe */
@@ -380,8 +392,8 @@ stroke: none;
 
 .pulse {
   position: relative;
-  width: 37vw;
-  height: 37vw;
+  width: 37cqw;
+  height: 37cqw;
   /* box-shadow: inset 0 0 40px var(--Accent-Green),
   0 0 50px var(--Accent-Green); */
   border-radius: 50%;
@@ -404,16 +416,16 @@ stroke: none;
 
 @keyframes animate {
   0% {
-    width:  37vw;
-    height:  37vw;
+    width:  37cqw;
+    height:  37cqw;
     opacity: 1;
   }
   50% {
     opacity: 1;
   }
   100% {
-    width: 100vw;
-    height: 100vw;
+    width: 100cqw;
+    height: 100cqw;
     opacity: 0;
 
    
@@ -426,16 +438,16 @@ stroke: none;
        only screen and (min-resolution: 192dpi) {
         @keyframes animate {
           0% {
-            width:  37vw;
-            height:  37vw;
+            width:  37cqw;
+            height:  37cqw;
             opacity: 1;
           }
           50% {
             opacity: 1;
           }
           100% {
-            width: 72vw;
-            height: 72vw;
+            width: 72cqw;
+            height: 72cqw;
             opacity: 0;
         
            

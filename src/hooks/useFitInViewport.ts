@@ -14,11 +14,17 @@ type Options = {
   within?: RefObject<HTMLElement | null>;
 };
 
-// Popups must stay above the bottom of the viewport or the floating navbar, whichever is higher
+// Popups must stay inside the 16:9 app stage and above the floating navbar
 function viewportBounds() {
+  const stage = document.querySelector('.app-stage')?.getBoundingClientRect() ?? new DOMRect(0, 0, window.innerWidth, window.innerHeight);
   const nav = document.querySelector('[data-app-navbar]');
   const navTop = nav ? nav.getBoundingClientRect().top : Infinity;
-  return { top: MARGIN, left: MARGIN, right: window.innerWidth - MARGIN, bottom: Math.min(window.innerHeight, navTop) - MARGIN };
+  return {
+    top: stage.top + MARGIN,
+    left: stage.left + MARGIN,
+    right: stage.right - MARGIN,
+    bottom: Math.min(stage.bottom, navTop) - MARGIN,
+  };
 }
 
 // Measures an absolutely positioned popup at its preferred spot and returns how to shift it to stay

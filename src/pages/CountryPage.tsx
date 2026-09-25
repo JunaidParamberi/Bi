@@ -107,10 +107,10 @@ const CountryPage: React.FC = () => {
             whileHover={{ rotate: 90, scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             // Big round hit area around the thin icon; negative margin keeps the icon where it was
-            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer p-[1.2vw] -m-[1.2vw] rounded-full hover:bg-white/10 transition-colors"
+            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer p-[1.2cqw] -m-[1.2cqw] rounded-full hover:bg-white/10 transition-colors"
             onClick={lightbox.close}
           >
-            <img src={close} alt="" className="w-[1.5vw] h-auto" />
+            <img src={close} alt="" className="w-[1.5cqw] h-auto" />
           </motion.button>
 
           {/* Left arrow */}
@@ -118,11 +118,11 @@ const CountryPage: React.FC = () => {
             onClick={lightbox.prev}
             aria-label="Previous (←)"
             disabled={currentImageIndex === 0}
-            className={`absolute left-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
+            className={`absolute left-8 cursor-pointer z-50 text-accent-green p-[1cqw] -m-[1cqw] rounded-full hover:bg-white/10 transition-colors ${
               currentImageIndex === 0 ? "opacity-30 cursor-not-allowed" : ""
             }`}
           >
-            <img src={leftArrow} alt="" className="w-[3vw] h-auto" />
+            <img src={leftArrow} alt="" className="w-[3cqw] h-auto" />
           </button>
 
           {/* Media Display */}
@@ -153,13 +153,13 @@ const CountryPage: React.FC = () => {
             onClick={lightbox.next}
             aria-label="Next (→)"
             disabled={currentImageIndex === media.length - 1}
-            className={`absolute right-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
+            className={`absolute right-8 cursor-pointer z-50 text-accent-green p-[1cqw] -m-[1cqw] rounded-full hover:bg-white/10 transition-colors ${
               currentImageIndex === media.length - 1
                 ? "opacity-30 cursor-not-allowed"
                 : ""
             }`}
           >
-            <img src={rightArrow} alt="" className="w-[3vw] h-auto" />
+            <img src={rightArrow} alt="" className="w-[3cqw] h-auto" />
           </button>
         </motion.div>
       )}
@@ -196,7 +196,7 @@ const CountryPage: React.FC = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="w-full h-full flex flex-col justify-items-end items-baseline"
             >
-              <h1 className="text-[2.8vw] font-bold w-full text-left text-white my-4">
+              <h1 className="text-[2.8cqw] font-bold w-full text-left text-white my-4">
                 {newData.country}
               </h1>
 
@@ -205,10 +205,10 @@ const CountryPage: React.FC = () => {
                   <motion.button
                     key={index}
                     onClick={() => handleClick(item)}
-                    className={`relative font-semibold px-[0.8vw] transition-[color,font-size,padding] duration-300 ease-out ${
+                    className={`relative font-semibold px-[0.8cqw] transition-[color,font-size,padding] duration-300 ease-out ${
                       data?.heading === item.heading
-                        ? "text-dark-green py-[0.4vw] text-[1vw]"
-                        : "text-white text-[0.9vw] py-[0.7%] bg-black/20 hover:text-accent-green"
+                        ? "text-dark-green py-[0.4cqw] text-[1cqw]"
+                        : "text-white text-[0.9cqw] py-[0.7%] bg-black/20 hover:text-accent-green"
                     }${
                       // thin divider between two neighbouring inactive tabs
                       index > 0 &&
@@ -248,19 +248,19 @@ const CountryPage: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]"
+                  className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1cqw]"
                 >
-                  <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw] whitespace-pre-line">
+                  <p className="text-white text-[1cqw] xl:text-[0.9cqw] p-[0.3cqw] whitespace-pre-line">
                     {data?.article}
                   </p>
 
-                  <div className="flex flex-col gap-[1vw] text-[1vw] xl:text-[0.9vw] text-white p-[0.3vw]">
+                  <div className="flex flex-col gap-[1cqw] text-[1cqw] xl:text-[0.9cqw] text-white p-[0.3cqw]">
                     {data?.lists?.map((ul: any, index: Key) => (
-                      <div key={index} className="flex flex-col gap-[0.5vw]">
+                      <div key={index} className="flex flex-col gap-[0.5cqw]">
                         {ul.listHead && (
                           <h3 className="font-semibold">{ul.listHead} :</h3>
                         )}
-                        <ul className="flex flex-col font-extralight px-[2vw] gap-[0.7vw] list-disc">
+                        <ul className="flex flex-col font-extralight px-[2cqw] gap-[0.7cqw] list-disc">
                           {ul.listPoints.map((li: any, liIndex: Key) => (
                             <li key={liIndex}>{li}</li>
                           ))}
@@ -269,9 +269,9 @@ const CountryPage: React.FC = () => {
                     ))}
                   </div>
                   {data?.subArticles && data.subArticles.length > 0 && (
-                    <div className="flex flex-col gap-[1vw] text-[1vw] xl:text-[0.9vw] text-white p-[0.3vw]">
+                    <div className="flex flex-col gap-[1cqw] text-[1cqw] xl:text-[0.9cqw] text-white p-[0.3cqw]">
                       {data.subArticles.map((subArticle, index) => (
-                        <div key={index} className="flex flex-col gap-[0.5vw]">
+                        <div key={index} className="flex flex-col gap-[0.5cqw]">
                           <h3 className="font-semibold">
                             {subArticle.heading}
                           </h3>
@@ -314,13 +314,13 @@ const CountryPage: React.FC = () => {
                           <SmartImage
                             src={item.preview}
                             loading="lazy"
-                            className="min-w-[15vw] h-full object-cover cursor-zoom-in"
+                            className="min-w-[15cqw] h-full object-cover cursor-zoom-in"
                             alt="Video Thumbnail"
                           />
                           <img
                             src={playBtn}
                             alt="Play Button"
-                            className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-black/40 rounded-full"
+                            className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4cqw] h-[4cqw] bg-black/40 rounded-full"
                           />
                         </div>
                       ) : (
@@ -328,7 +328,7 @@ const CountryPage: React.FC = () => {
                           src={item.preview}
                           loading="lazy"
                           alt="Image"
-                          className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
+                          className="min-w-[16.2cqw] h-full object-cover cursor-zoom-in"
                         />
                       )}
                     </motion.button>

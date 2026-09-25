@@ -55,9 +55,9 @@ function LightboxMedia({ media, index, className }: LightboxMediaProps) {
     <div
       data-lightbox-frame
       className={`relative overflow-hidden ${ready ? '' : 'skeleton'} ${className}`}
-      // Height is capped by both the available height and 90vw, so the frame always keeps the media's
+      // Height is capped by both the available height and 90cqw, so the frame always keeps the media's
       // exact shape (a fixed height plus a max-width squashed it, and the video got cropped at the sides)
-      style={{ aspectRatio: `${item.width} / ${item.height}`, height: `min(95%, calc(90vw * ${item.height} / ${item.width}))` }}
+      style={{ aspectRatio: `${item.width} / ${item.height}`, height: `min(95%, calc(90cqw * ${item.height} / ${item.width}))` }}
     >
       {item.type === 'video' ? (
         <BrandVideoPlayer

@@ -14,8 +14,8 @@ interface ButtonProps {
 export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
   return (
     <div className="bg-dark-green border-accent-green border-[0.5px] w-full px-[10%] xl:py-20 py-[15%] flex flex-col gap-5 rounded-none text-white">
-      <h1 className="text-[2vw] xl:text-[2vw] ">IMETA</h1>
-      <h2 className="text-[1vw] xl:text-[0.9vw] ">
+      <h1 className="text-[2cqw] xl:text-[2cqw] ">IMETA</h1>
+      <h2 className="text-[1cqw] xl:text-[0.9cqw] ">
         The IMETA region is unique in its rich cultural and demographic
         diversity; however, it also encompasses some of the world’s most
         underserved communities. The Boehringer Ingelheim team in IMETA is
@@ -24,7 +24,7 @@ export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
       </h2>
       <button
         type="button"
-        className="read-more self-start text-[0.8vw]"
+        className="read-more self-start text-[0.8cqw]"
         onClick={activate} // Trigger the activate function when clicking "Read More"
       >
         Read More
@@ -83,8 +83,8 @@ function MapPage() {
         <div className="absolute w-[22%] xl:w-[20%] z-50 bottom-[-4%] gap-5 xl:gap-8 left-0 flex flex-col">
           <Imeta activate={handleClick} />{" "}
           <div className="flex flex-col gap-1">
-            <span className="text-gray-300 text-[0.8vw]">DISCLIMER </span>
-            <span className="text-gray-300 text-[0.8vw]">
+            <span className="text-gray-300 text-[0.8cqw]">DISCLIMER </span>
+            <span className="text-gray-300 text-[0.8cqw]">
               *The data provided on this platform are updated as of October 27,
               2025”
             </span>
@@ -117,10 +117,10 @@ function MapPage() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="flex justify-between items-center h-full w-full xl:gap-10 xl:mt-30 flex-col"
         >
-          <h1 className=" text-[2.6vw] w-full font-bold  ">
+          <h1 className=" text-[2.6cqw] w-full font-bold  ">
             India, Middle East, Turkey, and Africa (IMETA)
           </h1>
-          <div className=" w-[85vw] ] object-contain">
+          <div className=" w-[85cqw] ] object-contain">
             <MapComponent />
           </div>
         </motion.div>
@@ -135,7 +135,7 @@ function MapPage() {
             animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.3, delay: 0.1 } }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="bg-dark-green/85 w-screen absolute z-100 h-[110vh] flex justify-center items-center"
+            className="bg-dark-green/85 w-screen absolute z-100 h-[110cqh] flex justify-center items-center"
             onClick={() => setIsActive(false)}
           >
             <motion.div
@@ -153,7 +153,7 @@ function MapPage() {
                 variants={modalClose}
                 whileHover={{ rotate: 90, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer text-white hover:text-accent-green hover:bg-white/10 transition-colors p-[0.8vw] -m-[0.8vw] rounded-full"
+                className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer text-white hover:text-accent-green hover:bg-white/10 transition-colors p-[0.8cqw] -m-[0.8cqw] rounded-full"
                 onClick={() => setIsActive(false)}
               >
                 {/* Same path and sizing as the MUI Close icon it replaces */}
@@ -167,12 +167,12 @@ function MapPage() {
                 </svg>
               </motion.button>
               <div className="flex flex-col gap-3 xl:gap-16 text-white">
-                <motion.h2 variants={modalLine} className="text-[2.5vw]">IMETA</motion.h2>
+                <motion.h2 variants={modalLine} className="text-[2.5cqw]">IMETA</motion.h2>
                 <motion.span
                   variants={modalRule}
-                  className="block h-px w-[6vw] bg-accent-green origin-left"
+                  className="block h-px w-[6cqw] bg-accent-green origin-left"
                 />
-                <motion.p variants={modalLine} className="text-[1.150vw] font-extralight flex flex-col gap-3 ">
+                <motion.p variants={modalLine} className="text-[1.150cqw] font-extralight flex flex-col gap-3 ">
                   The IMETA region is unique in its rich cultural and demographic
                   diversity; however, it also encompasses some of the world’s most
                   underserved communities. The Boehringer Ingelheim team in IMETA

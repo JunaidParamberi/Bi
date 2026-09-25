@@ -12,14 +12,14 @@ function StoryCard({ item }: StoryCardProps) {
       <SmartImage
         src={mediaUrl(item.coverImage.full)}
         alt={item.title}
-        className="h-[35vh] min-w-full object-cover"
+        className="h-[35cqh] min-w-full object-cover"
       />
 
       <div className="flex flex-col gap-5 xl:gap-16">
         <h2 className="text-2xl xl:text-[60px]">{item.title}</h2>
 
         {/* Use the line-clamp utility to limit text to 3 lines */}
-        <p className="text-[1vw] xl:text-[0.9vw] text-white xl:leading-[1.2] line-clamp-3 ">
+        <p className="text-[1cqw] xl:text-[0.9cqw] text-white xl:leading-[1.2] line-clamp-3 ">
           {item.coverText}
         </p>
 
@@ -28,7 +28,7 @@ function StoryCard({ item }: StoryCardProps) {
             relative="path"
             to={item.title}
             state={item}
-            className="px-[2vw]  py-[0.7vw] text-[0.9vw] border-accent-green border hover:bg-accent-green hover:text-dark-green active:opacity-70 duration-200 transition-all"
+            className="px-[2cqw]  py-[0.7cqw] text-[0.9cqw] border-accent-green border hover:bg-accent-green hover:text-dark-green active:opacity-70 duration-200 transition-all"
           >
             Read More
           </Link>
