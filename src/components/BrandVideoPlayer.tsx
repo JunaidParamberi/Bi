@@ -323,7 +323,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
       tabIndex={0}
       role='region'
       aria-label='Video player'
-      className={`brand-player group/player bg-dark-green outline-none focus-visible:ring-2 focus-visible:ring-accent-green ${
+      className={`brand-player group/player bg-dark-green outline-hidden focus-visible:ring-2 focus-visible:ring-accent-green ${
         showControls ? '' : 'cursor-none'
       } ${className}`}
       onPointerMove={revealControls}
@@ -387,7 +387,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
         onClick={togglePlay}
         // the icon's own ring is the button's edge, so the disc behind it is cropped to the ring
         className={`absolute inset-0 m-auto w-[clamp(4rem,7vw,9rem)] aspect-square rounded-full
-          bg-dark-green/60 text-accent-green backdrop-blur-sm
+          bg-dark-green/60 text-accent-green backdrop-blur-xs
           transition-all duration-300 hover:bg-accent-green hover:text-dark-green hover:scale-105 ${
             playing || !ready || waiting ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'
           }`}
@@ -397,7 +397,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
 
       {/* Control bar */}
       <div
-        className={`absolute inset-x-0 bottom-0 pt-16 pb-3 px-4 xl:px-8 xl:pb-6 bg-gradient-to-t from-dark-green via-dark-green/70 to-transparent
+        className={`absolute inset-x-0 bottom-0 pt-16 pb-3 px-4 xl:px-8 xl:pb-6 bg-linear-to-t from-dark-green via-dark-green/70 to-transparent
           transition-opacity duration-300 ${showControls && (started || !playing) ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       >
         {/* Seek bar */}
@@ -427,7 +427,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
           />
           {hover && duration > 0 && (
             <div
-              className='absolute bottom-full mb-2 -translate-x-1/2 px-2 py-0.5 xl:px-4 xl:py-1 rounded bg-dark-green border border-accent-green text-accent-green text-xs xl:text-2xl tabular-nums pointer-events-none'
+              className='absolute bottom-full mb-2 -translate-x-1/2 px-2 py-0.5 xl:px-4 xl:py-1 rounded-sm bg-dark-green border border-accent-green text-accent-green text-xs xl:text-2xl tabular-nums pointer-events-none'
               style={{ left: hover.x }}
             >
               {formatTime(hover.time)}
@@ -484,7 +484,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
                 {menuOpen && (
                   <div
                     role='menu'
-                    className='absolute bottom-full right-0 mb-3 min-w-[9rem] xl:min-w-[16rem] py-1 bg-dark-green/95 border border-accent-green backdrop-blur text-sm xl:text-3xl'
+                    className='absolute bottom-full right-0 mb-3 min-w-36 xl:min-w-[16rem] py-1 bg-dark-green/95 border border-accent-green backdrop-blur-sm text-sm xl:text-3xl'
                   >
                     <p className='px-4 py-1 xl:px-6 xl:py-3 text-[0.7em] uppercase tracking-widest text-accent-green/70'>Quality</p>
                     {[{ index: -1, height: 0 }, ...levels].map((level) => {
