@@ -169,7 +169,7 @@ const CountryPage: React.FC = () => {
                 {newData.country}
               </h1>
 
-              <div className="flex w-full items-end gap-2">
+              <div className="flex w-full items-end">
                 {newData.articles.map((item: Article, index: Key) => (
                   <motion.button
                     key={index}
