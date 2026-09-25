@@ -84,7 +84,7 @@ const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ mark
               <Link
                 to={currentData.country}
                 state={currentData}
-                className="text-accent-green text-[0.8vw] "
+                className="read-more text-[0.8vw]"
               >
                 Read More
               </Link>

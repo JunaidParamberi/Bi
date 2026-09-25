@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import playBtn from "../assets/images/play.svg";
 
 import { stories, mediaUrl, type Story } from "../content";
@@ -169,28 +169,35 @@ export default function StoryPage() {
       </div>
 
       {/* Modal for media viewer */}
+      <AnimatePresence>
       {currentIndex !== null && (
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
+          key="lightbox"
+          initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
+          exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.3, delay: 0.1 } }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           ref={lightbox.dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label="Media viewer"
           tabIndex={-1}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-hidden"
+          className="fixed inset-0 flex justify-center items-center bg-dark-green/95 z-50 text-accent-green outline-hidden"
         >
           {/* Close Button */}
-          <button
+          <motion.button
             type="button"
             aria-label="Close (Esc)"
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0, transition: { duration: 0.4, delay: 0.15 } }}
+            exit={{ opacity: 0, rotate: -90, transition: { duration: 0.2 } }}
+            whileHover={{ rotate: 90, scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
             onClick={lightbox.close}
           >
             <img src={close} alt="" className="w-[1.5vw] h-auto" />
-          </button>
+          </motion.button>
 
           {/* Prev Button */}
           <button
@@ -206,18 +213,25 @@ export default function StoryPage() {
 
           {/* Media Display */}
           <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }}
+            exit={{ opacity: 0, scale: 0.94, y: 24, filter: "blur(8px)", transition: { duration: 0.25, ease: "easeIn" } }}
+            className="h-[90%] w-full flex justify-center items-center"
+          >
+          <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, x: swipeDirection === "left" ? 100 : -100 }}
+            initial={swipeDirection ? { opacity: 0, x: swipeDirection === "left" ? 100 : -100 } : false}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: swipeDirection === "left" ? -100 : 100 }}
             transition={{ duration: 0.5 }}
-            className="h-[90%] w-auto flex justify-center items-center"
+            className="h-full w-auto flex justify-center items-center"
           >
             <LightboxMedia
               media={media}
               index={currentIndex}
-              className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-2"
+              className="w-auto border-accent-green border-2"
             />
+          </motion.div>
           </motion.div>
 
           {/* Next Button */}
@@ -235,6 +249,7 @@ export default function StoryPage() {
           </button>
         </motion.div>
       )}
+      </AnimatePresence>
     </motion.div>
   );
 }

@@ -54,7 +54,9 @@ function LightboxMedia({ media, index, className }: LightboxMediaProps) {
     // and shows a skeleton until the media is ready
     <div
       className={`relative overflow-hidden ${ready ? '' : 'skeleton'} ${className}`}
-      style={{ aspectRatio: `${item.width} / ${item.height}` }}
+      // Height is capped by both the available height and 90vw, so the frame always keeps the media's
+      // exact shape (a fixed height plus a max-width squashed it, and the video got cropped at the sides)
+      style={{ aspectRatio: `${item.width} / ${item.height}`, height: `min(95%, calc(90vw * ${item.height} / ${item.width}))` }}
     >
       {item.type === 'video' ? (
         <BrandVideoPlayer
