@@ -1,6 +1,6 @@
 import { Key, useMemo, useState } from "react";
 import cardImg from "../assets/images/Asset 24.png";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { countries, mediaUrl, type Article } from "../content";
 import playBtn from "../assets/images/play.svg";
 import rightArrow from "../assets/images/chevron-right.svg";
@@ -149,13 +149,25 @@ const CountryPage: React.FC = () => {
       {/* Main content */}
       <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
         <div className="w-[90%] h-[90%] flex justify-between">
-          <SmartImage
-            key={data?.coverImage?.full || cardImg}
-            src={data?.coverImage ? mediaUrl(data.coverImage.full) : cardImg}
-            fetchPriority="high"
-            alt=""
-            className="h-full w-[35%] object-cover"
-          />
+          <div className="relative h-full w-[35%] overflow-hidden">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={data?.coverImage?.full || cardImg}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <SmartImage
+                  src={data?.coverImage ? mediaUrl(data.coverImage.full) : cardImg}
+                  fetchPriority="high"
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           <div className="h-full w-[63%] text-[#ffffff81] flex flex-col justify-between">
             <motion.div
@@ -174,20 +186,27 @@ const CountryPage: React.FC = () => {
                   <motion.button
                     key={index}
                     onClick={() => handleClick(item)}
-                    className={`${
+                    className={`relative font-semibold px-[0.8vw] transition-colors duration-300 ${
                       data?.heading === item.heading
-                        ? "bg-accent-green text-dark-green px-[0.8vw] py-[0.4vw] font-semibold text-[1vw]"
-                        : "text-white text-[0.9vw] px-[0.8vw] py-[0.7%] font-semibold bg-black/20"
+                        ? "text-dark-green py-[0.4vw] text-[1vw]"
+                        : "text-white text-[0.9vw] py-[0.7%] bg-black/20 hover:text-accent-green"
                     }${
                       // thin divider between two neighbouring inactive tabs
                       index > 0 &&
                       data?.heading !== item.heading &&
                       data?.heading !== newData.articles[index - 1].heading
-                        ? " relative before:absolute before:left-0 before:top-1/4 before:h-1/2 before:w-px before:bg-white/30"
+                        ? " before:absolute before:left-0 before:top-1/4 before:h-1/2 before:w-px before:bg-white/30"
                         : ""
                     }`}
                   >
-                    {item.heading}
+                    {data?.heading === item.heading && (
+                      <motion.span
+                        layoutId="activeArticleTab"
+                        transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                        className="absolute inset-0 bg-accent-green"
+                      />
+                    )}
+                    <span className="relative">{item.heading}</span>
                   </motion.button>
                 ))}
               </div>
@@ -199,7 +218,15 @@ const CountryPage: React.FC = () => {
                     : "h-full"
                 } max-w-full flex justify-center items-center mb-3`}
               >
-                <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]">
+                <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={data?.heading}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]"
+                >
                   <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw] whitespace-pre-line">
                     {data?.article}
                   </p>
@@ -230,17 +257,26 @@ const CountryPage: React.FC = () => {
                       ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* Media Slider */}
+              <AnimatePresence mode="wait" initial={false}>
               {(data?.images || data?.videos) && (
-                <div
+                <motion.div
+                  key={data?.heading}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, transition: { duration: 0.15 } }}
                   className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y"
                   onKeyDown={handleRowKeys}
                 >
                   {media.map((item: MediaItem, index: number) => (
-                    <button
+                    <motion.button
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, ease: "easeOut", delay: Math.min(index, 6) * 0.05 }}
                       key={`${item.src}-${index}`}
                       ref={lightbox.thumbRef(index)}
                       type="button"
@@ -272,10 +308,11 @@ const CountryPage: React.FC = () => {
                           className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
                         />
                       )}
-                    </button>
+                    </motion.button>
                   ))}
-                </div>
+                </motion.div>
               )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </div>
