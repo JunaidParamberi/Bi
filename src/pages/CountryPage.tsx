@@ -170,7 +170,7 @@ const CountryPage: React.FC = () => {
               </h1>
 
               <div className="flex w-full items-end">
-                {newData.articles.map((item: Article, index: Key) => (
+                {newData.articles.map((item: Article, index: number) => (
                   <motion.button
                     key={index}
                     onClick={() => handleClick(item)}
@@ -178,6 +178,13 @@ const CountryPage: React.FC = () => {
                       data?.heading === item.heading
                         ? "bg-accent-green text-dark-green px-[0.8vw] py-[0.4vw] font-semibold text-[1vw]"
                         : "text-white text-[0.9vw] px-[0.8vw] py-[0.7%] font-semibold bg-black/20"
+                    }${
+                      // thin divider between two neighbouring inactive tabs
+                      index > 0 &&
+                      data?.heading !== item.heading &&
+                      data?.heading !== newData.articles[index - 1].heading
+                        ? " relative before:absolute before:left-0 before:top-1/4 before:h-1/2 before:w-px before:bg-white/30"
+                        : ""
                     }`}
                   >
                     {item.heading}
