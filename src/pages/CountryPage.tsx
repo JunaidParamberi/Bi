@@ -94,6 +94,9 @@ const CountryPage: React.FC = () => {
           aria-label="Media viewer"
           tabIndex={-1}
           className="fixed inset-0 flex justify-center items-center bg-dark-green/95 z-50 text-accent-green outline-hidden"
+          onClick={(e) => {
+            if (!(e.target as HTMLElement).closest("[data-lightbox-frame], button")) lightbox.close();
+          }}
         >
           <motion.button
             type="button"
@@ -103,7 +106,8 @@ const CountryPage: React.FC = () => {
             exit={{ opacity: 0, rotate: -90, transition: { duration: 0.2 } }}
             whileHover={{ rotate: 90, scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
+            // Big round hit area around the thin icon; negative margin keeps the icon where it was
+            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer p-[1.2vw] -m-[1.2vw] rounded-full hover:bg-white/10 transition-colors"
             onClick={lightbox.close}
           >
             <img src={close} alt="" className="w-[1.5vw] h-auto" />
@@ -114,7 +118,7 @@ const CountryPage: React.FC = () => {
             onClick={lightbox.prev}
             aria-label="Previous (←)"
             disabled={currentImageIndex === 0}
-            className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
+            className={`absolute left-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
               currentImageIndex === 0 ? "opacity-30 cursor-not-allowed" : ""
             }`}
           >
@@ -149,7 +153,7 @@ const CountryPage: React.FC = () => {
             onClick={lightbox.next}
             aria-label="Next (→)"
             disabled={currentImageIndex === media.length - 1}
-            className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
+            className={`absolute right-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
               currentImageIndex === media.length - 1
                 ? "opacity-30 cursor-not-allowed"
                 : ""

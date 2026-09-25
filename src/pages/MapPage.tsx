@@ -153,7 +153,7 @@ function MapPage() {
                 variants={modalClose}
                 whileHover={{ rotate: 90, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer text-white hover:text-accent-green transition-colors"
+                className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer text-white hover:text-accent-green hover:bg-white/10 transition-colors p-[0.8vw] -m-[0.8vw] rounded-full"
                 onClick={() => setIsActive(false)}
               >
                 {/* Same path and sizing as the MUI Close icon it replaces */}
