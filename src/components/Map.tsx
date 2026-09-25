@@ -232,7 +232,7 @@ const MapComponent: React.FC = () => {
               <motion.div
                 style={{ transformOrigin: "50% 100%" }}
                 initial={{ opacity: 0, y: -40, scale: 0.4 }}
-                animate={{ opacity: 1, y: 0, scale: isActive ? 1.3 : 1 }}
+                animate={{ opacity: 1, y: 0, scale: isActive ? 1.15 : 1 }}
                 transition={{
                   opacity: { duration: 0.2, delay: land },
                   y: { type: "spring", stiffness: 520, damping: 14, delay: land },
@@ -240,7 +240,7 @@ const MapComponent: React.FC = () => {
                     ? { type: "spring", stiffness: 400, damping: 18 }
                     : { type: "spring", stiffness: 520, damping: 16, delay: entered ? 0 : land },
                 }}
-                whileHover={{ scale: isActive ? 1.35 : 1.15, transition: { duration: 0.2 } }}
+                whileHover={{ scale: isActive ? 1.18 : 1.06, transition: { duration: 0.2 } }}
               >
                 {/* Idle float: each pin has its own pace so they never bob in unison */}
                 <motion.img
