@@ -63,7 +63,7 @@ export default function StoryPage() {
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="w-full h-full flex flex-col py-6 justify-center items-center"
     >
-      <div className="bg-dark-green border-accent-green border-[0.5px] xl:h-[90%] h-full w-full flex justify-center items-center py-7">
+      <div className="bg-dark-green border-accent-green border-(length:--line-hair) xl:h-[90%] h-full w-full flex justify-center items-center py-7">
         <div className="w-[90%] gap-7 xl:gap-16 flex h-[80%] justify-center items-start">
           {/* Cover Image */}
           <div className="w-[50%] h-full">
@@ -87,7 +87,7 @@ export default function StoryPage() {
               {data?.title}
             </h1>
 
-            <div className="border-accent-green border-[0.5px] min-h-[60%] max-h-[60%] max-w-full flex justify-center items-center mb-3">
+            <div className="border-accent-green border-(length:--line-hair) min-h-[60%] max-h-[60%] max-w-full flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
                 {data?.text && (
                   <p className="text-white text-[1cqw] xl:text-[0.9cqw] p-3">
@@ -233,7 +233,7 @@ export default function StoryPage() {
             <LightboxMedia
               media={media}
               index={currentIndex}
-              className="w-auto border-accent-green border-2"
+              className="w-auto border-accent-green border-(length:--line-2)"
             />
           </motion.div>
           </motion.div>

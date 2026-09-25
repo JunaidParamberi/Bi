@@ -13,7 +13,7 @@ interface ButtonProps {
 // Imeta component
 export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
   return (
-    <div className="bg-dark-green border-accent-green border-[0.5px] w-full px-[10%] xl:py-20 py-[15%] flex flex-col gap-5 rounded-none text-white">
+    <div className="bg-dark-green border-accent-green border-(length:--line-hair) w-full px-[10%] xl:py-20 py-[15%] flex flex-col gap-5 rounded-none text-white">
       <h1 className="text-[2cqw] xl:text-[2cqw] ">IMETA</h1>
       <h2 className="text-[1cqw] xl:text-[0.9cqw] ">
         The IMETA region is unique in its rich cultural and demographic
@@ -145,7 +145,7 @@ function MapPage() {
               exit="exit"
               style={{ transformOrigin: "left bottom" }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-[55%] bg-dark-green border-accent-green border-[0.5px] p-[5%] flex justify-center items-center shadow-2xl"
+              className="relative w-[55%] bg-dark-green border-accent-green border-(length:--line-hair) p-[5%] flex justify-center items-center shadow-2xl"
             >
               <motion.button
                 type="button"

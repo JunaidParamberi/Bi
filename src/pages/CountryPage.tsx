@@ -143,7 +143,7 @@ const CountryPage: React.FC = () => {
             <LightboxMedia
               media={media}
               index={currentImageIndex}
-              className="w-auto border-accent-green border-2"
+              className="w-auto border-accent-green border-(length:--line-2)"
             />
           </motion.div>
           </motion.div>
@@ -166,7 +166,7 @@ const CountryPage: React.FC = () => {
       </AnimatePresence>
 
       {/* Main content */}
-      <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
+      <div className="bg-dark-green border-accent-green border-(length:--line-hair) w-full flex justify-center items-center h-[90%]">
         <div className="w-[90%] h-[90%] flex justify-between">
           <div className="relative h-full w-[35%] overflow-hidden">
             <AnimatePresence initial={false}>
@@ -239,7 +239,7 @@ const CountryPage: React.FC = () => {
                     : { height: "100%", minHeight: "0%" }
                 }
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="border-accent-green w-full border-[0.5px] max-w-full flex justify-center items-center mb-3"
+                className="border-accent-green w-full border-(length:--line-hair) max-w-full flex justify-center items-center mb-3"
               >
                 <AnimatePresence mode="wait" initial={false}>
                 <motion.div

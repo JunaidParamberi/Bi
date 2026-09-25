@@ -41,7 +41,7 @@ const CardDetails: React.FC<{ data: TeamMember }> = ({ data }) => {
       animate='show'
       exit='exit'
       style={{ transformOrigin: 'left top' }}
-      className='shadow-2xl flex flex-col gap-[0.5cqw] bg-dark-green border-accent-green border-[0.5px] py-[1.4cqw] px-[1cqw] text-white'
+      className='shadow-2xl flex flex-col gap-[0.5cqw] bg-dark-green border-accent-green border-(length:--line-hair) py-[1.4cqw] px-[1cqw] text-white'
     >
       <motion.h1 variants={lineVariants} className='text-[1.1cqw] font-semibold'>{data.name}</motion.h1>
       <motion.h2 variants={lineVariants} className='text-[0.7cqw] track'>
@@ -97,7 +97,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
       onClick={onClick}
     >
       <AnimatePresence>{showDetails && <CardDetails data={data} />}</AnimatePresence>
-      <div className='w-[32%] h-[95%] ml-3 xl:mb-9 xl:ml-6 absolute border-accent-green border-[0.5px] mb-3'>
+      <div className='w-[32%] h-[95%] ml-3 xl:mb-9 xl:ml-6 absolute border-accent-green border-(length:--line-hair) mb-3'>
         <div className={`w-full h-full overflow-hidden flex justify-center items-center ${showPhoto ? (photoLoaded ? '' : 'skeleton') : 'bg-[#bdbdbd] text-white'}`}>
           {showPhoto ? (
             // The wrapper keeps the skeleton until the photo has loaded, so the box is never empty while it fades in
@@ -110,7 +110,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
           )}
         </div>
       </div>
-      <div className='text-left w-full pl-4 flex h-[90%] bg-black/50 justify-center items-center pr-1 border-[#00e47d7f] border-[0.1px]'>
+      <div className='text-left w-full pl-4 flex h-[90%] bg-black/50 justify-center items-center pr-1 border-[#00e47d7f] border-(length:--line-hair)'>
         <div className='w-[38%]' />
         <div className='w-[60%]'>
           <h1 className='text-white text-[0.8cqw] font-semibold xl:text-[190%] leading-tight mb-1'>{data.name}</h1>
@@ -129,7 +129,7 @@ const TeamPage: React.FC = () => {
   return (
     <PanelContext.Provider value={panelRef}>
     <div className='w-full h-full flex justify-center items-center py-6'>
-      <div ref={panelRef} className='bg-dark-green xl:h-[90%] border-accent-green border-[0.5px] w-full h-full flex overflow-hidden justify-center items-center'>
+      <div ref={panelRef} className='bg-dark-green xl:h-[90%] border-accent-green border-(length:--line-hair) w-full h-full flex overflow-hidden justify-center items-center'>
         <div className=' ml-[3cqw] relative w-[90%] h-[85%] flex flex-col justify-center items-center'>
 
           {/* First part of the card */}
