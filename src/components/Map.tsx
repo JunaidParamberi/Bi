@@ -106,6 +106,14 @@ const markers: Marker[] = [
   { id: 8, country: "Lebanon", top: "41.5%", left: "57.5%" },
 ];
 
+// Pin entrance: order by longitude so they land west to east
+const PIN_START = 0.3;
+const PIN_STAGGER = 0.12;
+const PING_EVERY = 3.4;
+const pinRank = new Map(
+  [...markers].sort((a, b) => parseFloat(a.left) - parseFloat(b.left)).map((m, i) => [m.id, i])
+);
+
 // Main component
 const MapComponent: React.FC = () => {
   // State for active country and its position
@@ -115,6 +123,13 @@ const MapComponent: React.FC = () => {
   const mapRef = useRef<HTMLImageElement | null>(null);
   // Pins wait for the map, so they never float over an empty background
   const [mapReady, setMapReady] = useState(false);
+  // After the entrance, selection changes animate immediately instead of waiting for each pin's slot
+  const [entered, setEntered] = useState(false);
+  useEffect(() => {
+    if (!mapReady) return;
+    const t = setTimeout(() => setEntered(true), (PIN_START + markers.length * PIN_STAGGER + 0.6) * 1000);
+    return () => clearTimeout(t);
+  }, [mapReady]);
 
   useEffect(() => {
     // a cached image can finish before React attaches onLoad
@@ -183,44 +198,62 @@ const MapComponent: React.FC = () => {
           </div>
         )}
 
-        {/* Markers */}
-        {mapReady && markers.map((marker) => (
-          <div
-            key={marker.id}
-            onClick={() => handleClick(marker.country)}
-            className="absolute w-[1.9%] cursor-pointer"
-            style={{
-              top: marker.top,
-              left: marker.left,
-              transform: "translate(-50%, -50%)", // Center the marker
-            }}
-            title={marker.country}
-          >
-            <motion.img
-              initial={{ opacity: 0, y: -12 }} // Drop in once the map is on screen
-              animate={{
-                opacity: 1,
-                y: [0, -3, 0], // Float effect
-              }}
-              transition={{
-                opacity: { duration: 0.4, delay: 0.3 + marker.id * 0.06 },
-                y: {
-                  duration: 1,
-                  ease: "easeInOut",
-                  repeat: Infinity, // Repeat the animation
-                  repeatType: "reverse", // Reverse the animation instead of looping
-                },
-              }}
-              whileHover={{
-                scale: 1.1, // Scale up on hover
-
-                transition: { duration: 0.3 }, // Quick transition on hover
-              }} // Scale slightly on hover
-              src={pinImg}
-              alt="Pin"
-            />
-          </div>
-        ))}
+        {/* Markers: drop in one by one west to east, then idle out of sync with a sonar wave sweeping across */}
+        {mapReady && markers.map((marker) => {
+          const rank = pinRank.get(marker.id) ?? 0;
+          const land = PIN_START + rank * PIN_STAGGER;
+          const isActive = activeCountry === marker.country;
+          const dimmed = activeCountry !== "" && !isActive;
+          return (
+            <motion.div
+              key={marker.id}
+              onClick={() => handleClick(marker.country)}
+              className="absolute w-[1.9%] cursor-pointer"
+              style={{ top: marker.top, left: marker.left, x: "-50%", y: "-50%", zIndex: isActive ? 2 : 1 }}
+              animate={{ opacity: dimmed ? 0.45 : 1 }}
+              transition={{ duration: 0.3 }}
+              title={marker.country}
+            >
+              {/* Soft glow behind the pin: swells and fades on landing, then pulses gently. All pins share the
+                  period, so their landing offsets become a slow wave across the map rather than a unison blink */}
+              <motion.span
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-[40%] w-[260%] aspect-square rounded-full"
+                style={{
+                  x: "-50%",
+                  y: "-50%",
+                  background: "radial-gradient(circle, rgba(0, 51, 38, 0.55) 0%, rgba(0, 51, 38, 0.25) 35%, transparent 70%)",
+                }}
+                initial={{ opacity: 0, scale: 0.3 }}
+                animate={{ opacity: [0, 0.9, 0], scale: [0.3, 1, 1.25] }}
+                transition={{ duration: 2.4, ease: "easeInOut", delay: land + 0.15, repeat: Infinity, repeatDelay: PING_EVERY - 1 }}
+              />
+              {/* Drop with a spring bounce, grow out of the pin tip */}
+              <motion.div
+                style={{ transformOrigin: "50% 100%" }}
+                initial={{ opacity: 0, y: -40, scale: 0.4 }}
+                animate={{ opacity: 1, y: 0, scale: isActive ? 1.3 : 1 }}
+                transition={{
+                  opacity: { duration: 0.2, delay: land },
+                  y: { type: "spring", stiffness: 520, damping: 14, delay: land },
+                  scale: isActive
+                    ? { type: "spring", stiffness: 400, damping: 18 }
+                    : { type: "spring", stiffness: 520, damping: 16, delay: entered ? 0 : land },
+                }}
+                whileHover={{ scale: isActive ? 1.35 : 1.15, transition: { duration: 0.2 } }}
+              >
+                {/* Idle float: each pin has its own pace so they never bob in unison */}
+                <motion.img
+                  src={pinImg}
+                  alt="Pin"
+                  className={`block w-full transition-[filter] duration-300 ${isActive ? "drop-shadow-[0_0_10px_#00e47c]" : ""}`}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 1.8 + (marker.id % 4) * 0.35, ease: "easeInOut", repeat: Infinity, delay: land + 0.6 }}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
 
         {/* Same coordinate space as the pins, so the card sits right next to its pin */}
         <AnimatePresence>
