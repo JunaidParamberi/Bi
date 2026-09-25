@@ -14,13 +14,13 @@ React 19 + TypeScript 7 + Vite 8 + Tailwind 4 single-page app (Boehringer Ingelh
 
 ## Routing / hosting gotchas
 
-- Routing is `BrowserRouter` (history API), **not** hash routing, and `vite.config.ts` sets `base: '/'` explicitly so deep links like `/world/Kenya` resolve assets. The README's claim of "relative asset paths and hash routing" is stale — trust the config.
+- Routing is `BrowserRouter` (history API), **not** hash routing, and `vite.config.ts` sets `base: '/'` explicitly so deep links like `/world/Kenya` resolve assets.
 - Production hosting is **Cloudflare Pages** (project `bi-imeta`, builds `main` → `dist/`, live at https://bi.moonframestudio.com via a GoDaddy CNAME to `bi-imeta.pages.dev`). Pages serves `index.html` for unknown routes by default; `public/_headers` sets noindex and long-lived asset caching.
 - Don't add `public/_redirects` with `/* /index.html 200`: Cloudflare rejects it as an infinite loop. Netlify and Vercel hosting have been removed; Cloudflare Pages is the only host.
 
 ## Content & media pipeline
 
-- All page content lives in `src/content/content.json` (large, hand-edited). Types and the `mediaUrl()` helper are in `src/content/index.ts`. The comment there referencing `scripts/media/build-media.mjs` is stale — that script doesn't exist; content entries are pasted manually.
+- All page content lives in `src/content/content.json` (large, hand-edited). Types and the `mediaUrl()` helper are in `src/content/index.ts`. Content entries are pasted manually from `media:add` output.
 - Media is **not** committed. `npm run media:add` processes a file (sharp for images, ffmpeg/ffprobe for h264 videos → HLS), uploads to Cloudflare R2, and prints a JSON entry you paste into `content.json`. Output goes to `media-build/out/` (gitignored).
   - Requires `ffmpeg`/`ffprobe` on PATH and R2 creds in `.env.local`: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`. The script reads `.env.local` itself; missing vars throw.
   - Keys are content hashes + a version (`IMAGE_VERSION` / `VIDEO_VERSION` in `scripts/media/lib.mjs`). Bump the version when processing settings change, or the CDN will keep serving stale outputs.
@@ -36,3 +36,15 @@ React 19 + TypeScript 7 + Vite 8 + Tailwind 4 single-page app (Boehringer Ingelh
 - Layout component is spelled `GenerelLeyout` (sic) in `src/components/GenerelLeyout.tsx` — match the existing name, don't "fix" imports.
 - `vite.config.ts` has `assetsInclude: ['**/*.JPG']` (uppercase) — unusual extension casing matters for how those assets are bundled.
 - Heavy deps (globe, map pages) are lazy-loaded on purpose; keep route-level code splitting intact.
+
+## Layout & sizing (must follow)
+
+- All pages render inside `.app-stage` (App.tsx/App.css): a 16:9 CSS size container fitted to the window. Size UI with container units (`cqw`/`cqh`), **never** `vw`/`vh` (only `body`, `.app`, native fullscreen video and the `index.html` boot loader use real viewport units).
+- Border/outline widths use the stage tokens `--line-hair|1|2|3` (e.g. `border-(length:--line-hair)`), not `border`/`border-2`/`border-[0.5px]`.
+- Pop-ups that must stay on screen use `src/hooks/useFitInViewport.ts` (measure an un-animated wrapper, animate a child with `AnimatePresence`).
+- tsParticles v4: particle colour is `particles.paint.fill.color`; `particles.color` is silently ignored.
+
+## Docs
+
+Human-facing handover docs are in `README.md` and `docs/01…09`. Update them when changing workflows, content schema, hosting or the media pipeline.
+
