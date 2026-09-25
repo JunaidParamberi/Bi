@@ -10,7 +10,7 @@ interface BrandLoaderProps {
 
 // Loading indicator built from the BI mark: light rises through the logo while a radar ring
 // ripples outward, echoing the pulse rings around the globe
-function BrandLoader({ className = 'w-[6vw] min-w-16' }: BrandLoaderProps) {
+function BrandLoader({ className = 'w-[6cqw] min-w-16' }: BrandLoaderProps) {
   const clipId = useId();
 
   return (

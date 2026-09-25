@@ -66,14 +66,14 @@ const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ mark
         exit="exit"
         // Grow out of the corner nearest the pin
         style={{ transformOrigin: `${fit.flipX ? "right" : "left"} ${fit.flipY ? "bottom" : "top"}` }}
-        className="w-max min-w-[13vw] max-w-[19vw] flex flex-col justify-center items-center py-[1.6vw] px-[1.6vw] text-white inside-glow-imeta bg-dark-green shadow-2xl"
+        className="w-max min-w-[13cqw] max-w-[19cqw] flex flex-col justify-center items-center py-[1.6cqw] px-[1.6cqw] text-white inside-glow-imeta bg-dark-green shadow-2xl"
       >
-        <div className=" flex h-full w-full flex-col gap-[1vw]">
-          <motion.h1 variants={lineVariants} className="text-[1.3vw]">{currentData?.country}</motion.h1>
+        <div className=" flex h-full w-full flex-col gap-[1cqw]">
+          <motion.h1 variants={lineVariants} className="text-[1.3cqw]">{currentData?.country}</motion.h1>
 
           <div>
             {currentData?.articles.map((item) => (
-              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] leading-snug text-balance mb-[0.5vw]">
+              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9cqw] leading-snug text-balance mb-[0.5cqw]">
                 {/* Card shows only the main title; a subtitle after " – " stays on the country page */}
                 {item.heading.split(" – ")[0]}
               </motion.h1>
@@ -84,7 +84,7 @@ const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ mark
               <Link
                 to={currentData.country}
                 state={currentData}
-                className="read-more text-[0.8vw]"
+                className="read-more text-[0.8cqw]"
               >
                 Read More
               </Link>

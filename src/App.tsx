@@ -52,6 +52,7 @@ function App() {
         className='min-w-full min-h-screen object-cover bg-no-repeat absolute z-[-100]'
       />
       <ParticlesBackground />
+      <div className='app-stage'>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<GenerelLeyout />}>
           <Route index element={<GlobePage />} />
@@ -63,6 +64,7 @@ function App() {
           <Route path='*' element={<h1>ops 404</h1>} />
         </Route>
       </Routes>
+      </div>
     </div>
   );
 }

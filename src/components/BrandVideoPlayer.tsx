@@ -386,7 +386,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
         tabIndex={-1}
         onClick={togglePlay}
         // the icon's own ring is the button's edge, so the disc behind it is cropped to the ring
-        className={`absolute inset-0 m-auto w-[clamp(4rem,7vw,9rem)] aspect-square rounded-full
+        className={`absolute inset-0 m-auto w-[clamp(4rem,7cqw,9rem)] aspect-square rounded-full
           bg-dark-green/60 text-accent-green backdrop-blur-xs
           transition-all duration-300 hover:bg-accent-green hover:text-dark-green hover:scale-105 ${
             playing || !ready || waiting ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'

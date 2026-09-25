@@ -81,16 +81,16 @@ export default function StoryPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="w-[60%] flex flex-col h-full gap-[0.5vw]"
+            className="w-[60%] flex flex-col h-full gap-[0.5cqw]"
           >
-            <h1 className="text-[2.8vw] font-bold w-full text-left xl:text-[100px] text-white">
+            <h1 className="text-[2.8cqw] font-bold w-full text-left xl:text-[100px] text-white">
               {data?.title}
             </h1>
 
             <div className="border-accent-green border-[0.5px] min-h-[60%] max-h-[60%] max-w-full flex justify-center items-center mb-3">
               <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px]">
                 {data?.text && (
-                  <p className="text-white text-[1vw] xl:text-[0.9vw] p-3">
+                  <p className="text-white text-[1cqw] xl:text-[0.9cqw] p-3">
                     {data?.text} <br />
                     {data?.title === "Making More Health" && (
                       <>
@@ -103,13 +103,13 @@ export default function StoryPage() {
 
                 {/* Render lists if they exist */}
                 {data?.lists && data?.lists.length > 0 && (
-                  <div className="flex flex-col gap-[1vw] mt-4 p-3">
+                  <div className="flex flex-col gap-[1cqw] mt-4 p-3">
                     {data?.lists.map((list, idx) => (
-                      <div key={idx} className="flex flex-col gap-[0.5vw]">
-                        <h3 className="font-semibold text-white text-[1vw] xl:text-[0.9vw]">
+                      <div key={idx} className="flex flex-col gap-[0.5cqw]">
+                        <h3 className="font-semibold text-white text-[1cqw] xl:text-[0.9cqw]">
                           {list.listHead}:
                         </h3>
-                        <ul className="list-disc pl-5 flex flex-col gap-[0.5vw] text-[1vw] xl:text-[0.9vw] text-white">
+                        <ul className="list-disc pl-5 flex flex-col gap-[0.5cqw] text-[1cqw] xl:text-[0.9cqw] text-white">
                           {list.listPoints.map((point, pIdx) => (
                             <li key={pIdx}>{point}</li>
                           ))}
@@ -143,13 +143,13 @@ export default function StoryPage() {
                         <SmartImage
                           src={item.preview}
                           loading="lazy"
-                          className="min-w-[15vw] h-full object-cover cursor-zoom-in"
+                          className="min-w-[15cqw] h-full object-cover cursor-zoom-in"
                           alt="Video Thumbnail"
                         />
                         <img
                           src={playBtn}
                           alt="Play Button"
-                          className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-black/40 rounded-full"
+                          className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4cqw] h-[4cqw] bg-black/40 rounded-full"
                         />
                       </div>
                     ) : (
@@ -157,7 +157,7 @@ export default function StoryPage() {
                         src={item.preview}
                         loading="lazy"
                         alt="Story Image"
-                        className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
+                        className="min-w-[16.2cqw] h-full object-cover cursor-zoom-in"
                       />
                     )}
                   </button>
@@ -197,10 +197,10 @@ export default function StoryPage() {
             whileHover={{ rotate: 90, scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             // Big round hit area around the thin icon; negative margin keeps the icon where it was
-            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer p-[1.2vw] -m-[1.2vw] rounded-full hover:bg-white/10 transition-colors"
+            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer p-[1.2cqw] -m-[1.2cqw] rounded-full hover:bg-white/10 transition-colors"
             onClick={lightbox.close}
           >
-            <img src={close} alt="" className="w-[1.5vw] h-auto" />
+            <img src={close} alt="" className="w-[1.5cqw] h-auto" />
           </motion.button>
 
           {/* Prev Button */}
@@ -208,11 +208,11 @@ export default function StoryPage() {
             onClick={lightbox.prev}
             aria-label="Previous (←)"
             disabled={currentIndex === 0}
-            className={`absolute left-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
+            className={`absolute left-8 cursor-pointer z-50 text-accent-green p-[1cqw] -m-[1cqw] rounded-full hover:bg-white/10 transition-colors ${
               currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            <img src={leftArrow} alt="" className="w-[3vw] h-auto" />
+            <img src={leftArrow} alt="" className="w-[3cqw] h-auto" />
           </button>
 
           {/* Media Display */}
@@ -243,13 +243,13 @@ export default function StoryPage() {
             onClick={lightbox.next}
             aria-label="Next (→)"
             disabled={currentIndex === media.length - 1}
-            className={`absolute right-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
+            className={`absolute right-8 cursor-pointer z-50 text-accent-green p-[1cqw] -m-[1cqw] rounded-full hover:bg-white/10 transition-colors ${
               currentIndex === media.length - 1
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}
           >
-            <img src={rightArrow} alt="" className="w-[3vw] h-auto" />
+            <img src={rightArrow} alt="" className="w-[3cqw] h-auto" />
           </button>
         </motion.div>
       )}
