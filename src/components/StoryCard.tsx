@@ -28,7 +28,7 @@ function StoryCard({ item }: StoryCardProps) {
             relative="path"
             to={item.title}
             state={item}
-            className="px-[2vw]  py-[0.7vw] text-[0.9vw] border-accent-green border-[1px] hover:bg-accent-green hover:text-dark-green active:opacity-70 duration-200 transition-all"
+            className="px-[2vw]  py-[0.7vw] text-[0.9vw] border-accent-green border hover:bg-accent-green hover:text-dark-green active:opacity-70 duration-200 transition-all"
           >
             Read More
           </Link>

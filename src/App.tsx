@@ -49,7 +49,7 @@ function App() {
         ref={(img) => { if (img?.complete) bootReady('background'); }}
         onLoad={() => bootReady('background')}
         onError={() => bootReady('background')}
-        className='min-w-full min-h-[100vh] object-cover bg-no-repeat absolute z-[-100]'
+        className='min-w-full min-h-screen object-cover bg-no-repeat absolute z-[-100]'
       />
       <ParticlesBackground />
       <Routes location={location} key={location.pathname}>

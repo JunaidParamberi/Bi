@@ -12,7 +12,7 @@ interface CardDetailsProps {
 const CardDetails: React.FC<CardDetailsProps> = ({ data, classeName }) => {
   const descriptionParts = data.des.split('(');
   return (
-    <div className={`${classeName} shadow-2xl top-[-0.6vw] flex flex-col w-full left-[5.2vw] gap-[0.5vw] absolute bg-dark-green border-accent-green border-[0.5px] z-[1000] py-[1.4vw] px-[1vw] text-white`}>
+    <div className={`${classeName} shadow-2xl top-[-0.6vw] flex flex-col w-full left-[5.2vw] gap-[0.5vw] absolute bg-dark-green border-accent-green border-[0.5px] z-1000 py-[1.4vw] px-[1vw] text-white`}>
 
       
       <h1 className='text-[1.1vw] font-semibold'>{data.name}</h1>
@@ -81,7 +81,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
           )}
         </div>
       </div>
-      <div className='text-left w-full pl-4 flex h-[90%] bg-black bg-opacity-50 justify-center items-center pr-1 border-[#00e47d7f] border-[0.1px]'>
+      <div className='text-left w-full pl-4 flex h-[90%] bg-black/50 justify-center items-center pr-1 border-[#00e47d7f] border-[0.1px]'>
         <div className='w-[38%]' />
         <div className='w-[60%]'>
           <h1 className='text-white text-[0.8vw] font-semibold xl:text-[190%] leading-tight mb-1'>{data.name}</h1>

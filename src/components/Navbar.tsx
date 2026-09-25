@@ -34,18 +34,18 @@ function Navbar() {
     </div>
 
       <div className="flex items-center gap-[1.5vw] ">
-        <NavLink to="/more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"}  hover:scale-110 active:scale-95 active:rotate-[10deg] transition-transform duration-300 p-2 xl:p-6`}>
+        <NavLink to="/more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"}  hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6`}>
           <img src={More} alt="more" className={ `w-[1.4vw] h-[1.4vw]  xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
         </NavLink>
 
-        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-[10deg] transition-transform duration-300 p-2 xl:p-6`}>
+        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6`}>
           <img src={Globe} alt="globe" className={ `w-[1.4vw] h-[1.4vw]   xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
         </NavLink>
 
         <NavLink 
         to="/world"
         
-        className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-[10deg] transition-transform duration-300 p-2 xl:p-6`}>
+        className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6`}>
           <img src={Home} alt="home" className={ `w-[1.4vw] h-[1.4vw]   xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
         </NavLink>
       </div>

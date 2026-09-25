@@ -135,7 +135,7 @@ export default function StoryPage() {
                     data-row-item
                     aria-label={`Open ${item.type === "video" ? "video" : "photo"} ${idx + 1} of ${media.length}`}
                     onClick={() => lightbox.open(idx)}
-                    className="thumb-focus relative shrink-0 cursor-zoom-in outline-none"
+                    className="thumb-focus relative shrink-0 cursor-zoom-in outline-hidden"
                   >
 
                     {item.type === "video" ? (
@@ -149,7 +149,7 @@ export default function StoryPage() {
                         <img
                           src={playBtn}
                           alt="Play Button"
-                          className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
+                          className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-black/40 rounded-full"
                         />
                       </div>
                     ) : (
@@ -180,7 +180,7 @@ export default function StoryPage() {
           aria-modal="true"
           aria-label="Media viewer"
           tabIndex={-1}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-none"
+          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-hidden"
         >
           {/* Close Button */}
           <button
@@ -216,7 +216,7 @@ export default function StoryPage() {
             <LightboxMedia
               media={media}
               index={currentIndex}
-              className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-[2px]"
+              className="h-[95%] w-auto object-cove max-w-[90%] border-accent-green border-2"
             />
           </motion.div>
 

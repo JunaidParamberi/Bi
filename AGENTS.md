@@ -1,6 +1,6 @@
 # AGENTS.md
 
-React 18 + TypeScript + Vite 8 + Tailwind 3 single-page app (Boehringer Ingelheim IMETA SD4G site). Not a monorepo; npm only (`package-lock.json` — don't introduce pnpm/yarn).
+React 19 + TypeScript 7 + Vite 8 + Tailwind 4 single-page app (Boehringer Ingelheim IMETA SD4G site). Not a monorepo; npm only (`package-lock.json` — don't introduce pnpm/yarn).
 
 ## Commands
 

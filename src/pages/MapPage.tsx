@@ -104,7 +104,7 @@ function MapPage() {
         animate={{ opacity: 1, scale: 1, rotateX: 0 }} // Animates to normal scale and rotation
         exit={{ opacity: 0, scale: 0.8, rotateX: -30 }} // Exit with reverse effects
         transition={{ duration: 0.7, ease: "easeOut" }} // Smooth transition
-        className={`bg-dark-green w-screen absolute z-[100] h-[110vh] bg-opacity-85 flex justify-center items-center
+        className={`bg-dark-green/85 w-screen absolute z-100 h-[110vh] flex justify-center items-center
         ${isActive ? "imeta-futuristic-enter" : "imeta-futuristic-exit hidden"}
       `}
       >
@@ -125,7 +125,7 @@ function MapPage() {
                 viewBox="0 0 24 24"
                 aria-hidden="true"
                 fill="currentColor"
-                className="imeta-close-icon w-[2.1875rem] h-[2.1875rem] inline-block shrink-0"
+                className="imeta-close-icon w-8.75 h-8.75 inline-block shrink-0"
               >
                 <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
               </svg>

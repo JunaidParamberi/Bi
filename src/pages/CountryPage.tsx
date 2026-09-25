@@ -91,7 +91,7 @@ const CountryPage: React.FC = () => {
           aria-modal="true"
           aria-label="Media viewer"
           tabIndex={-1}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-none"
+          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-hidden"
         >
           <button
             type="button"
@@ -126,7 +126,7 @@ const CountryPage: React.FC = () => {
             <LightboxMedia
               media={media}
               index={currentImageIndex}
-              className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-[2px]"
+              className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-2"
             />
           </motion.div>
 
@@ -177,7 +177,7 @@ const CountryPage: React.FC = () => {
                     className={`${
                       data?.heading === item.heading
                         ? "bg-accent-green text-dark-green px-[0.8vw] py-[0.4vw] font-semibold text-[1vw]"
-                        : "bg-black text-white text-[0.9vw] px-[0.8vw] py-[0.7%] font-semibold bg-opacity-20"
+                        : "text-white text-[0.9vw] px-[0.8vw] py-[0.7%] font-semibold bg-black/20"
                     }`}
                   >
                     {item.heading}
@@ -240,7 +240,7 @@ const CountryPage: React.FC = () => {
                       data-row-item
                       aria-label={`Open ${item.type === "video" ? "video" : "photo"} ${index + 1} of ${media.length}`}
                       onClick={() => lightbox.open(index)}
-                      className="thumb-focus relative shrink-0 cursor-zoom-in outline-none"
+                      className="thumb-focus relative shrink-0 cursor-zoom-in outline-hidden"
                     >
 
                       {item.type === "video" ? (
@@ -254,7 +254,7 @@ const CountryPage: React.FC = () => {
                           <img
                             src={playBtn}
                             alt="Play Button"
-                            className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-[#000000] rounded-full bg-opacity-40"
+                            className="cursor-zoom-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] bg-black/40 rounded-full"
                           />
                         </div>
                       ) : (
