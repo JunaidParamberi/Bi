@@ -186,7 +186,7 @@ const CountryPage: React.FC = () => {
                   <motion.button
                     key={index}
                     onClick={() => handleClick(item)}
-                    className={`relative font-semibold px-[0.8vw] transition-colors duration-300 ${
+                    className={`relative font-semibold px-[0.8vw] transition-[color,font-size,padding] duration-300 ease-out ${
                       data?.heading === item.heading
                         ? "text-dark-green py-[0.4vw] text-[1vw]"
                         : "text-white text-[0.9vw] py-[0.7%] bg-black/20 hover:text-accent-green"
@@ -211,12 +211,16 @@ const CountryPage: React.FC = () => {
                 ))}
               </div>
 
-              <div
-                className={`border-accent-green w-full border-[0.5px] ${
+              {/* Grows to full height when the article has no media row below it */}
+              <motion.div
+                initial={false}
+                animate={
                   data?.images || data?.videos
-                    ? "min-h-[57%] max-h-[57%]"
-                    : "h-full"
-                } max-w-full flex justify-center items-center mb-3`}
+                    ? { height: "57%", minHeight: "57%" }
+                    : { height: "100%", minHeight: "0%" }
+                }
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="border-accent-green w-full border-[0.5px] max-w-full flex justify-center items-center mb-3"
               >
                 <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -259,7 +263,7 @@ const CountryPage: React.FC = () => {
                   )}
                 </motion.div>
                 </AnimatePresence>
-              </div>
+              </motion.div>
 
               {/* Media Slider */}
               <AnimatePresence mode="wait" initial={false}>
