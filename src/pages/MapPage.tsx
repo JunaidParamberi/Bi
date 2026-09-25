@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button.tsx";
 import { useState } from "react";
 import { useKeyboard } from "../hooks/useKeyboard";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 // Define the ButtonProps interface for the activate function
 interface ButtonProps {
@@ -22,15 +22,43 @@ export const Imeta: React.FC<ButtonProps> = ({ activate }) => {
         comprised of close to 1,600 exceptional team members from 45
         nationalities who proudly serve over 70 countries. <br /> <br />
       </h2>
-      <div
-        className="text-accent-green text-[0.8vw] cursor-pointer "
+      <button
+        type="button"
+        className="read-more self-start text-[0.8vw]"
         onClick={activate} // Trigger the activate function when clicking "Read More"
       >
         Read More
-      </div>
+      </button>
     </div>
   );
 };
+
+const modalPanel = {
+  hidden: { opacity: 0, scale: 0.9, y: 40, filter: "blur(10px)" },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delayChildren: 0.15, staggerChildren: 0.08 },
+  },
+  exit: { opacity: 0, scale: 0.94, y: 24, filter: "blur(8px)", transition: { duration: 0.25, ease: "easeIn" } },
+} as const;
+
+const modalLine = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+} as const;
+
+const modalRule = {
+  hidden: { scaleX: 0 },
+  show: { scaleX: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+} as const;
+
+const modalClose = {
+  hidden: { opacity: 0, rotate: -90 },
+  show: { opacity: 1, rotate: 0, transition: { duration: 0.4, ease: "easeOut" } },
+} as const;
 
 function MapPage() {
   // Initialize the isActive state with false
@@ -98,51 +126,64 @@ function MapPage() {
         </motion.div>
       </motion.div>
 
-      {/* Modal with cool animation */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, rotateX: 30 }} // Backdrop starts with a scale and 3D rotation
-        animate={{ opacity: 1, scale: 1, rotateX: 0 }} // Animates to normal scale and rotation
-        exit={{ opacity: 0, scale: 0.8, rotateX: -30 }} // Exit with reverse effects
-        transition={{ duration: 0.7, ease: "easeOut" }} // Smooth transition
-        className={`bg-dark-green/85 w-screen absolute z-100 h-[110vh] flex justify-center items-center
-        ${isActive ? "imeta-futuristic-enter" : "imeta-futuristic-exit hidden"}
-      `}
-      >
-        <div className="relative w-[55%] bg-dark-green border-accent-green border-[0.5px] p-[5%]  flex justify-center items-center">
+      {/* IMETA modal: backdrop blurs in, panel rises out of the IMETA card's corner, text staggers in */}
+      <AnimatePresence>
+        {isActive && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }} // Modal content scales in
-            animate={{ opacity: 1, scale: 1 }} // Scales up with a bounce effect
-            exit={{ opacity: 0, scale: 0.9 }} // Scales down when exiting
-            transition={{ duration: 0.5, ease: "easeInOut", bounce: 0.3 }} // Bounce effect for smoothness
-            className=" flex"
+            key="imeta-modal"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.3, delay: 0.1 } }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="bg-dark-green/85 w-screen absolute z-100 h-[110vh] flex justify-center items-center"
+            onClick={() => setIsActive(false)}
           >
-            <div
-              className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer"
-              onClick={() => setIsActive(false)}
+            <motion.div
+              variants={modalPanel}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              style={{ transformOrigin: "left bottom" }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-[55%] bg-dark-green border-accent-green border-[0.5px] p-[5%] flex justify-center items-center shadow-2xl"
             >
-              {/* Same path and sizing as the MUI Close icon it replaces */}
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                fill="currentColor"
-                className="imeta-close-icon w-8.75 h-8.75 inline-block shrink-0"
+              <motion.button
+                type="button"
+                aria-label="Close (Esc)"
+                variants={modalClose}
+                whileHover={{ rotate: 90, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="absolute top-[10%] right-[5%] xl:right-[3%] cursor-pointer text-white hover:text-accent-green hover:bg-white/10 transition-colors p-[0.8vw] -m-[0.8vw] rounded-full"
+                onClick={() => setIsActive(false)}
               >
-                <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-              </svg>
-            </div>
-            <div className="flex flex-col gap-3 xl:gap-16 text-white">
-              <h2 className="text-[2.5vw]">IMETA</h2>
-              <p className="text-[1.150vw] font-extralight flex flex-col gap-3 ">
-                The IMETA region is unique in its rich cultural and demographic
-                diversity; however, it also encompasses some of the world’s most
-                underserved communities. The Boehringer Ingelheim team in IMETA
-                is comprised of close to 1,600 exceptional team members from 45
-                nationalities who proudly serve over 70 countries.
-              </p>
-            </div>
+                {/* Same path and sizing as the MUI Close icon it replaces */}
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  className="imeta-close-icon w-8.75 h-8.75 inline-block shrink-0"
+                >
+                  <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </svg>
+              </motion.button>
+              <div className="flex flex-col gap-3 xl:gap-16 text-white">
+                <motion.h2 variants={modalLine} className="text-[2.5vw]">IMETA</motion.h2>
+                <motion.span
+                  variants={modalRule}
+                  className="block h-px w-[6vw] bg-accent-green origin-left"
+                />
+                <motion.p variants={modalLine} className="text-[1.150vw] font-extralight flex flex-col gap-3 ">
+                  The IMETA region is unique in its rich cultural and demographic
+                  diversity; however, it also encompasses some of the world’s most
+                  underserved communities. The Boehringer Ingelheim team in IMETA
+                  is comprised of close to 1,600 exceptional team members from 45
+                  nationalities who proudly serve over 70 countries.
+                </motion.p>
+              </div>
+            </motion.div>
           </motion.div>
-        </div>
-      </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -44,8 +44,12 @@ const ParticlesField = () => {
         },
       },
       particles: {
-        color: {
-          value: "#00e47d82", // White particles
+        // v4 moved particle colour from `color` to `paint.fill`; the old key is silently ignored (particles went grey-white)
+        paint: {
+          fill: {
+            enable: true,
+            color: { value: "#00e47d82" },
+          },
         },
         links: {
           color: "#ffffff", // Link color

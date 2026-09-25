@@ -6,7 +6,8 @@ import mapImg2x from "../assets/images/map-3826.webp";
 import pinImg from "../assets/images/Pin.svg";
 import { countries } from "../content";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useFitInViewport } from "../hooks/useFitInViewport";
 import BrandLoader from "./BrandLoader";
 
 // Marker type definition
@@ -17,66 +18,85 @@ interface Marker {
   left: string;
 }
 
-interface MyComponentProps {
-  style?: React.CSSProperties; // Optional style prop with CSSProperties type
-  title: string; // Title prop
-  isVisible: boolean; // Added to the interface
-}
+// Popup is kept this far from the pin, on whichever side has room
+const CARD_GAP = 15;
 
-// CountryCard component with props typed
-const CountryCard: React.FC<MyComponentProps> = ({
-  style,
-  title,
-  isVisible,
-}) => {
-  const currentData = countries.find((data) => data.country === title);
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.85, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1], when: "beforeChildren", staggerChildren: 0.05 },
+  },
+  exit: { opacity: 0, scale: 0.92, filter: "blur(4px)", transition: { duration: 0.18, ease: "easeIn" } },
+} as const;
 
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+const lineVariants = {
+  hidden: { opacity: 0, x: -8 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.25, ease: "easeOut" } },
+} as const;
 
-  useEffect(() => {
-    if (!isVisible) {
-      // Trigger exit animation before removing the card
-      setIsAnimatingOut(true);
-      const timer = setTimeout(() => {
-        setIsAnimatingOut(false); // Ensure it's cleaned up properly
-      }, 600); // Duration of the exit animation
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible]);
+// Country popup anchored to its pin; flips/nudges itself so it never leaves the screen or covers the navbar
+const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ marker }, cardRef) => {
+  const currentData = countries.find((data) => data.country === marker.country);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const fit = useFitInViewport(boxRef, { flipGap: CARD_GAP });
 
   return (
+    // Unscaled box used for measuring; the motion child inside does the animating
     <div
-      style={style}
-      className={`absolute w-fit flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-16 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green z-50
-        ${
-          isVisible && !isAnimatingOut ? "futuristic-enter" : "futuristic-exit"
-        }`}
+      ref={(el) => {
+        boxRef.current = el;
+        if (typeof cardRef === "function") cardRef(el);
+        else if (cardRef) cardRef.current = el;
+      }}
+      className="absolute z-50"
+      style={{
+        top: marker.top,
+        left: marker.left,
+        margin: CARD_GAP,
+        transform: `translate(${fit.x}px, ${fit.y}px)`,
+      }}
     >
-      <div className=" flex h-full w-full flex-col gap-[1vw]">
-        <h1 className="text-[1.3vw]">{currentData?.country}</h1>
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+        // Grow out of the corner nearest the pin
+        style={{ transformOrigin: `${fit.flipX ? "right" : "left"} ${fit.flipY ? "bottom" : "top"}` }}
+        className="w-max min-w-[13vw] max-w-[19vw] flex flex-col justify-center items-center py-[1.6vw] px-[1.6vw] text-white inside-glow-imeta bg-dark-green shadow-2xl"
+      >
+        <div className=" flex h-full w-full flex-col gap-[1vw]">
+          <motion.h1 variants={lineVariants} className="text-[1.3vw]">{currentData?.country}</motion.h1>
 
-        <div>
-          {currentData?.articles.map((item) => (
-            <h1 key={item.heading} className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</h1>
-          ))}
+          <div>
+            {currentData?.articles.map((item) => (
+              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] leading-snug text-balance mb-[0.5vw]">
+                {/* Card shows only the main title; a subtitle after " – " stays on the country page */}
+                {item.heading.split(" – ")[0]}
+              </motion.h1>
+            ))}
+          </div>
+          <motion.div variants={lineVariants}>
+            {currentData?.country ? (
+              <Link
+                to={currentData.country}
+                state={currentData}
+                className="read-more text-[0.8vw]"
+              >
+                Read More
+              </Link>
+            ) : (
+              <span className="text-accent-green text-[14px]">Read More</span>
+            )}
+          </motion.div>
         </div>
-        <div>
-          {currentData?.country ? (
-            <Link
-              to={currentData.country}
-              state={currentData}
-              className="text-accent-green text-[0.8vw] "
-            >
-              Read More
-            </Link>
-          ) : (
-            <span className="text-accent-green text-[14px]">Read More</span>
-          )}
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
-};
+});
 // Marker data
 const markers: Marker[] = [
   { id: 1, country: "India", top: "50%", left: "70%" },
@@ -89,6 +109,14 @@ const markers: Marker[] = [
   { id: 8, country: "Lebanon", top: "41.5%", left: "57.5%" },
 ];
 
+// Pin entrance: order by longitude so they land west to east
+const PIN_START = 0.3;
+const PIN_STAGGER = 0.12;
+const PING_EVERY = 3.4;
+const pinRank = new Map(
+  [...markers].sort((a, b) => parseFloat(a.left) - parseFloat(b.left)).map((m, i) => [m.id, i])
+);
+
 // Main component
 const MapComponent: React.FC = () => {
   // State for active country and its position
@@ -98,6 +126,13 @@ const MapComponent: React.FC = () => {
   const mapRef = useRef<HTMLImageElement | null>(null);
   // Pins wait for the map, so they never float over an empty background
   const [mapReady, setMapReady] = useState(false);
+  // After the entrance, selection changes animate immediately instead of waiting for each pin's slot
+  const [entered, setEntered] = useState(false);
+  useEffect(() => {
+    if (!mapReady) return;
+    const t = setTimeout(() => setEntered(true), (PIN_START + markers.length * PIN_STAGGER + 0.6) * 1000);
+    return () => clearTimeout(t);
+  }, [mapReady]);
 
   useEffect(() => {
     // a cached image can finish before React attaches onLoad
@@ -137,16 +172,6 @@ const MapComponent: React.FC = () => {
       className="relative w-full h-full flex justify-center items-center"
       style={{ position: "relative" }}
     >
-      {/* Show CountryCard only if activeCountry is selected */}
-      {activeCountry && position && (
-        <div ref={cardRef}>
-          <CountryCard
-            title={activeCountry}
-            style={{ top: position.top, left: position.left, margin: "15px" }}
-            isVisible={!!activeCountry} // Control visibility
-          />
-        </div>
-      )}
       {/* Container for responsive scaling */}
       <div
         className="relative"
@@ -176,44 +201,67 @@ const MapComponent: React.FC = () => {
           </div>
         )}
 
-        {/* Markers */}
-        {mapReady && markers.map((marker) => (
-          <div
-            key={marker.id}
-            onClick={() => handleClick(marker.country)}
-            className="absolute w-[1.9%] cursor-pointer"
-            style={{
-              top: marker.top,
-              left: marker.left,
-              transform: "translate(-50%, -50%)", // Center the marker
-            }}
-            title={marker.country}
-          >
-            <motion.img
-              initial={{ opacity: 0, y: -12 }} // Drop in once the map is on screen
-              animate={{
-                opacity: 1,
-                y: [0, -3, 0], // Float effect
-              }}
-              transition={{
-                opacity: { duration: 0.4, delay: 0.3 + marker.id * 0.06 },
-                y: {
-                  duration: 1,
-                  ease: "easeInOut",
-                  repeat: Infinity, // Repeat the animation
-                  repeatType: "reverse", // Reverse the animation instead of looping
-                },
-              }}
-              whileHover={{
-                scale: 1.1, // Scale up on hover
+        {/* Markers: drop in one by one west to east, then idle out of sync with a sonar wave sweeping across */}
+        {mapReady && markers.map((marker) => {
+          const rank = pinRank.get(marker.id) ?? 0;
+          const land = PIN_START + rank * PIN_STAGGER;
+          const isActive = activeCountry === marker.country;
+          const dimmed = activeCountry !== "" && !isActive;
+          return (
+            <motion.div
+              key={marker.id}
+              onClick={() => handleClick(marker.country)}
+              className="absolute w-[1.9%] cursor-pointer"
+              style={{ top: marker.top, left: marker.left, x: "-50%", y: "-50%", zIndex: isActive ? 2 : 1 }}
+              animate={{ opacity: dimmed ? 0.45 : 1 }}
+              transition={{ duration: 0.3 }}
+              title={marker.country}
+            >
+              {/* Soft glow behind the pin: swells and fades on landing, then pulses gently. All pins share the
+                  period, so their landing offsets become a slow wave across the map rather than a unison blink */}
+              <motion.span
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-[40%] w-[260%] aspect-square rounded-full"
+                style={{
+                  x: "-50%",
+                  y: "-50%",
+                  background: "radial-gradient(circle, rgba(0, 51, 38, 0.55) 0%, rgba(0, 51, 38, 0.25) 35%, transparent 70%)",
+                }}
+                initial={{ opacity: 0, scale: 0.3 }}
+                animate={{ opacity: [0, 0.9, 0], scale: [0.3, 1, 1.25] }}
+                transition={{ duration: 2.4, ease: "easeInOut", delay: land + 0.15, repeat: Infinity, repeatDelay: PING_EVERY - 1 }}
+              />
+              {/* Drop with a spring bounce, grow out of the pin tip */}
+              <motion.div
+                style={{ transformOrigin: "50% 100%" }}
+                initial={{ opacity: 0, y: -40, scale: 0.4 }}
+                animate={{ opacity: 1, y: 0, scale: isActive ? 1.15 : 1 }}
+                transition={{
+                  opacity: { duration: 0.2, delay: land },
+                  y: { type: "spring", stiffness: 520, damping: 14, delay: land },
+                  scale: isActive
+                    ? { type: "spring", stiffness: 400, damping: 18 }
+                    : { type: "spring", stiffness: 520, damping: 16, delay: entered ? 0 : land },
+                }}
+                whileHover={{ scale: isActive ? 1.18 : 1.06, transition: { duration: 0.2 } }}
+              >
+                {/* Idle float: each pin has its own pace so they never bob in unison */}
+                <motion.img
+                  src={pinImg}
+                  alt="Pin"
+                  className={`block w-full transition-[filter] duration-300 ${isActive ? "drop-shadow-[0_0_10px_#00e47c]" : ""}`}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 1.8 + (marker.id % 4) * 0.35, ease: "easeInOut", repeat: Infinity, delay: land + 0.6 }}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
 
-                transition: { duration: 0.3 }, // Quick transition on hover
-              }} // Scale slightly on hover
-              src={pinImg}
-              alt="Pin"
-            />
-          </div>
-        ))}
+        {/* Same coordinate space as the pins, so the card sits right next to its pin */}
+        <AnimatePresence>
+          {position && <CountryCard key={position.country} ref={cardRef} marker={position} />}
+        </AnimatePresence>
       </div>
     </div>
   );

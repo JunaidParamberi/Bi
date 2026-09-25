@@ -1,22 +1,50 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, createContext, useContext, RefObject } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useFitInViewport } from '../hooks/useFitInViewport';
 import { team1, team2, mediaUrl, type TeamMember } from '../content';
 import SmartImage from '../components/SmartImage';
 
-interface CardDetailsProps {
-  data: TeamMember;
-  classeName: string;
-}
+// The team panel clips its overflow, so detail popups are kept inside it
+const PanelContext = createContext<RefObject<HTMLDivElement | null> | undefined>(undefined);
 
-const CardDetails: React.FC<CardDetailsProps> = ({ data, classeName }) => {
+const detailVariants = {
+  hidden: { opacity: 0, scale: 0.85, filter: 'blur(6px)' },
+  show: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1], when: 'beforeChildren', staggerChildren: 0.06 },
+  },
+  exit: { opacity: 0, scale: 0.92, filter: 'blur(4px)', transition: { duration: 0.18, ease: 'easeIn' } },
+} as const;
+
+const lineVariants = {
+  hidden: { opacity: 0, x: -8 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.25, ease: 'easeOut' } },
+} as const;
+
+const CardDetails: React.FC<{ data: TeamMember }> = ({ data }) => {
   const descriptionParts = data.des.split('(');
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const fit = useFitInViewport(boxRef, { within: useContext(PanelContext) });
   return (
-    <div className={`${classeName} shadow-2xl top-[-0.6vw] flex flex-col w-full left-[5.2vw] gap-[0.5vw] absolute bg-dark-green border-accent-green border-[0.5px] z-1000 py-[1.4vw] px-[1vw] text-white`}>
-
-      
-      <h1 className='text-[1.1vw] font-semibold'>{data.name}</h1>
-      <h2 className='text-[0.7vw] track'>
+    // Unscaled box used for measuring; the motion child inside does the animating
+    <div
+      ref={boxRef}
+      className='top-[-0.6vw] w-full left-[5.2vw] absolute z-1000'
+      style={{ transform: `translate(${fit.x}px, ${fit.y}px)` }}
+    >
+    <motion.div
+      variants={detailVariants}
+      initial='hidden'
+      animate='show'
+      exit='exit'
+      style={{ transformOrigin: 'left top' }}
+      className='shadow-2xl flex flex-col gap-[0.5vw] bg-dark-green border-accent-green border-[0.5px] py-[1.4vw] px-[1vw] text-white'
+    >
+      <motion.h1 variants={lineVariants} className='text-[1.1vw] font-semibold'>{data.name}</motion.h1>
+      <motion.h2 variants={lineVariants} className='text-[0.7vw] track'>
         {descriptionParts[0]}
         {descriptionParts[1] && (
           <>
@@ -24,7 +52,8 @@ const CardDetails: React.FC<CardDetailsProps> = ({ data, classeName }) => {
             {`(${descriptionParts[1]}`}
           </>
         )}
-      </h2>
+      </motion.h2>
+    </motion.div>
     </div>
   );
 };
@@ -67,7 +96,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
       className={`w-[13.7vw] h-[5.3vw] relative flex items-end ${data.name === "" && "opacity-0"} mt-[1vw] cursor-pointer`}
       onClick={onClick}
     >
-      {showDetails && <CardDetails data={data} classeName={`${showDetails ? "futuristic-enter" : 'futuristic-exit hidden'}`} />}
+      <AnimatePresence>{showDetails && <CardDetails data={data} />}</AnimatePresence>
       <div className='w-[32%] h-[95%] ml-3 xl:mb-9 xl:ml-6 absolute border-accent-green border-[0.5px] mb-3'>
         <div className={`w-full h-full overflow-hidden flex justify-center items-center ${showPhoto ? (photoLoaded ? '' : 'skeleton') : 'bg-[#bdbdbd] text-white'}`}>
           {showPhoto ? (
@@ -95,10 +124,12 @@ const TeamCard: React.FC<TeamCardProps> = ({ data, onClick, showDetails, seter }
 const TeamPage: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   useKeyboard({ Escape: () => setSelectedMember(null) }, selectedMember !== null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
   return (
+    <PanelContext.Provider value={panelRef}>
     <div className='w-full h-full flex justify-center items-center py-6'>
-      <div className='bg-dark-green xl:h-[90%] border-accent-green border-[0.5px] w-full h-full flex overflow-hidden justify-center items-center'>
+      <div ref={panelRef} className='bg-dark-green xl:h-[90%] border-accent-green border-[0.5px] w-full h-full flex overflow-hidden justify-center items-center'>
         <div className=' ml-[3vw] relative w-[90%] h-[85%] flex flex-col justify-center items-center'>
 
           {/* First part of the card */}
@@ -174,6 +205,7 @@ const TeamPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </PanelContext.Provider>
   );
 };
 

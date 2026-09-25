@@ -5,6 +5,34 @@ import ArrowRight from "../assets/icons/arrow_right.svg";
 import Home from "../assets/icons/home.svg";
 import Globe from "../assets/icons/globe.svg";
 import More from "../assets/icons/more.svg";
+import { motion } from "framer-motion";
+
+// One ring shared by all items (layoutId), so it glides to the active icon on route change
+function NavItem({ to, icon, alt }: { to: string; icon: string; alt: string }) {
+  return (
+    <NavLink
+      to={to}
+      className="relative inline-flex items-center justify-center rounded-full hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6"
+    >
+      {({ isActive }) => (
+        <>
+          {isActive && (
+            <motion.span
+              layoutId="navActiveRing"
+              transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              className="nav-active-ring"
+            />
+          )}
+          <img
+            src={icon}
+            alt={alt}
+            className="relative w-[1.4vw] h-[1.4vw] xl:w-[50px] xl:h-[50px] duration-300 transition-all"
+          />
+        </>
+      )}
+    </NavLink>
+  );
+}
 
 function Navbar() {
   const navigate = useNavigate();
@@ -20,7 +48,7 @@ function Navbar() {
 
 
   return (
-    <div className=" card-wrapper ">
+    <div className=" card-wrapper " data-app-navbar>
       <div className=" card-content">
 
     <div className=" active:opacity-70 duration-300 transition-all">
@@ -34,20 +62,9 @@ function Navbar() {
     </div>
 
       <div className="flex items-center gap-[1.5vw] ">
-        <NavLink to="/more" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"}  hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6`}>
-          <img src={More} alt="more" className={ `w-[1.4vw] h-[1.4vw]  xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
-        </NavLink>
-
-        <NavLink to="/" className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6`}>
-          <img src={Globe} alt="globe" className={ `w-[1.4vw] h-[1.4vw]   xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
-        </NavLink>
-
-        <NavLink 
-        to="/world"
-        
-        className={ ({isActive}) => ` ${isActive && "icon-gradient-border"} hover:scale-110 active:scale-95 active:rotate-10 transition-transform duration-300 p-2 xl:p-6`}>
-          <img src={Home} alt="home" className={ `w-[1.4vw] h-[1.4vw]   xl:w-[50px] xl:h-[50px] duration-300 transition-all`} />
-        </NavLink>
+        <NavItem to="/more" icon={More} alt="more" />
+        <NavItem to="/" icon={Globe} alt="globe" />
+        <NavItem to="/world" icon={Home} alt="home" />
       </div>
 
     <div className="">

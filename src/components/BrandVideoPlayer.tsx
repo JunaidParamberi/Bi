@@ -338,7 +338,7 @@ function BrandVideoPlayer({ src, poster, posterPreview, className = '', onCanPla
         playsInline
         preload='auto'
         poster={posterSrc}
-        className={`absolute inset-0 w-full h-full ${fullscreen ? 'object-contain' : 'object-cover'}`}
+        className='absolute inset-0 w-full h-full object-contain'
         onClick={togglePlay}
         onDoubleClick={toggleFullscreen}
         onCanPlay={() => {

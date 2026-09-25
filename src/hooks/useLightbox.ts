@@ -18,7 +18,11 @@ export function useLightbox(length: number) {
     setIndex(target);
   };
 
-  const open = (target: number) => setIndex(target);
+  const open = (target: number) => {
+    // no slide direction on open, so the first item arrives with the viewer instead of sliding in
+    setDirection(null);
+    setIndex(target);
+  };
   const close = () => setIndex(null);
   const prev = () => index !== null && goTo(index - 1);
   const next = () => index !== null && goTo(index + 1);

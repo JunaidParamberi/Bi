@@ -1,6 +1,6 @@
 import { Key, useMemo, useState } from "react";
 import cardImg from "../assets/images/Asset 24.png";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { countries, mediaUrl, type Article } from "../content";
 import playBtn from "../assets/images/play.svg";
 import rightArrow from "../assets/images/chevron-right.svg";
@@ -80,34 +80,45 @@ const CountryPage: React.FC = () => {
       className="relative w-full h-full flex justify-center items-center"
     >
       {/* Modal for full-screen media */}
+      <AnimatePresence>
       {currentImageIndex !== null && (
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, y: 20 }}
+          key="lightbox"
+          initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
+          exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.3, delay: 0.1 } }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           ref={lightbox.dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label="Media viewer"
           tabIndex={-1}
-          className="fixed inset-0 flex justify-center items-center bg-dark-green z-50 text-accent-green outline-hidden"
+          className="fixed inset-0 flex justify-center items-center bg-dark-green/95 z-50 text-accent-green outline-hidden"
+          onClick={(e) => {
+            if (!(e.target as HTMLElement).closest("[data-lightbox-frame], button")) lightbox.close();
+          }}
         >
-          <button
+          <motion.button
             type="button"
             aria-label="Close (Esc)"
-            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer"
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0, transition: { duration: 0.4, delay: 0.15 } }}
+            exit={{ opacity: 0, rotate: -90, transition: { duration: 0.2 } }}
+            whileHover={{ rotate: 90, scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            // Big round hit area around the thin icon; negative margin keeps the icon where it was
+            className="absolute xl:right-20 xl:top-20 right-10 top-10 cursor-pointer p-[1.2vw] -m-[1.2vw] rounded-full hover:bg-white/10 transition-colors"
             onClick={lightbox.close}
           >
             <img src={close} alt="" className="w-[1.5vw] h-auto" />
-          </button>
+          </motion.button>
 
           {/* Left arrow */}
           <button
             onClick={lightbox.prev}
             aria-label="Previous (←)"
             disabled={currentImageIndex === 0}
-            className={`absolute left-8 cursor-pointer z-50 text-accent-green ${
+            className={`absolute left-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
               currentImageIndex === 0 ? "opacity-30 cursor-not-allowed" : ""
             }`}
           >
@@ -116,18 +127,25 @@ const CountryPage: React.FC = () => {
 
           {/* Media Display */}
           <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }}
+            exit={{ opacity: 0, scale: 0.94, y: 24, filter: "blur(8px)", transition: { duration: 0.25, ease: "easeIn" } }}
+            className="h-[90%] w-full flex justify-center items-center"
+          >
+          <motion.div
             key={currentImageIndex}
-            initial={{ opacity: 0, x: swipeDirection === "left" ? 100 : -100 }}
+            initial={swipeDirection ? { opacity: 0, x: swipeDirection === "left" ? 100 : -100 } : false}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: swipeDirection === "left" ? -100 : 100 }}
             transition={{ duration: 0.5 }}
-            className="h-[90%] w-auto flex justify-center items-center"
+            className="h-full w-auto flex justify-center items-center"
           >
             <LightboxMedia
               media={media}
               index={currentImageIndex}
-              className="h-[95%] w-auto object-cover max-w-[90%] border-accent-green border-2"
+              className="w-auto border-accent-green border-2"
             />
+          </motion.div>
           </motion.div>
 
           {/* Right arrow */}
@@ -135,7 +153,7 @@ const CountryPage: React.FC = () => {
             onClick={lightbox.next}
             aria-label="Next (→)"
             disabled={currentImageIndex === media.length - 1}
-            className={`absolute right-8 cursor-pointer z-50 text-accent-green ${
+            className={`absolute right-8 cursor-pointer z-50 text-accent-green p-[1vw] -m-[1vw] rounded-full hover:bg-white/10 transition-colors ${
               currentImageIndex === media.length - 1
                 ? "opacity-30 cursor-not-allowed"
                 : ""
@@ -145,17 +163,30 @@ const CountryPage: React.FC = () => {
           </button>
         </motion.div>
       )}
+      </AnimatePresence>
 
       {/* Main content */}
       <div className="bg-dark-green border-accent-green border-[0.5px] w-full flex justify-center items-center h-[90%]">
         <div className="w-[90%] h-[90%] flex justify-between">
-          <SmartImage
-            key={data?.coverImage?.full || cardImg}
-            src={data?.coverImage ? mediaUrl(data.coverImage.full) : cardImg}
-            fetchPriority="high"
-            alt=""
-            className="h-full w-[35%] object-cover"
-          />
+          <div className="relative h-full w-[35%] overflow-hidden">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={data?.coverImage?.full || cardImg}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <SmartImage
+                  src={data?.coverImage ? mediaUrl(data.coverImage.full) : cardImg}
+                  fetchPriority="high"
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           <div className="h-full w-[63%] text-[#ffffff81] flex flex-col justify-between">
             <motion.div
@@ -169,30 +200,56 @@ const CountryPage: React.FC = () => {
                 {newData.country}
               </h1>
 
-              <div className="flex w-full items-end gap-2">
-                {newData.articles.map((item: Article, index: Key) => (
+              <div className="flex w-full items-end">
+                {newData.articles.map((item: Article, index: number) => (
                   <motion.button
                     key={index}
                     onClick={() => handleClick(item)}
-                    className={`${
+                    className={`relative font-semibold px-[0.8vw] transition-[color,font-size,padding] duration-300 ease-out ${
                       data?.heading === item.heading
-                        ? "bg-accent-green text-dark-green px-[0.8vw] py-[0.4vw] font-semibold text-[1vw]"
-                        : "text-white text-[0.9vw] px-[0.8vw] py-[0.7%] font-semibold bg-black/20"
+                        ? "text-dark-green py-[0.4vw] text-[1vw]"
+                        : "text-white text-[0.9vw] py-[0.7%] bg-black/20 hover:text-accent-green"
+                    }${
+                      // thin divider between two neighbouring inactive tabs
+                      index > 0 &&
+                      data?.heading !== item.heading &&
+                      data?.heading !== newData.articles[index - 1].heading
+                        ? " before:absolute before:left-0 before:top-1/4 before:h-1/2 before:w-px before:bg-white/30"
+                        : ""
                     }`}
                   >
-                    {item.heading}
+                    {data?.heading === item.heading && (
+                      <motion.span
+                        layoutId="activeArticleTab"
+                        transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                        className="absolute inset-0 bg-accent-green"
+                      />
+                    )}
+                    <span className="relative">{item.heading}</span>
                   </motion.button>
                 ))}
               </div>
 
-              <div
-                className={`border-accent-green w-full border-[0.5px] ${
+              {/* Grows to full height when the article has no media row below it */}
+              <motion.div
+                initial={false}
+                animate={
                   data?.images || data?.videos
-                    ? "min-h-[57%] max-h-[57%]"
-                    : "h-full"
-                } max-w-full flex justify-center items-center mb-3`}
+                    ? { height: "57%", minHeight: "57%" }
+                    : { height: "100%", minHeight: "0%" }
+                }
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="border-accent-green w-full border-[0.5px] max-w-full flex justify-center items-center mb-3"
               >
-                <div className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]">
+                <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={data?.heading}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="overflow-y-auto custom-scrollbar h-[80%] w-[95%] xl:text-[40px] flex flex-col gap-[1vw]"
+                >
                   <p className="text-white text-[1vw] xl:text-[0.9vw] p-[0.3vw] whitespace-pre-line">
                     {data?.article}
                   </p>
@@ -223,17 +280,26 @@ const CountryPage: React.FC = () => {
                       ))}
                     </div>
                   )}
-                </div>
-              </div>
+                </motion.div>
+                </AnimatePresence>
+              </motion.div>
 
               {/* Media Slider */}
+              <AnimatePresence mode="wait" initial={false}>
               {(data?.images || data?.videos) && (
-                <div
+                <motion.div
+                  key={data?.heading}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, transition: { duration: 0.15 } }}
                   className="flex w-full h-full overflow-x-auto gap-4 custom-scrollbar-y"
                   onKeyDown={handleRowKeys}
                 >
                   {media.map((item: MediaItem, index: number) => (
-                    <button
+                    <motion.button
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, ease: "easeOut", delay: Math.min(index, 6) * 0.05 }}
                       key={`${item.src}-${index}`}
                       ref={lightbox.thumbRef(index)}
                       type="button"
@@ -265,10 +331,11 @@ const CountryPage: React.FC = () => {
                           className="min-w-[16.2vw] h-full object-cover cursor-zoom-in"
                         />
                       )}
-                    </button>
+                    </motion.button>
                   ))}
-                </div>
+                </motion.div>
               )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </div>
