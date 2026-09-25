@@ -176,45 +176,16 @@
 
 
 
-.icon-gradient-border {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1000px;
-  transition: transform 0.3s ease; /* Smooth animation for transform */
-}
-
-.icon-gradient-border::after {
-  content: '';
+/* Active navbar icon ring: gradient stroke drawn as a border-box background around a black fill */
+.nav-active-ring {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  height: calc(100% + 4px);
-  width: calc(100% + 4px);
+  inset: -2px;
   border-radius: 1000px;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.5), #00e47c);
-  z-index: 0;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(black, black) padding-box,
+    linear-gradient(to left, rgba(0, 0, 0, 0.5), #00e47c) border-box;
 }
-
-.icon-gradient-border::before {
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 1000px;
-  background: black;
-  z-index: 1; 
-}
-
-.icon-gradient-border img {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease; /* Smooth animation for the icon itself */
-}
-
-
-
 
 .inside-glow-imeta {
   border: 1px solid #00cc66;
