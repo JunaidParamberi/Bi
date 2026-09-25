@@ -66,14 +66,14 @@ const CountryCard = React.forwardRef<HTMLDivElement, { marker: Marker }>(({ mark
         exit="exit"
         // Grow out of the corner nearest the pin
         style={{ transformOrigin: `${fit.flipX ? "right" : "left"} ${fit.flipY ? "bottom" : "top"}` }}
-        className="w-max flex flex-col justify-center items-center gap-5 py-8 pl-6 pr-16 xl:gap-10 xl:p-10 text-white inside-glow-imeta bg-dark-green shadow-2xl"
+        className="w-max min-w-[13vw] max-w-[19vw] flex flex-col justify-center items-center py-[1.6vw] px-[1.6vw] text-white inside-glow-imeta bg-dark-green shadow-2xl"
       >
         <div className=" flex h-full w-full flex-col gap-[1vw]">
           <motion.h1 variants={lineVariants} className="text-[1.3vw]">{currentData?.country}</motion.h1>
 
           <div>
             {currentData?.articles.map((item) => (
-              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] mb-[0.3vw]  ">{item?.heading}</motion.h1>
+              <motion.h1 variants={lineVariants} key={item.heading} className="text-[0.9vw] leading-snug text-balance mb-[0.5vw]">{item?.heading}</motion.h1>
             ))}
           </div>
           <motion.div variants={lineVariants}>
